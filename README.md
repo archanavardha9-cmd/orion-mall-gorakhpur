@@ -15,7 +15,7 @@ This is a single-page React application that serves as the digital showcase for 
 - **Home Page** — Full-screen video hero, architectural story section, animated floor ribbon, brand spotlight gallery, and dining/cinema showcase
 - **Explore Page** — Interactive 3D mall walkthrough (Three.js WebGL) with per-floor navigation, zoom controls, and auto-tour mode
 - **Shopping Page** — Floor-by-floor brand directory (Ground, First, Second floors) with brand imagery and category details
-- **Dining Page** — Third Floor restaurant showcase for KFC, Burger King, Domino's Pizza, and Jawed Habib with photo galleries
+- **Dining Page** — Third Floor restaurant showcase for KFC, Burger King, and Domino's Pizza with photo galleries
 - **Entertainment Page** — PVR INOX Cinemas hub with Now Showing, Coming Soon, and Previously Released movie listings, plus direct booking links
 - **Visit Page** — Location, hours, transit directions, parking information, and visitor amenities
 - **Dark / Light Theme Toggle** — Persistent user preference stored in localStorage

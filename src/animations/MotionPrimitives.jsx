@@ -1,26 +1,38 @@
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'motion/react';
 
 const VARIANTS = {
   rise: {
-    hidden: { opacity: 0, y: 54 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 64, scale: 0.985 },
+    visible: { opacity: 1, y: 0, scale: 1 }
+  },
+  drop: {
+    hidden: { opacity: 0, y: -48, scale: 0.985 },
+    visible: { opacity: 1, y: 0, scale: 1 }
   },
   slideLeft: {
-    hidden: { opacity: 0, x: 72 },
-    visible: { opacity: 1, x: 0 }
+    hidden: { opacity: 0, x: 84, scale: 0.985 },
+    visible: { opacity: 1, x: 0, scale: 1 }
   },
   slideRight: {
-    hidden: { opacity: 0, x: -72 },
-    visible: { opacity: 1, x: 0 }
+    hidden: { opacity: 0, x: -84, scale: 0.985 },
+    visible: { opacity: 1, x: 0, scale: 1 }
   },
   scaleDepth: {
-    hidden: { opacity: 0, scale: 0.9, y: 36 },
+    hidden: { opacity: 0, scale: 0.88, y: 28 },
+    visible: { opacity: 1, scale: 1, y: 0 }
+  },
+  pop: {
+    hidden: { opacity: 0, scale: 0.82, y: 18 },
     visible: { opacity: 1, scale: 1, y: 0 }
   },
   curtain: {
-    hidden: { opacity: 0, y: 32, clipPath: 'inset(16% 0% 0% 0%)' },
-    visible: { opacity: 1, y: 0, clipPath: 'inset(0% 0% 0% 0%)' }
+    hidden: { opacity: 0, y: 40, scale: 0.98, clipPath: 'inset(18% 0% 0% 0%)' },
+    visible: { opacity: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }
+  },
+  blurRise: {
+    hidden: { opacity: 0, y: 44, filter: 'blur(8px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
   }
 };
 
@@ -28,23 +40,33 @@ export function DramaticReveal({
   children,
   variant = 'rise',
   delay = 0,
-  duration = 0.72,
+  duration = 0.45,
+  amount = 0.12,
   className = ''
 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount, margin: '0px 0px -8% 0px' });
+  const [hasEntered, setHasEntered] = useState(false);
   const chosen = VARIANTS[variant] || VARIANTS.rise;
+
+  useEffect(() => {
+    if (inView) setHasEntered(true);
+  }, [inView]);
 
   return (
     <motion.div
+      ref={ref}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.14 }}
+      animate={inView ? 'visible' : 'hidden'}
       variants={chosen}
       transition={{
         duration,
-        delay,
-        ease: [0.16, 1, 0.3, 1]
+        delay: inView ? delay : 0,
+        ease: [0.22, 1, 0.36, 1]
       }}
+      style={{ willChange: 'transform, opacity' }}
       className={className}
+      data-revealed={hasEntered ? 'true' : 'false'}
     >
       {children}
     </motion.div>
@@ -59,15 +81,15 @@ export function DepthEmergeSection({ children, className = '' }) {
     offset: ['start end', 'center center']
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [56, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.45, 1], [0.25, 0.85, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [48, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.35, 1], [0.35, 0.9, 1]);
 
   return (
     <div ref={ref} className={`relative ${className}`}>
       <motion.div
-        style={{ scale, y, opacity }}
-        className="will-change-transform origin-center"
+        style={{ scale, y, opacity, willChange: 'transform, opacity' }}
+        className="origin-center"
       >
         {children}
       </motion.div>
@@ -87,9 +109,7 @@ export function ParallaxDepth({ children, offset = 52, horizontal = 0, className
 
   return (
     <div ref={ref} className={`relative ${className}`}>
-      <motion.div style={{ y, x }} className="will-change-transform">
-        {children}
-      </motion.div>
+      <motion.div style={{ y, x, willChange: 'transform' }}>{children}</motion.div>
     </div>
   );
 }
@@ -128,15 +148,28 @@ export function Interactive3DTilt({ children, className = '', intensity = 8 }) {
   );
 }
 
-export function KineticLineReveal({ text, className = '', as = 'h2', delay = 0 }) {
+export function KineticLineReveal({
+  text,
+  className = '',
+  as = 'h2',
+  delay = 0,
+  duration = 0.45
+}) {
   const Tag = as;
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0.2, margin: '0px 0px -8% 0px' });
+
   return (
-    <div className="overflow-hidden">
+    <div ref={ref} className="overflow-hidden">
       <motion.div
-        initial={{ y: '100%', opacity: 0 }}
-        whileInView={{ y: '0%', opacity: 1 }}
-        viewport={{ once: false, amount: 0.16 }}
-        transition={{ duration: 0.72, delay, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: '110%', opacity: 0 }}
+        animate={inView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0 }}
+        transition={{
+          duration,
+          delay: inView ? delay : 0,
+          ease: [0.22, 1, 0.36, 1]
+        }}
+        style={{ willChange: 'transform, opacity' }}
       >
         <Tag className={className}>{text}</Tag>
       </motion.div>

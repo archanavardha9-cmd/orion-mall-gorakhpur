@@ -1,13 +1,13 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { ArrowUpRight, Film } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
 import {
   DepthEmergeSection,
-  DramaticReveal,
   Interactive3DTilt
 } from '../animations/MotionPrimitives';
+import { ScrollReveal } from '../animations/ScrollReveal';
 import { VIDEO_ASSETS, IMAGE_ASSETS } from '../assets/mediaRegistry';
 import {
   ENTERTAINMENT_MOVIES,
@@ -302,33 +302,40 @@ export function EntertainmentPage() {
                   </section>
                 )}
 
-                {/* CATEGORY 2: COMING SOON (Alternating Large Editorial Splits, Zero Booking Buttons) */}
+                    {/* CATEGORY 2: COMING SOON (Alternating Large Editorial Splits, Zero Booking Buttons) */}
                 {activeCategory === 'comingSoon' && (
                   <section aria-labelledby="cat-coming-soon" className="space-y-10">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                       <div>
-                        <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-turquoise)]">
-                          Upcoming Theatrical Slate
-                        </p>
-                        <h3
-                          id="cat-coming-soon"
-                          className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
-                        >
-                          Coming Soon
-                        </h3>
+                        <ScrollReveal variant="drop">
+                          <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-turquoise)]">
+                            Upcoming Theatrical Slate
+                          </p>
+                        </ScrollReveal>
+                        <ScrollReveal variant="rise" delay={0.04}>
+                          <h3
+                            id="cat-coming-soon"
+                            className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
+                          >
+                            Coming Soon
+                          </h3>
+                        </ScrollReveal>
                       </div>
-                      <span className="text-xs text-[var(--text-muted)]">
-                        Confirmed release dates · Advance bookings open closer to release
-                      </span>
+                      <ScrollReveal variant="rise" delay={0.08}>
+                        <span className="text-xs text-[var(--text-muted)]">
+                          Confirmed release dates · Advance bookings open closer to release
+                        </span>
+                      </ScrollReveal>
                     </div>
 
                     <div className="space-y-12">
                       {ENTERTAINMENT_MOVIES.comingSoon.map((movie, idx) => {
                         const reversed = idx % 2 === 1;
                         return (
-                          <DramaticReveal
+                          <ScrollReveal
                             key={movie.id}
                             variant={reversed ? 'slideLeft' : 'slideRight'}
+                            delay={idx * 0.04}
                           >
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                               <div
@@ -337,19 +344,23 @@ export function EntertainmentPage() {
                                 }`}
                               >
                                 <Interactive3DTilt intensity={7} className="w-full max-w-[300px]">
-                                  <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[3/4]">
-                                    <img
-                                      src={movie.poster}
-                                      alt={`${movie.title} poster`}
-                                      referrerPolicy="no-referrer"
-                                      className="w-full h-full object-cover"
-                                    />
-                                    <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                      <span className="font-mono-tabular text-xs font-semibold uppercase tracking-widest text-amber-200">
-                                        {movie.status}
-                                      </span>
+                                  <ScrollReveal variant="scaleDepth">
+                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[3/4]">
+                                      <img
+                                        src={movie.poster}
+                                        alt={`${movie.title} poster`}
+                                        referrerPolicy="no-referrer"
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="w-full h-full object-cover"
+                                      />
+                                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                                        <span className="font-mono-tabular text-xs font-semibold uppercase tracking-widest text-amber-200">
+                                          {movie.status}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
+                                  </ScrollReveal>
                                 </Interactive3DTilt>
                               </div>
 
@@ -358,32 +369,40 @@ export function EntertainmentPage() {
                                   reversed ? 'lg:order-1' : 'lg:order-2'
                                 }`}
                               >
-                                <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-[var(--text-muted)]">
-                                  <span className="font-semibold text-[var(--accent-turquoise)]">
-                                    {movie.status}
-                                  </span>
-                                  <span aria-hidden="true">·</span>
-                                  <span className="font-mono-tabular">
-                                    Releasing {movie.releaseDate}
-                                  </span>
-                                  <span aria-hidden="true">·</span>
-                                  <span>{movie.language}</span>
-                                </div>
+                                <ScrollReveal variant="rise">
+                                  <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-[var(--text-muted)]">
+                                    <span className="font-semibold text-[var(--accent-turquoise)]">
+                                      {movie.status}
+                                    </span>
+                                    <span aria-hidden="true">·</span>
+                                    <span className="font-mono-tabular">
+                                      Releasing {movie.releaseDate}
+                                    </span>
+                                    <span aria-hidden="true">·</span>
+                                    <span>{movie.language}</span>
+                                  </div>
+                                </ScrollReveal>
 
-                                <h4 className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
-                                  {movie.title}
-                                </h4>
+                                <ScrollReveal variant="rise" delay={0.04}>
+                                  <h4 className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
+                                    {movie.title}
+                                  </h4>
+                                </ScrollReveal>
 
-                                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-plum)]">
-                                  {movie.genre}
-                                </p>
+                                <ScrollReveal variant="rise" delay={0.08}>
+                                  <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-plum)]">
+                                    {movie.genre}
+                                  </p>
+                                </ScrollReveal>
 
-                                <p className="text-sm md:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-                                  {movie.description}
-                                </p>
+                                <ScrollReveal variant="rise" delay={0.12}>
+                                  <p className="text-sm md:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+                                    {movie.description}
+                                  </p>
+                                </ScrollReveal>
                               </div>
                             </div>
-                          </DramaticReveal>
+                          </ScrollReveal>
                         );
                       })}
                     </div>
@@ -395,27 +414,33 @@ export function EntertainmentPage() {
                   <section aria-labelledby="cat-previously-released" className="space-y-10">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                       <div>
-                        <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-plum)]">
-                          Theatrical Archive · Acclaimed Hits
-                        </p>
-                        <h3
-                          id="cat-previously-released"
-                          className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
-                        >
-                          Previously Released
-                        </h3>
+                        <ScrollReveal variant="drop">
+                          <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-plum)]">
+                            Theatrical Archive · Acclaimed Hits
+                          </p>
+                        </ScrollReveal>
+                        <ScrollReveal variant="rise" delay={0.04}>
+                          <h3
+                            id="cat-previously-released"
+                            className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
+                          >
+                            Previously Released
+                          </h3>
+                        </ScrollReveal>
                       </div>
-                      <span className="text-xs text-[var(--text-muted)]">
-                        Popular recent theatrical releases
-                      </span>
+                      <ScrollReveal variant="rise" delay={0.08}>
+                        <span className="text-xs text-[var(--text-muted)]">
+                          Popular recent theatrical releases
+                        </span>
+                      </ScrollReveal>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
                       {ENTERTAINMENT_MOVIES.previouslyReleased.map((movie, idx) => (
-                        <DramaticReveal
+                        <ScrollReveal
                           key={movie.id}
                           variant="scaleDepth"
-                          delay={idx * 0.08}
+                          delay={idx * 0.06}
                           className={idx === 1 ? 'lg:mt-8' : ''}
                         >
                           <div className="group space-y-4">
@@ -424,6 +449,8 @@ export function EntertainmentPage() {
                                 src={movie.poster}
                                 alt={`${movie.title} poster`}
                                 referrerPolicy="no-referrer"
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/15 to-transparent" />
@@ -441,15 +468,19 @@ export function EntertainmentPage() {
                             </div>
 
                             <div className="px-2 space-y-2">
-                              <p className="text-xs font-medium text-[var(--text-muted)]">
-                                {movie.genre} · {movie.language}
-                              </p>
-                              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                                {movie.description}
-                              </p>
+                              <ScrollReveal variant="rise" delay={0.04}>
+                                <p className="text-xs font-medium text-[var(--text-muted)]">
+                                  {movie.genre} · {movie.language}
+                                </p>
+                              </ScrollReveal>
+                              <ScrollReveal variant="rise" delay={0.08}>
+                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                                  {movie.description}
+                                </p>
+                              </ScrollReveal>
                             </div>
                           </div>
-                        </DramaticReveal>
+                        </ScrollReveal>
                       ))}
                     </div>
                   </section>
@@ -468,29 +499,41 @@ export function EntertainmentPage() {
         className="py-16 md:py-20 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-6 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-xl space-y-4">
-            <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-turquoise)]">
-              Fourth Floor Auditorium
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)]">
-              Plush Recliners & Express Lift Lobby
-            </h2>
-            <p className="text-sm text-[var(--text-secondary)]">
-              Direct elevator access from basement parking to the Fourth Floor PVR INOX lobby.
-            </p>
-          </div>
-          <div className="lg:col-span-6">
+          <ScrollReveal variant="slideRight" className="lg:col-span-6">
+            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-xl space-y-4">
+              <ScrollReveal variant="drop">
+                <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-turquoise)]">
+                  Fourth Floor Auditorium
+                </p>
+              </ScrollReveal>
+              <ScrollReveal variant="rise" delay={0.04}>
+                <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)]">
+                  Plush Recliners & Express Lift Lobby
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal variant="rise" delay={0.08}>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  Direct elevator access from basement parking to the Fourth Floor PVR INOX lobby.
+                </p>
+              </ScrollReveal>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal variant="scaleDepth" delay={0.06} className="lg:col-span-6">
             <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3]">
               <img
                 src={IMAGE_ASSETS.brandCinema}
                 alt="Empty luxury multiplex auditorium inside Orion Mall"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </VideoBackdropSection>
     </div>
   );
 }
+
+

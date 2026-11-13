@@ -158,7 +158,6 @@ export const BRAND_IMAGES = {
   KFC: brandKfcImg,
   'Burger King': brandBurgerKingImg,
   "Domino's Pizza": brandDominosImg,
-  'Jawed Habib': brandSalonImg,
 
   // Fourth Floor
   'PVR INOX Cinemas': brandCinemaImg

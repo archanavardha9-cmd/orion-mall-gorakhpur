@@ -8,6 +8,7 @@ import {
   Interactive3DTilt,
   ParallaxDepth
 } from '../animations/MotionPrimitives';
+import { ScrollReveal } from '../animations/ScrollReveal';
 import { BRAND_IMAGES, VIDEO_ASSETS } from '../assets/mediaRegistry';
 import { FLOOR_LEVELS } from '../utils/mallData';
 import { useRouter } from '../utils/router';
@@ -59,7 +60,6 @@ export function BrandSpotlightGallery() {
       'KFC',
       'Burger King',
       "Domino's Pizza",
-      'Jawed Habib',
       'PVR INOX Cinemas'
     ];
     return names
@@ -114,21 +114,25 @@ export function BrandSpotlightGallery() {
             <div className="lg:col-span-7 relative min-h-[390px] sm:min-h-[470px] flex items-center">
               {/* Layer 1: Unique Brand Photography */}
               <Interactive3DTilt intensity={6} className="w-[90%] relative z-10">
-                <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-surface)]">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={`${activeStory.name}-${activeStory.primaryImg}`}
-                      src={activeStory.primaryImg}
-                      alt={`${activeStory.name} — ${activeStory.category}`}
-                      referrerPolicy="no-referrer"
-                      initial={{ opacity: 0, scale: 1.07 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.97 }}
-                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                      className="w-full h-full object-cover"
-                    />
-                  </AnimatePresence>
-                </div>
+                <ScrollReveal variant="scaleDepth">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-surface)]">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={`${activeStory.name}-${activeStory.primaryImg}`}
+                        src={activeStory.primaryImg}
+                        alt={`${activeStory.name} — ${activeStory.category}`}
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        initial={{ opacity: 0, scale: 1.07 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.97 }}
+                        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-full h-full object-cover"
+                      />
+                    </AnimatePresence>
+                  </div>
+                </ScrollReveal>
               </Interactive3DTilt>
 
               {/* Layer 2: Floating Collection Detail Plaque (Parallax depth, zero repeated photos) */}
@@ -180,116 +184,134 @@ export function BrandSpotlightGallery() {
             </div>
 
             {/* RIGHT: Visual Brand Explorer & Authentic Emblem Wall */}
-            <div className="lg:col-span-5 space-y-6 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-7 md:p-9 shadow-2xl">
-              <div className="flex items-center justify-between gap-4 border-b border-[var(--border-hairline)] pb-4">
-                <div>
-                  <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-plum)]">
-                    Signature Brands
-                  </p>
-                  <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-0.5">
-                    Curated Retail Icons
-                  </h2>
+            <ScrollReveal variant="slideLeft" delay={0.06} className="lg:col-span-5">
+              <div className="space-y-6 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-7 md:p-9 shadow-2xl">
+                <div className="flex items-center justify-between gap-4 border-b border-[var(--border-hairline)] pb-4">
+                  <div>
+                    <ScrollReveal variant="rise">
+                      <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-plum)]">
+                        Signature Brands
+                      </p>
+                    </ScrollReveal>
+                    <ScrollReveal variant="rise" delay={0.04}>
+                      <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-0.5">
+                        Curated Retail Icons
+                      </h2>
+                    </ScrollReveal>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <ScrollReveal variant="pop" delay={0.06}>
+                      <button
+                        type="button"
+                        onClick={() => setAutoCycle((c) => !c)}
+                        aria-label={autoCycle ? 'Pause gallery' : 'Play gallery'}
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                      >
+                        {autoCycle ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                      </button>
+                    </ScrollReveal>
+                    <ScrollReveal variant="pop" delay={0.1}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAutoCycle(false);
+                          stepFeatured(-1);
+                        }}
+                        aria-label="Previous brand visual"
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                    </ScrollReveal>
+                    <ScrollReveal variant="pop" delay={0.14}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAutoCycle(false);
+                          stepFeatured(1);
+                        }}
+                        aria-label="Next brand visual"
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </ScrollReveal>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setAutoCycle((c) => !c)}
-                    aria-label={autoCycle ? 'Pause gallery' : 'Play gallery'}
-                    className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
-                  >
-                    {autoCycle ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAutoCycle(false);
-                      stepFeatured(-1);
-                    }}
-                    aria-label="Previous brand visual"
-                    className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAutoCycle(false);
-                      stepFeatured(1);
-                    }}
-                    aria-label="Next brand visual"
-                    className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+                {/* Floor Filter Strip */}
+                <div className="flex flex-wrap gap-1.5 p-1 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-hairline)]">
+                  {FLOOR_LEVELS.slice(0, 5).map((fl, idx) => (
+                    <ScrollReveal key={fl.id} variant="pop" delay={idx * 0.03}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFloorFilterIdx(idx);
+                          if (fl.brands[0]) {
+                            setAutoCycle(false);
+                            setActiveStory(buildBrandStory(fl.brands[0], fl));
+                          }
+                        }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                          floorFilterIdx === idx
+                            ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)]'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                        }`}
+                      >
+                        {fl.shortLabel}
+                      </button>
+                    </ScrollReveal>
+                  ))}
                 </div>
-              </div>
 
-              {/* Floor Filter Strip */}
-              <div className="flex flex-wrap gap-1.5 p-1 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-hairline)]">
-                {FLOOR_LEVELS.slice(0, 5).map((fl, idx) => (
-                  <button
-                    key={fl.id}
-                    type="button"
-                    onClick={() => {
-                      setFloorFilterIdx(idx);
-                      if (fl.brands[0]) {
-                        setAutoCycle(false);
-                        setActiveStory(buildBrandStory(fl.brands[0], fl));
-                      }
-                    }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
-                      floorFilterIdx === idx
-                        ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)]'
-                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-                    }`}
-                  >
-                    {fl.shortLabel}
-                  </button>
-                ))}
-              </div>
+                {/* Pure Visual Brand Emblem Matrix */}
+                <div className="flex flex-wrap gap-3 py-2">
+                  {activeFloor.brands.map((brand, idx) => {
+                    const isActive = activeStory.name === brand.name;
+                    return (
+                      <ScrollReveal key={brand.name} variant="pop" delay={idx * 0.03}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAutoCycle(false);
+                            setActiveStory(buildBrandStory(brand, activeFloor));
+                          }}
+                          className={`group flex items-center gap-2.5 pr-3.5 p-1.5 rounded-2xl border transition-all duration-200 cursor-pointer ${
+                            isActive
+                              ? 'border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md'
+                              : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
+                          }`}
+                        >
+                          <BrandMark name={brand.name} size="sm" />
+                          <span className="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">
+                            {brand.name}
+                          </span>
+                        </button>
+                      </ScrollReveal>
+                    );
+                  })}
+                </div>
 
-              {/* Pure Visual Brand Emblem Matrix */}
-              <div className="flex flex-wrap gap-3 py-2">
-                {activeFloor.brands.map((brand) => {
-                  const isActive = activeStory.name === brand.name;
-                  return (
+                <div className="pt-3 border-t border-[var(--border-hairline)] flex items-center justify-between gap-4">
+                  <ScrollReveal variant="rise">
+                    <span className="text-xs text-[var(--text-muted)]">
+                      {activeStory.category} · {activeStory.floor}
+                    </span>
+                  </ScrollReveal>
+                  <ScrollReveal variant="rise" delay={0.04}>
                     <button
-                      key={brand.name}
                       type="button"
-                      onClick={() => {
-                        setAutoCycle(false);
-                        setActiveStory(buildBrandStory(brand, activeFloor));
-                      }}
-                      className={`group flex items-center gap-2.5 pr-3.5 p-1.5 rounded-2xl border transition-all duration-200 cursor-pointer ${
-                        isActive
-                          ? 'border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md'
-                          : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
-                      }`}
+                      onClick={() => navigate('/shopping')}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-coral)] hover:underline cursor-pointer whitespace-nowrap"
                     >
-                      <BrandMark name={brand.name} size="sm" />
-                      <span className="text-xs font-semibold text-[var(--text-primary)] whitespace-nowrap">
-                        {brand.name}
-                      </span>
+                      <span>Explore All Wings</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                  );
-                })}
+                  </ScrollReveal>
+                </div>
               </div>
-
-              <div className="pt-3 border-t border-[var(--border-hairline)] flex items-center justify-between gap-4">
-                <span className="text-xs text-[var(--text-muted)]">
-                  {activeStory.category} · {activeStory.floor}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => navigate('/shopping')}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-coral)] hover:underline cursor-pointer whitespace-nowrap"
-                >
-                  <span>Explore All Wings</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
+            </ScrollReveal>
           </div>
         </DepthEmergeSection>
       </div>

@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpRight, Film, UtensilsCrossed } from 'lucide-react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
-import { DramaticReveal } from '../animations/MotionPrimitives';
+import { ScrollReveal } from '../animations/ScrollReveal';
 import { VIDEO_ASSETS } from '../assets/mediaRegistry';
 import { PVR_BOOKING_LINKS } from '../utils/mallData';
 import { useRouter } from '../utils/router';
@@ -11,7 +11,7 @@ export function DiningCinemaShowcase() {
 
   return (
     <section className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[78vh]">
-      {/* Left Split: Third Floor Dining & Jawed Habib */}
+      {/* Left Split: Third Floor Dining */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
         scrim="bottom"
@@ -19,25 +19,28 @@ export function DiningCinemaShowcase() {
         className="flex items-end"
       >
         <div className="p-8 md:p-14 w-full text-white space-y-5">
-          <DramaticReveal variant="slideRight">
+          <ScrollReveal variant="slideRight">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
               <span>Third Floor</span>
             </div>
+          </ScrollReveal>
+          <ScrollReveal variant="rise" delay={0.05}>
             <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2">
-              Dining & Salon
+              Dining Terrace
             </h2>
-            <div className="flex flex-wrap items-center gap-3 pt-4">
-              {['KFC', 'Burger King', "Domino's Pizza", 'Jawed Habib'].map((b) => (
-                <div
-                  key={b}
-                  className="flex items-center gap-2 backdrop-blur-md bg-black/30 rounded-xl pr-3 p-1 border border-white/20"
-                >
+          </ScrollReveal>
+          <div className="flex flex-wrap items-center gap-3 pt-4">
+            {['KFC', 'Burger King', "Domino's Pizza"].map((b, idx) => (
+              <ScrollReveal key={b} variant="pop" delay={0.08 + idx * 0.05}>
+                <div className="flex items-center gap-2 backdrop-blur-md bg-black/30 rounded-xl pr-3 p-1 border border-white/20">
                   <BrandMark name={b} size="sm" />
                   <span className="text-xs font-medium text-white">{b}</span>
                 </div>
-              ))}
-            </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          <ScrollReveal variant="rise" delay={0.24}>
             <div className="pt-5">
               <button
                 type="button"
@@ -48,7 +51,7 @@ export function DiningCinemaShowcase() {
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </DramaticReveal>
+          </ScrollReveal>
         </div>
       </VideoBackdropSection>
 
@@ -60,15 +63,19 @@ export function DiningCinemaShowcase() {
         className="flex items-end border-t lg:border-t-0 lg:border-l border-[var(--border-hairline)]"
       >
         <div className="p-8 md:p-14 w-full text-white space-y-5">
-          <DramaticReveal variant="slideLeft">
+          <ScrollReveal variant="slideLeft">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-sky-200">
               <Film className="w-4 h-4" />
               <span>Fourth Floor</span>
             </div>
+          </ScrollReveal>
+          <ScrollReveal variant="rise" delay={0.05}>
             <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2">
               PVR INOX Cinemas
             </h2>
-            <div className="flex flex-wrap items-center gap-3 pt-5">
+          </ScrollReveal>
+          <div className="flex flex-wrap items-center gap-3 pt-5">
+            <ScrollReveal variant="pop" delay={0.1}>
               <button
                 type="button"
                 onClick={() => navigate('/entertainment')}
@@ -77,6 +84,8 @@ export function DiningCinemaShowcase() {
                 <span>Now Showing</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+            </ScrollReveal>
+            <ScrollReveal variant="pop" delay={0.16}>
               <a
                 href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
                 target="_blank"
@@ -86,8 +95,8 @@ export function DiningCinemaShowcase() {
                 <span>Book Tickets</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
-            </div>
-          </DramaticReveal>
+            </ScrollReveal>
+          </div>
         </div>
       </VideoBackdropSection>
     </section>

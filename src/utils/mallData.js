@@ -215,8 +215,8 @@ export const FLOOR_LEVELS = [
     number: '03',
     label: 'Third Floor',
     shortLabel: 'Third',
-    themeTitle: 'KFC, Burger King, Domino’s & Jawed Habib',
-    subtitle: "Social Dining Terrace · KFC, Burger King, Domino's Pizza & Jawed Habib",
+    themeTitle: 'KFC, Burger King & Domino’s',
+    subtitle: "Social Dining Terrace · KFC, Burger King & Domino's Pizza",
     accentColor: '#D97706',
     video: VIDEO_ASSETS.diningTerrace,
     image: IMAGE_ASSETS.brandDining,
@@ -238,12 +238,6 @@ export const FLOOR_LEVELS = [
         category: 'Fresh Hand-Tossed Pizza',
         highlight: 'Oven-baked pizzas & garlic breadsticks',
         image: BRAND_IMAGES["Domino's Pizza"]
-      },
-      {
-        name: 'Jawed Habib',
-        category: 'Hair & Grooming Salon',
-        highlight: 'Precision haircuts, styling & hair spa',
-        image: BRAND_IMAGES['Jawed Habib']
       }
     ]
   },

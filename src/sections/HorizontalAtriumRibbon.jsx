@@ -9,7 +9,8 @@ import {
 import { AnimatePresence, motion } from 'motion/react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
-import { DepthEmergeSection, DramaticReveal } from '../animations/MotionPrimitives';
+import { DepthEmergeSection } from '../animations/MotionPrimitives';
+import { ScrollReveal } from '../animations/ScrollReveal';
 import { BRAND_IMAGES, IMAGE_ASSETS, VIDEO_ASSETS } from '../assets/mediaRegistry';
 import { FLOOR_LEVELS } from '../utils/mallData';
 import { useRouter } from '../utils/router';
@@ -32,8 +33,8 @@ const FLOOR_STAGE_VISUALS = {
   },
   third: {
     main: BRAND_IMAGES['Burger King'],
-    inset: BRAND_IMAGES['Jawed Habib'],
-    insetLabel: 'Dining & Grooming'
+    inset: BRAND_IMAGES["Domino's Pizza"],
+    insetLabel: 'Dining Terrace'
   },
   fourth: {
     main: BRAND_IMAGES['PVR INOX Cinemas'],
@@ -139,117 +140,131 @@ export function HorizontalAtriumRibbon() {
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-10">
           {/* Section Header + Elevation Direction Controls */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <DramaticReveal variant="rise">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-2">
-                Vertical Promenade
-              </p>
-              <h2 className="font-display text-4xl md:text-6xl font-semibold text-[var(--text-primary)] leading-none">
-                Floor by Floor
-              </h2>
-            </DramaticReveal>
+            <div>
+              <ScrollReveal variant="rise">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-2">
+                  Vertical Promenade
+                </p>
+              </ScrollReveal>
+              <ScrollReveal variant="slideRight" delay={0.05}>
+                <h2 className="font-display text-4xl md:text-6xl font-semibold text-[var(--text-primary)] leading-none">
+                  Floor by Floor
+                </h2>
+              </ScrollReveal>
+            </div>
 
             <div className="flex items-center gap-2.5 shrink-0">
-              <button
-                type="button"
-                onClick={() => goStep(-1)}
-                aria-label="Previous floor"
-                className="w-11 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer"
-              >
-                <ChevronUp className="w-5 h-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => goStep(1)}
-                aria-label="Next floor"
-                className="w-11 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer"
-              >
-                <ChevronDown className="w-5 h-5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsAutoPlaying((p) => !p)}
-                aria-label={isAutoPlaying ? 'Pause floor showcase loop' : 'Resume floor showcase loop'}
-                className="inline-flex items-center gap-2 px-4 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer whitespace-nowrap"
-              >
-                {isAutoPlaying ? (
-                  <>
-                    <Pause className="w-3.5 h-3.5" />
-                    <span>Auto</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3.5 h-3.5" />
-                    <span>Paused</span>
-                  </>
-                )}
-              </button>
+              <ScrollReveal variant="pop" delay={0.08}>
+                <button
+                  type="button"
+                  onClick={() => goStep(-1)}
+                  aria-label="Previous floor"
+                  className="w-11 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer"
+                >
+                  <ChevronUp className="w-5 h-5" />
+                </button>
+              </ScrollReveal>
+              <ScrollReveal variant="pop" delay={0.12}>
+                <button
+                  type="button"
+                  onClick={() => goStep(1)}
+                  aria-label="Next floor"
+                  className="w-11 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer"
+                >
+                  <ChevronDown className="w-5 h-5" />
+                </button>
+              </ScrollReveal>
+              <ScrollReveal variant="pop" delay={0.16}>
+                <button
+                  type="button"
+                  onClick={() => setIsAutoPlaying((p) => !p)}
+                  aria-label={isAutoPlaying ? 'Pause floor showcase loop' : 'Resume floor showcase loop'}
+                  className="inline-flex items-center gap-2 px-4 h-11 rounded-full backdrop-blur-md bg-[var(--glass-panel)] border border-[var(--border-strong)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer whitespace-nowrap"
+                >
+                  {isAutoPlaying ? (
+                    <>
+                      <Pause className="w-3.5 h-3.5" />
+                      <span>Auto</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3.5 h-3.5" />
+                      <span>Paused</span>
+                    </>
+                  )}
+                </button>
+              </ScrollReveal>
             </div>
           </div>
 
           {/* Non-Card Split Stage: Left Architectural Elevation Rail + Right Vertically Animated Floor Canvas */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
             {/* LEFT: Interactive Floor Elevation Rail (Replaces Horizontal Scroll) */}
-            <div className="lg:col-span-4 flex flex-col justify-between gap-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl">
-              <div className="divide-y divide-[var(--border-hairline)]">
-                {FLOOR_LEVELS.map((floor, idx) => {
-                  const isActive = idx === activeIndex;
-                  return (
-                    <button
-                      key={floor.id}
-                      type="button"
-                      onClick={() => selectFloorIndex(idx)}
-                      className="relative w-full text-left py-3.5 px-3.5 flex items-center justify-between gap-4 rounded-2xl transition-colors cursor-pointer group"
-                    >
-                      {isActive && (
-                        <motion.div
-                          layoutId="floor-elevation-rail-active"
-                          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute inset-0 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-strong)] shadow-sm"
-                        />
-                      )}
-
-                      <div className="relative z-10 flex items-center gap-3.5 min-w-0">
-                        <span
-                          className="font-mono-tabular text-xs font-bold px-2.5 py-1 rounded-lg text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
-                          style={{
-                            backgroundColor: isActive ? floor.accentColor : 'rgba(110, 98, 130, 0.45)'
-                          }}
+            <ScrollReveal variant="slideRight" className="lg:col-span-4">
+              <div className="flex flex-col justify-between gap-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl h-full">
+                <div className="divide-y divide-[var(--border-hairline)]">
+                  {FLOOR_LEVELS.map((floor, idx) => {
+                    const isActive = idx === activeIndex;
+                    return (
+                      <ScrollReveal key={floor.id} variant="rise" delay={idx * 0.04}>
+                        <button
+                          type="button"
+                          onClick={() => selectFloorIndex(idx)}
+                          className="relative w-full text-left py-3.5 px-3.5 flex items-center justify-between gap-4 rounded-2xl transition-colors cursor-pointer group"
                         >
-                          L{floor.number}
-                        </span>
-                        <div className="min-w-0">
-                          <p
-                            className={`text-sm font-semibold truncate transition-colors ${
-                              isActive
-                                ? 'text-[var(--text-primary)]'
-                                : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
-                            }`}
-                          >
-                            {floor.label}
-                          </p>
-                          <p className="text-xs text-[var(--text-muted)] truncate">
-                            {floor.brands.length > 0
-                              ? `${floor.brands.length} Destination${floor.brands.length > 1 ? 's' : ''}`
-                              : 'Architectural Skylight Level'}
-                          </p>
-                        </div>
-                      </div>
+                          {isActive && (
+                            <motion.div
+                              layoutId="floor-elevation-rail-active"
+                              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                              className="absolute inset-0 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-strong)] shadow-sm"
+                            />
+                          )}
 
-                      <ArrowRight
-                        className={`relative z-10 w-4 h-4 shrink-0 transition-all duration-300 ${
-                          isActive
-                            ? 'opacity-100 translate-x-0 text-[var(--accent-coral)]'
-                            : 'opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0 text-[var(--text-muted)]'
-                        }`}
-                      />
-                    </button>
-                  );
-                })}
+                          <div className="relative z-10 flex items-center gap-3.5 min-w-0">
+                            <span
+                              className="font-mono-tabular text-xs font-bold px-2.5 py-1 rounded-lg text-white shrink-0 transition-transform duration-300 group-hover:scale-105"
+                              style={{
+                                backgroundColor: isActive ? floor.accentColor : 'rgba(110, 98, 130, 0.45)'
+                              }}
+                            >
+                              L{floor.number}
+                            </span>
+                            <div className="min-w-0">
+                              <p
+                                className={`text-sm font-semibold truncate transition-colors ${
+                                  isActive
+                                    ? 'text-[var(--text-primary)]'
+                                    : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
+                                }`}
+                              >
+                                {floor.label}
+                              </p>
+                              <p className="text-xs text-[var(--text-muted)] truncate">
+                                {floor.brands.length > 0
+                                  ? `${floor.brands.length} Destination${floor.brands.length > 1 ? 's' : ''}`
+                                  : 'Architectural Skylight Level'}
+                              </p>
+                            </div>
+                          </div>
+
+                          <ArrowRight
+                            className={`relative z-10 w-4 h-4 shrink-0 transition-all duration-300 ${
+                              isActive
+                                ? 'opacity-100 translate-x-0 text-[var(--accent-coral)]'
+                                : 'opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0 text-[var(--text-muted)]'
+                            }`}
+                          />
+                        </button>
+                      </ScrollReveal>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* RIGHT: Seamless Infinitely Looping Vertical Elevation Stage */}
-            <div className="lg:col-span-8 relative min-h-[480px] sm:min-h-[540px] lg:min-h-[580px] rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] bg-[#140f1e]">
+            <ScrollReveal variant="scaleDepth" delay={0.06} className="lg:col-span-8">
+              <div className="relative min-h-[480px] sm:min-h-[540px] lg:min-h-[580px] rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] bg-[#140f1e] h-full">
               <AnimatePresence initial={false} custom={stepState.direction} mode="sync">
                 <motion.div
                   key={stepState.step}
@@ -265,6 +280,8 @@ export function HorizontalAtriumRibbon() {
                     src={activeVisual.main}
                     alt={`${activeFloor.label} — ${activeFloor.themeTitle}`}
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                     initial={{ scale: 1.07 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 4.4, ease: 'easeOut' }}
@@ -382,6 +399,7 @@ export function HorizontalAtriumRibbon() {
                 />
               )}
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </DepthEmergeSection>

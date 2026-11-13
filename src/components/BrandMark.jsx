@@ -24,7 +24,6 @@ const BRAND_STYLES = {
   KFC: { bg: '#B91C1C', fg: '#FFFFFF', accent: '#FEF2F2', style: 'stripes', mark: 'KFC' },
   'Burger King': { bg: '#C2410C', fg: '#FFF7ED', accent: '#FDBA74', style: 'bun', mark: 'BK' },
   "Domino's Pizza": { bg: '#006491', fg: '#FFFFFF', accent: '#E31837', style: 'domino', mark: "Domino's" },
-  'Jawed Habib': { bg: '#292524', fg: '#FAF5EE', accent: '#F59E0B', style: 'serif', mark: 'JH' },
   'PVR INOX Cinemas': { bg: '#1E1B4B', fg: '#F8FAFC', accent: '#FBBF24', style: 'cinema', mark: 'PVR INOX' }
 };
 

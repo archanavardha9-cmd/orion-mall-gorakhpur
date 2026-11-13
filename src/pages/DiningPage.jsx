@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UtensilsCrossed, Scissors, Clock, Flame, Pizza } from 'lucide-react';
+import { UtensilsCrossed, Clock, Flame, Pizza } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
@@ -9,6 +9,7 @@ import {
   Interactive3DTilt,
   ParallaxDepth
 } from '../animations/MotionPrimitives';
+import { ScrollReveal } from '../animations/ScrollReveal';
 import {
   VIDEO_ASSETS,
   IMAGE_ASSETS,
@@ -199,35 +200,38 @@ export function DiningPage() {
             transition={{ duration: 0.75 }}
             className="max-w-3xl space-y-4"
           >
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)]">
+            <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)]">
               <UtensilsCrossed className="w-4 h-4" />
               <span>Third Floor Pavilion</span>
-            </div>
-            <h1
-              className="font-display font-semibold leading-[0.94] text-[var(--text-primary)]"
-              style={{ fontSize: 'clamp(2.9rem, 6vw, 5.5rem)' }}
-            >
-              Third Floor Flavours & Care
-            </h1>
+            </ScrollReveal>
+            <ScrollReveal variant="slideRight" delay={0.06}>
+              <h1
+                className="font-display font-semibold leading-[0.94] text-[var(--text-primary)]"
+                style={{ fontSize: 'clamp(2.9rem, 6vw, 5.5rem)' }}
+              >
+                Third Floor Flavours
+              </h1>
+            </ScrollReveal>
           </motion.div>
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20">
           <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--glass-panel)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-xl">
-            {DINING_DESTINATIONS.map((item) => (
-              <button
-                key={item.name}
-                type="button"
-                onClick={() => setSelectedOutlet(item)}
-                className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
-                  selectedOutlet.name === item.name
-                    ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] shadow-sm'
-                    : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
-                }`}
-              >
-                <BrandMark name={item.name} size="sm" />
-                <span>{item.name}</span>
-              </button>
+            {DINING_DESTINATIONS.map((item, idx) => (
+              <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
+                <button
+                  type="button"
+                  onClick={() => setSelectedOutlet(item)}
+                  className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
+                    selectedOutlet.name === item.name
+                      ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] shadow-sm'
+                      : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
+                  }`}
+                >
+                  <BrandMark name={item.name} size="sm" />
+                  <span>{item.name}</span>
+                </button>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -265,20 +269,30 @@ export function DiningPage() {
                 </div>
 
                 <div className="lg:col-span-5 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
-                  <BrandMark name={selectedOutlet.name} size="lg" />
-                  <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
-                    {selectedOutlet.name}
-                  </h2>
-                  <p className="text-base font-medium text-[var(--text-primary)]">
-                    {selectedOutlet.specialty}
-                  </p>
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    {selectedOutlet.signature}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs font-mono-tabular text-[var(--text-muted)] pt-3 border-t border-[var(--border-hairline)]">
-                    <Clock className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
-                    <span>{MALL_INFO.hours.dining}</span>
-                  </div>
+                  <ScrollReveal variant="pop">
+                    <BrandMark name={selectedOutlet.name} size="lg" />
+                  </ScrollReveal>
+                  <ScrollReveal variant="slideLeft" delay={0.04}>
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
+                      {selectedOutlet.name}
+                    </h2>
+                  </ScrollReveal>
+                  <ScrollReveal variant="rise" delay={0.08}>
+                    <p className="text-base font-medium text-[var(--text-primary)]">
+                      {selectedOutlet.specialty}
+                    </p>
+                  </ScrollReveal>
+                  <ScrollReveal variant="rise" delay={0.12}>
+                    <p className="text-sm text-[var(--text-secondary)]">
+                      {selectedOutlet.signature}
+                    </p>
+                  </ScrollReveal>
+                  <ScrollReveal variant="rise" delay={0.16}>
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-[var(--text-muted)] pt-3 border-t border-[var(--border-hairline)]">
+                      <Clock className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
+                      <span>{MALL_INFO.hours.dining}</span>
+                    </div>
+                  </ScrollReveal>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -329,51 +343,54 @@ export function DiningPage() {
 
                 {/* Interactive Showcase Switcher */}
                 <div className="space-y-2.5 pt-2" role="tablist" aria-label="Burger King gallery views">
-                  {BURGER_KING_SHOWCASE.map((view) => {
+                  {BURGER_KING_SHOWCASE.map((view, idx) => {
                     const isActive = activeBkView.id === view.id;
                     return (
-                      <button
-                        key={view.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        onClick={() => setActiveBkView(view)}
-                        className={`w-full text-left px-5 py-3.5 rounded-2xl transition-all cursor-pointer border ${
-                          isActive
-                            ? 'bg-[#D62300] border-[#FFAA00]/75 text-white shadow-xl translate-x-1'
-                            : 'bg-[#502314]/65 border-[#F5EBDC]/15 text-[#F5EBDC]/85 hover:bg-[#502314]/90 hover:border-[#FF8732]/50'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="font-display text-lg font-semibold">
-                            {view.title}
-                          </span>
-                          <span
-                            className={`font-mono-tabular text-[11px] uppercase tracking-wider shrink-0 ${
-                              isActive ? 'text-[#FFAA00]' : 'text-[#F5EBDC]/60'
-                            }`}
-                          >
-                            {isActive ? 'Viewing' : 'Explore'}
-                          </span>
-                        </div>
-                        <p className="text-xs text-[#F5EBDC]/85 mt-1 leading-relaxed">
-                          {view.caption}
-                        </p>
-                      </button>
+                      <ScrollReveal key={view.id} variant="slideRight" delay={idx * 0.05}>
+                        <button
+                          type="button"
+                          role="tab"
+                          aria-selected={isActive}
+                          onClick={() => setActiveBkView(view)}
+                          className={`w-full text-left px-5 py-3.5 rounded-2xl transition-all cursor-pointer border ${
+                            isActive
+                              ? 'bg-[#D62300] border-[#FFAA00]/75 text-white shadow-xl translate-x-1'
+                              : 'bg-[#502314]/65 border-[#F5EBDC]/15 text-[#F5EBDC]/85 hover:bg-[#502314]/90 hover:border-[#FF8732]/50'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="font-display text-lg font-semibold">
+                              {view.title}
+                            </span>
+                            <span
+                              className={`font-mono-tabular text-[11px] uppercase tracking-wider shrink-0 ${
+                                isActive ? 'text-[#FFAA00]' : 'text-[#F5EBDC]/60'
+                              }`}
+                            >
+                              {isActive ? 'Viewing' : 'Explore'}
+                            </span>
+                          </div>
+                          <p className="text-xs text-[#F5EBDC]/85 mt-1 leading-relaxed">
+                            {view.caption}
+                          </p>
+                        </button>
+                      </ScrollReveal>
                     );
                   })}
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs font-mono-tabular text-[#F5EBDC]/80 pt-3 border-t border-[#F5EBDC]/20">
-                  <Clock className="w-3.5 h-3.5 text-[#FFAA00]" />
-                  <span>{MALL_INFO.hours.dining}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>Whopper Grill Counter & Lounge Seating</span>
-                </div>
+                <ScrollReveal variant="rise" delay={0.18}>
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono-tabular text-[#F5EBDC]/80 pt-3 pb-1 border-t border-[#F5EBDC]/20">
+                    <Clock className="w-3.5 h-3.5 text-[#FFAA00]" />
+                    <span>{MALL_INFO.hours.dining}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>Whopper Grill Counter & Lounge Seating</span>
+                  </div>
+                </ScrollReveal>
               </div>
 
               {/* Right Layered Editorial Food + Interior Stage */}
-              <div className="lg:col-span-7 relative pb-10 sm:pb-14">
+              <div className="lg:col-span-7 relative pb-16 sm:pb-24 lg:pb-28">
                 <Interactive3DTilt intensity={6}>
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -388,6 +405,8 @@ export function DiningPage() {
                         src={activeBkView.image}
                         alt={activeBkView.alt}
                         referrerPolicy="no-referrer"
+                        loading="eager"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
@@ -395,24 +414,28 @@ export function DiningPage() {
                 </Interactive3DTilt>
 
                 {/* Complementary Inset Frame showing Interior / Meal Contrast */}
-                <div className="hidden sm:block absolute -bottom-2 right-4 md:right-8 w-56 md:w-72 rounded-2xl overflow-hidden shadow-2xl border-2 border-[#FFAA00]/80 bg-[#36160B]">
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={
-                        activeBkView.id === 'interior'
-                          ? DINING_BRAND_GALLERY.burgerKing.feast
-                          : DINING_BRAND_GALLERY.burgerKing.interior
-                      }
-                      alt={
-                        activeBkView.id === 'interior'
-                          ? 'Flame-grilled Whopper burger and fries feast'
-                          : 'Burger King contemporary timber restaurant seating'
-                      }
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                <ScrollReveal variant="slideLeft" delay={0.12} className="hidden sm:block absolute bottom-0 right-4 md:right-8 w-56 md:w-72">
+                  <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-[#FFAA00]/80 bg-[#36160B]">
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={
+                          activeBkView.id === 'interior'
+                            ? DINING_BRAND_GALLERY.burgerKing.feast
+                            : DINING_BRAND_GALLERY.burgerKing.interior
+                        }
+                        alt={
+                          activeBkView.id === 'interior'
+                            ? 'Flame-grilled Whopper burger and fries feast'
+                            : 'Burger King contemporary timber restaurant seating'
+                        }
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   </div>
-                </div>
+                </ScrollReveal>
               </div>
             </div>
           </DepthEmergeSection>
@@ -440,185 +463,169 @@ export function DiningPage() {
           <DepthEmergeSection>
             {/* Upper Architectural Interior + Floating Crisp White Brand Panel */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-              <div className="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 md:p-10 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
+              <div className="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 md:p-10 pb-9 md:pb-12 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
                 <div className="space-y-5">
-                  <DominosLogo />
+                  <ScrollReveal variant="pop">
+                    <DominosLogo />
+                  </ScrollReveal>
 
-                  <div className="flex items-center gap-2 text-xs font-mono-tabular uppercase tracking-[0.18em] text-[#E31837]">
-                    <Pizza className="w-3.5 h-3.5 shrink-0" />
-                    <span>Third Floor</span>
-                    <span aria-hidden="true">·</span>
-                    <span>Open-Oven Kitchen</span>
-                  </div>
+                  <ScrollReveal variant="rise" delay={0.04}>
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular uppercase tracking-[0.18em] text-[#E31837]">
+                      <Pizza className="w-3.5 h-3.5 shrink-0" />
+                      <span>Third Floor</span>
+                      <span aria-hidden="true">·</span>
+                      <span>Open-Oven Kitchen</span>
+                    </div>
+                  </ScrollReveal>
 
-                  <h2 className="font-display text-4xl md:text-5xl font-semibold text-[#004A70] leading-[1.04]">
-                    Fresh Dough. 450° Oven Heat.
-                  </h2>
+                  <ScrollReveal variant="slideRight" delay={0.08}>
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold text-[#004A70] leading-[1.04]">
+                      Fresh Dough. 450° Oven Heat.
+                    </h2>
+                  </ScrollReveal>
 
-                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                    Hand-stretched crust topped with golden bubbling mozzarella, vibrant garden
-                    peppers, stuffed garlic breadsticks, and warm choco lava cakes pulled hot from
-                    the oven.
-                  </p>
+                  <ScrollReveal variant="rise" delay={0.12}>
+                    <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                      Hand-stretched crust topped with golden bubbling mozzarella, vibrant garden
+                      peppers, stuffed garlic breadsticks, and warm choco lava cakes pulled hot from
+                      the oven.
+                    </p>
+                  </ScrollReveal>
                 </div>
 
                 {/* Interactive Oven Specialty Selector */}
-                <div className="space-y-3 pt-2 border-t border-slate-200">
-                  <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
-                    {DOMINOS_HIGHLIGHTS.map((item) => {
-                      const isActive = activeDominoHighlight.id === item.id;
-                      return (
-                        <button
-                          key={item.id}
-                          type="button"
-                          role="tab"
-                          aria-selected={isActive}
-                          onClick={() => setActiveDominoHighlight(item)}
-                          className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
-                            isActive
-                              ? 'bg-[#006491] text-white shadow-sm'
-                              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                          }`}
-                        >
-                          {item.tabLabel}
-                        </button>
-                      );
-                    })}
-                  </div>
+                <ScrollReveal variant="rise" delay={0.16}>
+                  <div className="space-y-3 pt-2 border-t border-slate-200">
+                    <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
+                      {DOMINOS_HIGHLIGHTS.map((item) => {
+                        const isActive = activeDominoHighlight.id === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={isActive}
+                            onClick={() => setActiveDominoHighlight(item)}
+                            className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
+                              isActive
+                                ? 'bg-[#006491] text-white shadow-sm'
+                                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                            }`}
+                          >
+                            {item.tabLabel}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeDominoHighlight.id}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.2 }}
-                      className="space-y-1 pt-1"
-                    >
-                      <h3 className="font-display text-lg font-semibold text-[#006491]">
-                        {activeDominoHighlight.title}
-                      </h3>
-                      <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-                        {activeDominoHighlight.detail}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={activeDominoHighlight.id}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-1 pt-1"
+                      >
+                        <h3 className="font-display text-lg font-semibold text-[#006491]">
+                          {activeDominoHighlight.title}
+                        </h3>
+                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
+                          {activeDominoHighlight.detail}
+                        </p>
+                      </motion.div>
+                    </AnimatePresence>
 
-                  <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-500 pt-2">
-                    <Clock className="w-3.5 h-3.5 text-[#E31837]" />
-                    <span>{MALL_INFO.hours.dining}</span>
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-500 pt-2 pb-1">
+                      <Clock className="w-3.5 h-3.5 text-[#E31837]" />
+                      <span>{MALL_INFO.hours.dining}</span>
+                    </div>
                   </div>
-                </div>
+                </ScrollReveal>
               </div>
 
               <div className="lg:col-span-7">
-                <DramaticReveal variant="scaleDepth" className="h-full">
-                  <div className="relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[280px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/30 bg-[#003B5C]">
-                    <img
-                      src={DINING_BRAND_GALLERY.dominos.interior}
-                      alt="Domino's Pizza modern cobalt blue and crisp white mall restaurant interior"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-[#002B42]/88 via-[#002B42]/35 to-transparent text-white">
-                      <p className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-sky-200">
-                        Open Kitchen Theatre · Third Floor
-                      </p>
-                      <p className="font-display text-2xl font-semibold mt-1">
-                        Blue-Tiled Oven Bar & Express Pickup Counter
-                      </p>
+                <ScrollReveal variant="scaleDepth">
+                  <DramaticReveal variant="scaleDepth" className="h-full">
+                    <div className="relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[280px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/30 bg-[#003B5C]">
+                      <img
+                        src={DINING_BRAND_GALLERY.dominos.interior}
+                        alt="Domino's Pizza modern cobalt blue and crisp white mall restaurant interior"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-[#002B42]/88 via-[#002B42]/35 to-transparent text-white">
+                        <p className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-sky-200">
+                          Open Kitchen Theatre · Third Floor
+                        </p>
+                        <p className="font-display text-2xl font-semibold mt-1">
+                          Blue-Tiled Oven Bar & Express Pickup Counter
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </DramaticReveal>
+                  </DramaticReveal>
+                </ScrollReveal>
               </div>
             </div>
 
             {/* Asymmetric Dual-Visual Food Triptych */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
               <div className="lg:col-span-7 space-y-3">
-                <ParallaxDepth offset={14}>
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/25 aspect-[16/10] bg-[#003B5C]">
-                    <img
-                      src={DINING_BRAND_GALLERY.dominos.spread}
-                      alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks and marinara dip"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                <ScrollReveal variant="scaleDepth">
+                  <ParallaxDepth offset={14}>
+                    <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/25 aspect-[16/10] bg-[#003B5C]">
+                      <img
+                        src={DINING_BRAND_GALLERY.dominos.spread}
+                        alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks and marinara dip"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </ParallaxDepth>
+                </ScrollReveal>
+                <ScrollReveal variant="rise" delay={0.06}>
+                  <div className="px-1 text-white space-y-1">
+                    <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-rose-200">
+                      Cheese Pull Perfection · Hand-Tossed & Pan Crusts
+                    </p>
+                    <p className="text-sm text-white/90">
+                      Golden crust dusted in toasted cornmeal, bubbling mozzarella, sweet golden corn,
+                      paprika & fresh basil served beside oven-warm breadsticks.
+                    </p>
                   </div>
-                </ParallaxDepth>
-                <div className="px-1 text-white space-y-1">
-                  <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-rose-200">
-                    Cheese Pull Perfection · Hand-Tossed & Pan Crusts
-                  </p>
-                  <p className="text-sm text-white/90">
-                    Golden crust dusted in toasted cornmeal, bubbling mozzarella, sweet golden corn,
-                    paprika & fresh basil served beside oven-warm breadsticks.
-                  </p>
-                </div>
+                </ScrollReveal>
               </div>
 
               <div className="lg:col-span-5 space-y-3 lg:mt-8">
-                <ParallaxDepth offset={20}>
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/25 aspect-[4/3] bg-[#003B5C]">
-                    <img
-                      src={DINING_BRAND_GALLERY.dominos.sides}
-                      alt="Domino's Pizza baked slices, cheesy sides and sauces"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                <ScrollReveal variant="scaleDepth" delay={0.08}>
+                  <ParallaxDepth offset={20}>
+                    <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/25 aspect-[4/3] bg-[#003B5C]">
+                      <img
+                        src={DINING_BRAND_GALLERY.dominos.sides}
+                        alt="Domino's Pizza baked slices, cheesy sides and sauces"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </ParallaxDepth>
+                </ScrollReveal>
+                <ScrollReveal variant="rise" delay={0.14}>
+                  <div className="px-1 text-white space-y-1">
+                    <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-sky-200">
+                      Sides, Pasta & Desserts · Express Dining
+                    </p>
+                    <p className="text-sm text-white/90">
+                      Zesty tacos, stuffed cheesy twists & chocolate lava indulgences crafted to
+                      share before or after your movie on Fourth Floor.
+                    </p>
                   </div>
-                </ParallaxDepth>
-                <div className="px-1 text-white space-y-1">
-                  <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-sky-200">
-                    Sides, Pasta & Desserts · Express Dining
-                  </p>
-                  <p className="text-sm text-white/90">
-                    Zesty tacos, stuffed cheesy twists & chocolate lava indulgences crafted to
-                    share before or after your movie on Fourth Floor.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </DepthEmergeSection>
-        </div>
-      </VideoBackdropSection>
-
-      {/* Third Floor Salon Sanctuary: Jawed Habib */}
-      <VideoBackdropSection
-        video={VIDEO_ASSETS.salonStudio}
-        scrim="sideRight"
-        minHeight="min-h-[72vh]"
-        className="py-20 flex items-center"
-      >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
-          <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-6">
-                <DramaticReveal variant="scaleDepth">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3]">
-                    <img
-                      src={IMAGE_ASSETS.brandSalon}
-                      alt="Jawed Habib Hair & Grooming Salon interior"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </DramaticReveal>
-              </div>
-              <div className="lg:col-span-6 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-4">
-                <div className="flex items-center gap-3">
-                  <BrandMark name="Jawed Habib" size="md" />
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--accent-plum)]">
-                    <Scissors className="w-3.5 h-3.5" />
-                    <span>Third Floor Studio</span>
-                  </span>
-                </div>
-                <h2 className="font-display text-4xl font-semibold text-[var(--text-primary)]">
-                  Jawed Habib
-                </h2>
-                <p className="text-sm md:text-base text-[var(--text-secondary)]">
-                  Precision haircuts, styling, and nourishing hair spa rituals on the Third Floor.
-                </p>
+                </ScrollReveal>
               </div>
             </div>
           </DepthEmergeSection>
