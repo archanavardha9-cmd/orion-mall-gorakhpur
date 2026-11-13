@@ -1,0 +1,6 @@
+{
+  "name": "Orion Mall Gorakhpur",
+  "description": "Official destination showcase for Orion Mall, Mohaddipur, Gorakhpur — featuring curated retail floors, dining, and PVR INOX Cinemas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

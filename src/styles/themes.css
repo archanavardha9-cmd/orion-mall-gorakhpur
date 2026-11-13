@@ -1,0 +1,63 @@
+/* Orion Mall Gorakhpur — Rich Colourful Light Theme & Elegant Dark Theme */
+
+:root {
+  --bg-canvas: #faf3ea;
+  --bg-canvas-gradient: radial-gradient(circle at 12% 18%, rgba(235, 223, 252, 0.92) 0%, transparent 45%),
+    radial-gradient(circle at 86% 14%, rgba(254, 222, 206, 0.85) 0%, transparent 42%),
+    radial-gradient(circle at 75% 74%, rgba(206, 244, 236, 0.85) 0%, transparent 48%),
+    radial-gradient(circle at 20% 82%, rgba(217, 234, 254, 0.85) 0%, transparent 48%),
+    linear-gradient(155deg, #faf3ea 0%, #f5eefb 48%, #ebf8f5 100%);
+  --bg-surface: rgba(255, 250, 244, 0.78);
+  --bg-surface-elevated: rgba(253, 247, 255, 0.9);
+  --bg-tint-lavender: #efe7fa;
+  --bg-tint-peach: #fce7dc;
+  --bg-tint-mint: #dff4ee;
+  --bg-tint-sky: #e3eefd;
+
+  --text-primary: #1c132b;
+  --text-secondary: #433759;
+  --text-muted: #65587c;
+
+  --accent-coral: #d64e34;
+  --accent-turquoise: #0c8a7b;
+  --accent-plum: #6c3eb8;
+  --accent-sky: #2563eb;
+
+  --border-hairline: rgba(28, 19, 43, 0.12);
+  --border-strong: rgba(28, 19, 43, 0.24);
+  --video-scrim-soft: linear-gradient(180deg, rgba(250, 243, 234, 0.24) 0%, rgba(28, 19, 43, 0.28) 55%, rgba(22, 14, 34, 0.62) 100%);
+  --video-scrim-side: linear-gradient(95deg, rgba(250, 243, 234, 0.88) 0%, rgba(242, 234, 250, 0.72) 44%, rgba(242, 234, 250, 0.14) 100%);
+  --glass-panel: rgba(252, 248, 244, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.68);
+}
+
+.dark {
+  --bg-canvas: #120e1b;
+  --bg-canvas-gradient: radial-gradient(circle at 15% 15%, rgba(69, 42, 114, 0.42) 0%, transparent 45%),
+    radial-gradient(circle at 86% 20%, rgba(160, 68, 52, 0.28) 0%, transparent 42%),
+    radial-gradient(circle at 72% 78%, rgba(22, 112, 104, 0.3) 0%, transparent 46%),
+    radial-gradient(circle at 24% 84%, rgba(44, 78, 138, 0.3) 0%, transparent 46%),
+    linear-gradient(160deg, #120e1b 0%, #191428 50%, #111c24 100%);
+  --bg-surface: rgba(28, 22, 43, 0.82);
+  --bg-surface-elevated: rgba(37, 29, 56, 0.92);
+  --bg-tint-lavender: #251d3b;
+  --bg-tint-peach: #301f27;
+  --bg-tint-mint: #162b2d;
+  --bg-tint-sky: #1a243b;
+
+  --text-primary: #f6f1e9;
+  --text-secondary: #d5cde3;
+  --text-muted: #a69bb9;
+
+  --accent-coral: #f27c54;
+  --accent-turquoise: #3fd8c3;
+  --accent-plum: #b48ef8;
+  --accent-sky: #74a9ff;
+
+  --border-hairline: rgba(246, 241, 233, 0.14);
+  --border-strong: rgba(246, 241, 233, 0.26);
+  --video-scrim-soft: linear-gradient(180deg, rgba(18, 14, 27, 0.26) 0%, rgba(18, 14, 27, 0.34) 55%, rgba(14, 10, 22, 0.68) 100%);
+  --video-scrim-side: linear-gradient(95deg, rgba(18, 14, 27, 0.88) 0%, rgba(25, 20, 40, 0.72) 45%, rgba(18, 14, 27, 0.16) 100%);
+  --glass-panel: rgba(26, 20, 40, 0.78);
+  --glass-border: rgba(246, 241, 233, 0.16);
+}
