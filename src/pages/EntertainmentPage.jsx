@@ -33,7 +33,7 @@ export function EntertainmentPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
-        tone="royal"
+        isHero
         minHeight="min-h-[82vh]"
         className="flex flex-col justify-between py-12 md:py-16"
       >
@@ -91,20 +91,19 @@ export function EntertainmentPage() {
 
       {/* Three-Category Movies Marquee Section */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.cinemaFoyer}
+        video={VIDEO_ASSETS.cinemaHall}
         scrim="jewelMist"
-        tone="amethyst"
         minHeight="min-h-[76vh]"
         className="py-16 md:py-24"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
           <DepthEmergeSection>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[var(--border-hairline)] pb-8">
-              <div>
+              <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
                   INOX · Orion Mall, Gorakhpur
                 </p>
-                <h2 className="font-display text-4xl md:text-6xl font-semibold text-[var(--text-primary)] mt-1 leading-none">
+                <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1 leading-none">
                   Cinema Slate
                 </h2>
               </div>
@@ -155,14 +154,14 @@ export function EntertainmentPage() {
               >
                 {activeCategory === 'nowShowing' && (
                   <section aria-labelledby="cat-now-showing" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
                       <div>
                         <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-coral)]">
                           Currently Running in Cinemas
                         </p>
                         <h3
                           id="cat-now-showing"
-                          className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
+                          className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
                         >
                           Now Showing
                         </h3>
@@ -282,7 +281,7 @@ export function EntertainmentPage() {
                               </div>
                             </button>
 
-                            <div className="px-1.5 flex items-start justify-between gap-4">
+                            <div className="backdrop-blur-md bg-[var(--bg-surface-elevated)] rounded-2xl p-4 border border-[var(--glass-border)] shadow-lg flex items-start justify-between gap-4">
                               <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-2">
                                 {movie.description}
                               </p>
@@ -305,7 +304,7 @@ export function EntertainmentPage() {
 
                 {activeCategory === 'comingSoon' && (
                   <section aria-labelledby="cat-coming-soon" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
                       <div>
                         <ScrollReveal variant="drop">
                           <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-turquoise)]">
@@ -315,14 +314,14 @@ export function EntertainmentPage() {
                         <ScrollReveal variant="rise" delay={0.04}>
                           <h3
                             id="cat-coming-soon"
-                            className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
+                            className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
                           >
                             Coming Soon
                           </h3>
                         </ScrollReveal>
                       </div>
                       <ScrollReveal variant="rise" delay={0.08}>
-                        <span className="text-xs text-[var(--text-muted)]">
+                        <span className="text-xs font-medium text-[var(--text-muted)]">
                           Confirmed release dates · Advance bookings open closer to release
                         </span>
                       </ScrollReveal>
@@ -411,7 +410,7 @@ export function EntertainmentPage() {
 
                 {activeCategory === 'previouslyReleased' && (
                   <section aria-labelledby="cat-previously-released" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
                       <div>
                         <ScrollReveal variant="drop">
                           <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-plum)]">
@@ -421,14 +420,14 @@ export function EntertainmentPage() {
                         <ScrollReveal variant="rise" delay={0.04}>
                           <h3
                             id="cat-previously-released"
-                            className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1"
+                            className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
                           >
                             Previously Released
                           </h3>
                         </ScrollReveal>
                       </div>
                       <ScrollReveal variant="rise" delay={0.08}>
-                        <span className="text-xs text-[var(--text-muted)]">
+                        <span className="text-xs font-medium text-[var(--text-muted)]">
                           Popular recent theatrical releases
                         </span>
                       </ScrollReveal>
@@ -492,9 +491,8 @@ export function EntertainmentPage() {
 
       {/* Auditorium Visual Section (Authentic Cinema Projector Motion Video) */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.cinemaHall}
+        video={VIDEO_ASSETS.techFootwear}
         scrim="jewelMist"
-        tone="royal"
         minHeight="min-h-[62vh]"
         className="py-16 md:py-24 flex items-center"
       >

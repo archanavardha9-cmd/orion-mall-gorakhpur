@@ -15,13 +15,15 @@ export function VisitPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.visitPlaza}
         scrim="heroPrism"
-        tone="coral"
+        isHero
         minHeight="min-h-[78vh]"
         className="flex flex-col justify-between py-14 md:py-20"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between text-white/90 font-mono-tabular text-xs tracking-[0.2em]">
-          <ScrollReveal variant="slideRight"><span>26.7606° N · 83.3956° E</span></ScrollReveal>
-          <ScrollReveal variant="slideLeft"><span className="hidden sm:inline text-amber-200">MOHADDIPUR · GORAKHPUR</span></ScrollReveal>
+        <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-14 md:-mt-20 pt-14 md:pt-20 pb-5">
+          <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between text-white font-mono-tabular text-xs tracking-[0.2em]">
+            <ScrollReveal variant="slideRight"><span className="drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">26.7606° N · 83.3956° E</span></ScrollReveal>
+            <ScrollReveal variant="slideLeft"><span className="hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">MOHADDIPUR · GORAKHPUR</span></ScrollReveal>
+          </div>
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 text-white">
@@ -174,9 +176,8 @@ export function VisitPage() {
 
       {/* Facilities Section over Escalator Motion Video */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.heroAtrium}
+        video={VIDEO_ASSETS.atriumStory}
         scrim="jewelMist"
-        tone="amethyst"
         minHeight="min-h-[58vh]"
         className="py-20 flex items-center"
       >

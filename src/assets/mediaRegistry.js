@@ -59,93 +59,147 @@ import movieKingPoster from './images/movie_king_poster_1794537285864.jpg';
 
 export const VIDEO_ASSETS = {
   heroAtrium: {
-    src: '/videos/hero_atrium.mp4',
+    src: '/videos/first_denim.mp4',
     poster: atriumEmptyImg,
-    alt: 'Ascending brass and steel mall escalator in motion'
+    objectPosition: 'center 55%',
+    startTime: 0.15,
+    endTime: 7.6,
+    alt: 'Ascending mall escalator in sunlit architectural atrium'
   },
   atriumStory: {
     src: '/videos/atrium_story.mp4',
     poster: atriumEmptyImg,
+    objectPosition: 'center center',
+    startTime: 0.08,
+    endTime: 3.85,
     alt: 'Sunlit architectural courtyard glass reflections'
   },
   exteriorDusk: {
     src: '/videos/exterior_dusk.mp4',
     poster: atriumEmptyImg,
+    objectPosition: 'center center',
+    startTime: 0.15,
+    endTime: 7.6,
     alt: 'Contemporary glass architectural facade against moving sky'
   },
   groundLuxury: {
     src: '/videos/ground_luxury.mp4',
     poster: brandMenswearImg,
+    objectPosition: 'center 45%',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Tailored fashion garments along a modern retail store rack'
   },
   firstRetail: {
     src: '/videos/first_retail.mp4',
     poster: brandDenimImg,
+    objectPosition: 'center center',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Colourful knitwear and apparel arranged in a contemporary clothing store'
   },
   firstDenim: {
     src: '/videos/first_denim.mp4',
     poster: brandDenimImg,
+    objectPosition: 'center 55%',
+    startTime: 0.15,
+    endTime: 7.6,
     alt: 'Empty ascending shopping mall escalator steps'
   },
   secondEthnic: {
-    src: '/videos/second_ethnic.mp4',
+    src: '/videos/salon_studio.mp4',
     poster: brandEthnicImg,
-    alt: 'Warm golden crystal chandelier lighting in motion'
+    objectPosition: 'center 55%',
+    startTime: 0.2,
+    endTime: 7.6,
+    alt: 'Sunlit contemporary boutique lounge and terrace gallery'
   },
   techFootwear: {
     src: '/videos/tech_footwear.mp4',
     poster: brandFootwearTechImg,
-    alt: 'Contemporary glass and steel architectural structure'
+    objectPosition: 'center center',
+    startTime: 0.2,
+    endTime: 7.6,
+    alt: 'Contemporary glass and steel architectural skylight structure'
   },
   diningTerrace: {
     src: '/videos/dining_terrace.mp4',
     poster: brandDiningImg,
+    objectPosition: 'center 50%',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Empty sunlit contemporary cafe and dining counter'
   },
   diningCulinary: {
     src: '/videos/dining_culinary.mp4',
     poster: brandDiningImg,
+    objectPosition: 'center 55%',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Warm-lit contemporary dining room with pendant chandeliers'
   },
   diningBurger: {
     src: '/videos/dining_burger.mp4',
     poster: bkWhopperFeastImg,
+    objectPosition: 'center center',
+    startTime: 0.3,
+    endTime: 7.4,
     alt: 'Flame-grilled burger with crispy seasoned fries in slow motion'
   },
   diningPizza: {
     src: '/videos/dining_pizza.mp4',
     poster: dominosPizzaSpreadImg,
+    objectPosition: 'center center',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Freshly baked pizzas with melted cheese and herbs'
   },
   salonStudio: {
     src: '/videos/salon_studio.mp4',
     poster: brandSalonImg,
+    objectPosition: 'center 55%',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Sunlit empty contemporary lounge terrace'
   },
   cinemaAuditorium: {
     src: '/videos/cinema_auditorium.mp4',
     poster: brandCinemaImg,
-    alt: 'Dynamic cinema popcorn falling in warm golden light'
+    objectPosition: 'center center',
+    startTime: 0.9,
+    endTime: 4.65,
+    alt: 'Dynamic cinema popcorn bursting in warm golden theater light'
   },
   cinemaFoyer: {
-    src: '/videos/cinema_foyer.mp4',
+    src: '/videos/cinema_hall.mp4',
     poster: brandCinemaImg,
-    alt: 'Warm shimmering golden and coral decorative lighting'
+    objectPosition: 'center center',
+    startTime: 0.4,
+    endTime: 7.5,
+    alt: 'Cinema film projector glowing in warm auditorium light'
   },
   cinemaHall: {
     src: '/videos/cinema_hall.mp4',
     poster: brandCinemaImg,
+    objectPosition: 'center center',
+    startTime: 0.4,
+    endTime: 7.5,
     alt: 'Cinema film projector glowing in warm auditorium light'
   },
   shoppingReel: {
-    src: '/videos/shopping_reel.mp4',
+    src: '/videos/first_retail.mp4',
     poster: brandMenswearImg,
-    alt: 'Luminous soft-focus mall atrium lights and escalator glide'
+    objectPosition: 'center center',
+    startTime: 0.2,
+    endTime: 7.6,
+    alt: 'Curated colourful fashion apparel displayed across retail racks'
   },
   visitPlaza: {
     src: '/videos/visit_plaza.mp4',
     poster: atriumEmptyImg,
+    objectPosition: 'center 55%',
+    startTime: 0.2,
+    endTime: 7.6,
     alt: 'Architectural plaza water fountain ripples bordered by palms'
   }
 };

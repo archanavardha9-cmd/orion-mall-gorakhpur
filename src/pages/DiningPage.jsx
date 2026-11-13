@@ -140,7 +140,7 @@ export function DiningPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
         scrim="heroPrism"
-        tone="coral"
+        isHero
         minHeight="min-h-[80vh]"
         className="flex flex-col justify-between py-14 md:py-20"
       >
@@ -269,6 +269,7 @@ export function DiningPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningBurger}
         scrim="soft"
+        edgeBlend="none"
         minHeight="min-h-[86vh]"
         className="flex items-center"
       >
@@ -406,6 +407,7 @@ export function DiningPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningPizza}
         scrim="soft"
+        edgeBlend="none"
         minHeight="min-h-[88vh]"
         className="flex items-center"
       >

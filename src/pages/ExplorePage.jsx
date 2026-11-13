@@ -22,9 +22,9 @@ export function ExplorePage() {
     <div className="w-full">
       {/* UNIQUE EXPLORE HERO: Centered Spatial Portal Hero over Ascending Mall Escalator Video */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.firstDenim}
+        video={VIDEO_ASSETS.techFootwear}
         scrim="heroPrism"
-        tone="emerald"
+        isHero
         minHeight="min-h-[76vh]"
         className="flex items-center justify-center text-center py-20"
       >

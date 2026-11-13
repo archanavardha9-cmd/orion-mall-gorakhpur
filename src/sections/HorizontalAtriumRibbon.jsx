@@ -140,14 +140,14 @@ export function HorizontalAtriumRibbon() {
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-10">
           {/* Section Header + Elevation Direction Controls */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
+            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
               <ScrollReveal variant="rise">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-2">
+                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-1.5">
                   Vertical Promenade
                 </p>
               </ScrollReveal>
               <ScrollReveal variant="slideRight" delay={0.05}>
-                <h2 className="font-display text-4xl md:text-6xl font-semibold text-[var(--text-primary)] leading-none">
+                <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] leading-none">
                   Floor by Floor
                 </h2>
               </ScrollReveal>

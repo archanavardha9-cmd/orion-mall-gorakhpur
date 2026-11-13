@@ -230,9 +230,8 @@ export function BrandSpotlightGallery() {
 
   return (
     <VideoBackdropSection
-      video={VIDEO_ASSETS.shoppingReel}
+      video={VIDEO_ASSETS.firstRetail}
       scrim="jewelMist"
-      tone="royal"
       minHeight="min-h-[92vh]"
       className="py-20 md:py-28 flex items-center"
     >
@@ -242,7 +241,7 @@ export function BrandSpotlightGallery() {
             {/* Section Title + Smooth Category Navigation Bar */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                <div>
+                <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
                   <ScrollReveal variant="rise">
                     <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
                       Signature Brands
@@ -344,15 +343,8 @@ export function BrandSpotlightGallery() {
 
             {/* 12-Column Brand Spotlight + Active Category Discovery Stage */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-2">
-              {/* LEFT: Dynamic Visual Stage with Category Aura & Authentic Brand Crest */}
+              {/* LEFT: Dynamic Visual Stage with Authentic Brand Crest */}
               <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[460px] flex items-center">
-                <div
-                  aria-hidden="true"
-                  className="absolute -inset-6 rounded-full blur-3xl opacity-35 pointer-events-none transition-colors duration-700"
-                  style={{
-                    background: `radial-gradient(circle at 45% 50%, ${activeStory.accentColor}, transparent 68%)`
-                  }}
-                />
 
                 {/* Layer 1: Brand Experience Photography */}
                 <Interactive3DTilt intensity={6} className="w-[90%] relative z-10">

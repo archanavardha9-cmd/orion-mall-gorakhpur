@@ -114,10 +114,6 @@ export function ArchitecturalStorySplit() {
 
             {/* 3-Layer Overlapping Architectural Photography */}
             <div className="lg:col-span-7 relative min-h-[430px] md:min-h-[560px] flex items-center justify-center">
-              <div
-                aria-hidden="true"
-                className="absolute inset-8 rounded-full bg-gradient-to-tr from-[var(--accent-turquoise)]/25 via-[var(--accent-plum)]/20 to-[var(--accent-coral)]/25 blur-3xl pointer-events-none"
-              />
 
               {/* Layer 1: Main Sunlit Atrium */}
               <ParallaxDepth offset={-42} horizontal={-14} className="w-[78%] ml-auto relative z-10">

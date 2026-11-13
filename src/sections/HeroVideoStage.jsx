@@ -29,32 +29,25 @@ export function HeroVideoStage() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.heroAtrium}
       scrim="heroPrism"
-      tone="coral"
+      isHero
       minHeight="min-h-[92vh]"
       className="flex flex-col justify-between"
     >
-      {/* Ambient Sunlit Colour Prism Halos (Subtle depth without darkening the video) */}
-      <div
-        aria-hidden="true"
-        className="absolute -top-24 -left-24 w-[460px] h-[460px] rounded-full bg-amber-400/20 blur-3xl pointer-events-none"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-10 right-10 w-[420px] h-[420px] rounded-full bg-purple-500/20 blur-3xl pointer-events-none"
-      />
 
       {/* Top Architectural Coordinate Line */}
-      <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-8 md:pt-11 flex items-center justify-between text-white/95 border-b border-white/20 pb-4">
-        <ScrollReveal variant="slideRight">
-          <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase">
-            Mohaddipur · Gorakhpur · Uttar Pradesh
-          </span>
-        </ScrollReveal>
-        <ScrollReveal variant="slideLeft" delay={0.05}>
-          <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-amber-200">
-            Five Levels · Fashion · Dining · Cinema
-          </span>
-        </ScrollReveal>
+      <div className="relative z-10 w-full bg-gradient-to-b from-[#120b20]/64 via-[#120b20]/28 to-transparent">
+        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-8 md:pt-11 flex items-center justify-between text-white border-b border-white/25 pb-4">
+          <ScrollReveal variant="slideRight">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">
+              Mohaddipur · Gorakhpur · Uttar Pradesh
+            </span>
+          </ScrollReveal>
+          <ScrollReveal variant="slideLeft" delay={0.05}>
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">
+              Five Levels · Fashion · Dining · Cinema
+            </span>
+          </ScrollReveal>
+        </div>
       </div>
 
       {/* Main Dynamic 12-Column Grand Entrance Composition */}

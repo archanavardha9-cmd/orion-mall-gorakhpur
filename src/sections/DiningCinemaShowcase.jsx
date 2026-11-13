@@ -15,11 +15,11 @@ export function DiningCinemaShowcase() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
         scrim="bottom"
-        tone="coral"
+        edgeBlend="none"
         minHeight="min-h-[65vh] lg:min-h-[78vh]"
         className="flex items-end"
       >
-        <div className="p-8 md:p-14 w-full text-white space-y-5">
+        <div className="relative z-10 w-full p-8 md:p-14 pt-28 md:pt-36 bg-gradient-to-t from-[#120b20]/90 via-[#120b20]/62 to-transparent text-white space-y-5">
           <ScrollReveal variant="slideRight">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
@@ -27,17 +27,17 @@ export function DiningCinemaShowcase() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
-            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2 drop-shadow">
+            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2 drop-shadow-md">
               Dining Terrace
             </h2>
           </ScrollReveal>
-          <p className="text-sm text-white/90 max-w-md">
+          <p className="text-sm text-white/95 max-w-md leading-relaxed drop-shadow-sm">
             Flame-grilled Whoppers, golden oven-baked pizzas &amp; signature crispy buckets in a lively social court.
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-2">
             {['KFC', 'Burger King', "Domino's Pizza"].map((b, idx) => (
               <ScrollReveal key={b} variant="pop" delay={0.08 + idx * 0.05}>
-                <div className="flex items-center gap-2 backdrop-blur-md bg-[#26120c]/55 rounded-xl pr-3 p-1 border border-amber-200/30 shadow-md">
+                <div className="flex items-center gap-2 backdrop-blur-md bg-[#26120c]/75 rounded-xl pr-3 p-1 border border-amber-200/35 shadow-md">
                   <BrandMark name={b} size="sm" />
                   <span className="text-xs font-semibold text-white">{b}</span>
                 </div>
@@ -63,11 +63,11 @@ export function DiningCinemaShowcase() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
-        tone="royal"
+        edgeBlend="none"
         minHeight="min-h-[65vh] lg:min-h-[78vh]"
         className="flex items-end border-t lg:border-t-0 lg:border-l border-[var(--glass-border)]"
       >
-        <div className="p-8 md:p-14 w-full text-white space-y-5">
+        <div className="relative z-10 w-full p-8 md:p-14 pt-28 md:pt-36 bg-gradient-to-t from-[#120b20]/88 via-[#120b20]/54 to-transparent text-white space-y-5">
           <ScrollReveal variant="pop">
             <BrandMark name="PVR INOX Cinemas" size="md" />
           </ScrollReveal>
@@ -78,11 +78,11 @@ export function DiningCinemaShowcase() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
-            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-1 drop-shadow">
+            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-1 drop-shadow-md">
               PVR INOX Cinemas
             </h2>
           </ScrollReveal>
-          <p className="text-sm text-white/90 max-w-md">
+          <p className="text-sm text-white/95 max-w-md leading-relaxed drop-shadow-sm">
             Laser projection, Dolby surround sound &amp; plush recliner auditoriums crowning Orion Mall.
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-4">
@@ -101,7 +101,7 @@ export function DiningCinemaShowcase() {
                 href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/22 text-white border border-white/45 hover:bg-white/32 transition-colors"
               >
                 <span>Book Tickets</span>
                 <ArrowUpRight className="w-4 h-4" />

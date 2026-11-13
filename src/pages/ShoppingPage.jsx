@@ -30,9 +30,9 @@ export function ShoppingPage() {
     <div className="w-full">
       {/* UNIQUE SHOPPING HERO: Asymmetric Editorial Lookbook Split */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.shoppingReel}
+        video={VIDEO_ASSETS.firstDenim}
         scrim="heroPrism"
-        tone="coral"
+        isHero
         minHeight="min-h-[82vh]"
         className="flex items-center py-16 md:py-24"
       >
@@ -87,8 +87,8 @@ export function ShoppingPage() {
           </div>
 
           {/* Layered Overlapping Storefront Imagery */}
-          <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] flex items-center">
-            <ParallaxDepth offset={-26} className="w-[82%] ml-auto">
+          <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] flex items-center pr-2 sm:pr-4">
+            <ParallaxDepth offset={-26} className="w-[78%] ml-auto">
               <Interactive3DTilt intensity={5}>
                 <ScrollReveal variant="scaleDepth" delay={0.08}>
                   <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530]">
@@ -127,7 +127,6 @@ export function ShoppingPage() {
         <VideoBackdropSection
           video={VIDEO_ASSETS.groundLuxury}
           scrim="jewelMist"
-          tone="coral"
           minHeight="min-h-[82vh]"
           className="py-20 md:py-28 flex items-center"
         >
@@ -229,7 +228,6 @@ export function ShoppingPage() {
         <VideoBackdropSection
           video={VIDEO_ASSETS.firstRetail}
           scrim="jewelMist"
-          tone="emerald"
           minHeight="min-h-[82vh]"
           className="py-20 md:py-28 flex items-center"
         >
@@ -329,9 +327,8 @@ export function ShoppingPage() {
       {/* Second Floor Visual Emblem Stage (Warm Couture Lighting Video) */}
       {showSecond && (
         <VideoBackdropSection
-          video={VIDEO_ASSETS.secondEthnic}
+          video={VIDEO_ASSETS.salonStudio}
           scrim="jewelMist"
-          tone="amethyst"
           minHeight="min-h-[82vh]"
           className="py-20 md:py-28 flex items-center"
         >

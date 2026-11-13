@@ -67,7 +67,9 @@ function registerVideoController(ctrl) {
 export function VideoBackdropSection({
   video,
   scrim = 'soft',
-  tone = 'none',
+  edgeBlend = 'canvas',
+  isHero = false,
+  objectPosition,
   minHeight = 'min-h-[82vh]',
   className = '',
   id,
@@ -76,31 +78,34 @@ export function VideoBackdropSection({
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const stateRef = useRef({
-    isInView: false,
-    targetTime: 0.02,
-    smoothedTime: 0.02,
+    isInView: isHero,
+    targetTime: video?.startTime ?? 0.02,
+    smoothedTime: video?.startTime ?? 0.02,
     initialized: false
   });
 
-  const [videoReady, setVideoReady] = useState(false);
-  const [isNearView, setIsNearView] = useState(false);
+  const [isNearView, setIsNearView] = useState(isHero);
+  const [hasVideoError, setHasVideoError] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start end', 'end start']
   });
 
-  const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.0, 1.04]);
-  const videoY = useTransform(scrollYProgress, [0, 1], ['-2.5%', '2.5%']);
-  const revealOpacity = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [0.82, 1, 1, 0.86]);
+  // Gradual emergence and exit transitions over warm canvas tone (never black frames)
+  const transitionOpacity = useTransform(
+    scrollYProgress,
+    isHero ? [0, 0.84, 1] : [0, 0.14, 0.86, 1],
+    isHero ? [1, 1, 0.48] : [0.42, 1, 1, 0.42]
+  );
 
-  // Reset ready flag only when video source actually changes
+  // Reset error flag when video source changes
   useEffect(() => {
-    setVideoReady(false);
+    setHasVideoError(false);
     stateRef.current.initialized = false;
   }, [video?.src]);
 
-  // Track both near-viewport (for eager metadata->auto buffering) and active viewport
+  // Preload up to one full viewport ahead so approaching sections reveal crisp frames immediately
   useEffect(() => {
     const el = containerRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') {
@@ -109,7 +114,18 @@ export function VideoBackdropSection({
       return;
     }
 
-    const observer = new IntersectionObserver(
+    const nearObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsNearView(true);
+          }
+        });
+      },
+      { rootMargin: '1100px 0px', threshold: 0.01 }
+    );
+
+    const viewObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           stateRef.current.isInView = entry.isIntersecting;
@@ -119,11 +135,15 @@ export function VideoBackdropSection({
           }
         });
       },
-      { rootMargin: '320px 0px', threshold: 0.01 }
+      { rootMargin: '240px 0px', threshold: 0.01 }
     );
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    nearObserver.observe(el);
+    viewObserver.observe(el);
+    return () => {
+      nearObserver.disconnect();
+      viewObserver.disconnect();
+    };
   }, []);
 
   // Register scroll-synchronized forward/reverse scrubbing controller
@@ -132,6 +152,15 @@ export function VideoBackdropSection({
       typeof window !== 'undefined' &&
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const getClipBounds = (duration) => {
+      const minBound = Math.max(0.02, Math.min(duration - 0.12, video?.startTime ?? 0.02));
+      const maxBound = Math.max(
+        minBound + 0.05,
+        Math.min(duration - 0.04, video?.endTime ?? duration - 0.04)
+      );
+      return [minBound, maxBound];
+    };
 
     const computeScrollTargetTime = () => {
       const container = containerRef.current;
@@ -146,15 +175,12 @@ export function VideoBackdropSection({
       const scrollY = window.scrollY || window.pageYOffset || 0;
       const docTop = rect.top + scrollY;
 
-      // Sections starting in the initial viewport begin at progress 0 at scrollY=0.
-      // Sections below the fold begin at progress 0 when their top enters the bottom of viewport.
       const startScroll = Math.max(0, docTop - vh);
       const endScroll = docTop + rect.height;
       const span = Math.max(1, endScroll - startScroll);
       const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
 
-      const safeMin = 0.02;
-      const safeMax = Math.max(safeMin + 0.04, duration - 0.04);
+      const [safeMin, safeMax] = getClipBounds(duration);
       const nextTarget = safeMin + progress * (safeMax - safeMin);
 
       stateRef.current.targetTime = nextTarget;
@@ -172,7 +198,6 @@ export function VideoBackdropSection({
         return false;
       }
 
-      // Never let native playback clock fight scroll-scrubbed currentTime
       if (!vid.paused) {
         vid.pause();
       }
@@ -185,21 +210,21 @@ export function VideoBackdropSection({
       if (Math.abs(diff) < 0.008) {
         st.smoothedTime = st.targetTime;
       } else {
-        st.smoothedTime += diff * 0.34;
+        st.smoothedTime += diff * 0.38;
       }
 
       const deltaFromVideo = Math.abs(st.smoothedTime - vid.currentTime);
       const pendingDistance = Math.abs(st.targetTime - vid.currentTime);
 
-      if (!vid.seeking && deltaFromVideo >= 0.015) {
+      if (!vid.seeking && deltaFromVideo >= 0.012) {
         try {
           vid.currentTime = st.smoothedTime;
         } catch {
-          // Ignore transient seek exceptions before full decode readiness
+          // Ignore transient seek exceptions before decode readiness
         }
       }
 
-      return pendingDistance >= 0.015 || Math.abs(st.targetTime - st.smoothedTime) >= 0.008;
+      return pendingDistance >= 0.012 || Math.abs(st.targetTime - st.smoothedTime) >= 0.008;
     };
 
     const ctrl = {
@@ -207,9 +232,8 @@ export function VideoBackdropSection({
       stepFrame
     };
 
-    const unregister = registerVideoController(ctrl);
-    return unregister;
-  }, [video?.src]);
+    return registerVideoController(ctrl);
+  }, [video?.src, video?.startTime, video?.endTime]);
 
   const handleVideoLoaded = () => {
     const vid = videoRef.current;
@@ -228,8 +252,12 @@ export function VideoBackdropSection({
         const endScroll = docTop + rect.height;
         const span = Math.max(1, endScroll - startScroll);
         const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
-        const safeMin = 0.02;
-        const safeMax = Math.max(safeMin + 0.04, vid.duration - 0.04);
+
+        const safeMin = Math.max(0.02, Math.min(vid.duration - 0.12, video?.startTime ?? 0.02));
+        const safeMax = Math.max(
+          safeMin + 0.05,
+          Math.min(vid.duration - 0.04, video?.endTime ?? vid.duration - 0.04)
+        );
         const initialTime = safeMin + progress * (safeMax - safeMin);
         stateRef.current.targetTime = initialTime;
         stateRef.current.smoothedTime = initialTime;
@@ -241,92 +269,90 @@ export function VideoBackdropSection({
         }
       }
     }
-
-    if (vid.readyState >= 2) {
-      setVideoReady(true);
-    }
     scheduleSync(true);
   };
 
-  const handleVideoSeeked = () => {
-    const vid = videoRef.current;
-    if (!vid) return;
-    if (vid.readyState >= 2) {
-      setVideoReady(true);
-    }
-    scheduleSync(false);
-  };
-
-  // Rich, vibrant scrims that keep colours luminous without flat black or milky white wash
+  // Sharp, clear scrims: only localized contrast feathering so crisp video footage stands out
   const scrimClasses = {
-    soft: 'bg-gradient-to-b from-[#1a102b]/12 via-[#120b20]/10 to-[#140c24]/48',
-    side: 'bg-gradient-to-r from-[#f8ebdc]/80 via-[#f2e4fb]/44 to-transparent dark:from-[#120c22]/84 dark:via-[#1c1334]/46 dark:to-transparent',
-    sideRight: 'bg-gradient-to-l from-[#f8ebdc]/80 via-[#e0f5f0]/44 to-transparent dark:from-[#120c22]/84 dark:via-[#102329]/46 dark:to-transparent',
-    bottom: 'bg-gradient-to-t from-[#160d26]/74 via-[#1c1130]/22 to-[#1f1233]/14',
-    heroPrism: 'bg-gradient-to-tr from-[#1c0f2e]/68 via-[#3d1c3a]/24 to-[#b45309]/18',
-    lightMist: 'bg-gradient-to-br from-[#f9ebd9]/56 via-[#efe3fc]/36 to-[#dcf4ee]/54 dark:from-[#130d22]/64 dark:via-[#1d1433]/44 dark:to-[#0f2228]/60',
-    jewelMist: 'bg-gradient-to-br from-[#fde6d8]/52 via-[#ede0fc]/34 to-[#d6f2ec]/52 dark:from-[#180f2b]/68 dark:via-[#23143d]/48 dark:to-[#0f252b]/64'
+    soft: 'bg-[#120b20]/10',
+    side: 'bg-gradient-to-r from-[#120b20]/54 via-[#120b20]/16 to-transparent',
+    sideRight: 'bg-gradient-to-l from-[#120b20]/54 via-[#120b20]/16 to-transparent',
+    bottom: 'bg-gradient-to-t from-[#120b20]/86 via-[#120b20]/38 to-transparent',
+    heroPrism: 'bg-gradient-to-r from-[#140d21]/56 via-[#140d21]/20 to-transparent',
+    lightMist: 'bg-gradient-to-b from-[var(--bg-canvas)]/26 via-transparent to-[var(--bg-canvas)]/26',
+    jewelMist: 'bg-gradient-to-b from-[var(--bg-canvas)]/22 via-transparent to-[var(--bg-canvas)]/22'
   };
 
-  const toneOverlays = {
-    none: null,
-    coral: 'radial-gradient(circle at 18% 22%, rgba(214, 78, 52, 0.22), transparent 54%), radial-gradient(circle at 84% 78%, rgba(217, 119, 6, 0.18), transparent 52%)',
-    emerald: 'radial-gradient(circle at 80% 20%, rgba(12, 138, 123, 0.22), transparent 55%), radial-gradient(circle at 18% 82%, rgba(37, 99, 235, 0.16), transparent 52%)',
-    amethyst: 'radial-gradient(circle at 22% 20%, rgba(108, 62, 184, 0.22), transparent 55%), radial-gradient(circle at 82% 80%, rgba(201, 59, 107, 0.18), transparent 52%)',
-    royal: 'radial-gradient(circle at 75% 24%, rgba(37, 99, 235, 0.24), transparent 55%), radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.2), transparent 52%)'
-  };
+  const resolvedPosition = objectPosition || video?.objectPosition || 'center center';
 
   return (
     <section
       id={id}
       ref={containerRef}
-      className={`relative w-full overflow-hidden ${minHeight} ${className}`}
+      className={`relative w-full overflow-x-clip ${minHeight} ${className}`}
     >
-      <motion.div
-        style={{ scale: videoScale, y: videoY, opacity: revealOpacity }}
-        className="absolute inset-0 w-full h-full pointer-events-none will-change-transform"
-      >
-        {video?.poster && (
-          <img
-            src={video.poster}
-            alt={video.alt || 'Orion Mall architectural footage'}
-            referrerPolicy="no-referrer"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
-        <video
-          ref={videoRef}
-          key={video?.src}
-          src={video?.src}
-          poster={video?.poster}
-          muted
-          playsInline
-          preload={isNearView ? 'auto' : 'metadata'}
-          onLoadedMetadata={handleVideoLoaded}
-          onLoadedData={handleVideoLoaded}
-          onCanPlay={handleVideoLoaded}
-          onSeeked={handleVideoSeeked}
-          aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            videoReady ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-      </motion.div>
-
+      {/* Warm base canvas behind transitions so no black flash can ever appear */}
       <div
         aria-hidden="true"
-        className={`absolute inset-0 pointer-events-none transition-colors duration-300 ${
-          scrimClasses[scrim] || scrimClasses.soft
-        }`}
-      />
+        className="absolute inset-0 pointer-events-none bg-[var(--bg-canvas)]"
+      >
+        {/* Sticky viewport-proportioned video stage prevents 3x vertical upscale & side cropping on tall sections */}
+        <motion.div
+          style={{ opacity: transitionOpacity, willChange: 'opacity' }}
+          className="sticky top-0 w-full h-[100svh] max-h-full overflow-hidden"
+        >
+          {hasVideoError && video?.poster ? (
+            <img
+              src={video.poster}
+              alt={video.alt || 'Orion Mall architectural footage'}
+              referrerPolicy="no-referrer"
+              style={{ objectPosition: resolvedPosition }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              key={video?.src}
+              src={video?.src}
+              poster={video?.poster}
+              muted
+              playsInline
+              preload={isNearView ? 'auto' : 'metadata'}
+              onLoadedMetadata={handleVideoLoaded}
+              onLoadedData={handleVideoLoaded}
+              onCanPlay={handleVideoLoaded}
+              onError={() => setHasVideoError(true)}
+              aria-hidden="true"
+              style={{ objectPosition: resolvedPosition }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
-      {toneOverlays[tone] && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: toneOverlays[tone] }}
-        />
-      )}
+          {/* Directional legibility scrim */}
+          <div
+            aria-hidden="true"
+            className={`absolute inset-0 pointer-events-none transition-colors duration-300 ${
+              scrimClasses[scrim] || scrimClasses.soft
+            }`}
+          />
+        </motion.div>
+
+        {/* Smooth top & bottom boundary feathering so neighboring sections transition naturally */}
+        {edgeBlend === 'canvas' && (
+          <>
+            {!isHero && (
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-20 md:h-28 pointer-events-none bg-gradient-to-b from-[var(--bg-canvas)]/78 via-[var(--bg-canvas)]/26 to-transparent"
+              />
+            )}
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-20 md:h-28 pointer-events-none bg-gradient-to-t from-[var(--bg-canvas)]/78 via-[var(--bg-canvas)]/26 to-transparent"
+            />
+          </>
+        )}
+      </div>
 
       <div className="relative z-10 w-full h-full">{children}</div>
     </section>
