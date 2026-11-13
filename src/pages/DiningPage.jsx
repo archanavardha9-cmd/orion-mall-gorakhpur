@@ -11,8 +11,8 @@ import {
 } from '../animations/MotionPrimitives';
 import { ScrollReveal } from '../animations/ScrollReveal';
 import {
+  BRAND_IMAGES,
   VIDEO_ASSETS,
-  IMAGE_ASSETS,
   DINING_BRAND_GALLERY
 } from '../assets/mediaRegistry';
 import { MALL_INFO } from '../utils/mallData';
@@ -21,17 +21,23 @@ const DINING_DESTINATIONS = [
   {
     name: 'KFC',
     specialty: 'Hot & Crispy Buckets · Zinger Burgers',
-    signature: 'Signature crunch & rice bowls on Third Floor'
+    signature: 'Signature crunch & rice bowls on Third Floor',
+    accent: '#E4002B',
+    insetImg: DINING_BRAND_GALLERY.burgerKing.sides
   },
   {
     name: 'Burger King',
     specialty: 'Flame-Grilled Whopper · King Fries',
-    signature: 'Fresh burger combos & thick shakes'
+    signature: 'Fresh burger combos & thick shakes',
+    accent: '#D62300',
+    insetImg: DINING_BRAND_GALLERY.burgerKing.feast
   },
   {
     name: "Domino's Pizza",
     specialty: 'Oven-Fresh Hand-Tossed Pizzas',
-    signature: 'Cheese Burst & stuffed garlic breadsticks'
+    signature: 'Cheese Burst & stuffed garlic breadsticks',
+    accent: '#006491',
+    insetImg: DINING_BRAND_GALLERY.dominos.spread
   }
 ];
 
@@ -80,63 +86,21 @@ const DOMINOS_HIGHLIGHTS = [
   }
 ];
 
-function BurgerKingLogo() {
+function BurgerKingLockup() {
   return (
-    <div className="inline-flex items-center gap-3.5 select-none" aria-label="Burger King logo">
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 drop-shadow-md"
-        aria-hidden="true"
-      >
-        <rect width="64" height="64" rx="18" fill="#F5EBDC" />
-        {/* Top Sesame Bun Dome */}
-        <path
-          d="M12 24C12 15.2 21 10 32 10C43 10 52 15.2 52 24H12Z"
-          fill="#FF8732"
+    <div className="inline-flex items-center gap-4 select-none" aria-label="Burger King official brand lockup">
+      <div className="w-16 h-16 rounded-2xl overflow-hidden flex items-center justify-center shrink-0 drop-shadow-lg">
+        <img
+          src="/images/logos/burger_king.svg"
+          alt="Burger King official logo"
+          className="w-full h-full object-contain"
         />
-        <circle cx="24" cy="17" r="1.4" fill="#F5EBDC" />
-        <circle cx="32" cy="14.5" r="1.4" fill="#F5EBDC" />
-        <circle cx="40" cy="17" r="1.4" fill="#F5EBDC" />
-        {/* Bold Stacked Wordmark */}
-        <text
-          x="32"
-          y="33.5"
-          textAnchor="middle"
-          fill="#D62300"
-          fontSize="9.2"
-          fontWeight="900"
-          fontFamily="sans-serif"
-          letterSpacing="0.4"
-        >
-          BURGER
-        </text>
-        <text
-          x="32"
-          y="43"
-          textAnchor="middle"
-          fill="#D62300"
-          fontSize="10.2"
-          fontWeight="900"
-          fontFamily="sans-serif"
-          letterSpacing="0.8"
-        >
-          KING
-        </text>
-        {/* Bottom Toasted Bun */}
-        <path
-          d="M12 46.5H52C52 51.8 43.2 54.5 32 54.5C20.8 54.5 12 51.8 12 46.5Z"
-          fill="#FF8732"
-        />
-      </svg>
+      </div>
       <div className="flex flex-col leading-none">
-        <span className="font-display text-xl md:text-2xl font-bold tracking-tight text-[#FFAA00]">
+        <span className="font-display text-2xl md:text-3xl font-bold tracking-tight text-[#FFAA00]">
           BURGER KING
         </span>
-        <span className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-[#F5EBDC]/85 mt-1">
+        <span className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-[#F5EBDC]/90 mt-1">
           Home of the Whopper
         </span>
       </div>
@@ -144,34 +108,21 @@ function BurgerKingLogo() {
   );
 }
 
-function DominosLogo() {
+function DominosLockup() {
   return (
-    <div className="inline-flex items-center gap-3.5 select-none" aria-label="Domino's Pizza logo">
-      <svg
-        width="60"
-        height="60"
-        viewBox="0 0 60 60"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 drop-shadow-sm"
-        aria-hidden="true"
-      >
-        <g transform="translate(30 30) rotate(-45) translate(-24 -12)">
-          <rect x="0" y="0" width="48" height="24" rx="4.5" fill="#FFFFFF" />
-          {/* Crimson Upper Half (1 Pip) */}
-          <rect x="2" y="2" width="21" height="20" rx="3" fill="#E31837" />
-          <circle cx="12.5" cy="12" r="2.7" fill="#FFFFFF" />
-          {/* Cobalt Blue Lower Half (2 Pips) */}
-          <rect x="25" y="2" width="21" height="20" rx="3" fill="#006491" />
-          <circle cx="31.5" cy="8" r="2.5" fill="#FFFFFF" />
-          <circle cx="39.5" cy="16" r="2.5" fill="#FFFFFF" />
-        </g>
-      </svg>
+    <div className="inline-flex items-center gap-3.5 select-none" aria-label="Domino's Pizza official brand lockup">
+      <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+        <img
+          src="/images/logos/dominos.svg"
+          alt="Domino's Pizza official logo"
+          className="w-full h-full object-contain"
+        />
+      </div>
       <div className="flex flex-col leading-none">
-        <span className="font-display text-2xl font-bold tracking-tight text-[#006491]">
+        <span className="font-display text-2xl md:text-3xl font-bold tracking-tight text-[#006491]">
           Domino&apos;s <span className="text-[#E31837]">Pizza</span>
         </span>
-        <span className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-slate-500 mt-1">
+        <span className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-slate-600 mt-1">
           Oven-Baked Freshness
         </span>
       </div>
@@ -189,7 +140,8 @@ export function DiningPage() {
       {/* UNIQUE DINING HERO: Top-Anchored Sunlit Culinary Horizon */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
-        scrim="side"
+        scrim="heroPrism"
+        tone="coral"
         minHeight="min-h-[80vh]"
         className="flex flex-col justify-between py-14 md:py-20"
       >
@@ -198,25 +150,28 @@ export function DiningPage() {
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75 }}
-            className="max-w-3xl space-y-4"
+            className="max-w-3xl space-y-4 text-white"
           >
-            <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)]">
+            <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
               <span>Third Floor Pavilion</span>
             </ScrollReveal>
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
-                className="font-display font-semibold leading-[0.94] text-[var(--text-primary)]"
+                className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
                 style={{ fontSize: 'clamp(2.9rem, 6vw, 5.5rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
+            <p className="text-sm md:text-base text-white/90 max-w-xl leading-relaxed">
+              Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
+            </p>
           </motion.div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20">
-          <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--glass-panel)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-xl">
+        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-16">
+          <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
                 <button
@@ -224,9 +179,14 @@ export function DiningPage() {
                   onClick={() => setSelectedOutlet(item)}
                   className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
                     selectedOutlet.name === item.name
-                      ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] shadow-sm'
+                      ? 'text-white shadow-md'
                       : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                   }`}
+                  style={
+                    selectedOutlet.name === item.name
+                      ? { backgroundColor: item.accent }
+                      : undefined
+                  }
                 >
                   <BrandMark name={item.name} size="sm" />
                   <span>{item.name}</span>
@@ -237,10 +197,11 @@ export function DiningPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* Culinary Visual Stage over Sunlit Courtyard Video */}
+      {/* Culinary Visual Stage over Warm Dining Room Motion Video */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.atriumStory}
-        scrim="lightMist"
+        video={VIDEO_ASSETS.diningCulinary}
+        scrim="jewelMist"
+        tone="coral"
         minHeight="min-h-[78vh]"
         className="py-20 md:py-28 flex items-center"
       >
@@ -255,20 +216,22 @@ export function DiningPage() {
                 transition={{ duration: 0.4 }}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
               >
-                <div className="lg:col-span-7">
+                <div className="lg:col-span-7 relative">
                   <ParallaxDepth offset={24}>
-                    <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3]">
-                      <img
-                        src={IMAGE_ASSETS.brandDining}
-                        alt={`${selectedOutlet.name} dining atmosphere`}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    <Interactive3DTilt intensity={5}>
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a150f]">
+                        <img
+                          src={BRAND_IMAGES[selectedOutlet.name] || selectedOutlet.insetImg}
+                          alt={`${selectedOutlet.name} signature culinary spread`}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </Interactive3DTilt>
                   </ParallaxDepth>
                 </div>
 
-                <div className="lg:col-span-5 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
+                <div className="lg:col-span-5 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
                   <ScrollReveal variant="pop">
                     <BrandMark name={selectedOutlet.name} size="lg" />
                   </ScrollReveal>
@@ -278,19 +241,22 @@ export function DiningPage() {
                     </h2>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.08}>
-                    <p className="text-base font-medium text-[var(--text-primary)]">
+                    <p
+                      className="text-base font-semibold"
+                      style={{ color: selectedOutlet.accent }}
+                    >
                       {selectedOutlet.specialty}
                     </p>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.12}>
-                    <p className="text-sm text-[var(--text-secondary)]">
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
                       {selectedOutlet.signature}
                     </p>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.16}>
                     <div className="flex items-center gap-2 text-xs font-mono-tabular text-[var(--text-muted)] pt-3 border-t border-[var(--border-hairline)]">
                       <Clock className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
-                      <span>{MALL_INFO.hours.dining}</span>
+                      <span>{MALL_INFO.hours.dining} · Third Floor</span>
                     </div>
                   </ScrollReveal>
                 </div>
@@ -300,30 +266,28 @@ export function DiningPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* DEDICATED BRAND SECTION: BURGER KING (Warm Red, Flame Orange, Golden Yellow & Toasted Cream) */}
+      {/* DEDICATED BRAND SECTION: BURGER KING (over Flame-Grilled Burger & Fries Motion Video) */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.groundLuxury}
+        video={VIDEO_ASSETS.diningBurger}
         scrim="soft"
         minHeight="min-h-[86vh]"
         className="py-20 md:py-28 flex items-center"
       >
-        {/* Warm Burger King Atmospheric Gradient Wash */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(135deg, rgba(64, 24, 14, 0.92) 0%, rgba(140, 28, 12, 0.82) 52%, rgba(214, 107, 20, 0.74) 100%)'
+              'linear-gradient(135deg, rgba(64, 24, 14, 0.88) 0%, rgba(140, 28, 12, 0.78) 52%, rgba(214, 107, 20, 0.68) 100%)'
           }}
         />
 
         <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-12 text-[#F5EBDC]">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-              {/* Left Editorial Brand Column */}
               <div className="lg:col-span-5 space-y-7">
                 <div className="space-y-4">
-                  <BurgerKingLogo />
+                  <BurgerKingLockup />
                   <div className="flex items-center gap-2 text-xs font-mono-tabular uppercase tracking-[0.18em] text-[#FFAA00]">
                     <Flame className="w-3.5 h-3.5 shrink-0" />
                     <span>Third Floor</span>
@@ -341,7 +305,6 @@ export function DiningPage() {
                   crunchy onion rings, and creamy thick shakes in an amber-lit dining lounge.
                 </p>
 
-                {/* Interactive Showcase Switcher */}
                 <div className="space-y-2.5 pt-2" role="tablist" aria-label="Burger King gallery views">
                   {BURGER_KING_SHOWCASE.map((view, idx) => {
                     const isActive = activeBkView.id === view.id;
@@ -384,12 +347,11 @@ export function DiningPage() {
                     <Clock className="w-3.5 h-3.5 text-[#FFAA00]" />
                     <span>{MALL_INFO.hours.dining}</span>
                     <span aria-hidden="true">·</span>
-                    <span>Whopper Grill Counter & Lounge Seating</span>
+                    <span>Whopper Grill Counter &amp; Lounge Seating</span>
                   </div>
                 </ScrollReveal>
               </div>
 
-              {/* Right Layered Editorial Food + Interior Stage */}
               <div className="lg:col-span-7 relative pb-16 sm:pb-24 lg:pb-28">
                 <Interactive3DTilt intensity={6}>
                   <AnimatePresence mode="wait">
@@ -413,7 +375,6 @@ export function DiningPage() {
                   </AnimatePresence>
                 </Interactive3DTilt>
 
-                {/* Complementary Inset Frame showing Interior / Meal Contrast */}
                 <ScrollReveal variant="slideLeft" delay={0.12} className="hidden sm:block absolute bottom-0 right-4 md:right-8 w-56 md:w-72">
                   <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-[#FFAA00]/80 bg-[#36160B]">
                     <div className="aspect-[16/10] overflow-hidden">
@@ -442,31 +403,29 @@ export function DiningPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* DEDICATED BRAND SECTION: DOMINO'S PIZZA (Cobalt Blue, Energetic Red & Crisp White) */}
+      {/* DEDICATED BRAND SECTION: DOMINO'S PIZZA (over Oven-Fresh Pizza Motion Video) */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.techFootwear}
+        video={VIDEO_ASSETS.diningPizza}
         scrim="soft"
         minHeight="min-h-[88vh]"
         className="py-20 md:py-28 flex items-center"
       >
-        {/* Crisp Cobalt Blue & Energetic Crimson Domino's Wash */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(140deg, rgba(0, 56, 92, 0.92) 0%, rgba(0, 100, 145, 0.84) 55%, rgba(227, 24, 55, 0.62) 100%)'
+              'linear-gradient(140deg, rgba(0, 56, 92, 0.88) 0%, rgba(0, 100, 145, 0.8) 55%, rgba(227, 24, 55, 0.6) 100%)'
           }}
         />
 
         <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-12">
           <DepthEmergeSection>
-            {/* Upper Architectural Interior + Floating Crisp White Brand Panel */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-              <div className="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 md:p-10 pb-9 md:pb-12 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
+              <div className="lg:col-span-5 bg-[#fffcf8] text-slate-900 rounded-3xl p-8 md:p-10 pb-9 md:pb-12 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
                 <div className="space-y-5">
                   <ScrollReveal variant="pop">
-                    <DominosLogo />
+                    <DominosLockup />
                   </ScrollReveal>
 
                   <ScrollReveal variant="rise" delay={0.04}>
@@ -485,7 +444,7 @@ export function DiningPage() {
                   </ScrollReveal>
 
                   <ScrollReveal variant="rise" delay={0.12}>
-                    <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                    <p className="text-sm md:text-base text-slate-700 leading-relaxed">
                       Hand-stretched crust topped with golden bubbling mozzarella, vibrant garden
                       peppers, stuffed garlic breadsticks, and warm choco lava cakes pulled hot from
                       the oven.
@@ -493,7 +452,6 @@ export function DiningPage() {
                   </ScrollReveal>
                 </div>
 
-                {/* Interactive Oven Specialty Selector */}
                 <ScrollReveal variant="rise" delay={0.16}>
                   <div className="space-y-3 pt-2 border-t border-slate-200">
                     <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
@@ -530,13 +488,13 @@ export function DiningPage() {
                         <h3 className="font-display text-lg font-semibold text-[#006491]">
                           {activeDominoHighlight.title}
                         </h3>
-                        <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
+                        <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
                           {activeDominoHighlight.detail}
                         </p>
                       </motion.div>
                     </AnimatePresence>
 
-                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-500 pt-2 pb-1">
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-600 pt-2 pb-1">
                       <Clock className="w-3.5 h-3.5 text-[#E31837]" />
                       <span>{MALL_INFO.hours.dining}</span>
                     </div>
@@ -561,7 +519,7 @@ export function DiningPage() {
                           Open Kitchen Theatre · Third Floor
                         </p>
                         <p className="font-display text-2xl font-semibold mt-1">
-                          Blue-Tiled Oven Bar & Express Pickup Counter
+                          Blue-Tiled Oven Bar &amp; Express Pickup Counter
                         </p>
                       </div>
                     </div>
@@ -570,7 +528,6 @@ export function DiningPage() {
               </div>
             </div>
 
-            {/* Asymmetric Dual-Visual Food Triptych */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
               <div className="lg:col-span-7 space-y-3">
                 <ScrollReveal variant="scaleDepth">
@@ -590,11 +547,11 @@ export function DiningPage() {
                 <ScrollReveal variant="rise" delay={0.06}>
                   <div className="px-1 text-white space-y-1">
                     <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-rose-200">
-                      Cheese Pull Perfection · Hand-Tossed & Pan Crusts
+                      Cheese Pull Perfection · Hand-Tossed &amp; Pan Crusts
                     </p>
                     <p className="text-sm text-white/90">
                       Golden crust dusted in toasted cornmeal, bubbling mozzarella, sweet golden corn,
-                      paprika & fresh basil served beside oven-warm breadsticks.
+                      paprika &amp; fresh basil served beside oven-warm breadsticks.
                     </p>
                   </div>
                 </ScrollReveal>
@@ -618,10 +575,10 @@ export function DiningPage() {
                 <ScrollReveal variant="rise" delay={0.14}>
                   <div className="px-1 text-white space-y-1">
                     <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-sky-200">
-                      Sides, Pasta & Desserts · Express Dining
+                      Sides, Pasta &amp; Desserts · Express Dining
                     </p>
                     <p className="text-sm text-white/90">
-                      Zesty tacos, stuffed cheesy twists & chocolate lava indulgences crafted to
+                      Zesty tacos, stuffed cheesy twists &amp; chocolate lava indulgences crafted to
                       share before or after your movie on Fourth Floor.
                     </p>
                   </div>

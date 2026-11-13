@@ -1,81 +1,206 @@
-const BRAND_STYLES = {
-  'MAX Fashion': { bg: '#0E4DA4', fg: '#FFFFFF', accent: '#E31E24', style: 'sans-bold', mark: 'MAX' },
-  UCB: { bg: '#008A4B', fg: '#FFFFFF', accent: '#D9F99D', style: 'box', mark: 'UCB' },
-  "Levi's": { bg: '#B91C1C', fg: '#FFFFFF', accent: '#FEE2E2', style: 'batwing', mark: "LEVI'S" },
-  'Van Heusen': { bg: '#1E1B2E', fg: '#F5EFE6', accent: '#D4AF37', style: 'serif', mark: 'VH' },
-  'Louis Philippe': { bg: '#2B1B17', fg: '#F7E7CE', accent: '#C89D54', style: 'crest', mark: 'LP' },
-  ColorPlus: { bg: '#D95338', fg: '#FFFDF9', accent: '#FDE68A', style: 'sans-wide', mark: 'CP' },
-  'Being Human': { bg: '#1F2937', fg: '#F9FAFB', accent: '#F43F5E', style: 'heart', mark: 'BH' },
-  Crocs: { bg: '#15803D', fg: '#FFFFFF', accent: '#BBF7D0', style: 'round', mark: 'crocs' },
-  'Samsung Experience Store': { bg: '#1428A0', fg: '#FFFFFF', accent: '#93C5FD', style: 'ellipse', mark: 'SAMSUNG' },
-  'Allen Solly': { bg: '#143642', fg: '#FDF8F0', accent: '#F59E0B', style: 'stag', mark: 'AS' },
-  'Peter England': { bg: '#1E3A5F', fg: '#F8FAFC', accent: '#E2E8F0', style: 'serif', mark: 'PE' },
-  'Pepe Jeans London': { bg: '#0F172A', fg: '#F8FAFC', accent: '#38BDF8', style: 'sans-bold', mark: 'Pepe' },
-  Spykar: { bg: '#991B1B', fg: '#FFFFFF', accent: '#FCA5A5', style: 'sans-wide', mark: 'SPYKAR' },
-  Mufti: { bg: '#312E81', fg: '#F5F3FF', accent: '#C4B5FD', style: 'sans-bold', mark: 'MUFTI' },
-  Skechers: { bg: '#0369A1', fg: '#FFFFFF', accent: '#BAE6FD', style: 'italic', mark: 'S' },
-  Reebok: { bg: '#18181B', fg: '#FFFFFF', accent: '#EF4444', style: 'delta', mark: 'RBK' },
-  Soch: { bg: '#881337', fg: '#FFF1F2', accent: '#FBCFE8', style: 'serif', mark: 'Soch' },
-  W: { bg: '#9D174D', fg: '#FDF2F8', accent: '#F9A8D4', style: 'monogram', mark: 'W' },
-  Aurelia: { bg: '#B45309', fg: '#FFFBEB', accent: '#FDE68A', style: 'serif', mark: 'Aurelia' },
-  'Van Heusen Woman': { bg: '#5B21B6', fg: '#FAF5FF', accent: '#DDD6FE', style: 'serif', mark: 'VH W' },
-  'U.S. Polo Assn. Kids': { bg: '#1D4ED8', fg: '#FFFFFF', accent: '#F87171', style: 'crest', mark: 'USPA' },
-  Lavie: { bg: '#BE185D', fg: '#FFF1F2', accent: '#FBCFE8', style: 'italic', mark: 'Lavie' },
-  KFC: { bg: '#B91C1C', fg: '#FFFFFF', accent: '#FEF2F2', style: 'stripes', mark: 'KFC' },
-  'Burger King': { bg: '#C2410C', fg: '#FFF7ED', accent: '#FDBA74', style: 'bun', mark: 'BK' },
-  "Domino's Pizza": { bg: '#006491', fg: '#FFFFFF', accent: '#E31837', style: 'domino', mark: "Domino's" },
-  'PVR INOX Cinemas': { bg: '#1E1B4B', fg: '#F8FAFC', accent: '#FBBF24', style: 'cinema', mark: 'PVR INOX' }
+const BRAND_LOGOS = {
+  'MAX Fashion': {
+    src: '/images/logos/max_fashion.svg',
+    alt: 'MAX Fashion official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  UCB: {
+    src: '/images/logos/ucb.svg',
+    alt: 'United Colors of Benetton official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  "Levi's": {
+    src: '/images/logos/levis.svg',
+    alt: "Levi's official logo",
+    backdrop: 'light',
+    padding: 'px-2 py-1'
+  },
+  'Van Heusen': {
+    src: '/images/logos/van_heusen.png',
+    alt: 'Van Heusen official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  'Louis Philippe': {
+    src: '/images/logos/louis_philippe.png',
+    alt: 'Louis Philippe official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  ColorPlus: {
+    src: '/images/logos/colorplus.png',
+    alt: 'ColorPlus official logo',
+    backdrop: 'light',
+    padding: 'px-2 py-1'
+  },
+  'Being Human': {
+    src: '/images/logos/being_human.png',
+    alt: 'Being Human Clothing official logo',
+    backdrop: 'light',
+    padding: 'px-2 py-1'
+  },
+  Crocs: {
+    src: '/images/logos/crocs.svg',
+    alt: 'Crocs official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  'Samsung Experience Store': {
+    src: '/images/logos/samsung.svg',
+    alt: 'Samsung official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  'Allen Solly': {
+    src: '/images/logos/allen_solly.png',
+    alt: 'Allen Solly official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  'Peter England': {
+    src: '/images/logos/peter_england.svg',
+    alt: 'Peter England official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  'Pepe Jeans London': {
+    src: '/images/logos/pepe_jeans.svg',
+    alt: 'Pepe Jeans London official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1'
+  },
+  Spykar: {
+    src: '/images/logos/spykar.png',
+    alt: 'Spykar official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  Mufti: {
+    src: '/images/logos/mufti.png',
+    alt: 'Mufti official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  Skechers: {
+    src: '/images/logos/skechers.svg',
+    alt: 'Skechers official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  Reebok: {
+    src: '/images/logos/reebok.svg',
+    alt: 'Reebok official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1'
+  },
+  Soch: {
+    src: '/images/logos/soch.svg',
+    alt: 'Soch official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  W: {
+    src: '/images/logos/w_woman.png',
+    alt: 'W for Woman official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  Aurelia: {
+    src: '/images/logos/aurelia.png',
+    alt: 'Aurelia official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  'Van Heusen Woman': {
+    src: '/images/logos/van_heusen.png',
+    alt: 'Van Heusen Woman official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  'U.S. Polo Assn. Kids': {
+    src: '/images/logos/uspa.png',
+    alt: 'U.S. Polo Assn. official logo',
+    backdrop: 'light',
+    padding: 'px-2 py-1'
+  },
+  Lavie: {
+    src: '/images/logos/lavie.png',
+    alt: 'Lavie official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1.5'
+  },
+  KFC: {
+    src: '/images/logos/kfc.svg',
+    alt: 'KFC official logo',
+    backdrop: 'light',
+    padding: 'px-2.5 py-1'
+  },
+  'Burger King': {
+    src: '/images/logos/burger_king.svg',
+    alt: 'Burger King official logo',
+    backdrop: 'none',
+    padding: 'p-0'
+  },
+  "Domino's Pizza": {
+    src: '/images/logos/dominos.svg',
+    alt: "Domino's Pizza official logo",
+    backdrop: 'light',
+    padding: 'p-1.5'
+  },
+  'PVR INOX Cinemas': {
+    src: '/images/logos/pvr_inox.png',
+    alt: 'PVR INOX Cinemas official logo',
+    backdrop: 'light',
+    padding: 'px-3 py-1.5'
+  }
 };
 
-export function BrandMark({ name, size = 'md' }) {
-  const cfg = BRAND_STYLES[name] || {
-    bg: '#3B2C59',
-    fg: '#FAF5EE',
-    accent: '#D64E34',
-    style: 'sans-bold',
-    mark: name.slice(0, 3).toUpperCase()
-  };
+export function BrandMark({ name, size = 'md', className = '' }) {
+  const logo = BRAND_LOGOS[name];
 
-  const dims =
+  const sizeClasses =
     size === 'lg'
-      ? 'h-16 min-w-[4.25rem] px-4 text-base'
+      ? 'h-14 min-w-[5.25rem] max-w-[10.5rem]'
       : size === 'sm'
-      ? 'h-10 min-w-[2.75rem] px-2.5 text-xs'
-      : 'h-12 min-w-[3.25rem] px-3 text-sm';
+      ? 'h-9 min-w-[3.25rem] max-w-[6.25rem]'
+      : 'h-11 min-w-[4rem] max-w-[8rem]';
+
+  const imgHeightClasses =
+    size === 'lg'
+      ? 'max-h-10'
+      : size === 'sm'
+      ? 'max-h-6'
+      : 'max-h-8';
+
+  if (!logo) {
+    return (
+      <div
+        className={`inline-flex items-center justify-center rounded-xl bg-white/95 border border-black/10 px-3 text-xs font-semibold text-stone-900 shadow-sm shrink-0 ${sizeClasses} ${className}`}
+      >
+        <span className="truncate">{name}</span>
+      </div>
+    );
+  }
+
+  const containerStyle =
+    logo.backdrop === 'light'
+      ? 'bg-white/95 border border-black/10 shadow-sm'
+      : 'bg-transparent border border-white/15 shadow-sm';
 
   return (
     <div
-      className={`relative inline-flex items-center justify-center rounded-xl font-bold tracking-wider select-none shadow-sm overflow-hidden shrink-0 ${dims}`}
-      style={{ backgroundColor: cfg.bg, color: cfg.fg }}
-      aria-label={`${name} emblem`}
+      className={`relative inline-flex items-center justify-center rounded-xl overflow-hidden shrink-0 select-none ${sizeClasses} ${logo.padding} ${containerStyle} ${className}`}
+      aria-label={logo.alt}
     >
-      {cfg.style === 'domino' && (
-        <span
-          className="w-2.5 h-2.5 rotate-45 mr-1.5 inline-block shrink-0"
-          style={{ backgroundColor: cfg.accent }}
-        />
-      )}
-      {cfg.style === 'stripes' && (
-        <span
-          className="absolute inset-y-0 left-0 w-1.5"
-          style={{ backgroundColor: cfg.accent }}
-        />
-      )}
-      {cfg.style === 'crest' && (
-        <span
-          className="absolute inset-1 rounded-lg border opacity-45 pointer-events-none"
-          style={{ borderColor: cfg.accent }}
-        />
-      )}
-      <span
-        className={
-          cfg.style === 'serif' || cfg.style === 'crest'
-            ? 'font-display italic tracking-wide'
-            : 'tracking-wider'
-        }
-      >
-        {cfg.mark}
-      </span>
+      <img
+        src={logo.src}
+        alt={logo.alt}
+        loading="lazy"
+        decoding="async"
+        className={`w-auto h-full ${imgHeightClasses} max-w-full object-contain block`}
+      />
     </div>
   );
 }

@@ -15,15 +15,15 @@ import { useRouter } from '../utils/router';
 
 const FLOOR_TINTS = {
   ground:
-    'from-amber-200/80 via-orange-100/60 to-rose-100/75 dark:from-amber-950/70 dark:via-stone-900/75 dark:to-purple-950/70',
+    'from-amber-200/85 via-orange-100/75 to-rose-200/80 dark:from-amber-950/85 dark:via-stone-900/80 dark:to-purple-950/85',
   first:
-    'from-teal-200/80 via-cyan-100/60 to-sky-100/75 dark:from-teal-950/70 dark:via-slate-900/75 dark:to-indigo-950/70',
+    'from-teal-200/85 via-cyan-100/75 to-sky-200/80 dark:from-teal-950/85 dark:via-slate-900/80 dark:to-indigo-950/85',
   second:
-    'from-purple-200/80 via-pink-100/60 to-amber-100/75 dark:from-purple-950/70 dark:via-rose-950/70 dark:to-stone-900/75',
+    'from-purple-200/85 via-pink-100/75 to-amber-200/80 dark:from-purple-950/85 dark:via-rose-950/80 dark:to-stone-900/85',
   third:
-    'from-orange-200/80 via-amber-100/60 to-rose-100/75 dark:from-amber-950/70 dark:via-stone-900/75 dark:to-rose-950/70',
+    'from-orange-200/85 via-amber-100/75 to-rose-200/80 dark:from-amber-950/85 dark:via-stone-900/80 dark:to-rose-950/85',
   fourth:
-    'from-indigo-200/80 via-violet-100/60 to-sky-100/75 dark:from-indigo-950/70 dark:via-purple-950/75 dark:to-slate-900/70'
+    'from-indigo-200/85 via-violet-100/75 to-sky-200/80 dark:from-indigo-950/85 dark:via-purple-950/80 dark:to-slate-900/85'
 };
 
 function buildBrandStory(brand, floor) {
@@ -100,22 +100,37 @@ export function BrandSpotlightGallery() {
     }
   };
 
+  const targetRouteForStory = () => {
+    if (activeStory.floorId === 'third') return '/dining';
+    if (activeStory.floorId === 'fourth') return '/entertainment';
+    return '/shopping';
+  };
+
   return (
     <VideoBackdropSection
       video={VIDEO_ASSETS.shoppingReel}
-      scrim="lightMist"
+      scrim="jewelMist"
+      tone="royal"
       minHeight="min-h-[92vh]"
       className="py-20 md:py-28 flex items-center"
     >
       <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-12">
         <DepthEmergeSection>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            {/* LEFT: Unique Category-Authentic Storefront Photography + Separate Brand Crest */}
+            {/* LEFT: Unique Category-Authentic Storefront Photography + Separate Authentic Brand Crest */}
             <div className="lg:col-span-7 relative min-h-[390px] sm:min-h-[470px] flex items-center">
-              {/* Layer 1: Unique Brand Photography */}
+              <div
+                aria-hidden="true"
+                className="absolute -inset-6 rounded-full blur-3xl opacity-30 pointer-events-none transition-colors duration-700"
+                style={{
+                  background: `radial-gradient(circle at 45% 50%, ${activeStory.accentColor}, transparent 68%)`
+                }}
+              />
+
+              {/* Layer 1: Storefront Photography */}
               <Interactive3DTilt intensity={6} className="w-[90%] relative z-10">
                 <ScrollReveal variant="scaleDepth">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-surface)]">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-surface)]">
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={`${activeStory.name}-${activeStory.primaryImg}`}
@@ -135,11 +150,11 @@ export function BrandSpotlightGallery() {
                 </ScrollReveal>
               </Interactive3DTilt>
 
-              {/* Layer 2: Floating Collection Detail Plaque (Parallax depth, zero repeated photos) */}
+              {/* Layer 2: Floating Collection Detail Plaque */}
               <ParallaxDepth
                 offset={-36}
                 horizontal={16}
-                className="hidden sm:block absolute right-0 bottom-3 max-w-[270px] z-20"
+                className="hidden sm:block absolute right-0 bottom-3 max-w-[280px] z-20"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -148,7 +163,7 @@ export function BrandSpotlightGallery() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -12 }}
                     transition={{ duration: 0.45 }}
-                    className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-5 shadow-2xl space-y-1.5"
+                    className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-2xl p-5 shadow-2xl space-y-1.5"
                   >
                     <p
                       className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider"
@@ -163,17 +178,17 @@ export function BrandSpotlightGallery() {
                 </AnimatePresence>
               </ParallaxDepth>
 
-              {/* Layer 3: Visually Separate Brand Mark Crest Plate */}
+              {/* Layer 3: Visually Separate Official Brand Mark Crest Plate */}
               <motion.div
                 key={`crest-${activeStory.name}`}
                 initial={{ opacity: 0, y: -14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45 }}
-                className={`absolute -top-4 left-4 sm:left-6 z-30 backdrop-blur-xl bg-gradient-to-r ${activeStory.tint} border border-[var(--glass-border)] rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-4`}
+                className={`absolute -top-4 left-4 sm:left-6 z-30 backdrop-blur-xl bg-gradient-to-r ${activeStory.tint} border-2 border-[var(--glass-border)] rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-4`}
               >
                 <BrandMark name={activeStory.name} size="lg" />
                 <div>
-                  <p className="font-mono-tabular text-[11px] font-semibold uppercase tracking-wider text-[var(--accent-coral)]">
+                  <p className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider text-[var(--accent-coral)]">
                     {activeStory.floor}
                   </p>
                   <p className="font-display text-2xl font-semibold text-[var(--text-primary)] leading-none mt-0.5">
@@ -206,7 +221,7 @@ export function BrandSpotlightGallery() {
                         type="button"
                         onClick={() => setAutoCycle((c) => !c)}
                         aria-label={autoCycle ? 'Pause gallery' : 'Play gallery'}
-                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] cursor-pointer"
                       >
                         {autoCycle ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                       </button>
@@ -219,7 +234,7 @@ export function BrandSpotlightGallery() {
                           stepFeatured(-1);
                         }}
                         aria-label="Previous brand visual"
-                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] cursor-pointer"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
@@ -232,7 +247,7 @@ export function BrandSpotlightGallery() {
                           stepFeatured(1);
                         }}
                         aria-label="Next brand visual"
-                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer"
+                        className="w-9 h-9 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] cursor-pointer"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -241,7 +256,7 @@ export function BrandSpotlightGallery() {
                 </div>
 
                 {/* Floor Filter Strip */}
-                <div className="flex flex-wrap gap-1.5 p-1 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-hairline)]">
+                <div className="flex flex-wrap gap-1.5 p-1.5 rounded-xl bg-[var(--bg-tint-lavender)]/45 dark:bg-[var(--bg-tint-lavender)]/55 border border-[var(--border-hairline)]">
                   {FLOOR_LEVELS.slice(0, 5).map((fl, idx) => (
                     <ScrollReveal key={fl.id} variant="pop" delay={idx * 0.03}>
                       <button
@@ -253,11 +268,16 @@ export function BrandSpotlightGallery() {
                             setActiveStory(buildBrandStory(fl.brands[0], fl));
                           }
                         }}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                           floorFilterIdx === idx
-                            ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)]'
+                            ? 'text-white shadow-sm'
                             : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                         }`}
+                        style={
+                          floorFilterIdx === idx
+                            ? { backgroundColor: fl.accentColor }
+                            : undefined
+                        }
                       >
                         {fl.shortLabel}
                       </button>
@@ -265,7 +285,7 @@ export function BrandSpotlightGallery() {
                   ))}
                 </div>
 
-                {/* Pure Visual Brand Emblem Matrix */}
+                {/* Pure Visual Authentic Brand Emblem Matrix */}
                 <div className="flex flex-wrap gap-3 py-2">
                   {activeFloor.brands.map((brand, idx) => {
                     const isActive = activeStory.name === brand.name;
@@ -302,7 +322,7 @@ export function BrandSpotlightGallery() {
                   <ScrollReveal variant="rise" delay={0.04}>
                     <button
                       type="button"
-                      onClick={() => navigate('/shopping')}
+                      onClick={() => navigate(targetRouteForStory())}
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-coral)] hover:underline cursor-pointer whitespace-nowrap"
                     >
                       <span>Explore All Wings</span>

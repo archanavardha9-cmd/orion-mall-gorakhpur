@@ -7,7 +7,11 @@ export function Footer() {
   const { navigate } = useRouter();
 
   return (
-    <footer className="relative border-t border-[var(--border-hairline)] bg-[var(--bg-surface)] backdrop-blur-xl transition-colors duration-300">
+    <footer className="relative border-t border-[var(--border-hairline)] bg-gradient-to-b from-[var(--bg-surface-elevated)] to-[var(--bg-surface)] backdrop-blur-xl transition-colors duration-300">
+      <div
+        aria-hidden="true"
+        className="h-[3px] w-full bg-gradient-to-r from-[var(--accent-coral)] via-[var(--accent-plum)] to-[var(--accent-turquoise)]"
+      />
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           <div className="md:col-span-5 space-y-4">
@@ -41,7 +45,7 @@ export function Footer() {
 
           <div className="md:col-span-3 space-y-3">
             <ScrollReveal variant="rise">
-              <p className="text-xs font-semibold tracking-wider text-[var(--text-muted)]">
+              <p className="text-xs font-semibold tracking-wider uppercase text-[var(--accent-plum)]">
                 Destinations
               </p>
             </ScrollReveal>
@@ -55,7 +59,7 @@ export function Footer() {
                         e.preventDefault();
                         navigate(route.path);
                       }}
-                      className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent-coral)] transition-colors"
+                      className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-coral)] transition-colors"
                     >
                       {route.label}
                     </a>
@@ -67,7 +71,7 @@ export function Footer() {
 
           <div className="md:col-span-4 space-y-3">
             <ScrollReveal variant="rise">
-              <p className="text-xs font-semibold tracking-wider text-[var(--text-muted)]">
+              <p className="text-xs font-semibold tracking-wider uppercase text-[var(--accent-turquoise)]">
                 Fourth Floor Cinema Booking
               </p>
             </ScrollReveal>
@@ -82,7 +86,7 @@ export function Footer() {
                   href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-[var(--accent-coral)] text-white hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-90 transition-opacity shadow-sm"
                 >
                   <span>Book via BookMyShow</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -93,7 +97,7 @@ export function Footer() {
                   href={PVR_BOOKING_LINKS.pvrOfficial}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border border-[var(--border-strong)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors"
                 >
                   <span>PVR INOX Portal</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -108,7 +112,7 @@ export function Footer() {
             <span>Orion Mall · Mohaddipur, Gorakhpur, Uttar Pradesh</span>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.04}>
-            <span>Ground to Fourth Floor Retail, Culinary Court & PVR INOX Cinemas</span>
+            <span>Ground to Fourth Floor Retail, Culinary Court &amp; PVR INOX Cinemas</span>
           </ScrollReveal>
         </div>
       </div>

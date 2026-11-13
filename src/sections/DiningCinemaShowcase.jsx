@@ -15,6 +15,7 @@ export function DiningCinemaShowcase() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
         scrim="bottom"
+        tone="coral"
         minHeight="min-h-[65vh] lg:min-h-[78vh]"
         className="flex items-end"
       >
@@ -26,26 +27,29 @@ export function DiningCinemaShowcase() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
-            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2">
+            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2 drop-shadow">
               Dining Terrace
             </h2>
           </ScrollReveal>
-          <div className="flex flex-wrap items-center gap-3 pt-4">
+          <p className="text-sm text-white/90 max-w-md">
+            Flame-grilled Whoppers, golden oven-baked pizzas &amp; signature crispy buckets in a lively social court.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             {['KFC', 'Burger King', "Domino's Pizza"].map((b, idx) => (
               <ScrollReveal key={b} variant="pop" delay={0.08 + idx * 0.05}>
-                <div className="flex items-center gap-2 backdrop-blur-md bg-black/30 rounded-xl pr-3 p-1 border border-white/20">
+                <div className="flex items-center gap-2 backdrop-blur-md bg-[#26120c]/55 rounded-xl pr-3 p-1 border border-amber-200/30 shadow-md">
                   <BrandMark name={b} size="sm" />
-                  <span className="text-xs font-medium text-white">{b}</span>
+                  <span className="text-xs font-semibold text-white">{b}</span>
                 </div>
               </ScrollReveal>
             ))}
           </div>
           <ScrollReveal variant="rise" delay={0.24}>
-            <div className="pt-5">
+            <div className="pt-4">
               <button
                 type="button"
                 onClick={() => navigate('/dining')}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white text-stone-900 hover:bg-amber-100 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-amber-300 to-amber-100 text-stone-950 hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
               >
                 <span>Open Third Floor</span>
                 <ArrowRight className="w-4 h-4" />
@@ -59,10 +63,14 @@ export function DiningCinemaShowcase() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
+        tone="royal"
         minHeight="min-h-[65vh] lg:min-h-[78vh]"
-        className="flex items-end border-t lg:border-t-0 lg:border-l border-[var(--border-hairline)]"
+        className="flex items-end border-t lg:border-t-0 lg:border-l border-[var(--glass-border)]"
       >
         <div className="p-8 md:p-14 w-full text-white space-y-5">
+          <ScrollReveal variant="pop">
+            <BrandMark name="PVR INOX Cinemas" size="md" />
+          </ScrollReveal>
           <ScrollReveal variant="slideLeft">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-sky-200">
               <Film className="w-4 h-4" />
@@ -70,16 +78,19 @@ export function DiningCinemaShowcase() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
-            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-2">
+            <h2 className="font-display text-4xl md:text-6xl font-semibold leading-[0.98] mt-1 drop-shadow">
               PVR INOX Cinemas
             </h2>
           </ScrollReveal>
-          <div className="flex flex-wrap items-center gap-3 pt-5">
+          <p className="text-sm text-white/90 max-w-md">
+            Laser projection, Dolby surround sound &amp; plush recliner auditoriums crowning Orion Mall.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 pt-4">
             <ScrollReveal variant="pop" delay={0.1}>
               <button
                 type="button"
                 onClick={() => navigate('/entertainment')}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 transition-opacity cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
               >
                 <span>Now Showing</span>
                 <ArrowRight className="w-4 h-4" />
@@ -90,7 +101,7 @@ export function DiningCinemaShowcase() {
                 href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/35 hover:bg-white/28 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
               >
                 <span>Book Tickets</span>
                 <ArrowUpRight className="w-4 h-4" />

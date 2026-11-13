@@ -76,7 +76,12 @@ export const VIDEO_ASSETS = {
   groundLuxury: {
     src: '/videos/ground_luxury.mp4',
     poster: brandMenswearImg,
-    alt: 'Warm-lit contemporary architectural suite glide'
+    alt: 'Tailored fashion garments along a modern retail store rack'
+  },
+  firstRetail: {
+    src: '/videos/first_retail.mp4',
+    poster: brandDenimImg,
+    alt: 'Colourful knitwear and apparel arranged in a contemporary clothing store'
   },
   firstDenim: {
     src: '/videos/first_denim.mp4',
@@ -98,6 +103,21 @@ export const VIDEO_ASSETS = {
     poster: brandDiningImg,
     alt: 'Empty sunlit contemporary cafe and dining counter'
   },
+  diningCulinary: {
+    src: '/videos/dining_culinary.mp4',
+    poster: brandDiningImg,
+    alt: 'Warm-lit contemporary dining room with pendant chandeliers'
+  },
+  diningBurger: {
+    src: '/videos/dining_burger.mp4',
+    poster: bkWhopperFeastImg,
+    alt: 'Flame-grilled burger with crispy seasoned fries in slow motion'
+  },
+  diningPizza: {
+    src: '/videos/dining_pizza.mp4',
+    poster: dominosPizzaSpreadImg,
+    alt: 'Freshly baked pizzas with melted cheese and herbs'
+  },
   salonStudio: {
     src: '/videos/salon_studio.mp4',
     poster: brandSalonImg,
@@ -112,6 +132,11 @@ export const VIDEO_ASSETS = {
     src: '/videos/cinema_foyer.mp4',
     poster: brandCinemaImg,
     alt: 'Warm shimmering golden and coral decorative lighting'
+  },
+  cinemaHall: {
+    src: '/videos/cinema_hall.mp4',
+    poster: brandCinemaImg,
+    alt: 'Cinema film projector glowing in warm auditorium light'
   },
   shoppingReel: {
     src: '/videos/shopping_reel.mp4',

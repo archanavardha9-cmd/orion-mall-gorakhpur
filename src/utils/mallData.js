@@ -114,7 +114,7 @@ export const FLOOR_LEVELS = [
     themeTitle: 'Denim Culture & Activewear',
     subtitle: 'Upper Atrium Promenade · Streetwear & Performance Footwear',
     accentColor: '#0C8A7B',
-    video: VIDEO_ASSETS.firstDenim,
+    video: VIDEO_ASSETS.firstRetail,
     image: IMAGE_ASSETS.brandDenim,
     brands: [
       {

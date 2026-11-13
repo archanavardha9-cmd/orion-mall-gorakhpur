@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { ArrowUpRight, Film } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
@@ -33,12 +33,13 @@ export function EntertainmentPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
+        tone="royal"
         minHeight="min-h-[82vh]"
         className="flex flex-col justify-between py-12 md:py-16"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between gap-4">
           <BrandMark name="PVR INOX Cinemas" size="md" />
-          <span className="font-mono-tabular text-xs tracking-[0.22em] uppercase text-amber-200">
+          <span className="font-mono-tabular text-xs tracking-[0.22em] uppercase text-amber-200 backdrop-blur-md bg-[#120c22]/60 border border-white/20 px-3.5 py-1.5 rounded-xl">
             Fourth Floor · Mohaddipur
           </span>
         </div>
@@ -55,11 +56,14 @@ export function EntertainmentPage() {
               <span>Multiplex Experience</span>
             </div>
             <h1
-              className="font-display font-semibold leading-[0.92] text-white"
+              className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
               style={{ fontSize: 'clamp(3rem, 6.2vw, 5.8rem)' }}
             >
               PVR INOX Cinemas
             </h1>
+            <p className="text-sm md:text-base text-white/90 max-w-xl">
+              Laser projection, spatial Dolby surround acoustics, and plush recliner seating high above Orion Mall&apos;s central atrium.
+            </p>
           </motion.div>
 
           <div className="flex flex-wrap gap-3">
@@ -67,7 +71,7 @@ export function EntertainmentPage() {
               href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 transition-opacity shadow-xl"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-white hover:opacity-95 transition-opacity shadow-xl"
             >
               <span>Book Tickets · BookMyShow</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -76,7 +80,7 @@ export function EntertainmentPage() {
               href={PVR_BOOKING_LINKS.pvrOfficial}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/35 hover:bg-white/28 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
             >
               <span>PVR INOX Official</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -88,13 +92,13 @@ export function EntertainmentPage() {
       {/* Three-Category Movies Marquee Section */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaFoyer}
-        scrim="lightMist"
+        scrim="jewelMist"
+        tone="amethyst"
         minHeight="min-h-[76vh]"
         className="py-16 md:py-24"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
           <DepthEmergeSection>
-            {/* Cinema Slate Header & Category Navigation */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[var(--border-hairline)] pb-8">
               <div>
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
@@ -108,7 +112,7 @@ export function EntertainmentPage() {
               <div
                 role="tablist"
                 aria-label="Select movie category"
-                className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-hairline)] shadow-lg self-start lg:self-auto"
+                className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-lg self-start lg:self-auto"
               >
                 {MOVIE_CATEGORIES.map((cat) => {
                   const isActive = activeCategory === cat.id;
@@ -129,7 +133,7 @@ export function EntertainmentPage() {
                         <motion.span
                           layoutId="cinemaCategoryHighlight"
                           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                          className="absolute inset-0 rounded-xl bg-[var(--accent-coral)] shadow-md"
+                          className="absolute inset-0 rounded-xl bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] shadow-md"
                           aria-hidden="true"
                         />
                       )}
@@ -149,7 +153,6 @@ export function EntertainmentPage() {
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-10"
               >
-                {/* CATEGORY 1: NOW SHOWING (Spotlight + Marquee Reel + Direct INOX Orion Mall Booking) */}
                 {activeCategory === 'nowShowing' && (
                   <section aria-labelledby="cat-now-showing" className="space-y-10">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -169,7 +172,6 @@ export function EntertainmentPage() {
                       </span>
                     </div>
 
-                    {/* Interactive Widescreen Spotlight */}
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedNowShowing.id}
@@ -177,11 +179,11 @@ export function EntertainmentPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -14 }}
                         transition={{ duration: 0.4 }}
-                        className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-7 md:p-11 shadow-2xl"
+                        className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-7 md:p-11 shadow-2xl"
                       >
                         <div className="lg:col-span-5 flex justify-center">
                           <Interactive3DTilt intensity={8} className="w-full max-w-[330px]">
-                            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[3/4]">
+                            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
                               <img
                                 src={selectedNowShowing.poster}
                                 alt={`${selectedNowShowing.title} official poster`}
@@ -227,7 +229,7 @@ export function EntertainmentPage() {
                               href={INOX_ORION_BOOKING_URL}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 transition-opacity shadow-xl whitespace-nowrap"
+                              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-xl whitespace-nowrap"
                             >
                               <span>Book Tickets</span>
                               <ArrowUpRight className="w-4 h-4" />
@@ -240,7 +242,6 @@ export function EntertainmentPage() {
                       </motion.div>
                     </AnimatePresence>
 
-                    {/* Interactive Now Showing Borderless Marquee Reel */}
                     <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-9 md:overflow-visible md:pb-0 items-start">
                       {ENTERTAINMENT_MOVIES.nowShowing.map((movie, idx) => {
                         const isSelected = selectedNowShowing.id === movie.id;
@@ -302,7 +303,6 @@ export function EntertainmentPage() {
                   </section>
                 )}
 
-                    {/* CATEGORY 2: COMING SOON (Alternating Large Editorial Splits, Zero Booking Buttons) */}
                 {activeCategory === 'comingSoon' && (
                   <section aria-labelledby="cat-coming-soon" className="space-y-10">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -345,7 +345,7 @@ export function EntertainmentPage() {
                               >
                                 <Interactive3DTilt intensity={7} className="w-full max-w-[300px]">
                                   <ScrollReveal variant="scaleDepth">
-                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[3/4]">
+                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
                                       <img
                                         src={movie.poster}
                                         alt={`${movie.title} poster`}
@@ -365,7 +365,7 @@ export function EntertainmentPage() {
                               </div>
 
                               <div
-                                className={`lg:col-span-8 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-7 md:p-10 shadow-xl space-y-4 ${
+                                className={`lg:col-span-8 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-7 md:p-10 shadow-xl space-y-4 ${
                                   reversed ? 'lg:order-1' : 'lg:order-2'
                                 }`}
                               >
@@ -409,7 +409,6 @@ export function EntertainmentPage() {
                   </section>
                 )}
 
-                {/* CATEGORY 3: PREVIOUSLY RELEASED (Staggered Retrospective Poster Strip, Zero Booking Buttons) */}
                 {activeCategory === 'previouslyReleased' && (
                   <section aria-labelledby="cat-previously-released" className="space-y-10">
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -444,7 +443,7 @@ export function EntertainmentPage() {
                           className={idx === 1 ? 'lg:mt-8' : ''}
                         >
                           <div className="group space-y-4">
-                            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[3/4]">
+                            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
                               <img
                                 src={movie.poster}
                                 alt={`${movie.title} poster`}
@@ -467,9 +466,9 @@ export function EntertainmentPage() {
                               </div>
                             </div>
 
-                            <div className="px-2 space-y-2">
+                            <div className="px-2 space-y-2 backdrop-blur-md bg-[var(--bg-surface)] rounded-2xl p-4 border border-[var(--border-hairline)]">
                               <ScrollReveal variant="rise" delay={0.04}>
-                                <p className="text-xs font-medium text-[var(--text-muted)]">
+                                <p className="text-xs font-semibold text-[var(--accent-plum)]">
                                   {movie.genre} · {movie.language}
                                 </p>
                               </ScrollReveal>
@@ -491,16 +490,18 @@ export function EntertainmentPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* Auditorium Visual Section */}
+      {/* Auditorium Visual Section (Authentic Cinema Projector Motion Video) */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.exteriorDusk}
-        scrim="side"
-        minHeight="min-h-[60vh]"
-        className="py-16 md:py-20 flex items-center"
+        video={VIDEO_ASSETS.cinemaHall}
+        scrim="jewelMist"
+        tone="royal"
+        minHeight="min-h-[62vh]"
+        className="py-16 md:py-24 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <ScrollReveal variant="slideRight" className="lg:col-span-6">
-            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-xl space-y-4">
+            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
+              <BrandMark name="PVR INOX Cinemas" size="md" />
               <ScrollReveal variant="drop">
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-turquoise)]">
                   Fourth Floor Auditorium
@@ -508,32 +509,32 @@ export function EntertainmentPage() {
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.04}>
                 <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)]">
-                  Plush Recliners & Express Lift Lobby
+                  Plush Recliners &amp; Express Lift Lobby
                 </h2>
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.08}>
-                <p className="text-sm text-[var(--text-secondary)]">
-                  Direct elevator access from basement parking to the Fourth Floor PVR INOX lobby.
+                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                  Direct elevator access from basement parking to the Fourth Floor PVR INOX lobby, featuring gourmet popcorn concessions and Dolby acoustics.
                 </p>
               </ScrollReveal>
             </div>
           </ScrollReveal>
           <ScrollReveal variant="scaleDepth" delay={0.06} className="lg:col-span-6">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[4/3]">
-              <img
-                src={IMAGE_ASSETS.brandCinema}
-                alt="Empty luxury multiplex auditorium inside Orion Mall"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <Interactive3DTilt intensity={5}>
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3]">
+                <img
+                  src={IMAGE_ASSETS.brandCinema}
+                  alt="Empty luxury multiplex auditorium inside Orion Mall"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </Interactive3DTilt>
           </ScrollReveal>
         </div>
       </VideoBackdropSection>
     </div>
   );
 }
-
-

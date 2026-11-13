@@ -1,8 +1,9 @@
-﻿import { Compass, ArrowDown, ArrowUp, ArrowRight } from 'lucide-react';
+import { Compass, ArrowDown, ArrowUp, ArrowRight } from 'lucide-react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { MallExplorer3D } from '../components/MallExplorer3D';
 import {
   DepthEmergeSection,
+  Interactive3DTilt,
   ParallaxDepth
 } from '../animations/MotionPrimitives';
 import { ScrollReveal } from '../animations/ScrollReveal';
@@ -19,10 +20,11 @@ export function ExplorePage() {
 
   return (
     <div className="w-full">
-      {/* UNIQUE EXPLORE HERO: Centered Spatial Portal Hero */}
+      {/* UNIQUE EXPLORE HERO: Centered Spatial Portal Hero over Ascending Mall Escalator Video */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.firstDenim}
-        scrim="bottom"
+        scrim="heroPrism"
+        tone="emerald"
         minHeight="min-h-[76vh]"
         className="flex items-center justify-center text-center py-20"
       >
@@ -36,14 +38,14 @@ export function ExplorePage() {
             </ScrollReveal>
             <ScrollReveal variant="rise" delay={0.05}>
               <h1
-                className="font-display font-semibold leading-[0.94] text-white"
+                className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
                 style={{ fontSize: 'clamp(2.9rem, 6.2vw, 5.75rem)' }}
               >
                 Walk Through Every Level
               </h1>
             </ScrollReveal>
             <ScrollReveal variant="rise" delay={0.1}>
-              <p className="text-sm md:text-base text-white/90 max-w-xl mx-auto">
+              <p className="text-sm md:text-base text-white/95 max-w-xl mx-auto">
                 Move along sunlit corridors, ride the glass elevator, and inspect every storefront in real time.
               </p>
             </ScrollReveal>
@@ -54,7 +56,7 @@ export function ExplorePage() {
               <button
                 type="button"
                 onClick={jumpTo3D}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 shadow-xl cursor-pointer"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-turquoise)] text-white hover:opacity-95 shadow-xl cursor-pointer"
               >
                 <span>Launch 3D Walkthrough</span>
                 <ArrowDown className="w-4 h-4" />
@@ -75,31 +77,33 @@ export function ExplorePage() {
         />
       </section>
 
-      {/* Immersive Atrium Light & Architecture Finale (Zero cards, zero grids, zero listings) */}
+      {/* Immersive Atrium Light & Architecture Finale */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.atriumStory}
-        scrim="lightMist"
+        scrim="jewelMist"
+        tone="royal"
         minHeight="min-h-[84vh]"
         className="py-24 md:py-32 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Parallax Overlapping Architectural Composition */}
               <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[480px] flex items-center">
                 <ParallaxDepth offset={-42} horizontal={-14} className="w-[82%] mr-auto">
-                  <ScrollReveal variant="scaleDepth">
-                    <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--glass-border)] aspect-[16/10]">
-                      <img
-                        src={IMAGE_ASSETS.mallAtriumEmpty}
-                        alt="Sunlit five-level architectural atrium inside Orion Mall"
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </ScrollReveal>
+                  <Interactive3DTilt intensity={5}>
+                    <ScrollReveal variant="scaleDepth">
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10]">
+                        <img
+                          src={IMAGE_ASSETS.mallAtriumEmpty}
+                          alt="Sunlit five-level architectural atrium inside Orion Mall"
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </ScrollReveal>
+                  </Interactive3DTilt>
                 </ParallaxDepth>
 
                 <ParallaxDepth
@@ -108,7 +112,7 @@ export function ExplorePage() {
                   className="hidden sm:block absolute right-0 bottom-2 w-[46%] z-20"
                 >
                   <ScrollReveal variant="slideLeft" delay={0.1}>
-                    <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3]">
+                    <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3]">
                       <img
                         src={IMAGE_ASSETS.brandCinema}
                         alt="Upper floor PVR INOX cinema horizon inside Orion Mall"
@@ -122,9 +126,8 @@ export function ExplorePage() {
                 </ParallaxDepth>
               </div>
 
-              {/* Minimal Editorial Focal Anchor */}
               <ScrollReveal variant="slideRight" className="lg:col-span-5">
-                <div className="space-y-6">
+                <div className="space-y-6 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
                       <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-turquoise)]">
@@ -151,7 +154,7 @@ export function ExplorePage() {
                       <button
                         type="button"
                         onClick={jumpTo3D}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
                       >
                         <ArrowUp className="w-4 h-4" />
                         <span>Return to 3D Explorer</span>
@@ -177,4 +180,3 @@ export function ExplorePage() {
     </div>
   );
 }
-

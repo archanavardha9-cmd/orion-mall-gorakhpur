@@ -1,63 +1,69 @@
-/* Orion Mall Gorakhpur — Rich Colourful Light Theme & Elegant Dark Theme */
+/* Orion Mall Gorakhpur — Rich Colourful Luxury Light Theme & Royal Jewel Dark Theme */
 
 :root {
-  --bg-canvas: #faf3ea;
-  --bg-canvas-gradient: radial-gradient(circle at 12% 18%, rgba(235, 223, 252, 0.92) 0%, transparent 45%),
-    radial-gradient(circle at 86% 14%, rgba(254, 222, 206, 0.85) 0%, transparent 42%),
-    radial-gradient(circle at 75% 74%, rgba(206, 244, 236, 0.85) 0%, transparent 48%),
-    radial-gradient(circle at 20% 82%, rgba(217, 234, 254, 0.85) 0%, transparent 48%),
-    linear-gradient(155deg, #faf3ea 0%, #f5eefb 48%, #ebf8f5 100%);
-  --bg-surface: rgba(255, 250, 244, 0.78);
-  --bg-surface-elevated: rgba(253, 247, 255, 0.9);
-  --bg-tint-lavender: #efe7fa;
-  --bg-tint-peach: #fce7dc;
-  --bg-tint-mint: #dff4ee;
-  --bg-tint-sky: #e3eefd;
+  --bg-canvas: #f7ecde;
+  --bg-canvas-gradient: radial-gradient(circle at 10% 14%, rgba(224, 198, 255, 0.92) 0%, transparent 46%),
+    radial-gradient(circle at 88% 12%, rgba(255, 206, 178, 0.9) 0%, transparent 44%),
+    radial-gradient(circle at 76% 74%, rgba(182, 238, 224, 0.88) 0%, transparent 48%),
+    radial-gradient(circle at 18% 84%, rgba(202, 224, 255, 0.88) 0%, transparent 48%),
+    linear-gradient(150deg, #f9ede0 0%, #f1e3fb 46%, #e1f4ef 100%);
+  --bg-surface: rgba(255, 248, 240, 0.84);
+  --bg-surface-elevated: rgba(254, 246, 255, 0.92);
+  --bg-tint-lavender: #eadcf9;
+  --bg-tint-peach: #fbdcc9;
+  --bg-tint-mint: #d1f1e8;
+  --bg-tint-sky: #dae8fe;
+  --bg-tint-gold: #fbe8be;
 
-  --text-primary: #1c132b;
-  --text-secondary: #433759;
-  --text-muted: #65587c;
+  --text-primary: #1a102b;
+  --text-secondary: #3e3056;
+  --text-muted: #5d4e78;
 
-  --accent-coral: #d64e34;
-  --accent-turquoise: #0c8a7b;
+  --accent-coral: #d6492e;
+  --accent-turquoise: #0a8475;
   --accent-plum: #6c3eb8;
   --accent-sky: #2563eb;
+  --accent-gold: #c6821c;
+  --accent-rose: #c73468;
 
-  --border-hairline: rgba(28, 19, 43, 0.12);
-  --border-strong: rgba(28, 19, 43, 0.24);
-  --video-scrim-soft: linear-gradient(180deg, rgba(250, 243, 234, 0.24) 0%, rgba(28, 19, 43, 0.28) 55%, rgba(22, 14, 34, 0.62) 100%);
-  --video-scrim-side: linear-gradient(95deg, rgba(250, 243, 234, 0.88) 0%, rgba(242, 234, 250, 0.72) 44%, rgba(242, 234, 250, 0.14) 100%);
-  --glass-panel: rgba(252, 248, 244, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.68);
+  --border-hairline: rgba(34, 20, 56, 0.13);
+  --border-strong: rgba(34, 20, 56, 0.25);
+  --video-scrim-soft: linear-gradient(180deg, rgba(249, 237, 224, 0.18) 0%, rgba(26, 16, 43, 0.28) 55%, rgba(20, 12, 34, 0.62) 100%);
+  --video-scrim-side: linear-gradient(95deg, rgba(249, 237, 224, 0.88) 0%, rgba(241, 227, 251, 0.72) 44%, rgba(241, 227, 251, 0.14) 100%);
+  --glass-panel: rgba(253, 246, 238, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.74);
 }
 
 .dark {
-  --bg-canvas: #120e1b;
-  --bg-canvas-gradient: radial-gradient(circle at 15% 15%, rgba(69, 42, 114, 0.42) 0%, transparent 45%),
-    radial-gradient(circle at 86% 20%, rgba(160, 68, 52, 0.28) 0%, transparent 42%),
-    radial-gradient(circle at 72% 78%, rgba(22, 112, 104, 0.3) 0%, transparent 46%),
-    radial-gradient(circle at 24% 84%, rgba(44, 78, 138, 0.3) 0%, transparent 46%),
-    linear-gradient(160deg, #120e1b 0%, #191428 50%, #111c24 100%);
-  --bg-surface: rgba(28, 22, 43, 0.82);
-  --bg-surface-elevated: rgba(37, 29, 56, 0.92);
-  --bg-tint-lavender: #251d3b;
-  --bg-tint-peach: #301f27;
-  --bg-tint-mint: #162b2d;
-  --bg-tint-sky: #1a243b;
+  --bg-canvas: #110c1c;
+  --bg-canvas-gradient: radial-gradient(circle at 14% 14%, rgba(92, 52, 148, 0.48) 0%, transparent 46%),
+    radial-gradient(circle at 88% 18%, rgba(186, 74, 52, 0.34) 0%, transparent 44%),
+    radial-gradient(circle at 74% 78%, rgba(20, 128, 118, 0.36) 0%, transparent 48%),
+    radial-gradient(circle at 22% 84%, rgba(44, 88, 166, 0.36) 0%, transparent 48%),
+    linear-gradient(155deg, #110c1c 0%, #1b1330 48%, #0f1f29 100%);
+  --bg-surface: rgba(29, 21, 46, 0.84);
+  --bg-surface-elevated: rgba(39, 28, 62, 0.92);
+  --bg-tint-lavender: #2a1e47;
+  --bg-tint-peach: #382028;
+  --bg-tint-mint: #142f32;
+  --bg-tint-sky: #192644;
+  --bg-tint-gold: #362815;
 
-  --text-primary: #f6f1e9;
-  --text-secondary: #d5cde3;
-  --text-muted: #a69bb9;
+  --text-primary: #faf4eb;
+  --text-secondary: #d9d0e8;
+  --text-muted: #afa3c4;
 
-  --accent-coral: #f27c54;
-  --accent-turquoise: #3fd8c3;
-  --accent-plum: #b48ef8;
+  --accent-coral: #f37b53;
+  --accent-turquoise: #36d7c1;
+  --accent-plum: #ba94fa;
   --accent-sky: #74a9ff;
+  --accent-gold: #f5b942;
+  --accent-rose: #f472b6;
 
-  --border-hairline: rgba(246, 241, 233, 0.14);
-  --border-strong: rgba(246, 241, 233, 0.26);
-  --video-scrim-soft: linear-gradient(180deg, rgba(18, 14, 27, 0.26) 0%, rgba(18, 14, 27, 0.34) 55%, rgba(14, 10, 22, 0.68) 100%);
-  --video-scrim-side: linear-gradient(95deg, rgba(18, 14, 27, 0.88) 0%, rgba(25, 20, 40, 0.72) 45%, rgba(18, 14, 27, 0.16) 100%);
-  --glass-panel: rgba(26, 20, 40, 0.78);
-  --glass-border: rgba(246, 241, 233, 0.16);
+  --border-hairline: rgba(250, 244, 235, 0.15);
+  --border-strong: rgba(250, 244, 235, 0.28);
+  --video-scrim-soft: linear-gradient(180deg, rgba(17, 12, 28, 0.22) 0%, rgba(17, 12, 28, 0.34) 55%, rgba(14, 10, 22, 0.68) 100%);
+  --video-scrim-side: linear-gradient(95deg, rgba(17, 12, 28, 0.88) 0%, rgba(27, 19, 48, 0.72) 45%, rgba(17, 12, 28, 0.16) 100%);
+  --glass-panel: rgba(26, 19, 43, 0.82);
+  --glass-border: rgba(250, 244, 235, 0.18);
 }

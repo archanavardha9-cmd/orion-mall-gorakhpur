@@ -1,48 +1,65 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 
-// Shared scroll-activity manager so background videos play ONLY while scrolling
-// and pause immediately on the exact frame once scrolling stops.
-const scrollSubscribers = new Set();
-let scrollActive = false;
-let scrollStopTimeout = null;
-let listenerAttached = false;
+// Shared single-listener scroll & rAF coordinator for all VideoBackdropSection instances.
+// Ensures zero redundant scroll listeners and stops rAF completely when idle.
+const controllers = new Set();
+let listenersAttached = false;
+let rafId = null;
+let needsTargetRefresh = false;
 
-function notifyScrollSubscribers() {
-  scrollSubscribers.forEach((cb) => cb(scrollActive));
+function scheduleSync(refreshTargets = false) {
+  if (refreshTargets) {
+    needsTargetRefresh = true;
+  }
+  if (rafId !== null || typeof window === 'undefined') return;
+  rafId = window.requestAnimationFrame(runSyncLoop);
 }
 
-function handleWindowScroll() {
-  if (!scrollActive) {
-    scrollActive = true;
-    notifyScrollSubscribers();
+function runSyncLoop() {
+  rafId = null;
+  const refresh = needsTargetRefresh;
+  needsTargetRefresh = false;
+
+  let keepRunning = false;
+  controllers.forEach((ctrl) => {
+    if (refresh) {
+      ctrl.updateTarget();
+    }
+    if (ctrl.stepFrame()) {
+      keepRunning = true;
+    }
+  });
+
+  if (keepRunning) {
+    rafId = window.requestAnimationFrame(runSyncLoop);
   }
-  if (scrollStopTimeout !== null) {
-    window.clearTimeout(scrollStopTimeout);
-  }
-  scrollStopTimeout = window.setTimeout(() => {
-    scrollActive = false;
-    scrollStopTimeout = null;
-    notifyScrollSubscribers();
-  }, 150);
 }
 
-function subscribeToScrollActivity(cb) {
-  scrollSubscribers.add(cb);
-  if (!listenerAttached && typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleWindowScroll, { passive: true });
-    listenerAttached = true;
+function handleGlobalScroll() {
+  scheduleSync(true);
+}
+
+function registerVideoController(ctrl) {
+  controllers.add(ctrl);
+  if (!listenersAttached && typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleGlobalScroll, { passive: true });
+    window.addEventListener('resize', handleGlobalScroll, { passive: true });
+    listenersAttached = true;
   }
+  scheduleSync(true);
+
   return () => {
-    scrollSubscribers.delete(cb);
-    if (scrollSubscribers.size === 0 && listenerAttached && typeof window !== 'undefined') {
-      window.removeEventListener('scroll', handleWindowScroll);
-      listenerAttached = false;
-      if (scrollStopTimeout !== null) {
-        window.clearTimeout(scrollStopTimeout);
-        scrollStopTimeout = null;
+    controllers.delete(ctrl);
+    if (controllers.size === 0 && listenersAttached && typeof window !== 'undefined') {
+      window.removeEventListener('scroll', handleGlobalScroll);
+      window.removeEventListener('resize', handleGlobalScroll);
+      listenersAttached = false;
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
       }
-      scrollActive = false;
+      needsTargetRefresh = false;
     }
   };
 }
@@ -50,6 +67,7 @@ function subscribeToScrollActivity(cb) {
 export function VideoBackdropSection({
   video,
   scrim = 'soft',
+  tone = 'none',
   minHeight = 'min-h-[82vh]',
   className = '',
   id,
@@ -57,9 +75,15 @@ export function VideoBackdropSection({
 }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const stateRef = useRef({
+    isInView: false,
+    targetTime: 0.02,
+    smoothedTime: 0.02,
+    initialized: false
+  });
+
   const [videoReady, setVideoReady] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [isNearView, setIsNearView] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -68,66 +92,188 @@ export function VideoBackdropSection({
 
   const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.0, 1.04]);
   const videoY = useTransform(scrollYProgress, [0, 1], ['-2.5%', '2.5%']);
-  const revealOpacity = useTransform(scrollYProgress, [0, 0.16, 0.85, 1], [0.75, 1, 1, 0.85]);
+  const revealOpacity = useTransform(scrollYProgress, [0, 0.14, 0.86, 1], [0.82, 1, 1, 0.86]);
 
-  // Listen to shared global scroll activity across all pages & sections
+  // Reset ready flag only when video source actually changes
   useEffect(() => {
-    return subscribeToScrollActivity((active) => {
-      setIsScrolling(active);
-    });
-  }, []);
+    setVideoReady(false);
+    stateRef.current.initialized = false;
+  }, [video?.src]);
 
-  // Track whether this section is near or inside the viewport
+  // Track both near-viewport (for eager metadata->auto buffering) and active viewport
   useEffect(() => {
     const el = containerRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') {
-      setIsInView(true);
+      setIsNearView(true);
+      stateRef.current.isInView = true;
       return;
     }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          setIsInView(entry.isIntersecting);
+          stateRef.current.isInView = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            setIsNearView(true);
+            scheduleSync(true);
+          }
         });
       },
-      { rootMargin: '180px 0px', threshold: 0.02 }
+      { rootMargin: '320px 0px', threshold: 0.01 }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Reset ready flag only when video source changes
+  // Register scroll-synchronized forward/reverse scrubbing controller
   useEffect(() => {
-    setVideoReady(false);
-  }, [video?.src]);
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Synchronize HTMLVideoElement play/pause strictly with scrolling without resetting currentTime
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    el.muted = true;
+    const computeScrollTargetTime = () => {
+      const container = containerRef.current;
+      const vid = videoRef.current;
+      if (!container || !vid) return;
 
-    if (isScrolling && isInView) {
-      if (el.paused) {
-        const playPromise = el.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(() => {
-            // Silently ignore autoplay-restricted blocks while poster/frame remains visible
-          });
+      const duration = vid.duration;
+      if (!Number.isFinite(duration) || duration <= 0.1) return;
+
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const docTop = rect.top + scrollY;
+
+      // Sections starting in the initial viewport begin at progress 0 at scrollY=0.
+      // Sections below the fold begin at progress 0 when their top enters the bottom of viewport.
+      const startScroll = Math.max(0, docTop - vh);
+      const endScroll = docTop + rect.height;
+      const span = Math.max(1, endScroll - startScroll);
+      const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
+
+      const safeMin = 0.02;
+      const safeMax = Math.max(safeMin + 0.04, duration - 0.04);
+      const nextTarget = safeMin + progress * (safeMax - safeMin);
+
+      stateRef.current.targetTime = nextTarget;
+      if (!stateRef.current.initialized) {
+        stateRef.current.smoothedTime = nextTarget;
+        stateRef.current.initialized = true;
+      }
+    };
+
+    const stepFrame = () => {
+      const vid = videoRef.current;
+      const st = stateRef.current;
+      if (!vid || !st.isInView) return false;
+      if (vid.readyState < 1 || !Number.isFinite(vid.duration) || vid.duration <= 0.1) {
+        return false;
+      }
+
+      // Never let native playback clock fight scroll-scrubbed currentTime
+      if (!vid.paused) {
+        vid.pause();
+      }
+
+      if (prefersReducedMotion) {
+        return false;
+      }
+
+      const diff = st.targetTime - st.smoothedTime;
+      if (Math.abs(diff) < 0.008) {
+        st.smoothedTime = st.targetTime;
+      } else {
+        st.smoothedTime += diff * 0.34;
+      }
+
+      const deltaFromVideo = Math.abs(st.smoothedTime - vid.currentTime);
+      const pendingDistance = Math.abs(st.targetTime - vid.currentTime);
+
+      if (!vid.seeking && deltaFromVideo >= 0.015) {
+        try {
+          vid.currentTime = st.smoothedTime;
+        } catch {
+          // Ignore transient seek exceptions before full decode readiness
         }
       }
-    } else if (!el.paused) {
-      el.pause();
-    }
-  }, [isScrolling, isInView, video?.src]);
 
-  // Measured, transparent scrims that keep real video motion vibrant and clear
+      return pendingDistance >= 0.015 || Math.abs(st.targetTime - st.smoothedTime) >= 0.008;
+    };
+
+    const ctrl = {
+      updateTarget: computeScrollTargetTime,
+      stepFrame
+    };
+
+    const unregister = registerVideoController(ctrl);
+    return unregister;
+  }, [video?.src]);
+
+  const handleVideoLoaded = () => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    if (!vid.paused) vid.pause();
+
+    if (Number.isFinite(vid.duration) && vid.duration > 0.1) {
+      const container = containerRef.current;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const docTop = rect.top + scrollY;
+        const startScroll = Math.max(0, docTop - vh);
+        const endScroll = docTop + rect.height;
+        const span = Math.max(1, endScroll - startScroll);
+        const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
+        const safeMin = 0.02;
+        const safeMax = Math.max(safeMin + 0.04, vid.duration - 0.04);
+        const initialTime = safeMin + progress * (safeMax - safeMin);
+        stateRef.current.targetTime = initialTime;
+        stateRef.current.smoothedTime = initialTime;
+        stateRef.current.initialized = true;
+        try {
+          vid.currentTime = initialTime;
+        } catch {
+          // Ignore
+        }
+      }
+    }
+
+    if (vid.readyState >= 2) {
+      setVideoReady(true);
+    }
+    scheduleSync(true);
+  };
+
+  const handleVideoSeeked = () => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    if (vid.readyState >= 2) {
+      setVideoReady(true);
+    }
+    scheduleSync(false);
+  };
+
+  // Rich, vibrant scrims that keep colours luminous without flat black or milky white wash
   const scrimClasses = {
-    soft: 'bg-gradient-to-b from-transparent via-black/10 to-black/38 dark:from-[#120e1b]/20 dark:via-[#120e1b]/14 dark:to-[#120e1b]/45',
-    side: 'bg-gradient-to-r from-[#faf3ea]/78 via-[#f5eefb]/36 to-transparent dark:from-[#120e1b]/78 dark:via-[#191428]/38 dark:to-transparent',
-    sideRight: 'bg-gradient-to-l from-[#faf3ea]/78 via-[#ebf8f5]/36 to-transparent dark:from-[#120e1b]/78 dark:via-[#111c24]/38 dark:to-transparent',
-    bottom: 'bg-gradient-to-t from-[#140e20]/64 via-[#140e20]/16 to-transparent',
-    lightMist: 'bg-gradient-to-b from-[#faf3ea]/42 via-[#f5eefb]/24 to-[#ebf8f5]/46 dark:from-[#120e1b]/48 dark:via-[#191428]/26 dark:to-[#120e1b]/52'
+    soft: 'bg-gradient-to-b from-[#1a102b]/12 via-[#120b20]/10 to-[#140c24]/48',
+    side: 'bg-gradient-to-r from-[#f8ebdc]/80 via-[#f2e4fb]/44 to-transparent dark:from-[#120c22]/84 dark:via-[#1c1334]/46 dark:to-transparent',
+    sideRight: 'bg-gradient-to-l from-[#f8ebdc]/80 via-[#e0f5f0]/44 to-transparent dark:from-[#120c22]/84 dark:via-[#102329]/46 dark:to-transparent',
+    bottom: 'bg-gradient-to-t from-[#160d26]/74 via-[#1c1130]/22 to-[#1f1233]/14',
+    heroPrism: 'bg-gradient-to-tr from-[#1c0f2e]/68 via-[#3d1c3a]/24 to-[#b45309]/18',
+    lightMist: 'bg-gradient-to-br from-[#f9ebd9]/56 via-[#efe3fc]/36 to-[#dcf4ee]/54 dark:from-[#130d22]/64 dark:via-[#1d1433]/44 dark:to-[#0f2228]/60',
+    jewelMist: 'bg-gradient-to-br from-[#fde6d8]/52 via-[#ede0fc]/34 to-[#d6f2ec]/52 dark:from-[#180f2b]/68 dark:via-[#23143d]/48 dark:to-[#0f252b]/64'
+  };
+
+  const toneOverlays = {
+    none: null,
+    coral: 'radial-gradient(circle at 18% 22%, rgba(214, 78, 52, 0.22), transparent 54%), radial-gradient(circle at 84% 78%, rgba(217, 119, 6, 0.18), transparent 52%)',
+    emerald: 'radial-gradient(circle at 80% 20%, rgba(12, 138, 123, 0.22), transparent 55%), radial-gradient(circle at 18% 82%, rgba(37, 99, 235, 0.16), transparent 52%)',
+    amethyst: 'radial-gradient(circle at 22% 20%, rgba(108, 62, 184, 0.22), transparent 55%), radial-gradient(circle at 82% 80%, rgba(201, 59, 107, 0.18), transparent 52%)',
+    royal: 'radial-gradient(circle at 75% 24%, rgba(37, 99, 235, 0.24), transparent 55%), radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.2), transparent 52%)'
   };
 
   return (
@@ -153,12 +299,13 @@ export function VideoBackdropSection({
           key={video?.src}
           src={video?.src}
           poster={video?.poster}
-          loop
           muted
           playsInline
-          preload="auto"
-          onLoadedData={() => setVideoReady(true)}
-          onCanPlay={() => setVideoReady(true)}
+          preload={isNearView ? 'auto' : 'metadata'}
+          onLoadedMetadata={handleVideoLoaded}
+          onLoadedData={handleVideoLoaded}
+          onCanPlay={handleVideoLoaded}
+          onSeeked={handleVideoSeeked}
           aria-hidden="true"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
             videoReady ? 'opacity-100' : 'opacity-0'
@@ -172,6 +319,14 @@ export function VideoBackdropSection({
           scrimClasses[scrim] || scrimClasses.soft
         }`}
       />
+
+      {toneOverlays[tone] && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: toneOverlays[tone] }}
+        />
+      )}
 
       <div className="relative z-10 w-full h-full">{children}</div>
     </section>
