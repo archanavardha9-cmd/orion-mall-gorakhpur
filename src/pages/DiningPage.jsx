@@ -5,7 +5,6 @@ import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
 import {
   DepthEmergeSection,
-  DramaticReveal,
   Interactive3DTilt,
   ParallaxDepth
 } from '../animations/MotionPrimitives';
@@ -271,7 +270,7 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningBurger}
         scrim="soft"
         minHeight="min-h-[86vh]"
-        className="py-20 md:py-28 flex items-center"
+        className="flex items-center"
       >
         <div
           aria-hidden="true"
@@ -282,10 +281,10 @@ export function DiningPage() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-12 text-[#F5EBDC]">
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32 space-y-12 text-[#F5EBDC]">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-              <div className="lg:col-span-5 space-y-7">
+              <div className="lg:col-span-5 space-y-7 pb-4 md:pb-6">
                 <div className="space-y-4">
                   <BurgerKingLockup />
                   <div className="flex items-center gap-2 text-xs font-mono-tabular uppercase tracking-[0.18em] text-[#FFAA00]">
@@ -343,7 +342,7 @@ export function DiningPage() {
                 </div>
 
                 <ScrollReveal variant="rise" delay={0.18}>
-                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono-tabular text-[#F5EBDC]/80 pt-3 pb-1 border-t border-[#F5EBDC]/20">
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono-tabular text-[#F5EBDC]/85 pt-4 pb-3 border-t border-[#F5EBDC]/20">
                     <Clock className="w-3.5 h-3.5 text-[#FFAA00]" />
                     <span>{MALL_INFO.hours.dining}</span>
                     <span aria-hidden="true">·</span>
@@ -408,7 +407,7 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningPizza}
         scrim="soft"
         minHeight="min-h-[88vh]"
-        className="py-20 md:py-28 flex items-center"
+        className="flex items-center"
       >
         <div
           aria-hidden="true"
@@ -419,10 +418,10 @@ export function DiningPage() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-12">
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32 space-y-12">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-              <div className="lg:col-span-5 bg-[#fffcf8] text-slate-900 rounded-3xl p-8 md:p-10 pb-9 md:pb-12 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
+              <div className="lg:col-span-5 bg-[#fffcf8] text-slate-900 rounded-3xl p-8 md:p-10 pb-10 md:pb-12 shadow-2xl border border-white/80 flex flex-col justify-between space-y-6">
                 <div className="space-y-5">
                   <ScrollReveal variant="pop">
                     <DominosLockup />
@@ -453,7 +452,7 @@ export function DiningPage() {
                 </div>
 
                 <ScrollReveal variant="rise" delay={0.16}>
-                  <div className="space-y-3 pt-2 border-t border-slate-200">
+                  <div className="space-y-3 pt-4 pb-2 border-t border-slate-200">
                     <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
                       {DOMINOS_HIGHLIGHTS.map((item) => {
                         const isActive = activeDominoHighlight.id === item.id;
@@ -502,33 +501,31 @@ export function DiningPage() {
                 </ScrollReveal>
               </div>
 
-              <div className="lg:col-span-7">
-                <ScrollReveal variant="scaleDepth">
-                  <DramaticReveal variant="scaleDepth" className="h-full">
-                    <div className="relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[280px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/30 bg-[#003B5C]">
-                      <img
-                        src={DINING_BRAND_GALLERY.dominos.interior}
-                        alt="Domino's Pizza modern cobalt blue and crisp white mall restaurant interior"
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-[#002B42]/88 via-[#002B42]/35 to-transparent text-white">
-                        <p className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-sky-200">
-                          Open Kitchen Theatre · Third Floor
-                        </p>
-                        <p className="font-display text-2xl font-semibold mt-1">
-                          Blue-Tiled Oven Bar &amp; Express Pickup Counter
-                        </p>
-                      </div>
+              <div className="lg:col-span-7 flex">
+                <ScrollReveal variant="scaleDepth" className="w-full lg:h-full">
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[320px] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/30 bg-[#003B5C]">
+                    <img
+                      src={DINING_BRAND_GALLERY.dominos.interior}
+                      alt="Domino's Pizza modern cobalt blue and crisp white mall restaurant interior"
+                      referrerPolicy="no-referrer"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-[#002B42]/88 via-[#002B42]/40 to-transparent text-white">
+                      <p className="font-mono-tabular text-[11px] uppercase tracking-[0.2em] text-sky-200">
+                        Open Kitchen Theatre · Third Floor
+                      </p>
+                      <p className="font-display text-2xl md:text-3xl font-semibold mt-1">
+                        Blue-Tiled Oven Bar &amp; Express Pickup Counter
+                      </p>
                     </div>
-                  </DramaticReveal>
+                  </div>
                 </ScrollReveal>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4 pb-4 md:pb-6">
               <div className="lg:col-span-7 space-y-3">
                 <ScrollReveal variant="scaleDepth">
                   <ParallaxDepth offset={14}>
@@ -545,11 +542,11 @@ export function DiningPage() {
                   </ParallaxDepth>
                 </ScrollReveal>
                 <ScrollReveal variant="rise" delay={0.06}>
-                  <div className="px-1 text-white space-y-1">
+                  <div className="px-1 pt-1 pb-3 text-white space-y-1.5">
                     <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-rose-200">
                       Cheese Pull Perfection · Hand-Tossed &amp; Pan Crusts
                     </p>
-                    <p className="text-sm text-white/90">
+                    <p className="text-sm text-white/90 leading-relaxed">
                       Golden crust dusted in toasted cornmeal, bubbling mozzarella, sweet golden corn,
                       paprika &amp; fresh basil served beside oven-warm breadsticks.
                     </p>
@@ -573,11 +570,11 @@ export function DiningPage() {
                   </ParallaxDepth>
                 </ScrollReveal>
                 <ScrollReveal variant="rise" delay={0.14}>
-                  <div className="px-1 text-white space-y-1">
+                  <div className="px-1 pt-1 pb-3 text-white space-y-1.5">
                     <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-sky-200">
                       Sides, Pasta &amp; Desserts · Express Dining
                     </p>
-                    <p className="text-sm text-white/90">
+                    <p className="text-sm text-white/90 leading-relaxed">
                       Zesty tacos, stuffed cheesy twists &amp; chocolate lava indulgences crafted to
                       share before or after your movie on Fourth Floor.
                     </p>
