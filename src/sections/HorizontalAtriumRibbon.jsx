@@ -132,35 +132,34 @@ export function HorizontalAtriumRibbon() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.exteriorDusk}
       scrim="jewelMist"
-      minHeight="min-h-[100vh]"
-      className="py-20 md:py-28 flex flex-col justify-center"
+      className="flex flex-col justify-center py-4 md:py-6"
     >
       <DepthEmergeSection>
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-10">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 space-y-4 my-auto">
           {/* Section Header + Elevation Direction Controls */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div className="bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-5 py-2.5 shadow-xl self-start">
               <ScrollReveal variant="rise">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-1.5">
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)] mb-0.5">
                   Vertical Promenade
                 </p>
               </ScrollReveal>
               <ScrollReveal variant="slideRight" delay={0.05}>
-                <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] leading-none">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-[var(--text-primary)] leading-none">
                   Floor by Floor
                 </h2>
               </ScrollReveal>
             </div>
 
-            <div className="flex items-center gap-2.5 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               <ScrollReveal variant="pop" delay={0.08}>
                 <button
                   type="button"
                   onClick={() => goStep(-1)}
                   aria-label="Previous floor"
-                  className="w-11 h-11 rounded-xl backdrop-blur-md bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                  className="w-9 h-9 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
                 >
-                  <ChevronUp className="w-5 h-5" />
+                  <ChevronUp className="w-4 h-4" />
                 </button>
               </ScrollReveal>
               <ScrollReveal variant="pop" delay={0.12}>
@@ -168,9 +167,9 @@ export function HorizontalAtriumRibbon() {
                   type="button"
                   onClick={() => goStep(1)}
                   aria-label="Next floor"
-                  className="w-11 h-11 rounded-xl backdrop-blur-md bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                  className="w-9 h-9 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
                 >
-                  <ChevronDown className="w-5 h-5" />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
               </ScrollReveal>
               <ScrollReveal variant="pop" delay={0.16}>
@@ -178,16 +177,16 @@ export function HorizontalAtriumRibbon() {
                   type="button"
                   onClick={() => setIsAutoPlaying((p) => !p)}
                   aria-label={isAutoPlaying ? 'Pause floor showcase loop' : 'Resume floor showcase loop'}
-                  className="inline-flex items-center gap-2 px-4 h-11 rounded-xl backdrop-blur-md bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer whitespace-nowrap shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 h-9 rounded-xl bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer whitespace-nowrap shadow-sm"
                 >
                   {isAutoPlaying ? (
                     <>
-                      <Pause className="w-3.5 h-3.5 text-[var(--accent-coral)]" />
+                      <Pause className="w-3 h-3 text-[var(--accent-coral)]" />
                       <span>Auto</span>
                     </>
                   ) : (
                     <>
-                      <Play className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
+                      <Play className="w-3 h-3 text-[var(--accent-turquoise)]" />
                       <span>Paused</span>
                     </>
                   )}
@@ -196,32 +195,32 @@ export function HorizontalAtriumRibbon() {
             </div>
           </div>
 
-          {/* Non-Card Split Stage: Left Architectural Elevation Rail + Right Vertically Animated Floor Canvas */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+          {/* Split Stage: Left Elevation Rail + Right Vertically Animated Floor Canvas */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch">
             {/* LEFT: Interactive Floor Elevation Rail */}
             <ScrollReveal variant="slideRight" className="lg:col-span-4">
-              <div className="flex flex-col justify-between gap-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl h-full">
+              <div className="flex flex-col justify-between gap-1 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2.5 sm:p-3 shadow-xl h-full">
                 <div className="divide-y divide-[var(--border-hairline)]">
                   {FLOOR_LEVELS.map((floor, idx) => {
                     const isActive = idx === activeIndex;
                     return (
-                      <ScrollReveal key={floor.id} variant="rise" delay={idx * 0.04}>
+                      <ScrollReveal key={floor.id} variant="rise" delay={idx * 0.03}>
                         <button
                           type="button"
                           onClick={() => selectFloorIndex(idx)}
-                          className="relative w-full text-left py-3.5 px-3.5 flex items-center justify-between gap-4 rounded-2xl transition-colors cursor-pointer group"
+                          className="relative w-full text-left py-2 px-2.5 flex items-center justify-between gap-3 rounded-xl transition-colors cursor-pointer group"
                         >
                           {isActive && (
                             <motion.div
                               layoutId="floor-elevation-rail-active"
-                              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                              className="absolute inset-0 rounded-2xl bg-[var(--bg-tint-peach)]/75 dark:bg-[var(--bg-tint-lavender)]/85 border border-[var(--border-strong)] shadow-sm"
+                              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                              className="absolute inset-0 rounded-xl bg-[var(--bg-tint-peach)]/75 dark:bg-[var(--bg-tint-lavender)]/85 border border-[var(--border-strong)] shadow-sm"
                             />
                           )}
 
-                          <div className="relative z-10 flex items-center gap-3.5 min-w-0">
+                          <div className="relative z-10 flex items-center gap-2.5 min-w-0">
                             <span
-                              className="font-mono-tabular text-xs font-bold px-2.5 py-1 rounded-lg text-white shrink-0 transition-transform duration-300 group-hover:scale-105 shadow-sm"
+                              className="font-mono-tabular text-[11px] font-bold px-2 py-0.5 rounded-md text-white shrink-0 shadow-sm"
                               style={{
                                 backgroundColor: isActive ? floor.accentColor : 'rgba(108, 62, 184, 0.55)'
                               }}
@@ -230,7 +229,7 @@ export function HorizontalAtriumRibbon() {
                             </span>
                             <div className="min-w-0">
                               <p
-                                className={`text-sm font-semibold truncate transition-colors ${
+                                className={`text-xs font-semibold truncate transition-colors ${
                                   isActive
                                     ? 'text-[var(--text-primary)]'
                                     : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'
@@ -238,7 +237,7 @@ export function HorizontalAtriumRibbon() {
                               >
                                 {floor.label}
                               </p>
-                              <p className="text-xs text-[var(--text-muted)] truncate">
+                              <p className="text-[10px] text-[var(--text-muted)] truncate">
                                 {floor.brands.length > 0
                                   ? `${floor.brands.length} Destination${floor.brands.length > 1 ? 's' : ''}`
                                   : 'Architectural Skylight Level'}
@@ -247,7 +246,7 @@ export function HorizontalAtriumRibbon() {
                           </div>
 
                           <ArrowRight
-                            className={`relative z-10 w-4 h-4 shrink-0 transition-all duration-300 ${
+                            className={`relative z-10 w-3.5 h-3.5 shrink-0 transition-all duration-300 ${
                               isActive
                                 ? 'opacity-100 translate-x-0 text-[var(--accent-coral)]'
                                 : 'opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0 text-[var(--text-muted)]'
@@ -263,7 +262,7 @@ export function HorizontalAtriumRibbon() {
 
             {/* RIGHT: Seamless Infinitely Looping Vertical Elevation Stage */}
             <ScrollReveal variant="scaleDepth" delay={0.06} className="lg:col-span-8">
-              <div className="relative min-h-[480px] sm:min-h-[540px] lg:min-h-[580px] rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] bg-[#140f1e] h-full">
+              <div className="relative min-h-[320px] sm:min-h-[380px] lg:min-h-[420px] rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] bg-[#140f1e] h-full">
                 <AnimatePresence initial={false} custom={stepState.direction} mode="sync">
                   <motion.div
                     key={stepState.step}
@@ -295,26 +294,26 @@ export function HorizontalAtriumRibbon() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#130c22]/90 via-[#19102c]/36 to-[#130c22]/18 pointer-events-none" />
 
-                    <div className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-9 md:p-11 text-white">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-1">
+                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 text-white">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="space-y-0.5">
                           <span
-                            className="inline-block font-mono-tabular text-xs font-bold px-3 py-1 rounded-lg text-white shadow-md"
+                            className="inline-block font-mono-tabular text-xs font-bold px-2.5 py-0.5 rounded-lg text-white shadow-md"
                             style={{ backgroundColor: activeFloor.accentColor }}
                           >
                             Level {activeFloor.number} · {activeFloor.label}
                           </span>
-                          <p className="text-xs text-white/85 font-medium pt-1">
+                          <p className="text-[11px] text-white/85 font-medium pt-0.5">
                             {activeFloor.subtitle}
                           </p>
                         </div>
 
                         {activeVisual.inset && (
                           <motion.div
-                            initial={{ opacity: 0, y: 18, scale: 0.94 }}
+                            initial={{ opacity: 0, y: 14, scale: 0.94 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             transition={{ duration: 0.65, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
-                            className="hidden sm:block w-40 md:w-48 rounded-2xl overflow-hidden border-2 border-white/35 shadow-2xl bg-[#160d26]/65 shrink-0"
+                            className="hidden sm:block w-32 md:w-40 rounded-xl overflow-hidden border border-white/35 shadow-2xl bg-[#160d26]/85 shrink-0"
                           >
                             <div className="aspect-[4/3] overflow-hidden">
                               <img
@@ -324,41 +323,41 @@ export function HorizontalAtriumRibbon() {
                                 className="w-full h-full object-cover"
                               />
                             </div>
-                            <p className="px-3 py-1.5 text-[11px] font-medium text-white/95 truncate bg-[#160d26]/75">
+                            <p className="px-2 py-1 text-[10px] font-medium text-white/95 truncate bg-[#160d26]/90">
                               {activeVisual.insetLabel}
                             </p>
                           </motion.div>
                         )}
                       </div>
 
-                      <div className="space-y-5">
+                      <div className="space-y-3">
                         <div>
-                          <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold leading-[1.02] text-white max-w-2xl drop-shadow">
+                          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.04] text-white max-w-2xl drop-shadow">
                             {activeFloor.themeTitle}
                           </h3>
                         </div>
 
                         {activeFloor.brands.length > 0 ? (
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
                             {activeFloor.brands.map((brand) => (
                               <div
                                 key={brand.name}
-                                className="inline-flex items-center gap-2 pr-3 p-1 rounded-xl bg-[#150e24]/65 border border-white/25 backdrop-blur-md"
+                                className="inline-flex items-center gap-1.5 pr-2.5 p-1 rounded-lg bg-[#150e24]/85 border border-white/20"
                               >
                                 <BrandMark name={brand.name} size="sm" />
-                                <span className="text-xs font-semibold text-white whitespace-nowrap">
+                                <span className="text-[11px] font-semibold text-white whitespace-nowrap">
                                   {brand.name}
                                 </span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <p className="text-sm text-white/85 max-w-xl">
+                          <p className="text-xs text-white/85 max-w-xl">
                             Skylight Truss Deck &amp; Building Services · No Retail Stores Listed
                           </p>
                         )}
 
-                        <div className="pt-1 flex flex-wrap items-center justify-between gap-4">
+                        <div className="pt-0.5 flex flex-wrap items-center justify-between gap-3">
                           <button
                             type="button"
                             onClick={() => navigate(routeForFloor(activeFloor.id))}

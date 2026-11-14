@@ -5,6 +5,7 @@ import { HorizontalAtriumRibbon } from '../sections/HorizontalAtriumRibbon';
 import { BrandSpotlightGallery } from '../sections/BrandSpotlightGallery';
 import { DiningCinemaShowcase } from '../sections/DiningCinemaShowcase';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
+import { FullPageContainer } from '../components/FullPageContainer';
 import {
   DepthEmergeSection,
   Interactive3DTilt,
@@ -18,32 +19,44 @@ import { useRouter } from '../utils/router';
 export function HomePage() {
   const { navigate } = useRouter();
 
+  const sectionLabels = [
+    '01 · Grand Entrance',
+    '02 · Architectural Flow',
+    '03 · Floor by Floor',
+    '04 · Signature Brands',
+    '05 · Dining & Cinema',
+    '06 · Plan Your Visit'
+  ];
+
   return (
-    <div className="w-full">
+    <FullPageContainer pageId="home" sectionLabels={sectionLabels}>
+      {/* Scene 1: Hero */}
       <HeroVideoStage />
+
+      {/* Scene 2: Architectural Story */}
       <ArchitecturalStorySplit />
+
+      {/* Scene 3: Floor by Floor Showcase */}
       <HorizontalAtriumRibbon />
+
+      {/* Scene 4: Curated Retail Icons */}
       <BrandSpotlightGallery />
+
+      {/* Scene 5: Dining & Cinema Split */}
       <DiningCinemaShowcase />
 
-      {/* Closing Mohaddipur Visit Invitation */}
+      {/* Scene 6: Plan Your Visit */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.visitWalkers}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="flex items-center py-20 md:py-24"
+        className="flex items-center py-6 md:py-10"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 my-auto">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               <ScrollReveal variant="slideRight" className="lg:col-span-7">
-                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-12 shadow-2xl space-y-5">
-                  <div
-                    aria-hidden="true"
-                    className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-gradient-to-tl from-[var(--accent-coral)]/25 via-[var(--accent-gold)]/18 to-transparent blur-2xl pointer-events-none"
-                  />
-
-                  <div className="relative z-10 space-y-5">
+                <div className="relative overflow-hidden bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-4">
+                  <div className="relative z-10 space-y-4">
                     <ScrollReveal variant="drop" delay={0.02}>
                       <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-coral)]">
                         <MapPin className="w-4 h-4" />
@@ -51,21 +64,21 @@ export function HomePage() {
                       </div>
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.06}>
-                      <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] leading-[1.04]">
+                      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)] leading-[1.04]">
                         Plan Your Visit
                       </h2>
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.1}>
-                      <p className="text-sm md:text-base text-[var(--text-secondary)] max-w-xl leading-relaxed">
+                      <p className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] max-w-xl leading-relaxed">
                         {MALL_INFO.locality} · Retail {MALL_INFO.hours.retail} · PVR INOX {MALL_INFO.hours.cinema}
                       </p>
                     </ScrollReveal>
-                    <div className="pt-2 flex flex-wrap gap-3.5">
+                    <div className="pt-1 flex flex-wrap gap-2.5">
                       <ScrollReveal variant="pop" delay={0.14}>
                         <button
                           type="button"
                           onClick={() => navigate('/visit')}
-                          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-gold)] text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-gold)] text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
                         >
                           <span>Directions &amp; Hours</span>
                           <ArrowRight className="w-4 h-4" />
@@ -75,7 +88,7 @@ export function HomePage() {
                         <button
                           type="button"
                           onClick={() => navigate('/explore')}
-                          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer"
                         >
                           <Compass className="w-4 h-4 text-[var(--accent-turquoise)]" />
                           <span>Walk 3D Mall</span>
@@ -85,7 +98,7 @@ export function HomePage() {
                         <button
                           type="button"
                           onClick={() => navigate('/entertainment')}
-                          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-plum)] transition-colors cursor-pointer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-plum)] transition-colors cursor-pointer"
                         >
                           <span>PVR INOX Shows</span>
                         </button>
@@ -95,8 +108,8 @@ export function HomePage() {
                 </div>
               </ScrollReveal>
 
-              <div className="lg:col-span-5 relative hidden sm:flex items-center justify-center min-h-[300px]">
-                <ParallaxDepth offset={-24} className="w-[88%] ml-auto">
+              <div className="lg:col-span-5 relative hidden sm:flex items-center justify-center min-h-[240px] md:min-h-[300px]">
+                <ParallaxDepth className="w-[88%] ml-auto">
                   <Interactive3DTilt intensity={5}>
                     <ScrollReveal variant="scaleDepth" delay={0.1}>
                       <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-peach)]">
@@ -108,11 +121,11 @@ export function HomePage() {
                           decoding="async"
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
-                          <p className="font-mono-tabular text-[11px] uppercase tracking-[0.18em] text-amber-200">
+                        <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
+                          <p className="font-mono-tabular text-[10px] uppercase tracking-[0.18em] text-amber-200">
                             Mohaddipur Highway Corridor
                           </p>
-                          <p className="font-display text-xl font-semibold">
+                          <p className="font-display text-base font-semibold">
                             Multi-Level Parking &amp; Valet Entry
                           </p>
                         </div>
@@ -125,6 +138,6 @@ export function HomePage() {
           </DepthEmergeSection>
         </div>
       </VideoBackdropSection>
-    </div>
+    </FullPageContainer>
   );
 }

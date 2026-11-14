@@ -1,5 +1,6 @@
 import { MapPin, Navigation, Clock, Car, ArrowUpRight } from 'lucide-react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
+import { FullPageContainer } from '../components/FullPageContainer';
 import { DepthEmergeSection, Interactive3DTilt } from '../animations/MotionPrimitives';
 import { ScrollReveal } from '../animations/ScrollReveal';
 import { VIDEO_ASSETS, IMAGE_ASSETS } from '../assets/mediaRegistry';
@@ -9,8 +10,14 @@ export function VisitPage() {
   const googleMapsUrl =
     'https://www.google.com/maps/search/?api=1&query=Orion+Mall+Mohaddipur+Gorakhpur+Uttar+Pradesh';
 
+  const sectionLabels = [
+    '01 · Coordinates & Access',
+    '02 · Transit & Hours',
+    '03 · Visitor Facilities'
+  ];
+
   return (
-    <div className="w-full">
+    <FullPageContainer pageId="visit" sectionLabels={sectionLabels}>
       {/* UNIQUE VISIT HERO: Architectural Coordinate Blueprint */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.visitPlaza}
@@ -212,6 +219,6 @@ export function VisitPage() {
           </DepthEmergeSection>
         </div>
       </VideoBackdropSection>
-    </div>
+    </FullPageContainer>
   );
 }

@@ -1,278 +1,163 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
-// Shared single-listener scroll & rAF coordinator for all VideoBackdropSection instances.
-// Ensures zero redundant scroll listeners and stops rAF completely when idle.
-const controllers = new Set();
-let listenersAttached = false;
-let rafId = null;
-let needsTargetRefresh = false;
-
-function scheduleSync(refreshTargets = false) {
-  if (refreshTargets) {
-    needsTargetRefresh = true;
-  }
-  if (rafId !== null || typeof window === 'undefined') return;
-  rafId = window.requestAnimationFrame(runSyncLoop);
-}
-
-function runSyncLoop() {
-  rafId = null;
-  const refresh = needsTargetRefresh;
-  needsTargetRefresh = false;
-
-  let keepRunning = false;
-  controllers.forEach((ctrl) => {
-    if (refresh) {
-      ctrl.updateTarget();
-    }
-    if (ctrl.stepFrame()) {
-      keepRunning = true;
-    }
-  });
-
-  if (keepRunning) {
-    rafId = window.requestAnimationFrame(runSyncLoop);
-  }
-}
-
-function handleGlobalScroll() {
-  scheduleSync(true);
-}
-
-function registerVideoController(ctrl) {
-  controllers.add(ctrl);
-  if (!listenersAttached && typeof window !== 'undefined') {
-    window.addEventListener('scroll', handleGlobalScroll, { passive: true });
-    window.addEventListener('resize', handleGlobalScroll, { passive: true });
-    listenersAttached = true;
-  }
-  scheduleSync(true);
-
-  return () => {
-    controllers.delete(ctrl);
-    if (controllers.size === 0 && listenersAttached && typeof window !== 'undefined') {
-      window.removeEventListener('scroll', handleGlobalScroll);
-      window.removeEventListener('resize', handleGlobalScroll);
-      listenersAttached = false;
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      needsTargetRefresh = false;
-    }
-  };
-}
-
+/**
+ * VideoBackdropSection
+ * Scroll-controlled cinematic video background:
+ * - Downward scrolling advances video forward smoothly.
+ * - Upward scrolling reverses video backward from its current frame.
+ * - Stopping scroll pauses playback immediately (~180ms delay) maintaining the exact frame visible.
+ * - Videos do NOT continuously autoplay when idle.
+ * - Resuming scroll continues from current frame without resetting.
+ * - Crisp, sharp rendering without heavy blur or fog overlays.
+ */
 export function VideoBackdropSection({
   video,
   scrim = 'soft',
   edgeBlend = 'canvas',
   isHero = false,
   objectPosition,
-  minHeight = 'min-h-[82vh]',
+  minHeight = 'h-full',
   className = '',
   id,
   children
 }) {
-  const containerRef = useRef(null);
   const videoRef = useRef(null);
-  const stateRef = useRef({
-    isInView: isHero,
-    targetTime: video?.startTime ?? 0.02,
-    smoothedTime: video?.startTime ?? 0.02,
-    initialized: false
-  });
-
-  const [isNearView, setIsNearView] = useState(isHero);
   const [hasVideoError, setHasVideoError] = useState(false);
+  const stopTimeoutRef = useRef(null);
+  const isScrubbingRef = useRef(false);
+  const targetTimeRef = useRef(0);
+  const animFrameRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start']
-  });
-
-  // Gradual emergence and exit transitions over warm canvas tone (never black frames)
-  const transitionOpacity = useTransform(
-    scrollYProgress,
-    isHero ? [0, 0.84, 1] : [0, 0.14, 0.86, 1],
-    isHero ? [1, 1, 0.48] : [0.42, 1, 1, 0.42]
-  );
-
-  // Reset error flag when video source changes
   useEffect(() => {
     setHasVideoError(false);
-    stateRef.current.initialized = false;
   }, [video?.src]);
 
-  // Preload up to one full viewport ahead so approaching sections reveal crisp frames immediately
+  // Initial video setup: mute, preload, and prime the first frame cleanly (prevent black frames)
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') {
-      setIsNearView(true);
-      stateRef.current.isInView = true;
-      return;
-    }
-
-    const nearObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsNearView(true);
-          }
-        });
-      },
-      { rootMargin: '1100px 0px', threshold: 0.01 }
-    );
-
-    const viewObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          stateRef.current.isInView = entry.isIntersecting;
-          if (entry.isIntersecting) {
-            setIsNearView(true);
-            scheduleSync(true);
-          }
-        });
-      },
-      { rootMargin: '240px 0px', threshold: 0.01 }
-    );
-
-    nearObserver.observe(el);
-    viewObserver.observe(el);
-    return () => {
-      nearObserver.disconnect();
-      viewObserver.disconnect();
-    };
-  }, []);
-
-  // Register scroll-synchronized forward/reverse scrubbing controller
-  useEffect(() => {
-    const prefersReducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const getClipBounds = (duration) => {
-      const minBound = Math.max(0.02, Math.min(duration - 0.12, video?.startTime ?? 0.02));
-      const maxBound = Math.max(
-        minBound + 0.05,
-        Math.min(duration - 0.04, video?.endTime ?? duration - 0.04)
-      );
-      return [minBound, maxBound];
-    };
-
-    const computeScrollTargetTime = () => {
-      const container = containerRef.current;
-      const vid = videoRef.current;
-      if (!container || !vid) return;
-
-      const duration = vid.duration;
-      if (!Number.isFinite(duration) || duration <= 0.1) return;
-
-      const rect = container.getBoundingClientRect();
-      const vh = window.innerHeight || 800;
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      const docTop = rect.top + scrollY;
-
-      const startScroll = Math.max(0, docTop - vh);
-      const endScroll = docTop + rect.height;
-      const span = Math.max(1, endScroll - startScroll);
-      const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
-
-      const [safeMin, safeMax] = getClipBounds(duration);
-      const nextTarget = safeMin + progress * (safeMax - safeMin);
-
-      stateRef.current.targetTime = nextTarget;
-      if (!stateRef.current.initialized) {
-        stateRef.current.smoothedTime = nextTarget;
-        stateRef.current.initialized = true;
-      }
-    };
-
-    const stepFrame = () => {
-      const vid = videoRef.current;
-      const st = stateRef.current;
-      if (!vid || !st.isInView) return false;
-      if (vid.readyState < 1 || !Number.isFinite(vid.duration) || vid.duration <= 0.1) {
-        return false;
-      }
-
-      if (!vid.paused) {
-        vid.pause();
-      }
-
-      if (prefersReducedMotion) {
-        return false;
-      }
-
-      const diff = st.targetTime - st.smoothedTime;
-      if (Math.abs(diff) < 0.008) {
-        st.smoothedTime = st.targetTime;
-      } else {
-        st.smoothedTime += diff * 0.38;
-      }
-
-      const deltaFromVideo = Math.abs(st.smoothedTime - vid.currentTime);
-      const pendingDistance = Math.abs(st.targetTime - vid.currentTime);
-
-      if (!vid.seeking && deltaFromVideo >= 0.012) {
-        try {
-          vid.currentTime = st.smoothedTime;
-        } catch {
-          // Ignore transient seek exceptions before decode readiness
-        }
-      }
-
-      return pendingDistance >= 0.012 || Math.abs(st.targetTime - st.smoothedTime) >= 0.008;
-    };
-
-    const ctrl = {
-      updateTarget: computeScrollTargetTime,
-      stepFrame
-    };
-
-    return registerVideoController(ctrl);
-  }, [video?.src, video?.startTime, video?.endTime]);
-
-  const handleVideoLoaded = () => {
     const vid = videoRef.current;
     if (!vid) return;
+
     vid.muted = true;
-    if (!vid.paused) vid.pause();
+    vid.defaultMuted = true;
+    vid.playsInline = true;
 
-    if (Number.isFinite(vid.duration) && vid.duration > 0.1) {
-      const container = containerRef.current;
-      if (container) {
-        const rect = container.getBoundingClientRect();
-        const vh = window.innerHeight || 800;
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-        const docTop = rect.top + scrollY;
-        const startScroll = Math.max(0, docTop - vh);
-        const endScroll = docTop + rect.height;
-        const span = Math.max(1, endScroll - startScroll);
-        const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / span));
-
-        const safeMin = Math.max(0.02, Math.min(vid.duration - 0.12, video?.startTime ?? 0.02));
-        const safeMax = Math.max(
-          safeMin + 0.05,
-          Math.min(vid.duration - 0.04, video?.endTime ?? vid.duration - 0.04)
-        );
-        const initialTime = safeMin + progress * (safeMax - safeMin);
-        stateRef.current.targetTime = initialTime;
-        stateRef.current.smoothedTime = initialTime;
-        stateRef.current.initialized = true;
-        try {
-          vid.currentTime = initialTime;
-        } catch {
-          // Ignore
-        }
+    const handleLoadedMetadata = () => {
+      // Set to 0.05s so the browser decodes and displays the initial frame while paused
+      if (vid.currentTime === 0 && vid.duration > 0.1) {
+        vid.currentTime = 0.05;
       }
-    }
-    scheduleSync(true);
-  };
+      targetTimeRef.current = vid.currentTime;
+    };
 
-  // Scrims are kept minimal, sharp, and non-foggy so crisp natural video is clearly visible
+    if (vid.readyState >= 1) {
+      handleLoadedMetadata();
+    } else {
+      vid.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true });
+    }
+
+    return () => {
+      vid.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      if (stopTimeoutRef.current) clearTimeout(stopTimeoutRef.current);
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [video?.src]);
+
+  // Handle forward scroll movement
+  const handleScrollDown = useCallback((intensity = 40) => {
+    const vid = videoRef.current;
+    if (!vid) return;
+
+    // Clear any pending pause
+    if (stopTimeoutRef.current) {
+      clearTimeout(stopTimeoutRef.current);
+    }
+
+    const duration = vid.duration || 10;
+
+    // If already at end of video, loop seamlessly
+    if (vid.currentTime >= duration - 0.2) {
+      vid.currentTime = 0.05;
+    }
+
+    // Play forward smoothly
+    vid.playbackRate = 1.0;
+    const playPromise = vid.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+
+    // Pause promptly when user stops scrolling (180ms delay)
+    stopTimeoutRef.current = setTimeout(() => {
+      if (vid && !vid.paused) {
+        vid.pause();
+      }
+    }, 180);
+  }, []);
+
+  // Handle reverse scroll movement (stepping backward from current frame)
+  const handleScrollUp = useCallback((intensity = 40) => {
+    const vid = videoRef.current;
+    if (!vid) return;
+
+    if (stopTimeoutRef.current) {
+      clearTimeout(stopTimeoutRef.current);
+    }
+
+    // Immediately pause native forward playback to step in reverse
+    if (!vid.paused) {
+      vid.pause();
+    }
+
+    const duration = vid.duration || 10;
+    // Step backwards proportionally to scroll gesture
+    const step = Math.min(0.45, Math.max(0.06, intensity * 0.0025));
+    let nextTime = vid.currentTime - step;
+
+    if (nextTime < 0.05) {
+      nextTime = Math.max(0.05, duration - 0.5);
+    }
+
+    vid.currentTime = nextTime;
+    targetTimeRef.current = nextTime;
+
+    // Ensure it remains paused when scrolling ceases
+    stopTimeoutRef.current = setTimeout(() => {
+      if (vid && !vid.paused) {
+        vid.pause();
+      }
+    }, 120);
+  }, []);
+
+  // Connect to global scroll-impulse event dispatched by FullPageContainer and wheel gestures
+  useEffect(() => {
+    const onScrollImpulse = (e) => {
+      if (!e.detail) return;
+      const { direction, delta } = e.detail;
+      if (direction === 'down') {
+        handleScrollDown(delta);
+      } else if (direction === 'up') {
+        handleScrollUp(delta);
+      }
+    };
+
+    window.addEventListener('scroll-impulse', onScrollImpulse);
+    return () => window.removeEventListener('scroll-impulse', onScrollImpulse);
+  }, [handleScrollDown, handleScrollUp]);
+
+  // Fallback native wheel listener for the section itself
+  useEffect(() => {
+    const onLocalWheel = (e) => {
+      if (e.deltaY > 0) {
+        handleScrollDown(Math.abs(e.deltaY));
+      } else if (e.deltaY < 0) {
+        handleScrollUp(Math.abs(e.deltaY));
+      }
+    };
+
+    window.addEventListener('wheel', onLocalWheel, { passive: true });
+    return () => window.removeEventListener('wheel', onLocalWheel);
+  }, [handleScrollDown, handleScrollUp]);
+
   const scrimClasses = {
     soft: 'bg-[#120b20]/15',
     side: 'bg-gradient-to-r from-[#120b20]/55 via-[#120b20]/15 to-transparent',
@@ -289,72 +174,47 @@ export function VideoBackdropSection({
   return (
     <section
       id={id}
-      ref={containerRef}
-      className={`relative w-full overflow-x-clip ${minHeight} ${className}`}
+      className={`relative w-full h-full min-h-[calc(100svh-4rem)] flex flex-col justify-center overflow-x-hidden ${className}`}
     >
-      {/* Base canvas background */}
+      {/* Background Video Stage */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none bg-[var(--bg-canvas)]"
+        className="absolute inset-0 pointer-events-none bg-[var(--bg-canvas)] overflow-hidden"
       >
-        {/* Sticky viewport-proportioned video stage */}
-        <motion.div
-          style={{ opacity: transitionOpacity, willChange: 'opacity' }}
-          className="sticky top-0 w-full h-[100svh] max-h-full overflow-hidden"
-        >
-          {hasVideoError && video?.poster ? (
-            <img
-              src={video.poster}
-              alt={video.alt || 'Orion Mall footage'}
-              referrerPolicy="no-referrer"
-              style={{ objectPosition: resolvedPosition }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          ) : (
-            <video
-              ref={videoRef}
-              key={video?.src}
-              src={video?.src}
-              muted
-              playsInline
-              preload={isHero ? 'auto' : (isNearView ? 'auto' : 'metadata')}
-              onLoadedMetadata={handleVideoLoaded}
-              onLoadedData={handleVideoLoaded}
-              onCanPlay={handleVideoLoaded}
-              onError={() => setHasVideoError(true)}
-              aria-hidden="true"
-              style={{ objectPosition: resolvedPosition }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          )}
-
-          {/* Minimal contrast scrim for typography legibility without fog or blur */}
-          <div
-            aria-hidden="true"
-            className={`absolute inset-0 pointer-events-none transition-colors duration-300 ${
-              scrimClasses[scrim] || scrimClasses.soft
-            }`}
+        {hasVideoError && video?.poster ? (
+          <img
+            src={video.poster}
+            alt={video.alt || 'Orion Mall footage'}
+            referrerPolicy="no-referrer"
+            style={{ objectPosition: resolvedPosition }}
+            className="absolute inset-0 w-full h-full object-cover"
           />
-        </motion.div>
-
-        {/* Gentle boundary blend for continuous visual connection across sections */}
-        {edgeBlend === 'canvas' && (
-          <>
-            {!isHero && (
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-16 md:h-24 pointer-events-none bg-gradient-to-b from-[var(--bg-canvas)]/60 to-transparent"
-              />
-            )}
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-16 md:h-24 pointer-events-none bg-gradient-to-t from-[var(--bg-canvas)]/60 to-transparent"
-            />
-          </>
+        ) : (
+          <video
+            ref={videoRef}
+            key={video?.src}
+            src={video?.src}
+            muted
+            playsInline
+            preload="auto"
+            onError={() => setHasVideoError(true)}
+            aria-hidden="true"
+            style={{ objectPosition: resolvedPosition }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         )}
+
+        {/* Minimal legibility scrim for typography without heavy blur or fog */}
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 pointer-events-none transition-colors duration-300 ${
+            scrimClasses[scrim] || scrimClasses.soft
+          }`}
+        />
       </div>
 
-      <div className="relative z-10 w-full h-full">{children}</div>
+      {/* Content Layer */}
+      <div className="relative z-10 w-full h-full flex flex-col justify-center">{children}</div>
     </section>
   );
 }

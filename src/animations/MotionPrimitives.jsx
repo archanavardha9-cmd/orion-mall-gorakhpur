@@ -27,12 +27,12 @@ const VARIANTS = {
     visible: { opacity: 1, scale: 1, y: 0 }
   },
   curtain: {
-    hidden: { opacity: 0, y: 40, scale: 0.98, clipPath: 'inset(18% 0% 0% 0%)' },
-    visible: { opacity: 1, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)' }
+    hidden: { opacity: 0, y: 32 },
+    visible: { opacity: 1, y: 0 }
   },
   blurRise: {
-    hidden: { opacity: 0, y: 44, filter: 'blur(8px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)' }
+    hidden: { opacity: 0, y: 32 },
+    visible: { opacity: 1, y: 0 }
   }
 };
 
@@ -44,72 +44,40 @@ export function DramaticReveal({
   amount = 0.12,
   className = ''
 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount, margin: '0px 0px -8% 0px' });
-  const [hasEntered, setHasEntered] = useState(false);
   const chosen = VARIANTS[variant] || VARIANTS.rise;
-
-  useEffect(() => {
-    if (inView) setHasEntered(true);
-  }, [inView]);
 
   return (
     <motion.div
-      ref={ref}
       initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
+      animate="visible"
       variants={chosen}
       transition={{
         duration,
-        delay: inView ? delay : 0,
+        delay,
         ease: [0.22, 1, 0.36, 1]
       }}
       style={{ willChange: 'transform, opacity' }}
       className={className}
-      data-revealed={hasEntered ? 'true' : 'false'}
     >
       {children}
     </motion.div>
   );
 }
 
-/* Continuous scroll-driven 3D depth emergence (works smoothly both down and up) */
+/* Depth container */
 export function DepthEmergeSection({ children, className = '' }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'center center']
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [48, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.35, 1], [0.35, 0.9, 1]);
-
   return (
-    <div ref={ref} className={`relative ${className}`}>
-      <motion.div
-        style={{ scale, y, opacity, willChange: 'transform, opacity' }}
-        className="origin-center"
-      >
-        {children}
-      </motion.div>
+    <div className={`relative ${className}`}>
+      {children}
     </div>
   );
 }
 
-/* Scroll-linked directional horizontal or vertical glide */
-export function ParallaxDepth({ children, offset = 52, horizontal = 0, className = '' }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start']
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [-offset, offset]);
-  const x = useTransform(scrollYProgress, [0, 1], [-horizontal, horizontal]);
-
+/* Depth container */
+export function ParallaxDepth({ children, className = '' }) {
   return (
-    <div ref={ref} className={`relative ${className}`}>
-      <motion.div style={{ y, x, willChange: 'transform' }}>{children}</motion.div>
+    <div className={`relative ${className}`}>
+      {children}
     </div>
   );
 }
@@ -156,17 +124,15 @@ export function KineticLineReveal({
   duration = 0.45
 }) {
   const Tag = as;
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.2, margin: '0px 0px -8% 0px' });
 
   return (
-    <div ref={ref} className="overflow-hidden">
+    <div className="overflow-hidden">
       <motion.div
         initial={{ y: '110%', opacity: 0 }}
-        animate={inView ? { y: '0%', opacity: 1 } : { y: '110%', opacity: 0 }}
+        animate={{ y: '0%', opacity: 1 }}
         transition={{
           duration,
-          delay: inView ? delay : 0,
+          delay,
           ease: [0.22, 1, 0.36, 1]
         }}
         style={{ willChange: 'transform, opacity' }}

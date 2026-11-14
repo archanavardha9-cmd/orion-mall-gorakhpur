@@ -3,7 +3,6 @@ import { ThemeProvider } from './utils/themeContext';
 import { RouterProvider, useRouter } from './utils/router';
 import { AutoScrollProvider } from './utils/autoScrollContext';
 import { Header } from './components/Header';
-import { AutoScrollBar } from './components/AutoScrollBar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { ExplorePage } from './pages/ExplorePage';
@@ -55,7 +54,6 @@ export default function App() {
         <AutoScrollProvider>
           <div className="min-h-screen flex flex-col">
             <Header />
-            <AutoScrollBar />
             <main className="flex-1">
               <PageStage />
             </main>

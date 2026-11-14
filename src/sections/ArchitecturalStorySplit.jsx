@@ -42,21 +42,15 @@ export function ArchitecturalStorySplit() {
       id="atrium-story"
       video={VIDEO_ASSETS.atriumStory}
       scrim="jewelMist"
-      minHeight="min-h-[100vh]"
-      className="flex items-center py-20 md:py-28"
+      className="flex items-center py-6 md:py-10"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 my-auto">
         <DepthEmergeSection>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             {/* Editorial Narrative Column */}
             <ScrollReveal variant="slideRight" className="lg:col-span-5">
-              <div className="relative space-y-8 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-8 md:p-11 shadow-2xl overflow-hidden">
-                <div
-                  aria-hidden="true"
-                  className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-gradient-to-br from-[var(--accent-coral)]/20 via-[var(--accent-plum)]/15 to-transparent blur-2xl pointer-events-none"
-                />
-
-                <div className="relative z-10 space-y-6">
+              <div className="relative space-y-5 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden">
+                <div className="relative z-10 space-y-4">
                   <ScrollReveal variant="drop">
                     <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-turquoise)]">
                       Architecture &amp; Flow
@@ -64,29 +58,33 @@ export function ArchitecturalStorySplit() {
                   </ScrollReveal>
                   <KineticLineReveal
                     text="Five sunlit levels in Mohaddipur"
-                    className="font-display text-4xl md:text-5xl font-semibold leading-[1.02] text-[var(--text-primary)]"
+                    className="font-display text-3xl md:text-4xl font-semibold leading-[1.04] text-[var(--text-primary)]"
                   />
 
                   <div className="divide-y divide-[var(--border-hairline)]">
                     {CHAPTERS.map((ch, idx) => (
-                      <ScrollReveal key={ch.num} variant="slideRight" delay={0.06 + idx * 0.06}>
+                      <ScrollReveal
+                        key={ch.num}
+                        variant="slideRight"
+                        delay={0.05 + idx * 0.04}
+                      >
                         <button
                           type="button"
                           onClick={() => navigate(ch.path)}
-                          className="group w-full text-left py-4 flex items-start justify-between gap-4 hover:translate-x-1 transition-transform cursor-pointer"
+                          className="group w-full text-left py-2.5 flex items-start justify-between gap-3 hover:translate-x-1 transition-transform cursor-pointer"
                         >
-                          <div className="flex items-baseline gap-4">
+                          <div className="flex items-baseline gap-3">
                             <span
-                              className="font-mono-tabular text-xs font-bold px-2.5 py-1 rounded-lg text-white shrink-0"
+                              className="font-mono-tabular text-xs font-bold px-2 py-0.5 rounded-lg text-white shrink-0"
                               style={{ backgroundColor: ch.accent }}
                             >
                               {ch.num}
                             </span>
                             <div>
-                              <h3 className="font-display text-2xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-coral)] transition-colors">
+                              <h3 className="font-display text-lg sm:text-xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-coral)] transition-colors">
                                 {ch.title}
                               </h3>
-                              <p className="text-xs text-[var(--text-muted)] mt-1">
+                              <p className="text-xs text-[var(--text-muted)] mt-0.5">
                                 {ch.detail}
                               </p>
                             </div>
@@ -97,11 +95,11 @@ export function ArchitecturalStorySplit() {
                     ))}
                   </div>
 
-                  <ScrollReveal variant="rise" delay={0.26}>
+                  <ScrollReveal variant="rise" delay={0.2}>
                     <button
                       type="button"
-                      onClick={() => navigate('/explore')}
-                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
+                      onClick={() => navigate("/explore")}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
                     >
                       <span>Walk the 3D Mall Atrium</span>
                       <ArrowUpRight className="w-4 h-4" />
@@ -111,11 +109,14 @@ export function ArchitecturalStorySplit() {
               </div>
             </ScrollReveal>
 
-            {/* 3-Layer Overlapping Architectural Photography */}
-            <div className="lg:col-span-7 relative min-h-[430px] md:min-h-[560px] flex items-center justify-center">
-
+            {/* Overlapping Architectural Photography */}
+            <div className="lg:col-span-7 relative min-h-[320px] md:min-h-[420px] flex items-center justify-center">
               {/* Layer 1: Main Sunlit Atrium */}
-              <ParallaxDepth offset={-42} horizontal={-14} className="w-[78%] ml-auto relative z-10">
+              <ParallaxDepth
+                offset={-24}
+                horizontal={-8}
+                className="w-[82%] ml-auto relative z-10"
+              >
                 <Interactive3DTilt intensity={5}>
                   <ScrollReveal variant="scaleDepth" delay={0.08}>
                     <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] bg-[var(--bg-tint-peach)]">
@@ -134,8 +135,8 @@ export function ArchitecturalStorySplit() {
 
               {/* Layer 2: Top-Left Menswear Atelier Accent */}
               <ParallaxDepth
-                offset={-24}
-                horizontal={10}
+                offset={-16}
+                horizontal={8}
                 className="hidden sm:block absolute left-2 top-0 w-[34%] z-20"
               >
                 <ScrollReveal variant="drop" delay={0.12}>
@@ -154,9 +155,9 @@ export function ArchitecturalStorySplit() {
 
               {/* Layer 3: Bottom-Left Ethnic Couture Wing */}
               <ParallaxDepth
-                offset={46}
-                horizontal={18}
-                className="absolute left-0 bottom-0 md:bottom-4 w-[52%] z-30"
+                offset={24}
+                horizontal={12}
+                className="absolute left-0 bottom-0 w-[50%] z-30"
               >
                 <ScrollReveal variant="slideLeft" delay={0.16}>
                   <div className="animate-float-slow rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-mint)]">
@@ -168,8 +169,8 @@ export function ArchitecturalStorySplit() {
                       decoding="async"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-x-0 bottom-0 px-4 py-2.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
-                      <p className="font-mono-tabular text-[11px] uppercase tracking-[0.16em] text-amber-200">
+                    <div className="absolute inset-x-0 bottom-0 px-3.5 py-1.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
+                      <p className="font-mono-tabular text-[10px] uppercase tracking-[0.16em] text-amber-200">
                         26 Signature Outlets · Floors 00–04
                       </p>
                     </div>
