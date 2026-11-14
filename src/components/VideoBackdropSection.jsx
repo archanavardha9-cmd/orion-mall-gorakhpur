@@ -186,6 +186,9 @@ export function VideoBackdropSection({
             src={video.poster}
             alt={video.alt || 'Orion Mall footage'}
             referrerPolicy="no-referrer"
+            loading={isHero ? "eager" : "lazy"}
+            decoding="async"
+            fetchpriority={isHero ? "high" : "auto"}
             style={{ objectPosition: resolvedPosition }}
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -196,7 +199,7 @@ export function VideoBackdropSection({
             src={video?.src}
             muted
             playsInline
-            preload="auto"
+            preload={isHero ? "auto" : "metadata"}
             onError={() => setHasVideoError(true)}
             aria-hidden="true"
             style={{ objectPosition: resolvedPosition }}

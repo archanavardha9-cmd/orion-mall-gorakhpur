@@ -232,42 +232,43 @@ export function BrandSpotlightGallery() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.firstRetail}
       scrim="jewelMist"
-      className="flex flex-col justify-center py-4 md:py-6"
+      minHeight="min-h-[92vh]"
+      className="py-20 md:py-28 flex items-center"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 space-y-3.5 my-auto">
+      <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-8">
         <DepthEmergeSection>
-          <div className="space-y-3.5">
+          <div className="space-y-8">
             {/* Section Title + Smooth Category Navigation Bar */}
-            <div className="flex flex-col gap-2.5">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-                <div className="bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-5 py-2 shadow-xl self-start">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
                   <ScrollReveal variant="rise">
-                    <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
+                    <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
                       Signature Brands
                     </p>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.04}>
-                    <h2 className="font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mt-0.5 leading-none">
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mt-1 leading-none">
                       Curated Retail Icons
                     </h2>
                   </ScrollReveal>
                 </div>
 
-                <div className="flex items-center gap-1.5 shrink-0 self-start sm:self-auto">
+                <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto">
                   <button
                     type="button"
                     onClick={() => setAutoCycle((c) => !c)}
                     aria-label={autoCycle ? 'Pause brand spotlight' : 'Play brand spotlight'}
-                    className="inline-flex items-center gap-1.5 px-3 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-3.5 h-10 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
                   >
                     {autoCycle ? (
                       <>
-                        <Pause className="w-3 h-3 text-[var(--accent-coral)]" />
+                        <Pause className="w-3.5 h-3.5 text-[var(--accent-coral)]" />
                         <span>Auto</span>
                       </>
                     ) : (
                       <>
-                        <Play className="w-3 h-3 text-[var(--accent-turquoise)]" />
+                        <Play className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
                         <span>Paused</span>
                       </>
                     )}
@@ -276,7 +277,7 @@ export function BrandSpotlightGallery() {
                     type="button"
                     onClick={() => stepBrand(-1)}
                     aria-label="Previous brand"
-                    className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                    className="w-10 h-10 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -284,7 +285,7 @@ export function BrandSpotlightGallery() {
                     type="button"
                     onClick={() => stepBrand(1)}
                     aria-label="Next brand"
-                    className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                    className="w-10 h-10 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -295,7 +296,7 @@ export function BrandSpotlightGallery() {
               <div
                 role="tablist"
                 aria-label="Browse brands by shopping and lifestyle category"
-                className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-xl"
+                className="flex flex-wrap gap-2 p-2 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-xl"
               >
                 {BRAND_CATEGORIES.map((cat) => {
                   const Icon = cat.icon;
@@ -307,7 +308,7 @@ export function BrandSpotlightGallery() {
                       role="tab"
                       aria-selected={isActive}
                       onClick={() => handleSelectCategory(cat)}
-                      className={`relative inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[32px] rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                      className={`relative inline-flex items-center gap-2 px-4 py-2.5 min-h-[42px] rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                         isActive
                           ? 'text-white'
                           : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
@@ -323,12 +324,12 @@ export function BrandSpotlightGallery() {
                         />
                       )}
                       <Icon
-                        className="relative z-10 w-3.5 h-3.5 shrink-0"
+                        className="relative z-10 w-4 h-4 shrink-0"
                         style={isActive ? undefined : { color: cat.accentColor }}
                       />
                       <span className="relative z-10">{cat.label}</span>
                       <span
-                        className={`relative z-10 font-mono-tabular text-[10px] opacity-85 ${
+                        className={`relative z-10 font-mono-tabular text-[11px] opacity-85 ${
                           isActive ? 'text-white/90' : 'text-[var(--text-muted)]'
                         }`}
                       >
@@ -341,11 +342,13 @@ export function BrandSpotlightGallery() {
             </div>
 
             {/* 12-Column Brand Spotlight + Active Category Discovery Stage */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-              {/* LEFT: Dynamic Visual Stage */}
-              <div className="lg:col-span-7 relative min-h-[220px] sm:min-h-[300px] flex items-center justify-center">
-                <Interactive3DTilt intensity={5} className="w-[88%] relative z-10">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] bg-[var(--bg-surface)]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-2">
+              {/* LEFT: Dynamic Visual Stage with Authentic Brand Crest */}
+              <div className="lg:col-span-7 relative min-h-[280px] sm:min-h-[460px] flex items-center">
+
+                {/* Layer 1: Brand Experience Photography */}
+                <Interactive3DTilt intensity={6} className="w-[90%] relative z-10">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-surface)]">
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={`${activeStory.name}-${activeStory.primaryImg}`}
@@ -354,10 +357,10 @@ export function BrandSpotlightGallery() {
                         referrerPolicy="no-referrer"
                         loading="lazy"
                         decoding="async"
-                        initial={{ opacity: 0, scale: 1.04 }}
+                        initial={{ opacity: 0, scale: 1.06 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, scale: 0.97 }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full h-full object-cover"
                       />
                     </AnimatePresence>
@@ -366,25 +369,27 @@ export function BrandSpotlightGallery() {
 
                 {/* Layer 2: Floating Specialty Plaque */}
                 <ParallaxDepth
-                  className="hidden sm:block absolute right-0 bottom-1 max-w-[240px] z-20"
+                  offset={-32}
+                  horizontal={14}
+                  className="hidden sm:block absolute right-0 bottom-3 max-w-[285px] z-20"
                 >
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={`detail-${activeStory.name}`}
-                      initial={{ opacity: 0, x: 14 }}
+                      initial={{ opacity: 0, x: 16 }}
                       animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-2xl p-3 shadow-xl space-y-1"
+                      exit={{ opacity: 0, x: -12 }}
+                      transition={{ duration: 0.35 }}
+                      className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-2xl p-5 shadow-2xl space-y-1.5"
                     >
                       <p
-                        className="font-mono-tabular text-[10px] font-bold uppercase tracking-wider"
+                        className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider"
                         style={{ color: activeStory.accentColor }}
                       >
                         {activeStory.specialty} · {String(categoryBrandIdx).padStart(2, '0')}/
                         {String(activeCategory.brands.length).padStart(2, '0')}
                       </p>
-                      <p className="text-xs text-[var(--text-primary)] font-medium leading-snug">
+                      <p className="text-xs md:text-sm text-[var(--text-primary)] font-medium leading-relaxed">
                         {activeStory.highlight}
                       </p>
                     </motion.div>
@@ -395,21 +400,21 @@ export function BrandSpotlightGallery() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`crest-${activeStory.name}`}
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: -12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.3 }}
-                    className={`absolute -top-3 left-3 sm:left-5 z-30 bg-gradient-to-r ${activeStory.tint} border-2 border-[var(--glass-border)] rounded-xl px-3 py-1.5 shadow-xl flex items-center gap-2.5`}
+                    transition={{ duration: 0.35 }}
+                    className={`absolute -top-4 left-4 sm:left-6 z-30 backdrop-blur-xl bg-gradient-to-r ${activeStory.tint} border-2 border-[var(--glass-border)] rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-4`}
                   >
-                    <BrandMark name={activeStory.name} size="md" />
+                    <BrandMark name={activeStory.name} size="lg" />
                     <div>
                       <p
-                        className="font-mono-tabular text-[10px] font-bold uppercase tracking-wider"
+                        className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider"
                         style={{ color: activeStory.accentColor }}
                       >
                         {activeStory.categoryLabel}
                       </p>
-                      <p className="font-display text-base sm:text-lg font-semibold text-[var(--text-primary)] leading-none mt-0.5">
+                      <p className="font-display text-2xl font-semibold text-[var(--text-primary)] leading-none mt-0.5">
                         {activeStory.name}
                       </p>
                     </div>
@@ -417,23 +422,29 @@ export function BrandSpotlightGallery() {
                 </AnimatePresence>
               </div>
 
-              {/* RIGHT: Active Category Discovery Showcase */}
+              {/* RIGHT: Active Category Discovery Showcase (Displays ONLY Selected Category Brands) */}
               <div className="lg:col-span-5">
-                <div className="relative overflow-hidden bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl space-y-3">
+                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-7 md:p-9 shadow-2xl space-y-6">
+                  <div
+                    aria-hidden="true"
+                    className="absolute -top-20 -right-20 w-52 h-52 rounded-full blur-2xl opacity-25 pointer-events-none transition-colors duration-500"
+                    style={{ backgroundColor: activeCategory.accentColor }}
+                  />
+
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeCategory.id}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="relative z-10 space-y-3"
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative z-10 space-y-5"
                     >
                       {/* Category Visual Identity Header */}
-                      <div className="space-y-1 border-b border-[var(--border-hairline)] pb-2">
+                      <div className="space-y-2 border-b border-[var(--border-hairline)] pb-4">
                         <div className="flex items-center justify-between gap-3">
                           <span
-                            className="inline-flex items-center gap-1.5 text-xs font-mono-tabular font-bold uppercase tracking-[0.16em]"
+                            className="inline-flex items-center gap-2 text-xs font-mono-tabular font-bold uppercase tracking-[0.16em]"
                             style={{ color: activeCategory.accentColor }}
                           >
                             <activeCategory.icon className="w-3.5 h-3.5 shrink-0" />
@@ -444,35 +455,42 @@ export function BrandSpotlightGallery() {
                             {activeCategory.brands.length === 1 ? 'Brand' : 'Brands'}
                           </span>
                         </div>
-                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed">
                           {activeCategory.tagline}
                         </p>
                       </div>
 
                       {/* Brands Belonging Exclusively to Selected Category */}
-                      <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto py-1">
+                      <div className="flex flex-wrap gap-2.5 py-1">
                         {activeCategory.brands.map((brandName, idx) => {
                           const isSelected = activeStory.name === brandName;
+                          const isCompact = activeCategory.brands.length > 6;
                           return (
                             <motion.button
                               key={brandName}
                               type="button"
                               initial={{ opacity: 0, scale: 0.94 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.2, delay: idx * 0.015 }}
+                              transition={{ duration: 0.22, delay: idx * 0.02 }}
                               onClick={() => handleSelectBrand(brandName)}
                               aria-pressed={isSelected}
-                              className={`group flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-pointer pr-2.5 p-1 ${
+                              className={`group flex items-center gap-2.5 rounded-2xl border transition-all duration-200 cursor-pointer ${
+                                isCompact ? 'pr-3 p-1.5' : 'pr-4 p-2'
+                              } ${
                                 isSelected
                                   ? `${activeCategory.activeSurface} scale-[1.03] shadow-md`
-                                  : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
+                                  : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)] hover:-translate-y-0.5'
                               }`}
                             >
                               <BrandMark
                                 name={brandName}
-                                size="sm"
+                                size={isCompact ? 'sm' : 'md'}
                               />
-                              <span className="font-semibold text-xs text-[var(--text-primary)] whitespace-nowrap">
+                              <span
+                                className={`font-semibold text-[var(--text-primary)] whitespace-nowrap ${
+                                  isCompact ? 'text-xs' : 'text-xs sm:text-sm'
+                                }`}
+                              >
                                 {brandName}
                               </span>
                             </motion.button>
@@ -481,8 +499,8 @@ export function BrandSpotlightGallery() {
                       </div>
 
                       {/* Category Footer Metadata & Action Link */}
-                      <div className="pt-2 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-3">
-                        <span className="text-[11px] text-[var(--text-muted)]">
+                      <div className="pt-4 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-3">
+                        <span className="text-xs text-[var(--text-muted)]">
                           {activeStory.specialty} · {activeStory.categoryLabel}
                         </span>
                         <button

@@ -110,12 +110,12 @@ export function ArchitecturalStorySplit() {
             </ScrollReveal>
 
             {/* Overlapping Architectural Photography */}
-            <div className="lg:col-span-7 relative min-h-[320px] md:min-h-[420px] flex items-center justify-center">
-              {/* Layer 1: Main Sunlit Atrium */}
+            <div className="lg:col-span-7 relative min-h-[340px] md:min-h-[440px] flex items-center justify-center">
+              {/* Layer 1: Main Sunlit Atrium (Slightly Enlarged) */}
               <ParallaxDepth
                 offset={-24}
                 horizontal={-8}
-                className="w-[82%] ml-auto relative z-10"
+                className="w-[88%] ml-auto relative z-10"
               >
                 <Interactive3DTilt intensity={5}>
                   <ScrollReveal variant="scaleDepth" delay={0.08}>
@@ -133,11 +133,11 @@ export function ArchitecturalStorySplit() {
                 </Interactive3DTilt>
               </ParallaxDepth>
 
-              {/* Layer 2: Top-Left Menswear Atelier Accent */}
+              {/* Layer 2: Top-Left Menswear Atelier Accent (Slightly Enlarged) */}
               <ParallaxDepth
                 offset={-16}
                 horizontal={8}
-                className="hidden sm:block absolute left-2 top-0 w-[34%] z-20"
+                className="hidden sm:block absolute left-1 -top-2 w-[38%] z-20"
               >
                 <ScrollReveal variant="drop" delay={0.12}>
                   <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-lavender)]">
@@ -153,11 +153,11 @@ export function ArchitecturalStorySplit() {
                 </ScrollReveal>
               </ParallaxDepth>
 
-              {/* Layer 3: Bottom-Left Ethnic Couture Wing */}
+              {/* Layer 3: Bottom-Left Ethnic Couture Wing (Enlarged & Shifted Slightly Downward) */}
               <ParallaxDepth
                 offset={24}
                 horizontal={12}
-                className="absolute left-0 bottom-0 w-[50%] z-30"
+                className="absolute -left-2 -bottom-3 sm:-bottom-4 w-[54%] z-30"
               >
                 <ScrollReveal variant="slideLeft" delay={0.16}>
                   <div className="animate-float-slow rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-mint)]">

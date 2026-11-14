@@ -408,12 +408,12 @@ export function DiningPage() {
         minHeight="min-h-[100vh]"
         className="flex items-center"
       >
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 py-6 md:py-8 my-auto space-y-6">
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-10 py-4 md:py-6 my-auto space-y-4">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-              {/* Left Column: Domino's Brand Card */}
-              <div className="lg:col-span-5 bg-white/95 text-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/80 space-y-4">
-                <div className="space-y-3">
+              {/* Left Column: Enlarged Domino's Main Content Box */}
+              <div className="lg:col-span-5 bg-white/95 text-slate-900 rounded-3xl p-7 sm:p-8 md:p-9 shadow-2xl border border-white/80 space-y-5">
+                <div className="space-y-3.5">
                   <ScrollReveal variant="pop">
                     <DominosLockup />
                   </ScrollReveal>
@@ -428,21 +428,21 @@ export function DiningPage() {
                   </ScrollReveal>
 
                   <ScrollReveal variant="slideRight" delay={0.06}>
-                    <h2 className="font-display text-3xl md:text-4xl font-semibold text-[#004A70] leading-[1.08]">
+                    <h2 className="font-display text-3xl md:text-4xl font-semibold text-[#004A70] leading-[1.06]">
                       Fresh Dough. 450° Oven Heat.
                     </h2>
                   </ScrollReveal>
 
                   <ScrollReveal variant="rise" delay={0.09}>
-                    <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
+                    <p className="text-sm text-slate-700 leading-relaxed">
                       Hand-stretched dough with bubbling mozzarella, stuffed garlic breadsticks, and warm choco lava cakes.
                     </p>
                   </ScrollReveal>
                 </div>
 
                 <ScrollReveal variant="rise" delay={0.12}>
-                  <div className="space-y-2.5 pt-3 border-t border-slate-200">
-                    <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Domino's Pizza specialties">
+                  <div className="space-y-3 pt-3.5 border-t border-slate-200">
+                    <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
                       {DOMINOS_HIGHLIGHTS.map((item) => {
                         const isActive = activeDominoHighlight.id === item.id;
                         return (
@@ -452,7 +452,7 @@ export function DiningPage() {
                             role="tab"
                             aria-selected={isActive}
                             onClick={() => setActiveDominoHighlight(item)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
+                            className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                               isActive
                                 ? 'bg-[#006491] text-white shadow-sm'
                                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -471,52 +471,64 @@ export function DiningPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.2 }}
-                        className="space-y-0.5 pt-0.5"
+                        className="space-y-1 pt-1"
                       >
-                        <h3 className="font-display text-base font-semibold text-[#006491]">
+                        <h3 className="font-display text-lg font-semibold text-[#006491]">
                           {activeDominoHighlight.title}
                         </h3>
-                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                           {activeDominoHighlight.detail}
                         </p>
                       </motion.div>
                     </AnimatePresence>
 
-                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-600 pt-1">
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-600 pt-2 border-t border-slate-100">
                       <Clock className="w-3.5 h-3.5 text-[#E31837]" />
                       <span>{MALL_INFO.hours.dining}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>Express Counter</span>
                     </div>
                   </div>
                 </ScrollReveal>
               </div>
 
-              {/* Right Column: Both Pizza Images (Spread & Sides) in a Balanced Composition without Oven Image */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                <ScrollReveal variant="scaleDepth" delay={0.06}>
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/60 aspect-[4/3] max-h-[300px]">
-                    <img
-                      src={DINING_BRAND_GALLERY.dominos.spread}
-                      alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks"
-                      referrerPolicy="no-referrer"
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </ScrollReveal>
+              {/* Right Column: Dynamic Asymmetric Pizza Image Composition */}
+              <div className="lg:col-span-7 flex flex-col sm:flex-row gap-5 lg:gap-7 items-center justify-center pl-0 sm:pl-3">
+                {/* Larger Pizza Image: Slightly increased size, moved just a little away from the card edge */}
+                <div className="w-full sm:w-[61%] sm:ml-2 -translate-y-2 sm:-translate-y-4">
+                  <ScrollReveal variant="scaleDepth" delay={0.06}>
+                    <Interactive3DTilt intensity={5}>
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/70 aspect-[4/3] max-h-[355px]">
+                        <img
+                          src={DINING_BRAND_GALLERY.dominos.spread}
+                          alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks"
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </Interactive3DTilt>
+                  </ScrollReveal>
+                </div>
 
-                <ScrollReveal variant="scaleDepth" delay={0.1}>
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/60 aspect-[4/3] max-h-[300px]">
-                    <img
-                      src={DINING_BRAND_GALLERY.dominos.sides}
-                      alt="Domino's Pizza oven-baked savory sides, slices and sauces"
-                      referrerPolicy="no-referrer"
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </ScrollReveal>
+                {/* Smaller Pizza Image: Positioned slightly further DOWN, maintaining natural asymmetrical stagger */}
+                <div className="w-[85%] sm:w-[39%] translate-y-4 sm:translate-y-8 self-end sm:self-auto">
+                  <ScrollReveal variant="scaleDepth" delay={0.12}>
+                    <Interactive3DTilt intensity={4}>
+                      <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-white/60 aspect-[4/3] max-h-[240px]">
+                        <img
+                          src={DINING_BRAND_GALLERY.dominos.sides}
+                          alt="Domino's Pizza oven-baked savory sides, slices and sauces"
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </Interactive3DTilt>
+                  </ScrollReveal>
+                </div>
               </div>
             </div>
           </DepthEmergeSection>

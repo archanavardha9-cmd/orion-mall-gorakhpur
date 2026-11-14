@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   ArrowUpRight,
   Film,
@@ -32,21 +32,54 @@ export function EntertainmentPage() {
   const [activeCategory, setActiveCategory] = useState("nowShowing");
   const [activeMovieIndex, setActiveMovieIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState(1);
+  const [altDirection, setAltDirection] = useState(1);
+  const autoPlayTimerRef = useRef(null);
 
   const currentMovies =
     ENTERTAINMENT_MOVIES[activeCategory] || ENTERTAINMENT_MOVIES.nowShowing;
   const safeIndex = Math.min(activeMovieIndex, currentMovies.length - 1);
   const currentMovie = currentMovies[safeIndex] || currentMovies[0];
 
+  const resetAutoPlay = useCallback(() => {
+    if (autoPlayTimerRef.current) {
+      clearInterval(autoPlayTimerRef.current);
+    }
+    autoPlayTimerRef.current = setInterval(() => {
+      setAltDirection((prevAlt) => {
+        const nextAlt = prevAlt === 1 ? -1 : 1;
+        setSlideDirection(nextAlt);
+        setActiveMovieIndex((prevIndex) => {
+          if (nextAlt === 1) {
+            return (prevIndex + 1) % currentMovies.length;
+          } else {
+            return (prevIndex - 1 + currentMovies.length) % currentMovies.length;
+          }
+        });
+        return nextAlt;
+      });
+    }, 4500);
+  }, [currentMovies.length]);
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => {
+      if (autoPlayTimerRef.current) {
+        clearInterval(autoPlayTimerRef.current);
+      }
+    };
+  }, [resetAutoPlay]);
+
   const handleCategorySwitch = (catId) => {
     setActiveCategory(catId);
     setActiveMovieIndex(0);
     setSlideDirection(1);
+    resetAutoPlay();
   };
 
   const handleNextMovie = () => {
     setSlideDirection(1);
     setActiveMovieIndex((prev) => (prev + 1) % currentMovies.length);
+    resetAutoPlay();
   };
 
   const handlePrevMovie = () => {
@@ -54,6 +87,7 @@ export function EntertainmentPage() {
     setActiveMovieIndex(
       (prev) => (prev - 1 + currentMovies.length) % currentMovies.length,
     );
+    resetAutoPlay();
   };
 
   const slideVariants = {
@@ -158,14 +192,14 @@ export function EntertainmentPage() {
         minHeight="min-h-[100vh]"
         className="py-6 md:py-8 flex items-center justify-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-10 my-auto">
+        <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 my-auto">
           <DepthEmergeSection>
-            {/* Top Control Bar: Category Toggle (Now Showing / Coming Soon) & Carousel Arrows */}
-            <div className="flex items-center justify-between gap-4 pb-3">
+            {/* Top Control Bar: Category Toggle (Now Showing / Coming Soon) on the LEFT & Carousel Arrows on the RIGHT */}
+            <div className="flex items-center justify-between gap-6 pb-3.5">
               <div
                 role="tablist"
                 aria-label="Select movie category"
-                className="inline-flex items-center gap-1.5 p-1 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md"
+                className="inline-flex items-center gap-1.5 p-1 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md -ml-0.5 sm:-ml-1"
               >
                 {MOVIE_CATEGORIES.map((cat) => {
                   const isActive = activeCategory === cat.id;
@@ -200,13 +234,13 @@ export function EntertainmentPage() {
                 })}
               </div>
 
-              {/* Counter & Carousel Controls */}
-              <div className="flex items-center gap-3">
+              {/* Counter & Carousel Controls moved towards the RIGHT with increased horizontal spacing */}
+              <div className="flex items-center gap-3.5 sm:gap-4 -mr-0.5 sm:-mr-1">
                 <span className="text-xs font-mono-tabular text-[var(--text-muted)] hidden sm:inline">
                   {safeIndex + 1} of {currentMovies.length}
                 </span>
 
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={handlePrevMovie}
@@ -227,7 +261,7 @@ export function EntertainmentPage() {
               </div>
             </div>
 
-            {/* Main Prominent Center Showcase with AnimatePresence Horizontal Slide */}
+            {/* Main Prominent Center Showcase with AnimatePresence Horizontal Slide (Increased Vertical Length) */}
             <div className="overflow-hidden">
               <AnimatePresence custom={slideDirection} mode="wait">
                 <motion.div
@@ -237,19 +271,21 @@ export function EntertainmentPage() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-7 shadow-2xl"
+                  className="grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-7 shadow-2xl min-h-[350px] sm:min-h-[370px]"
                 >
-                  {/* Left Center Stage: Poster */}
-                  <div className="lg:col-span-4 flex justify-center">
+                  {/* Left Center Stage: Portrait Poster (Increased Vertical Length) */}
+                  <div className="sm:col-span-5 flex justify-center">
                     <Interactive3DTilt
                       intensity={6}
-                      className="w-full max-w-[240px]"
+                      className="w-full max-w-[210px] sm:max-w-[235px]"
                     >
-                      <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4] max-h-[300px] bg-stone-900 mx-auto">
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[2/3] max-h-[335px] bg-stone-900 mx-auto">
                         <img
                           src={currentMovie.poster}
                           alt={`${currentMovie.title} official theatrical poster`}
                           referrerPolicy="no-referrer"
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/85 via-black/35 to-transparent">
@@ -262,7 +298,7 @@ export function EntertainmentPage() {
                   </div>
 
                   {/* Right Center Stage: Movie Information & Direct Booking */}
-                  <div className="lg:col-span-8 space-y-3">
+                  <div className="sm:col-span-7 space-y-3.5">
                     <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-[var(--text-muted)]">
                       <span className="font-semibold text-[var(--accent-coral)]">
                         {currentMovie.status}
@@ -327,6 +363,7 @@ export function EntertainmentPage() {
                           onClick={() => {
                             setSlideDirection(idx >= safeIndex ? 1 : -1);
                             setActiveMovieIndex(idx);
+                            resetAutoPlay();
                           }}
                           className={`flex items-center gap-2 p-1 pr-2.5 rounded-xl border transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                             idx === safeIndex
@@ -338,6 +375,8 @@ export function EntertainmentPage() {
                             src={m.poster}
                             alt=""
                             aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
                             className="w-6 h-8 object-cover rounded-md"
                           />
                           <span className="text-xs font-medium text-[var(--text-primary)]">
