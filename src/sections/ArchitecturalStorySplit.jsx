@@ -42,8 +42,7 @@ export function ArchitecturalStorySplit() {
       id="atrium-story"
       video={VIDEO_ASSETS.atriumStory}
       scrim="jewelMist"
-      tone="emerald"
-      minHeight="min-h-[88vh]"
+      minHeight="min-h-[100vh]"
       className="flex items-center py-20 md:py-28"
     >
       <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">

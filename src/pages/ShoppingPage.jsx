@@ -33,7 +33,7 @@ export function ShoppingPage() {
         video={VIDEO_ASSETS.firstDenim}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[82vh]"
+        minHeight="min-h-[100vh]"
         className="flex items-center py-16 md:py-24"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -127,7 +127,7 @@ export function ShoppingPage() {
         <VideoBackdropSection
           video={VIDEO_ASSETS.groundLuxury}
           scrim="jewelMist"
-          minHeight="min-h-[82vh]"
+          minHeight="min-h-[100vh]"
           className="py-20 md:py-28 flex items-center"
         >
           <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
@@ -228,7 +228,7 @@ export function ShoppingPage() {
         <VideoBackdropSection
           video={VIDEO_ASSETS.firstRetail}
           scrim="jewelMist"
-          minHeight="min-h-[82vh]"
+          minHeight="min-h-[100vh]"
           className="py-20 md:py-28 flex items-center"
         >
           <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
@@ -327,9 +327,9 @@ export function ShoppingPage() {
       {/* Second Floor Visual Emblem Stage (Warm Couture Lighting Video) */}
       {showSecond && (
         <VideoBackdropSection
-          video={VIDEO_ASSETS.salonStudio}
+          video={VIDEO_ASSETS.secondEthnic}
           scrim="jewelMist"
-          minHeight="min-h-[82vh]"
+          minHeight="min-h-[100vh]"
           className="py-20 md:py-28 flex items-center"
         >
           <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">

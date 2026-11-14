@@ -28,10 +28,9 @@ export function HomePage() {
 
       {/* Closing Mohaddipur Visit Invitation */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.visitPlaza}
+        video={VIDEO_ASSETS.visitWalkers}
         scrim="jewelMist"
-        tone="coral"
-        minHeight="min-h-[70vh]"
+        minHeight="min-h-[100vh]"
         className="flex items-center py-20 md:py-24"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">

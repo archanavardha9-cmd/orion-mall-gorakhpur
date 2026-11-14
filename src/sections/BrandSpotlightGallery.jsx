@@ -232,7 +232,7 @@ export function BrandSpotlightGallery() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.firstRetail}
       scrim="jewelMist"
-      minHeight="min-h-[92vh]"
+      minHeight="min-h-[100vh]"
       className="py-20 md:py-28 flex items-center"
     >
       <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 space-y-8">

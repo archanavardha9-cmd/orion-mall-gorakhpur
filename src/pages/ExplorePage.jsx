@@ -25,7 +25,7 @@ export function ExplorePage() {
         video={VIDEO_ASSETS.techFootwear}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[76vh]"
+        minHeight="min-h-[100vh]"
         className="flex items-center justify-center text-center py-20"
       >
         <div className="max-w-4xl mx-auto px-6 text-white space-y-6">
@@ -79,10 +79,9 @@ export function ExplorePage() {
 
       {/* Immersive Atrium Light & Architecture Finale */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.atriumStory}
+        video={VIDEO_ASSETS.exploreDome}
         scrim="jewelMist"
-        tone="royal"
-        minHeight="min-h-[84vh]"
+        minHeight="min-h-[100vh]"
         className="py-24 md:py-32 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">

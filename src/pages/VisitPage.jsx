@@ -16,7 +16,7 @@ export function VisitPage() {
         video={VIDEO_ASSETS.visitPlaza}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[78vh]"
+        minHeight="min-h-[100vh]"
         className="flex flex-col justify-between py-14 md:py-20"
       >
         <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-14 md:-mt-20 pt-14 md:pt-20 pb-5">
@@ -70,10 +70,9 @@ export function VisitPage() {
 
       {/* Transit & Hours Split */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.exteriorDusk}
+        video={VIDEO_ASSETS.visitTransit}
         scrim="jewelMist"
-        tone="emerald"
-        minHeight="min-h-[78vh]"
+        minHeight="min-h-[100vh]"
         className="py-20 md:py-28 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
@@ -174,11 +173,11 @@ export function VisitPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* Facilities Section over Escalator Motion Video */}
+      {/* Facilities Section over Walking Shoppers Motion Video */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.atriumStory}
+        video={VIDEO_ASSETS.visitWalkers}
         scrim="jewelMist"
-        minHeight="min-h-[58vh]"
+        minHeight="min-h-[100vh]"
         className="py-20 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">

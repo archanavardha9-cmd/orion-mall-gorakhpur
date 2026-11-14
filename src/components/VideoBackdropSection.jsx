@@ -272,15 +272,16 @@ export function VideoBackdropSection({
     scheduleSync(true);
   };
 
-  // Sharp, clear scrims: only localized contrast feathering so crisp video footage stands out
+  // Scrims are kept minimal, sharp, and non-foggy so crisp natural video is clearly visible
   const scrimClasses = {
-    soft: 'bg-[#120b20]/10',
-    side: 'bg-gradient-to-r from-[#120b20]/54 via-[#120b20]/16 to-transparent',
-    sideRight: 'bg-gradient-to-l from-[#120b20]/54 via-[#120b20]/16 to-transparent',
-    bottom: 'bg-gradient-to-t from-[#120b20]/86 via-[#120b20]/38 to-transparent',
-    heroPrism: 'bg-gradient-to-r from-[#140d21]/56 via-[#140d21]/20 to-transparent',
-    lightMist: 'bg-gradient-to-b from-[var(--bg-canvas)]/26 via-transparent to-[var(--bg-canvas)]/26',
-    jewelMist: 'bg-gradient-to-b from-[var(--bg-canvas)]/22 via-transparent to-[var(--bg-canvas)]/22'
+    soft: 'bg-[#120b20]/15',
+    side: 'bg-gradient-to-r from-[#120b20]/55 via-[#120b20]/15 to-transparent',
+    sideRight: 'bg-gradient-to-l from-[#120b20]/55 via-[#120b20]/15 to-transparent',
+    bottom: 'bg-gradient-to-t from-[#120b20]/75 via-[#120b20]/25 to-transparent',
+    heroPrism: 'bg-gradient-to-r from-[#140d21]/60 via-[#140d21]/20 to-transparent',
+    lightMist: 'bg-[#120b20]/10',
+    jewelMist: 'bg-[#120b20]/12',
+    none: 'bg-transparent'
   };
 
   const resolvedPosition = objectPosition || video?.objectPosition || 'center center';
@@ -291,12 +292,12 @@ export function VideoBackdropSection({
       ref={containerRef}
       className={`relative w-full overflow-x-clip ${minHeight} ${className}`}
     >
-      {/* Warm base canvas behind transitions so no black flash can ever appear */}
+      {/* Base canvas background */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none bg-[var(--bg-canvas)]"
       >
-        {/* Sticky viewport-proportioned video stage prevents 3x vertical upscale & side cropping on tall sections */}
+        {/* Sticky viewport-proportioned video stage */}
         <motion.div
           style={{ opacity: transitionOpacity, willChange: 'opacity' }}
           className="sticky top-0 w-full h-[100svh] max-h-full overflow-hidden"
@@ -304,7 +305,7 @@ export function VideoBackdropSection({
           {hasVideoError && video?.poster ? (
             <img
               src={video.poster}
-              alt={video.alt || 'Orion Mall architectural footage'}
+              alt={video.alt || 'Orion Mall footage'}
               referrerPolicy="no-referrer"
               style={{ objectPosition: resolvedPosition }}
               className="absolute inset-0 w-full h-full object-cover"
@@ -314,10 +315,9 @@ export function VideoBackdropSection({
               ref={videoRef}
               key={video?.src}
               src={video?.src}
-              poster={video?.poster}
               muted
               playsInline
-              preload={isNearView ? 'auto' : 'metadata'}
+              preload={isHero ? 'auto' : (isNearView ? 'auto' : 'metadata')}
               onLoadedMetadata={handleVideoLoaded}
               onLoadedData={handleVideoLoaded}
               onCanPlay={handleVideoLoaded}
@@ -328,7 +328,7 @@ export function VideoBackdropSection({
             />
           )}
 
-          {/* Directional legibility scrim */}
+          {/* Minimal contrast scrim for typography legibility without fog or blur */}
           <div
             aria-hidden="true"
             className={`absolute inset-0 pointer-events-none transition-colors duration-300 ${
@@ -337,18 +337,18 @@ export function VideoBackdropSection({
           />
         </motion.div>
 
-        {/* Smooth top & bottom boundary feathering so neighboring sections transition naturally */}
+        {/* Gentle boundary blend for continuous visual connection across sections */}
         {edgeBlend === 'canvas' && (
           <>
             {!isHero && (
               <div
                 aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-20 md:h-28 pointer-events-none bg-gradient-to-b from-[var(--bg-canvas)]/78 via-[var(--bg-canvas)]/26 to-transparent"
+                className="absolute inset-x-0 top-0 h-16 md:h-24 pointer-events-none bg-gradient-to-b from-[var(--bg-canvas)]/60 to-transparent"
               />
             )}
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-20 md:h-28 pointer-events-none bg-gradient-to-t from-[var(--bg-canvas)]/78 via-[var(--bg-canvas)]/26 to-transparent"
+              className="absolute inset-x-0 bottom-0 h-16 md:h-24 pointer-events-none bg-gradient-to-t from-[var(--bg-canvas)]/60 to-transparent"
             />
           </>
         )}

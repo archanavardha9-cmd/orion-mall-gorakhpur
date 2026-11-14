@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Film } from 'lucide-react';
+import { ArrowUpRight, Film, ChevronLeft, ChevronRight, Calendar, Ticket } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { VideoBackdropSection } from '../components/VideoBackdropSection';
 import { BrandMark } from '../components/BrandMark';
@@ -17,15 +17,59 @@ import {
 
 const MOVIE_CATEGORIES = [
   { id: 'nowShowing', label: 'Now Showing' },
-  { id: 'comingSoon', label: 'Coming Soon' },
-  { id: 'previouslyReleased', label: 'Previously Released' }
+  { id: 'comingSoon', label: 'Coming Soon' }
 ];
 
 export function EntertainmentPage() {
   const [activeCategory, setActiveCategory] = useState('nowShowing');
-  const [selectedNowShowing, setSelectedNowShowing] = useState(
-    ENTERTAINMENT_MOVIES.nowShowing[0]
-  );
+  const [activeMovieIndex, setActiveMovieIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(1);
+
+  const currentMovies = ENTERTAINMENT_MOVIES[activeCategory] || ENTERTAINMENT_MOVIES.nowShowing;
+  const safeIndex = Math.min(activeMovieIndex, currentMovies.length - 1);
+  const currentMovie = currentMovies[safeIndex] || currentMovies[0];
+
+  const handleCategorySwitch = (catId) => {
+    setActiveCategory(catId);
+    setActiveMovieIndex(0);
+    setSlideDirection(1);
+  };
+
+  const handleNextMovie = () => {
+    setSlideDirection(1);
+    setActiveMovieIndex((prev) => (prev + 1) % currentMovies.length);
+  };
+
+  const handlePrevMovie = () => {
+    setSlideDirection(-1);
+    setActiveMovieIndex((prev) => (prev - 1 + currentMovies.length) % currentMovies.length);
+  };
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 120 : -120,
+      opacity: 0,
+      scale: 0.94
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.45,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? -120 : 120,
+      opacity: 0,
+      scale: 0.94,
+      transition: {
+        duration: 0.35,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    })
+  };
 
   return (
     <div className="w-full">
@@ -34,7 +78,7 @@ export function EntertainmentPage() {
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
         isHero
-        minHeight="min-h-[82vh]"
+        minHeight="min-h-[100vh]"
         className="flex flex-col justify-between py-12 md:py-16"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between gap-4">
@@ -89,15 +133,16 @@ export function EntertainmentPage() {
         </div>
       </VideoBackdropSection>
 
-      {/* Three-Category Movies Marquee Section */}
+      {/* Premium Cinematic Movies Showcase Carousel Section */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaHall}
         scrim="jewelMist"
-        minHeight="min-h-[76vh]"
-        className="py-16 md:py-24"
+        minHeight="min-h-[100vh]"
+        className="py-16 md:py-24 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
           <DepthEmergeSection>
+            {/* Header with Category Toggle */}
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[var(--border-hairline)] pb-8">
               <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-xl self-start">
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)]">
@@ -108,10 +153,11 @@ export function EntertainmentPage() {
                 </h2>
               </div>
 
+              {/* Two categories only: Now Showing & Coming Soon */}
               <div
                 role="tablist"
                 aria-label="Select movie category"
-                className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-lg self-start lg:self-auto"
+                className="inline-flex items-center gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-lg self-start lg:self-auto"
               >
                 {MOVIE_CATEGORIES.map((cat) => {
                   const isActive = activeCategory === cat.id;
@@ -121,8 +167,8 @@ export function EntertainmentPage() {
                       type="button"
                       role="tab"
                       aria-selected={isActive}
-                      onClick={() => setActiveCategory(cat.id)}
-                      className={`relative px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                      onClick={() => handleCategorySwitch(cat.id)}
+                      className={`relative px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                         isActive
                           ? 'text-white'
                           : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -143,357 +189,165 @@ export function EntertainmentPage() {
               </div>
             </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-10"
-              >
-                {activeCategory === 'nowShowing' && (
-                  <section aria-labelledby="cat-now-showing" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
-                      <div>
-                        <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-coral)]">
-                          Currently Running in Cinemas
-                        </p>
-                        <h3
-                          id="cat-now-showing"
-                          className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
-                        >
-                          Now Showing
-                        </h3>
-                      </div>
-                      <span className="text-xs font-medium text-[var(--text-muted)]">
-                        Booking available for INOX: Orion Mall, Mohaddipur
-                      </span>
+            {/* Cinematic Horizontal Movie Showcase */}
+            <div className="mt-10 relative">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono-tabular uppercase tracking-widest text-[var(--accent-coral)]">
+                    {activeCategory === 'nowShowing' ? 'Now Showing in Theatres' : 'Upcoming Theatrical Slate'}
+                  </span>
+                  <span className="text-xs text-[var(--text-muted)]">·</span>
+                  <span className="text-xs font-mono-tabular text-[var(--text-muted)]">
+                    {safeIndex + 1} of {currentMovies.length}
+                  </span>
+                </div>
+
+                {/* Carousel Controls */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handlePrevMovie}
+                    aria-label="Previous movie"
+                    className="w-10 h-10 rounded-xl backdrop-blur-md bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextMovie}
+                    aria-label="Next movie"
+                    className="w-10 h-10 rounded-xl backdrop-blur-md bg-[var(--bg-surface-elevated)] border border-[var(--border-strong)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Prominent Center Showcase with AnimatePresence Horizontal Slide */}
+              <div className="overflow-hidden">
+                <AnimatePresence custom={slideDirection} mode="wait">
+                  <motion.div
+                    key={`${activeCategory}-${currentMovie.id}`}
+                    custom={slideDirection}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-10 shadow-2xl"
+                  >
+                    {/* Left Center Stage: Big Poster */}
+                    <div className="lg:col-span-5 flex justify-center">
+                      <Interactive3DTilt intensity={7} className="w-full max-w-[340px]">
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4] bg-stone-900">
+                          <img
+                            src={currentMovie.poster}
+                            alt={`${currentMovie.title} official theatrical poster`}
+                            referrerPolicy="no-referrer"
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/85 via-black/35 to-transparent">
+                            <span className="font-mono-tabular text-xs font-semibold uppercase tracking-widest text-emerald-300">
+                              {currentMovie.status}
+                            </span>
+                          </div>
+                        </div>
+                      </Interactive3DTilt>
                     </div>
 
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selectedNowShowing.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -14 }}
-                        transition={{ duration: 0.4 }}
-                        className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-7 md:p-11 shadow-2xl"
-                      >
-                        <div className="lg:col-span-5 flex justify-center">
-                          <Interactive3DTilt intensity={8} className="w-full max-w-[330px]">
-                            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
-                              <img
-                                src={selectedNowShowing.poster}
-                                alt={`${selectedNowShowing.title} official poster`}
-                                referrerPolicy="no-referrer"
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent">
-                                <span className="font-mono-tabular text-xs font-semibold uppercase tracking-widest text-emerald-300">
-                                  {selectedNowShowing.status}
-                                </span>
-                              </div>
-                            </div>
-                          </Interactive3DTilt>
-                        </div>
+                    {/* Right Center Stage: Movie Information & Direct Booking */}
+                    <div className="lg:col-span-7 space-y-6">
+                      <div className="flex flex-wrap items-center gap-2.5 text-xs font-medium text-[var(--text-muted)]">
+                        <span className="font-semibold text-[var(--accent-coral)]">
+                          {currentMovie.status}
+                        </span>
+                        <span aria-hidden="true">·</span>
+                        <span className="font-mono-tabular flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>
+                            {activeCategory === 'nowShowing' ? `Released ${currentMovie.releaseDate}` : `Releasing ${currentMovie.releaseDate}`}
+                          </span>
+                        </span>
+                        <span aria-hidden="true">·</span>
+                        <span>{currentMovie.language}</span>
+                      </div>
 
-                        <div className="lg:col-span-7 space-y-6">
-                          <div className="flex flex-wrap items-center gap-2.5 text-xs font-medium text-[var(--text-muted)]">
-                            <span className="font-semibold text-[var(--accent-coral)]">
-                              {selectedNowShowing.status}
-                            </span>
-                            <span aria-hidden="true">·</span>
-                            <span className="font-mono-tabular">
-                              Released {selectedNowShowing.releaseDate}
-                            </span>
-                            <span aria-hidden="true">·</span>
-                            <span>{selectedNowShowing.language}</span>
+                      <h3 className="font-display text-4xl sm:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
+                        {currentMovie.title}
+                      </h3>
+
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-turquoise)]">
+                        {currentMovie.genre}
+                      </p>
+
+                      <p className="text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+                        {currentMovie.description}
+                      </p>
+
+                      {/* Integrated Booking: ONLY for Now Showing movies */}
+                      <div className="pt-2 flex flex-wrap items-center gap-4">
+                        {activeCategory === 'nowShowing' && currentMovie.bookingUrl ? (
+                          <a
+                            href={currentMovie.bookingUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-all shadow-xl hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
+                          >
+                            <Ticket className="w-4 h-4" />
+                            <span>Book Tickets</span>
+                            <ArrowUpRight className="w-4 h-4" />
+                          </a>
+                        ) : (
+                          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-mono-tabular font-medium bg-[var(--bg-surface)] border border-[var(--border-strong)] text-[var(--text-muted)]">
+                            <span>Advance bookings open closer to release date</span>
                           </div>
+                        )}
+                        <span className="text-xs text-[var(--text-muted)]">
+                          INOX: Orion Mall, Gorakhpur
+                        </span>
+                      </div>
 
-                          <h4 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
-                            {selectedNowShowing.title}
-                          </h4>
-
-                          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-turquoise)]">
-                            {selectedNowShowing.genre}
-                          </p>
-
-                          <p className="text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-                            {selectedNowShowing.description}
-                          </p>
-
-                          <div className="pt-2 flex flex-wrap items-center gap-4">
-                            <a
-                              href={INOX_ORION_BOOKING_URL}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-xl whitespace-nowrap"
-                            >
-                              <span>Book Tickets</span>
-                              <ArrowUpRight className="w-4 h-4" />
-                            </a>
-                            <span className="text-xs text-[var(--text-muted)]">
-                              INOX: Orion Mall, Gorakhpur
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-
-                    <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-9 md:overflow-visible md:pb-0 items-start">
-                      {ENTERTAINMENT_MOVIES.nowShowing.map((movie, idx) => {
-                        const isSelected = selectedNowShowing.id === movie.id;
-                        return (
-                          <div
-                            key={movie.id}
-                            className={`group shrink-0 w-[78vw] sm:w-[320px] md:w-auto snap-start space-y-4 transition-transform duration-500 ${
-                              idx === 1 ? 'md:mt-6' : ''
+                      {/* Movie Thumbnails Strip */}
+                      <div className="pt-4 border-t border-[var(--border-hairline)] flex items-center gap-3 overflow-x-auto pb-1">
+                        {currentMovies.map((m, idx) => (
+                          <button
+                            key={m.id}
+                            type="button"
+                            onClick={() => {
+                              setSlideDirection(idx >= safeIndex ? 1 : -1);
+                              setActiveMovieIndex(idx);
+                            }}
+                            className={`flex items-center gap-2.5 p-1.5 pr-3 rounded-xl border transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                              idx === safeIndex
+                                ? 'border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] shadow-sm'
+                                : 'border-transparent bg-[var(--bg-surface)] hover:border-[var(--border-strong)] opacity-75 hover:opacity-100'
                             }`}
                           >
-                            <button
-                              type="button"
-                              onClick={() => setSelectedNowShowing(movie)}
-                              aria-pressed={isSelected}
-                              className={`w-full text-left cursor-pointer block relative rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl transition-all duration-300 ${
-                                isSelected
-                                  ? 'ring-2 ring-[var(--accent-coral)] ring-offset-4 ring-offset-transparent scale-[1.01]'
-                                  : 'border border-[var(--glass-border)] opacity-90 hover:opacity-100'
-                              }`}
-                            >
-                              <img
-                                src={movie.poster}
-                                alt={`${movie.title} poster`}
-                                referrerPolicy="no-referrer"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
-                              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5">
-                                <p className="font-mono-tabular text-[11px] font-semibold uppercase tracking-widest text-emerald-300">
-                                  {movie.status} · {movie.releaseDate}
-                                </p>
-                                <h5 className="font-display text-3xl font-semibold leading-none">
-                                  {movie.title}
-                                </h5>
-                                <p className="text-xs text-white/85">
-                                  {movie.genre} · {movie.language}
-                                </p>
-                              </div>
-                            </button>
-
-                            <div className="backdrop-blur-md bg-[var(--bg-surface-elevated)] rounded-2xl p-4 border border-[var(--glass-border)] shadow-lg flex items-start justify-between gap-4">
-                              <p className="text-xs md:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-2">
-                                {movie.description}
-                              </p>
-                              <a
-                                href={movie.bookingUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-[var(--accent-coral)] text-white hover:opacity-95 transition-opacity shrink-0 whitespace-nowrap shadow-md"
-                              >
-                                <span>Book Tickets</span>
-                                <ArrowUpRight className="w-3.5 h-3.5" />
-                              </a>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                {activeCategory === 'comingSoon' && (
-                  <section aria-labelledby="cat-coming-soon" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
-                      <div>
-                        <ScrollReveal variant="drop">
-                          <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-turquoise)]">
-                            Upcoming Theatrical Slate
-                          </p>
-                        </ScrollReveal>
-                        <ScrollReveal variant="rise" delay={0.04}>
-                          <h3
-                            id="cat-coming-soon"
-                            className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
-                          >
-                            Coming Soon
-                          </h3>
-                        </ScrollReveal>
+                            <img
+                              src={m.poster}
+                              alt=""
+                              aria-hidden="true"
+                              className="w-8 h-10 object-cover rounded-lg"
+                            />
+                            <span className="text-xs font-semibold text-[var(--text-primary)]">
+                              {m.title}
+                            </span>
+                          </button>
+                        ))}
                       </div>
-                      <ScrollReveal variant="rise" delay={0.08}>
-                        <span className="text-xs font-medium text-[var(--text-muted)]">
-                          Confirmed release dates · Advance bookings open closer to release
-                        </span>
-                      </ScrollReveal>
                     </div>
-
-                    <div className="space-y-12">
-                      {ENTERTAINMENT_MOVIES.comingSoon.map((movie, idx) => {
-                        const reversed = idx % 2 === 1;
-                        return (
-                          <ScrollReveal
-                            key={movie.id}
-                            variant={reversed ? 'slideLeft' : 'slideRight'}
-                            delay={idx * 0.04}
-                          >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                              <div
-                                className={`lg:col-span-4 flex justify-center ${
-                                  reversed ? 'lg:order-2' : 'lg:order-1'
-                                }`}
-                              >
-                                <Interactive3DTilt intensity={7} className="w-full max-w-[300px]">
-                                  <ScrollReveal variant="scaleDepth">
-                                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
-                                      <img
-                                        src={movie.poster}
-                                        alt={`${movie.title} poster`}
-                                        referrerPolicy="no-referrer"
-                                        loading="lazy"
-                                        decoding="async"
-                                        className="w-full h-full object-cover"
-                                      />
-                                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                                        <span className="font-mono-tabular text-xs font-semibold uppercase tracking-widest text-amber-200">
-                                          {movie.status}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </ScrollReveal>
-                                </Interactive3DTilt>
-                              </div>
-
-                              <div
-                                className={`lg:col-span-8 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-7 md:p-10 shadow-xl space-y-4 ${
-                                  reversed ? 'lg:order-1' : 'lg:order-2'
-                                }`}
-                              >
-                                <ScrollReveal variant="rise">
-                                  <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-[var(--text-muted)]">
-                                    <span className="font-semibold text-[var(--accent-turquoise)]">
-                                      {movie.status}
-                                    </span>
-                                    <span aria-hidden="true">·</span>
-                                    <span className="font-mono-tabular">
-                                      Releasing {movie.releaseDate}
-                                    </span>
-                                    <span aria-hidden="true">·</span>
-                                    <span>{movie.language}</span>
-                                  </div>
-                                </ScrollReveal>
-
-                                <ScrollReveal variant="rise" delay={0.04}>
-                                  <h4 className="font-display text-3xl md:text-5xl font-semibold text-[var(--text-primary)] leading-tight">
-                                    {movie.title}
-                                  </h4>
-                                </ScrollReveal>
-
-                                <ScrollReveal variant="rise" delay={0.08}>
-                                  <p className="text-xs font-semibold uppercase tracking-wider text-[var(--accent-plum)]">
-                                    {movie.genre}
-                                  </p>
-                                </ScrollReveal>
-
-                                <ScrollReveal variant="rise" delay={0.12}>
-                                  <p className="text-sm md:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-                                    {movie.description}
-                                  </p>
-                                </ScrollReveal>
-                              </div>
-                            </div>
-                          </ScrollReveal>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                {activeCategory === 'previouslyReleased' && (
-                  <section aria-labelledby="cat-previously-released" className="space-y-10">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-6 py-4 shadow-lg">
-                      <div>
-                        <ScrollReveal variant="drop">
-                          <p className="font-mono-tabular text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent-plum)]">
-                            Theatrical Archive · Acclaimed Hits
-                          </p>
-                        </ScrollReveal>
-                        <ScrollReveal variant="rise" delay={0.04}>
-                          <h3
-                            id="cat-previously-released"
-                            className="font-display text-3xl md:text-4xl font-semibold text-[var(--text-primary)] mt-1 leading-none"
-                          >
-                            Previously Released
-                          </h3>
-                        </ScrollReveal>
-                      </div>
-                      <ScrollReveal variant="rise" delay={0.08}>
-                        <span className="text-xs font-medium text-[var(--text-muted)]">
-                          Popular recent theatrical releases
-                        </span>
-                      </ScrollReveal>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
-                      {ENTERTAINMENT_MOVIES.previouslyReleased.map((movie, idx) => (
-                        <ScrollReveal
-                          key={movie.id}
-                          variant="scaleDepth"
-                          delay={idx * 0.06}
-                          className={idx === 1 ? 'lg:mt-8' : ''}
-                        >
-                          <div className="group space-y-4">
-                            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[3/4]">
-                              <img
-                                src={movie.poster}
-                                alt={`${movie.title} poster`}
-                                referrerPolicy="no-referrer"
-                                loading="lazy"
-                                decoding="async"
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/15 to-transparent" />
-                              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5">
-                                <span className="font-mono-tabular text-[11px] font-semibold uppercase tracking-widest text-amber-200">
-                                  {movie.status}
-                                </span>
-                                <h4 className="font-display text-3xl font-semibold leading-none">
-                                  {movie.title}
-                                </h4>
-                                <p className="font-mono-tabular text-xs text-white/85">
-                                  Released {movie.releaseDate}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="px-2 space-y-2 backdrop-blur-md bg-[var(--bg-surface)] rounded-2xl p-4 border border-[var(--border-hairline)]">
-                              <ScrollReveal variant="rise" delay={0.04}>
-                                <p className="text-xs font-semibold text-[var(--accent-plum)]">
-                                  {movie.genre} · {movie.language}
-                                </p>
-                              </ScrollReveal>
-                              <ScrollReveal variant="rise" delay={0.08}>
-                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                                  {movie.description}
-                                </p>
-                              </ScrollReveal>
-                            </div>
-                          </div>
-                        </ScrollReveal>
-                      ))}
-                    </div>
-                  </section>
-                )}
-              </motion.div>
-            </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
           </DepthEmergeSection>
         </div>
       </VideoBackdropSection>
 
       {/* Auditorium Visual Section (Authentic Cinema Projector Motion Video) */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.techFootwear}
+        video={VIDEO_ASSETS.entSeats}
         scrim="jewelMist"
-        minHeight="min-h-[62vh]"
+        minHeight="min-h-[100vh]"
         className="py-16 md:py-24 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

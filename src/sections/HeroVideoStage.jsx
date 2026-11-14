@@ -30,7 +30,7 @@ export function HeroVideoStage() {
       video={VIDEO_ASSETS.heroAtrium}
       scrim="heroPrism"
       isHero
-      minHeight="min-h-[92vh]"
+      minHeight="min-h-[100vh]"
       className="flex flex-col justify-between"
     >
 

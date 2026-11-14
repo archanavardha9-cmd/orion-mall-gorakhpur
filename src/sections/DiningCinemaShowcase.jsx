@@ -10,13 +10,13 @@ export function DiningCinemaShowcase() {
   const { navigate } = useRouter();
 
   return (
-    <section className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[78vh]">
+    <section className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[100vh]">
       {/* Left Split: Third Floor Dining */}
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningTerrace}
         scrim="bottom"
         edgeBlend="none"
-        minHeight="min-h-[65vh] lg:min-h-[78vh]"
+        minHeight="min-h-[70vh] lg:min-h-[100vh]"
         className="flex items-end"
       >
         <div className="relative z-10 w-full p-8 md:p-14 pt-28 md:pt-36 bg-gradient-to-t from-[#120b20]/90 via-[#120b20]/62 to-transparent text-white space-y-5">
@@ -64,7 +64,7 @@ export function DiningCinemaShowcase() {
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
         edgeBlend="none"
-        minHeight="min-h-[65vh] lg:min-h-[78vh]"
+        minHeight="min-h-[70vh] lg:min-h-[100vh]"
         className="flex items-end border-t lg:border-t-0 lg:border-l border-[var(--glass-border)]"
       >
         <div className="relative z-10 w-full p-8 md:p-14 pt-28 md:pt-36 bg-gradient-to-t from-[#120b20]/88 via-[#120b20]/54 to-transparent text-white space-y-5">

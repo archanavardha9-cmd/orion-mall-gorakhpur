@@ -141,7 +141,7 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningTerrace}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[80vh]"
+        minHeight="min-h-[100vh]"
         className="flex flex-col justify-between py-14 md:py-20"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
@@ -200,8 +200,7 @@ export function DiningPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningCulinary}
         scrim="jewelMist"
-        tone="coral"
-        minHeight="min-h-[78vh]"
+        minHeight="min-h-[100vh]"
         className="py-20 md:py-28 flex items-center"
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
@@ -270,18 +269,9 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningBurger}
         scrim="soft"
         edgeBlend="none"
-        minHeight="min-h-[86vh]"
+        minHeight="min-h-[100vh]"
         className="flex items-center"
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(64, 24, 14, 0.88) 0%, rgba(140, 28, 12, 0.78) 52%, rgba(214, 107, 20, 0.68) 100%)'
-          }}
-        />
-
         <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32 space-y-12 text-[#F5EBDC]">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
@@ -408,18 +398,9 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningPizza}
         scrim="soft"
         edgeBlend="none"
-        minHeight="min-h-[88vh]"
+        minHeight="min-h-[100vh]"
         className="flex items-center"
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(140deg, rgba(0, 56, 92, 0.88) 0%, rgba(0, 100, 145, 0.8) 55%, rgba(227, 24, 55, 0.6) 100%)'
-          }}
-        />
-
         <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32 space-y-12">
           <DepthEmergeSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">

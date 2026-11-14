@@ -132,8 +132,7 @@ export function HorizontalAtriumRibbon() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.exteriorDusk}
       scrim="jewelMist"
-      tone="amethyst"
-      minHeight="min-h-[88vh]"
+      minHeight="min-h-[100vh]"
       className="py-20 md:py-28 flex flex-col justify-center"
     >
       <DepthEmergeSection>
