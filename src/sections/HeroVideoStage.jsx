@@ -1,25 +1,58 @@
-import { ArrowRight, Compass, Film } from 'lucide-react';
-import { ScrollReveal } from '../animations/ScrollReveal';
-import { Interactive3DTilt, ParallaxDepth } from '../animations/MotionPrimitives';
-import { VideoBackdropSection } from '../components/VideoBackdropSection';
-import { BrandMark } from '../components/BrandMark';
-import { IMAGE_ASSETS, VIDEO_ASSETS } from '../assets/mediaRegistry';
-import { useRouter } from '../utils/router';
+import { ArrowRight, Compass, Film } from "lucide-react";
+import { ScrollReveal } from "../animations/ScrollReveal";
+import {
+  Interactive3DTilt,
+  ParallaxDepth,
+} from "../animations/MotionPrimitives";
+import { VideoBackdropSection } from "../components/VideoBackdropSection";
+import { BrandMark } from "../components/BrandMark";
+import { IMAGE_ASSETS, VIDEO_ASSETS } from "../assets/mediaRegistry";
+import { useRouter } from "../utils/router";
 
 const HERO_FEATURED_LOGOS = [
-  'MAX Fashion',
+  "MAX Fashion",
   "Levi's",
-  'Allen Solly',
-  'KFC',
-  'PVR INOX Cinemas'
+  "Allen Solly",
+  "KFC",
+  "PVR INOX Cinemas",
 ];
 
 const HERO_LEVEL_LINKS = [
-  { num: '00', label: 'Ground', detail: 'Icons & Tech', path: '/shopping', color: '#E86144' },
-  { num: '01', label: 'First', detail: 'Denim & Sport', path: '/shopping', color: '#14B8A6' },
-  { num: '02', label: 'Second', detail: 'Couture & Kids', path: '/shopping', color: '#A855F7' },
-  { num: '03', label: 'Third', detail: 'Dining Terrace', path: '/dining', color: '#F59E0B' },
-  { num: '04', label: 'Fourth', detail: 'PVR INOX', path: '/entertainment', color: '#3B82F6' }
+  {
+    num: "00",
+    label: "Ground",
+    detail: "Icons & Tech",
+    path: "/shopping",
+    color: "#E86144",
+  },
+  {
+    num: "01",
+    label: "First",
+    detail: "Denim & Sport",
+    path: "/shopping",
+    color: "#14B8A6",
+  },
+  {
+    num: "02",
+    label: "Second",
+    detail: "Couture & Kids",
+    path: "/shopping",
+    color: "#A855F7",
+  },
+  {
+    num: "03",
+    label: "Third",
+    detail: "Dining Terrace",
+    path: "/dining",
+    color: "#F59E0B",
+  },
+  {
+    num: "04",
+    label: "Fourth",
+    detail: "PVR INOX",
+    path: "/entertainment",
+    color: "#3B82F6",
+  },
 ];
 
 export function HeroVideoStage() {
@@ -56,7 +89,7 @@ export function HeroVideoStage() {
             <ScrollReveal variant="rise" delay={0.04}>
               <h1
                 className="font-display font-semibold leading-[0.94] tracking-tight text-white drop-shadow-lg"
-                style={{ fontSize: 'clamp(2.4rem, 4.8vw, 4.6rem)' }}
+                style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.6rem)" }}
               >
                 Orion Mall
                 <span className="block italic font-medium text-amber-200 mt-0.5">
@@ -67,7 +100,9 @@ export function HeroVideoStage() {
 
             <ScrollReveal variant="rise" delay={0.08}>
               <p className="text-xs sm:text-sm md:text-base text-white/95 max-w-xl leading-relaxed drop-shadow-sm">
-                Step inside Mohaddipur&apos;s sunlit five-level destination — uniting flagship apparel, denim culture, festive couture, Third Floor culinary favourites, and PVR INOX Cinemas.
+                Step inside Mohaddipur&apos;s sunlit five-level destination —
+                uniting flagship apparel, denim culture, festive couture, Third
+                Floor culinary favourites, and PVR INOX Cinemas.
               </p>
             </ScrollReveal>
 
@@ -75,7 +110,7 @@ export function HeroVideoStage() {
               <ScrollReveal variant="pop" delay={0.12}>
                 <button
                   type="button"
-                  onClick={() => navigate('/explore')}
+                  onClick={() => navigate("/explore")}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] via-[#e26336] to-[#d97706] text-white hover:opacity-95 transition-all hover:-translate-y-0.5 cursor-pointer shadow-xl whitespace-nowrap"
                 >
                   <Compass className="w-4 h-4" />
@@ -86,7 +121,7 @@ export function HeroVideoStage() {
               <ScrollReveal variant="pop" delay={0.16}>
                 <button
                   type="button"
-                  onClick={() => navigate('/shopping')}
+                  onClick={() => navigate("/shopping")}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/20 text-white border border-white/45 hover:bg-white/30 transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
                 >
                   <span>Explore Brands</span>
@@ -97,7 +132,7 @@ export function HeroVideoStage() {
               <ScrollReveal variant="pop" delay={0.2}>
                 <button
                   type="button"
-                  onClick={() => navigate('/entertainment')}
+                  onClick={() => navigate("/entertainment")}
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/55 text-amber-200 border border-amber-200/35 hover:bg-[#1e1233]/75 transition-colors cursor-pointer whitespace-nowrap"
                 >
                   <Film className="w-4 h-4" />
@@ -113,7 +148,11 @@ export function HeroVideoStage() {
               </span>
               <div className="flex flex-wrap items-center gap-2">
                 {HERO_FEATURED_LOGOS.map((name, i) => (
-                  <ScrollReveal key={name} variant="pop" delay={0.15 + i * 0.03}>
+                  <ScrollReveal
+                    key={name}
+                    variant="pop"
+                    delay={0.15 + i * 0.03}
+                  >
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/15 border border-white/25 text-xs text-white">
                       <BrandMark name={name} size="sm" />
                       <span className="font-medium text-[11px]">{name}</span>
@@ -126,7 +165,11 @@ export function HeroVideoStage() {
 
           {/* Right Layered Showcase Imagery */}
           <div className="lg:col-span-5 relative hidden sm:flex items-center justify-center min-h-[240px] md:min-h-[290px]">
-            <ParallaxDepth offset={-20} horizontal={-6} className="w-[84%] ml-auto">
+            <ParallaxDepth
+              offset={-20}
+              horizontal={-6}
+              className="w-[84%] ml-auto"
+            >
               <Interactive3DTilt intensity={5}>
                 <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/50 aspect-[4/3] bg-[#1c102d]">
                   <img
@@ -166,36 +209,13 @@ export function HeroVideoStage() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 px-2.5 py-1.5 bg-gradient-to-t from-[#160d26]/88 to-transparent text-white">
-                  <p className="text-[10px] font-semibold">26 Signature Brands</p>
+                  <p className="text-[10px] font-semibold">
+                    26 Signature Brands
+                  </p>
                 </div>
               </div>
             </ParallaxDepth>
           </div>
-        </div>
-      </div>
-
-      {/* Bottom Interactive Floor Elevation Bar */}
-      <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-12 pb-4 md:pb-5">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 bg-[#1a102b]/65 border border-white/20 rounded-2xl p-1.5 shadow-2xl">
-          {HERO_LEVEL_LINKS.map((lv) => (
-            <button
-              key={lv.num}
-              type="button"
-              onClick={() => navigate(lv.path)}
-              className="group flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-left hover:bg-white/14 transition-colors cursor-pointer"
-            >
-              <span
-                className="font-mono-tabular text-xs font-bold px-2 py-0.5 rounded-lg text-white shrink-0 transition-transform duration-200 group-hover:scale-105"
-                style={{ backgroundColor: lv.color }}
-              >
-                L{lv.num}
-              </span>
-              <div className="min-w-0">
-                <p className="text-xs font-semibold text-white truncate">{lv.label}</p>
-                <p className="text-[10px] text-white/75 truncate">{lv.detail}</p>
-              </div>
-            </button>
-          ))}
         </div>
       </div>
     </VideoBackdropSection>
