@@ -59,212 +59,212 @@ import movieKingPoster from './images/movie_king_poster_1794537285864.jpg';
 
 export const VIDEO_ASSETS = {
   heroAtrium: {
-    src: '/videos/home_hero_atrium.mp4',
+    src: '/videos/video_atrium_light.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Symmetrical modern mall escalator ascending smoothly in soft architectural light'
+    endTime: 4.9,
+    alt: 'Sunlit modern mall atrium with symmetrical ascending escalators in soft architectural light'
   },
   atriumStory: {
-    src: '/videos/home_atrium_facade.mp4',
+    src: '/videos/video_atrium_light.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Sunlit curved glass commercial architecture beneath bright daylight sky'
+    endTime: 4.9,
+    alt: 'Sunlit architectural promenade with delicate skylight truss geometry and drifting daylight beams'
   },
   exteriorDusk: {
-    src: '/videos/home_floor_promenade.mp4',
+    src: '/videos/video_floor_promenade.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Contemporary rhythmic architectural levels and glass balconies'
+    endTime: 4.9,
+    alt: 'Contemporary rhythmic architectural floor levels and glass balconies'
   },
   firstRetail: {
-    src: '/videos/home_brands_boutique.mp4',
+    src: '/videos/video_brand_boutique.mp4',
     poster: brandDenimImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Quiet sunlit retail clothing racks and tailored wardrobe displays'
+    endTime: 4.9,
+    alt: 'Curated boutique wardrobe racks and flowing soft silk ribbons in warm daylight'
   },
   diningTerrace: {
-    src: '/videos/home_dining_room.mp4',
+    src: '/videos/video_dining_terrace.mp4',
     poster: brandDiningImg,
     objectPosition: 'center 50%',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Calm sunlit dining room with dressed tables and warm natural daylight'
+    endTime: 4.9,
+    alt: 'Sunlit dining terrace with gentle rising aroma steam and warm ambient daylight'
   },
   cinemaAuditorium: {
-    src: '/videos/home_cinema_hall.mp4',
+    src: '/videos/video_cinema_beam.mp4',
     poster: brandCinemaImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Illuminated classic cinema theater marquee and grand architectural entrance'
+    endTime: 4.9,
+    alt: 'Cinematic laser projection beam cutting diagonally through atmospheric auditorium motes'
   },
   visitWalkers: {
-    src: '/videos/home_visit_plaza.mp4',
+    src: '/videos/video_transit_vista.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Sunlit commercial plaza facade and landscaped approach avenue'
+    endTime: 4.9,
+    alt: 'Clean sunlit commercial approach boulevard with smooth flowing transit vectors'
   },
   techFootwear: {
-    src: '/videos/explore_towers_hero.mp4',
+    src: '/videos/video_explore_spatial.mp4',
     poster: brandFootwearTechImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Sleek curved glass commercial architecture beneath calm daylight sky'
+    endTime: 4.9,
+    alt: 'Spatial 3D isometric mall walkthrough grid and geodesic glass dome'
   },
   exploreDome: {
-    src: '/videos/explore_gallery_corridor.mp4',
+    src: '/videos/video_explore_spatial.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 5.1,
-    alt: 'Warmly lit architectural promenade corridor with symmetrical lighting'
+    endTime: 4.9,
+    alt: 'Architectural geodesic skylight dome above geometric spatial floor grid'
   },
   firstDenim: {
-    src: '/videos/shopping_hero_atelier.mp4',
+    src: '/videos/video_brand_boutique.mp4',
     poster: brandDenimImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Curated boutique wardrobe rack with pastel and terracotta collared shirts'
+    endTime: 4.9,
+    alt: 'Curated boutique lookbook atelier with undulating soft silk ribbons'
   },
   groundLuxury: {
-    src: '/videos/shopping_ground_wardrobe.mp4',
+    src: '/videos/video_brand_boutique.mp4',
     poster: brandMenswearImg,
     objectPosition: 'center 45%',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Warm illuminated luxury fashion wardrobe shelves and tailored attire'
+    endTime: 4.9,
+    alt: 'Warm luxury fashion boutique atelier with minimalist wardrobe displays'
   },
   shoppingFirst: {
-    src: '/videos/shopping_first_footwear.mp4',
+    src: '/videos/video_shopping_active.mp4',
     poster: brandDenimImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Warm department store footwear display with glass apparel shelves behind'
+    endTime: 4.9,
+    alt: 'Dynamic geometric athletic threads and contemporary textile weaving'
   },
   secondEthnic: {
-    src: '/videos/shopping_second_jewelry.mp4',
+    src: '/videos/video_shopping_couture.mp4',
     poster: brandEthnicImg,
     objectPosition: 'center 50%',
     startTime: 0.05,
-    endTime: 6.4,
-    alt: 'Curated velvet luxury rings and lifestyle accessories showcase'
+    endTime: 4.9,
+    alt: 'Curated couture draping, fine gemstone facets, and gold starlight motes'
   },
   diningDeckHero: {
-    src: '/videos/dining_hero_cafe.mp4',
+    src: '/videos/video_dining_terrace.mp4',
     poster: brandDiningImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Calm unoccupied restaurant dining room with white-dressed tables and amber lamps'
+    endTime: 4.9,
+    alt: 'Calm sunlit dining terrace with gentle rising aroma steam and warm daylight'
   },
   diningCulinary: {
-    src: '/videos/dining_showcase_lounge.mp4',
+    src: '/videos/video_dining_terrace.mp4',
     poster: brandDiningImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Warm golden morning sunlight over a steaming porcelain espresso cup'
+    endTime: 4.9,
+    alt: 'Artisanal culinary dining lounge with gentle rising aroma steam'
   },
   diningBurger: {
-    src: '/videos/dining_burger_clean.mp4',
+    src: '/videos/video_gourmet_flame.mp4',
     poster: bkWhopperFeastImg,
     objectPosition: 'center center',
-    startTime: 0.1,
-    endTime: 7.6,
-    alt: 'Flame-grilled gourmet burger with toasted sesame bun and fresh greens'
+    startTime: 0.05,
+    endTime: 4.9,
+    alt: 'Warm flame-grilled hearth glow with floating golden embers'
   },
   diningPizza: {
-    src: '/videos/dining_pizza.mp4',
+    src: '/videos/video_stone_oven.mp4',
     poster: dominosPizzaSpreadImg,
     objectPosition: 'center center',
-    startTime: 0.1,
-    endTime: 7.6,
-    alt: 'Freshly baked Domino\'s Pizza with bubbling mozzarella cheese'
+    startTime: 0.05,
+    endTime: 4.9,
+    alt: 'Stone-baked artisanal oven warmth with floating flour and spice motes'
   },
   entMultiplexHero: {
-    src: '/videos/ent_hero_projector.mp4',
+    src: '/videos/video_cinema_beam.mp4',
     poster: brandCinemaImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Warm golden antique cinema projector reel gently turning'
+    endTime: 4.9,
+    alt: 'Anamorphic laser cinema projector beam cutting through atmospheric auditorium air'
   },
   cinemaHall: {
-    src: '/videos/ent_slate_reel.mp4',
+    src: '/videos/video_cinema_popcorn.mp4',
     poster: brandCinemaImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Spinning vintage film reel illuminated by soft amber cinema light'
+    endTime: 4.9,
+    alt: 'Crimson red cinema backdrop with animated bursting popcorn effect'
   },
   entSeats: {
-    src: '/videos/ent_lounge_popcorn.mp4',
+    src: '/videos/video_auditorium_lounge.mp4',
     poster: brandCinemaImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Golden freshly popped cinema popcorn concessions texture'
+    endTime: 4.9,
+    alt: 'Plush velvet auditorium recliners with ambient aisle runner illumination'
   },
   visitPlaza: {
-    src: '/videos/visit_hero_courtyard.mp4',
+    src: '/videos/video_floor_promenade.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center 50%',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Sunlit arrival plaza building with glass doors and ornamental foliage'
+    endTime: 4.9,
+    alt: 'Sunlit arrival plaza building with clean geometric balconies and glass lines'
   },
   visitTransit: {
-    src: '/videos/visit_transit_vista.mp4',
+    src: '/videos/video_transit_vista.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Wide sunlit commercial plaza boulevard and architectural waterfront'
+    endTime: 4.9,
+    alt: 'Wide sunlit commercial boulevard with smooth flowing transit guides'
   },
   visitFacilities: {
-    src: '/videos/visit_facilities_hall.mp4',
+    src: '/videos/video_facilities_lobby.mp4',
     poster: atriumEmptyImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Bright minimalist sunlit interior lobby bathed in natural daylight'
+    endTime: 4.9,
+    alt: 'Bright minimalist sunlit interior lobby bathed in natural daylight with greenery'
   },
   cinemaFoyer: {
-    src: '/videos/ent_hero_projector.mp4',
+    src: '/videos/video_cinema_beam.mp4',
     poster: brandCinemaImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Warm golden cinema projection mechanism'
+    endTime: 4.9,
+    alt: 'Warm golden cinema laser projection beam'
   },
   salonStudio: {
-    src: '/videos/shopping_second_jewelry.mp4',
+    src: '/videos/video_shopping_couture.mp4',
     poster: brandSalonImg,
     objectPosition: 'center 50%',
     startTime: 0.05,
-    endTime: 6.4,
-    alt: 'Luxury lifestyle and accessories boutique showcase'
+    endTime: 4.9,
+    alt: 'Luxury couture and fine jewelry facets showcase'
   },
   shoppingReel: {
-    src: '/videos/shopping_hero_atelier.mp4',
+    src: '/videos/video_brand_boutique.mp4',
     poster: brandMenswearImg,
     objectPosition: 'center center',
     startTime: 0.05,
-    endTime: 7.9,
-    alt: 'Curated fashion storefront gallery'
+    endTime: 4.9,
+    alt: 'Curated boutique wardrobe and silk atelier gallery'
   }
 };
 

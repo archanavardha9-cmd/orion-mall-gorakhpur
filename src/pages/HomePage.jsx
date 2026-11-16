@@ -1,31 +1,31 @@
-import { ArrowRight, Compass, MapPin } from 'lucide-react';
-import { HeroVideoStage } from '../sections/HeroVideoStage';
-import { ArchitecturalStorySplit } from '../sections/ArchitecturalStorySplit';
-import { HorizontalAtriumRibbon } from '../sections/HorizontalAtriumRibbon';
-import { BrandSpotlightGallery } from '../sections/BrandSpotlightGallery';
-import { DiningCinemaShowcase } from '../sections/DiningCinemaShowcase';
-import { VideoBackdropSection } from '../components/VideoBackdropSection';
-import { FullPageContainer } from '../components/FullPageContainer';
+import { ArrowRight, Compass, MapPin } from "lucide-react";
+import { HeroVideoStage } from "../sections/HeroVideoStage";
+import { ArchitecturalStorySplit } from "../sections/ArchitecturalStorySplit";
+import { HorizontalAtriumRibbon } from "../sections/HorizontalAtriumRibbon";
+import { BrandSpotlightGallery } from "../sections/BrandSpotlightGallery";
+import { DiningCinemaShowcase } from "../sections/DiningCinemaShowcase";
+import { VideoBackdropSection } from "../components/VideoBackdropSection";
+import { FullPageContainer } from "../components/FullPageContainer";
 import {
   DepthEmergeSection,
   Interactive3DTilt,
-  ParallaxDepth
-} from '../animations/MotionPrimitives';
-import { ScrollReveal } from '../animations/ScrollReveal';
-import { IMAGE_ASSETS, VIDEO_ASSETS } from '../assets/mediaRegistry';
-import { MALL_INFO } from '../utils/mallData';
-import { useRouter } from '../utils/router';
+  ParallaxDepth,
+} from "../animations/MotionPrimitives";
+import { ScrollReveal } from "../animations/ScrollReveal";
+import { IMAGE_ASSETS, VIDEO_ASSETS } from "../assets/mediaRegistry";
+import { MALL_INFO } from "../utils/mallData";
+import { useRouter } from "../utils/router";
 
 export function HomePage() {
   const { navigate } = useRouter();
 
   const sectionLabels = [
-    '01 · Grand Entrance',
-    '02 · Architectural Flow',
-    '03 · Floor by Floor',
-    '04 · Signature Brands',
-    '05 · Dining & Cinema',
-    '06 · Plan Your Visit'
+    "01 · Grand Entrance",
+    "02 · Architectural Flow",
+    "03 · Floor by Floor",
+    "04 · Signature Brands",
+    "05 · Dining & Cinema",
+    "06 · Plan Your Visit",
   ];
 
   return (
@@ -35,9 +35,6 @@ export function HomePage() {
 
       {/* Scene 2: Architectural Story */}
       <ArchitecturalStorySplit />
-
-      {/* Scene 3: Floor by Floor Showcase */}
-      <HorizontalAtriumRibbon />
 
       {/* Scene 4: Curated Retail Icons */}
       <BrandSpotlightGallery />
@@ -70,14 +67,15 @@ export function HomePage() {
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.1}>
                       <p className="text-xs sm:text-sm md:text-base text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                        {MALL_INFO.locality} · Retail {MALL_INFO.hours.retail} · PVR INOX {MALL_INFO.hours.cinema}
+                        {MALL_INFO.locality} · Retail {MALL_INFO.hours.retail} ·
+                        PVR INOX {MALL_INFO.hours.cinema}
                       </p>
                     </ScrollReveal>
                     <div className="pt-1 flex flex-wrap gap-2.5">
                       <ScrollReveal variant="pop" delay={0.14}>
                         <button
                           type="button"
-                          onClick={() => navigate('/visit')}
+                          onClick={() => navigate("/visit")}
                           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-gold)] text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
                         >
                           <span>Directions &amp; Hours</span>
@@ -87,7 +85,7 @@ export function HomePage() {
                       <ScrollReveal variant="pop" delay={0.18}>
                         <button
                           type="button"
-                          onClick={() => navigate('/explore')}
+                          onClick={() => navigate("/explore")}
                           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer"
                         >
                           <Compass className="w-4 h-4 text-[var(--accent-turquoise)]" />
@@ -97,7 +95,7 @@ export function HomePage() {
                       <ScrollReveal variant="pop" delay={0.22}>
                         <button
                           type="button"
-                          onClick={() => navigate('/entertainment')}
+                          onClick={() => navigate("/entertainment")}
                           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-plum)] transition-colors cursor-pointer"
                         >
                           <span>PVR INOX Shows</span>
