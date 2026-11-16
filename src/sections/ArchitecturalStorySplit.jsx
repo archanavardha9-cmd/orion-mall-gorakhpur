@@ -42,14 +42,14 @@ export function ArchitecturalStorySplit() {
       id="atrium-story"
       video={VIDEO_ASSETS.atriumStory}
       scrim="jewelMist"
-      className="flex items-center py-6 md:py-10"
+      className="flex items-center py-8 md:py-10"
     >
       <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 my-auto">
         <DepthEmergeSection>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
             {/* Editorial Narrative Column */}
             <ScrollReveal variant="slideRight" className="lg:col-span-5">
-              <div className="relative space-y-5 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden">
+              <div className="relative space-y-5 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-3xl p-5 sm:p-6 md:p-8 shadow-2xl overflow-hidden">
                 <div className="relative z-10 space-y-4">
                   <ScrollReveal variant="drop">
                     <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[var(--accent-turquoise)]">
@@ -58,7 +58,7 @@ export function ArchitecturalStorySplit() {
                   </ScrollReveal>
                   <KineticLineReveal
                     text="Five sunlit levels in Mohaddipur"
-                    className="font-display text-3xl md:text-4xl font-semibold leading-[1.04] text-[var(--text-primary)]"
+                    className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.04] text-[var(--text-primary)]"
                   />
 
                   <div className="divide-y divide-[var(--border-hairline)]">
@@ -81,7 +81,7 @@ export function ArchitecturalStorySplit() {
                               {ch.num}
                             </span>
                             <div>
-                              <h3 className="font-display text-lg sm:text-xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-coral)] transition-colors">
+                              <h3 className="font-display text-base sm:text-xl font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-coral)] transition-colors">
                                 {ch.title}
                               </h3>
                               <p className="text-xs text-[var(--text-muted)] mt-0.5">
@@ -110,12 +110,12 @@ export function ArchitecturalStorySplit() {
             </ScrollReveal>
 
             {/* Overlapping Architectural Photography */}
-            <div className="lg:col-span-7 relative min-h-[340px] md:min-h-[440px] flex items-center justify-center">
-              {/* Layer 1: Main Sunlit Atrium (Slightly Enlarged) */}
+            <div className="lg:col-span-7 relative min-h-0 md:min-h-[400px] lg:min-h-[440px] flex items-center justify-center pb-4 sm:pb-0">
+              {/* Layer 1: Main Sunlit Atrium */}
               <ParallaxDepth
                 offset={-24}
                 horizontal={-8}
-                className="w-[88%] ml-auto relative z-10"
+                className="w-full sm:w-[88%] sm:ml-auto relative z-10"
               >
                 <Interactive3DTilt intensity={5}>
                   <ScrollReveal variant="scaleDepth" delay={0.08}>
@@ -133,7 +133,7 @@ export function ArchitecturalStorySplit() {
                 </Interactive3DTilt>
               </ParallaxDepth>
 
-              {/* Layer 2: Top-Left Menswear Atelier Accent (Slightly Enlarged) */}
+              {/* Layer 2: Top-Left Menswear Atelier Accent */}
               <ParallaxDepth
                 offset={-16}
                 horizontal={8}
@@ -153,11 +153,11 @@ export function ArchitecturalStorySplit() {
                 </ScrollReveal>
               </ParallaxDepth>
 
-              {/* Layer 3: Bottom-Left Ethnic Couture Wing (Enlarged & Shifted Slightly Downward) */}
+              {/* Layer 3: Bottom-Left Ethnic Couture Wing */}
               <ParallaxDepth
                 offset={24}
                 horizontal={12}
-                className="absolute -left-2 -bottom-3 sm:-bottom-4 w-[54%] z-30"
+                className="absolute left-2 sm:-left-2 -bottom-2 sm:-bottom-4 w-[50%] sm:w-[54%] z-30"
               >
                 <ScrollReveal variant="slideLeft" delay={0.16}>
                   <div className="animate-float-slow rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-mint)]">
@@ -169,8 +169,8 @@ export function ArchitecturalStorySplit() {
                       decoding="async"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-x-0 bottom-0 px-3.5 py-1.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
-                      <p className="font-mono-tabular text-[10px] uppercase tracking-[0.16em] text-amber-200">
+                    <div className="absolute inset-x-0 bottom-0 px-3 py-1.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
+                      <p className="font-mono-tabular text-[10px] uppercase tracking-[0.14em] text-amber-200 truncate">
                         26 Signature Outlets · Floors 00–04
                       </p>
                     </div>

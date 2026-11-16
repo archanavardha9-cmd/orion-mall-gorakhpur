@@ -89,9 +89,9 @@ function ExploreFinaleScene() {
     >
       <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 my-auto">
         <DepthEmergeSection>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-7 relative min-h-[260px] sm:min-h-[340px] flex items-center">
-              <ParallaxDepth className="w-[84%] mr-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+            <div className="lg:col-span-7 order-2 lg:order-1 relative min-h-0 lg:min-h-[340px] flex items-center">
+              <ParallaxDepth className="w-full sm:w-[84%] sm:mr-auto">
                 <Interactive3DTilt intensity={5}>
                   <ScrollReveal variant="scaleDepth">
                     <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10]">
@@ -124,7 +124,7 @@ function ExploreFinaleScene() {
               </ParallaxDepth>
             </div>
 
-            <ScrollReveal variant="slideRight" className="lg:col-span-5">
+            <ScrollReveal variant="slideRight" className="lg:col-span-5 order-1 lg:order-2">
               <div className="space-y-4 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 shadow-2xl">
                 <div>
                   <ScrollReveal variant="drop">

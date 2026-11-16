@@ -25,11 +25,11 @@ function ShoppingHeroScene() {
       video={VIDEO_ASSETS.firstDenim}
       scrim="heroPrism"
       isHero
-      minHeight="min-h-[100vh]"
-      className="flex items-center py-16 md:py-24"
+      minHeight="min-h-[calc(100svh-4rem)]"
+      className="flex items-center py-8 md:py-16"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-6 space-y-6 text-white">
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-12 items-center">
+        <div className="lg:col-span-6 space-y-5 text-white">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <ShoppingBag className="w-4 h-4" />
@@ -39,7 +39,7 @@ function ShoppingHeroScene() {
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
               className="font-display font-semibold leading-[0.95] text-white drop-shadow-lg"
-              style={{ fontSize: 'clamp(2.8rem, 5.4vw, 5.2rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 5.4vw, 5.2rem)' }}
             >
               Three Levels of Curated Style
             </h1>
@@ -60,7 +60,7 @@ function ShoppingHeroScene() {
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
-                  className="px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
+                  className="px-3.5 sm:px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
                 >
                   {tab.label}
                 </button>
@@ -70,8 +70,8 @@ function ShoppingHeroScene() {
         </div>
 
         {/* Layered Overlapping Storefront Imagery */}
-        <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[420px] flex items-center pr-2 sm:pr-4">
-          <ParallaxDepth offset={-26} className="w-[78%] ml-auto">
+        <div className="lg:col-span-6 relative min-h-[230px] sm:min-h-[380px] flex items-center pr-0 sm:pr-4">
+          <ParallaxDepth offset={-26} className="w-[82%] sm:w-[78%] ml-auto">
             <Interactive3DTilt intensity={5}>
               <ScrollReveal variant="scaleDepth" delay={0.08}>
                 <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530]">
@@ -128,14 +128,14 @@ export function ShoppingPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.groundLuxury}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 md:py-28 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
               <ScrollReveal variant="slideRight" className="lg:col-span-5">
-                <div className="space-y-6 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 shadow-2xl">
+                <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
                       <p className="font-mono-tabular text-xs font-bold uppercase tracking-widest text-[var(--accent-coral)]">
@@ -143,7 +143,7 @@ export function ShoppingPage() {
                       </p>
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.04}>
-                      <h2 className="font-display text-4xl font-semibold text-[var(--text-primary)] mt-1">
+                      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mt-1">
                         Flagship Icons &amp; Tech
                       </h2>
                     </ScrollReveal>
@@ -225,14 +225,14 @@ export function ShoppingPage() {
 
       {/* Scene 3: First Floor Denim & Activewear */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.firstRetail}
+        video={VIDEO_ASSETS.shoppingFirst}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 md:py-28 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
               <div className="lg:col-span-7 order-2 lg:order-1">
                 <Interactive3DTilt intensity={6}>
                   <AnimatePresence mode="wait">
@@ -275,7 +275,7 @@ export function ShoppingPage() {
               </div>
 
               <ScrollReveal variant="slideLeft" className="lg:col-span-5 order-1 lg:order-2">
-                <div className="space-y-6 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 shadow-2xl">
+                <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
                       <p className="font-mono-tabular text-xs font-bold uppercase tracking-widest text-[var(--accent-turquoise)]">
@@ -283,7 +283,7 @@ export function ShoppingPage() {
                       </p>
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.04}>
-                      <h2 className="font-display text-4xl font-semibold text-[var(--text-primary)] mt-1">
+                      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mt-1">
                         Denim &amp; Activewear
                       </h2>
                     </ScrollReveal>
@@ -326,14 +326,14 @@ export function ShoppingPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.secondEthnic}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 md:py-28 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
               <ScrollReveal variant="slideRight" className="lg:col-span-5">
-                <div className="space-y-6 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 shadow-2xl">
+                <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
                       <p className="font-mono-tabular text-xs font-bold uppercase tracking-widest text-[var(--accent-plum)]">
@@ -341,7 +341,7 @@ export function ShoppingPage() {
                       </p>
                     </ScrollReveal>
                     <ScrollReveal variant="rise" delay={0.04}>
-                      <h2 className="font-display text-4xl font-semibold text-[var(--text-primary)] mt-1">
+                      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mt-1">
                         Couture, Bags &amp; Kids
                       </h2>
                     </ScrollReveal>

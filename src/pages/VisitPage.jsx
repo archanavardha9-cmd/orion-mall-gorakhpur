@@ -23,18 +23,18 @@ export function VisitPage() {
         video={VIDEO_ASSETS.visitPlaza}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[100vh]"
-        className="flex flex-col justify-between py-14 md:py-20"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="flex flex-col justify-between py-8 md:py-16"
       >
-        <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-14 md:-mt-20 pt-14 md:pt-20 pb-5">
-          <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between text-white font-mono-tabular text-xs tracking-[0.2em]">
+        <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-8 md:-mt-16 pt-8 md:pt-16 pb-5">
+          <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 flex items-center justify-between text-white font-mono-tabular text-xs tracking-[0.2em]">
             <ScrollReveal variant="slideRight"><span className="drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">26.7606° N · 83.3956° E</span></ScrollReveal>
             <ScrollReveal variant="slideLeft"><span className="hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">MOHADDIPUR · GORAKHPUR</span></ScrollReveal>
           </div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 text-white">
-          <div className="border-t border-white/35 pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-white">
+          <div className="border-t border-white/35 pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
             <div className="lg:col-span-8 space-y-3">
               <ScrollReveal variant="drop">
                 <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
@@ -45,7 +45,7 @@ export function VisitPage() {
               <ScrollReveal variant="rise" delay={0.05}>
                 <h1
                   className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
-                  style={{ fontSize: 'clamp(2.9rem, 6vw, 5.5rem)' }}
+                  style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
                 >
                   Visit Orion Mall
                 </h1>
@@ -79,14 +79,14 @@ export function VisitPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.visitTransit}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 md:py-28 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
               <ScrollReveal variant="slideRight" className="lg:col-span-7">
-                <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-6">
+                <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-5">
                   <div>
                     <ScrollReveal variant="drop">
                       <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-turquoise)]">
@@ -182,15 +182,15 @@ export function VisitPage() {
 
       {/* Facilities Section over Walking Shoppers Motion Video */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.visitWalkers}
+        video={VIDEO_ASSETS.visitFacilities}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-16 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
             <ScrollReveal variant="slideLeft" className="lg:ml-auto max-w-xl">
-              <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
+              <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-5">
                 <ScrollReveal variant="drop">
                   <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--accent-turquoise)]">
                     <Car className="w-4 h-4" />

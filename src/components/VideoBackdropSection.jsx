@@ -16,7 +16,7 @@ export function VideoBackdropSection({
   edgeBlend = 'canvas',
   isHero = false,
   objectPosition,
-  minHeight = 'h-full',
+  minHeight = 'min-h-[calc(100svh-4rem)]',
   className = '',
   id,
   children
@@ -174,7 +174,7 @@ export function VideoBackdropSection({
   return (
     <section
       id={id}
-      className={`relative w-full h-full min-h-[calc(100svh-4rem)] flex flex-col justify-center overflow-x-hidden ${className}`}
+      className={`relative w-full min-h-full ${minHeight} flex flex-col overflow-x-hidden ${className}`}
     >
       {/* Background Video Stage */}
       <div
@@ -188,7 +188,7 @@ export function VideoBackdropSection({
             referrerPolicy="no-referrer"
             loading={isHero ? "eager" : "lazy"}
             decoding="async"
-            fetchpriority={isHero ? "high" : "auto"}
+            fetchPriority={isHero ? "high" : "auto"}
             style={{ objectPosition: resolvedPosition }}
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -216,8 +216,18 @@ export function VideoBackdropSection({
         />
       </div>
 
-      {/* Content Layer */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-center">{children}</div>
+      {/* Content Layer: safe vertical centering avoids top cutoff when mobile content overflows */}
+      <div
+        className={`relative z-10 w-full flex-1 flex flex-col ${
+          className.includes('justify-between')
+            ? 'justify-between'
+            : className.includes('justify-end')
+            ? 'justify-end'
+            : '[&>*:first-child]:mt-auto [&>*:last-child]:mb-auto'
+        }`}
+      >
+        {children}
+      </div>
     </section>
   );
 }

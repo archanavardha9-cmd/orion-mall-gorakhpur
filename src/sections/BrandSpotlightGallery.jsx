@@ -223,73 +223,74 @@ export function BrandSpotlightGallery() {
     <VideoBackdropSection
       video={VIDEO_ASSETS.firstRetail}
       scrim="jewelMist"
-      minHeight="min-h-[100vh]"
-      className="py-8 md:py-12 flex items-center"
+      minHeight="min-h-[calc(100svh-4rem)]"
+      className="py-6 md:py-8 flex items-center"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-10 space-y-6 md:space-y-8 my-auto">
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-10 my-auto">
         <DepthEmergeSection>
-          <div className="space-y-6 md:space-y-8">
-            {/* Top Bar: Section Heading (Left) + Controls & Two-Row Category Navigation (Right) */}
-            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-              {/* Section Heading: Single-line, compact bottom height with proper padding */}
-              <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-5 sm:px-6 pt-3 pb-2.5 shadow-xl self-start max-w-full">
+          <div className="space-y-5 lg:space-y-6">
+            {/* Top Bar: Section Heading (Left) + Stepper/Autoplay Controls (Right) */}
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl px-4 sm:px-6 py-2.5 shadow-xl max-w-full">
                 <ScrollReveal variant="rise">
                   <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--accent-plum)] leading-tight">
                     Signature Brands
                   </p>
                 </ScrollReveal>
                 <ScrollReveal variant="rise" delay={0.03}>
-                  <h2 className="font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mt-0.5 leading-none whitespace-nowrap">
+                  <h2 className="font-display text-xl sm:text-3xl font-semibold text-[var(--text-primary)] mt-0.5 leading-none sm:whitespace-nowrap">
                     Flagship Retail Collection
                   </h2>
                 </ScrollReveal>
               </div>
 
-              {/* Right Area: Controls on Top, Two-Row Category Navigation Below */}
-              <div className="flex flex-col items-start lg:items-end gap-2.5 self-start lg:self-auto w-full lg:w-auto">
-                {/* Stepper & Autoplay Controls: Kept in original area and position */}
-                <div className="flex items-center gap-1.5 shrink-0 self-start lg:self-end">
-                  <button
-                    type="button"
-                    onClick={() => setAutoCycle((c) => !c)}
-                    aria-label={autoCycle ? 'Pause brand spotlight' : 'Play brand spotlight'}
-                    className="inline-flex items-center gap-1.5 px-3 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] text-[11px] font-semibold text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
-                  >
-                    {autoCycle ? (
-                      <>
-                        <Pause className="w-3 h-3 text-[var(--accent-coral)]" />
-                        <span>Auto</span>
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-3 h-3 text-[var(--accent-turquoise)]" />
-                        <span>Play</span>
-                      </>
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => stepBrand(-1)}
-                    aria-label="Previous brand"
-                    className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => stepBrand(1)}
-                    aria-label="Next brand"
-                    className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
-                  >
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setAutoCycle((c) => !c)}
+                  aria-label={autoCycle ? 'Pause brand spotlight' : 'Play brand spotlight'}
+                  className="inline-flex items-center gap-1.5 px-3 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] text-[11px] font-semibold text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                >
+                  {autoCycle ? (
+                    <>
+                      <Pause className="w-3 h-3 text-[var(--accent-coral)]" />
+                      <span>Auto</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3 h-3 text-[var(--accent-turquoise)]" />
+                      <span>Play</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => stepBrand(-1)}
+                  aria-label="Previous brand"
+                  className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => stepBrand(1)}
+                  aria-label="Next brand"
+                  className="w-8 h-8 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-surface-elevated)] flex items-center justify-center text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer shadow-sm"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
 
-                {/* Compact Category Navigation in EXACTLY TWO ROWS Below Controls */}
+            {/* 12-Column Brand Spotlight: Brand Image & Cards on Left + Category Nav & Brand List on Right */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start lg:items-center">
+              {/* RIGHT (Desktop) / FIRST (Mobile): Category Navigation slightly upward directly above Brand List Card */}
+              <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-3.5 sm:gap-4">
+                {/* 6-Category Navigation cleanly separated above the Brand List Card */}
                 <div
                   role="tablist"
                   aria-label="Browse brands by shopping and lifestyle category"
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md w-full sm:w-auto max-w-full"
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md w-full"
                 >
                   {BRAND_CATEGORIES.map((cat) => {
                     const Icon = cat.icon;
@@ -301,7 +302,7 @@ export function BrandSpotlightGallery() {
                         role="tab"
                         aria-selected={isActive}
                         onClick={() => handleSelectCategory(cat)}
-                        className={`relative inline-flex items-center justify-between sm:justify-start gap-1.5 px-3 py-1.5 min-h-[34px] rounded-xl text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                        className={`relative inline-flex items-center justify-between gap-1 px-2 sm:px-2.5 py-1.5 min-h-[34px] rounded-xl text-[10.5px] sm:text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap min-w-0 ${
                           isActive
                             ? 'text-white'
                             : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
@@ -316,15 +317,15 @@ export function BrandSpotlightGallery() {
                             aria-hidden="true"
                           />
                         )}
-                        <span className="relative z-10 flex items-center gap-1.5 min-w-0">
+                        <span className="relative z-10 flex items-center gap-1 min-w-0">
                           <Icon
-                            className="w-3.5 h-3.5 shrink-0"
+                            className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0"
                             style={isActive ? undefined : { color: cat.accentColor }}
                           />
                           <span className="truncate">{cat.label}</span>
                         </span>
                         <span
-                          className={`relative z-10 font-mono-tabular text-[10px] opacity-85 ml-1 ${
+                          className={`relative z-10 font-mono-tabular text-[10px] opacity-85 shrink-0 ${
                             isActive ? 'text-white/90' : 'text-[var(--text-muted)]'
                           }`}
                         >
@@ -334,93 +335,9 @@ export function BrandSpotlightGallery() {
                     );
                   })}
                 </div>
-              </div>
-            </div>
 
-            {/* 12-Column Brand Spotlight: Larger Image on Left + Compact Brand List Card on Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center pt-2 sm:pt-4">
-              {/* LEFT (lg:col-span-7): Larger Main Brand Image Stage positioned slightly UP */}
-              <div className="lg:col-span-7 relative min-h-[300px] sm:min-h-[440px] flex items-center justify-center -translate-y-1 sm:-translate-y-2">
-
-                {/* Layer 1: Main Brand Experience Photography (Enlarged & Prominent) */}
-                <Interactive3DTilt intensity={5} className="w-[94%] sm:w-[92%] relative z-10">
-                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/11] sm:aspect-[4/3] max-h-[430px] bg-[var(--bg-surface)]">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={`${activeStory.name}-${activeStory.primaryImg}`}
-                        src={activeStory.primaryImg}
-                        alt={`${activeStory.name} — ${activeStory.specialty}`}
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                        decoding="async"
-                        initial={{ opacity: 0, scale: 1.05 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="w-full h-full object-cover"
-                      />
-                    </AnimatePresence>
-                  </div>
-                </Interactive3DTilt>
-
-                {/* Layer 2: Second Card – Brand Information (beside/overlaying lower edge of main image) */}
-                <ParallaxDepth
-                  offset={-24}
-                  horizontal={12}
-                  className="hidden sm:block absolute right-1 bottom-1 sm:bottom-2 max-w-[270px] z-20"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={`detail-${activeStory.name}`}
-                      initial={{ opacity: 0, x: 14 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-2xl p-4 shadow-2xl space-y-1"
-                    >
-                      <p
-                        className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider"
-                        style={{ color: activeStory.accentColor }}
-                      >
-                        {activeStory.specialty} · {String(categoryBrandIdx).padStart(2, '0')}/
-                        {String(activeCategory.brands.length).padStart(2, '0')}
-                      </p>
-                      <p className="text-xs text-[var(--text-primary)] font-medium leading-relaxed line-clamp-2">
-                        {activeStory.highlight}
-                      </p>
-                    </motion.div>
-                  </AnimatePresence>
-                </ParallaxDepth>
-
-                {/* Layer 3: First Card – Brand Name & Logo Crest (on top edge of main image) */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={`crest-${activeStory.name}`}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.3 }}
-                    className={`absolute -top-3 left-3 sm:left-5 z-30 backdrop-blur-xl bg-gradient-to-r ${activeStory.tint} border-2 border-[var(--glass-border)] rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-3`}
-                  >
-                    <BrandMark name={activeStory.name} size="md" />
-                    <div>
-                      <p
-                        className="font-mono-tabular text-[10px] font-bold uppercase tracking-wider"
-                        style={{ color: activeStory.accentColor }}
-                      >
-                        {activeStory.categoryLabel}
-                      </p>
-                      <p className="font-display text-xl sm:text-2xl font-semibold text-[var(--text-primary)] leading-none mt-0.5">
-                        {activeStory.name}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* RIGHT (lg:col-span-5): Compact & Clean Brand List Card */}
-              <div className="lg:col-span-5">
-                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4">
+                {/* Compact & Clean Brand List Card with clear visual gap below Categories */}
+                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl">
                   <div
                     aria-hidden="true"
                     className="absolute -top-16 -right-16 w-44 h-44 rounded-full blur-2xl opacity-20 pointer-events-none transition-colors duration-500"
@@ -434,10 +351,10 @@ export function BrandSpotlightGallery() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="relative z-10 space-y-4"
+                      className="relative z-10 space-y-3.5"
                     >
                       {/* Category Header */}
-                      <div className="space-y-1.5 border-b border-[var(--border-hairline)] pb-3">
+                      <div className="space-y-1 border-b border-[var(--border-hairline)] pb-2.5">
                         <div className="flex items-center justify-between gap-2">
                           <span
                             className="inline-flex items-center gap-1.5 text-xs font-mono-tabular font-bold uppercase tracking-[0.14em]"
@@ -488,7 +405,7 @@ export function BrandSpotlightGallery() {
                       </div>
 
                       {/* Card Footer */}
-                      <div className="pt-3 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-2.5">
+                      <div className="pt-2.5 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-2">
                         <span className="text-[11px] text-[var(--text-muted)]">
                           {activeStory.specialty} · {activeStory.categoryLabel}
                         </span>
@@ -505,6 +422,84 @@ export function BrandSpotlightGallery() {
                     </motion.div>
                   </AnimatePresence>
                 </div>
+              </div>
+
+              {/* LEFT (Desktop) / SECOND (Mobile): Main Brand Image + Floating Crest & Detail Info Cards */}
+              <div className="lg:col-span-6 order-2 lg:order-1 relative pt-8 sm:pt-9 pb-0 sm:pb-6 flex flex-col sm:flex-row items-center justify-center">
+                {/* Layer 3: Brand Name & Logo Crest overlapping upper edge cleanly below heading */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`crest-${activeStory.name}`}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.3 }}
+                    className={`absolute top-1 left-2 sm:left-4 z-30 backdrop-blur-xl bg-gradient-to-r ${activeStory.tint} border-2 border-[var(--glass-border)] rounded-2xl px-3.5 sm:px-4 py-2 shadow-xl flex items-center gap-2.5 sm:gap-3`}
+                  >
+                    <BrandMark name={activeStory.name} size="md" />
+                    <div>
+                      <p
+                        className="font-mono-tabular text-[10px] font-bold uppercase tracking-wider"
+                        style={{ color: activeStory.accentColor }}
+                      >
+                        {activeStory.categoryLabel}
+                      </p>
+                      <p className="font-display text-lg sm:text-2xl font-semibold text-[var(--text-primary)] leading-none mt-0.5">
+                        {activeStory.name}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Layer 1: Main Brand Experience Photography */}
+                <Interactive3DTilt intensity={5} className="w-full sm:w-[92%] relative z-10">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] sm:aspect-[4/3] max-h-[360px] lg:max-h-[410px] bg-[var(--bg-surface)]">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={`${activeStory.name}-${activeStory.primaryImg}`}
+                        src={activeStory.primaryImg}
+                        alt={`${activeStory.name} — ${activeStory.specialty}`}
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-full h-full object-cover"
+                      />
+                    </AnimatePresence>
+                  </div>
+                </Interactive3DTilt>
+
+                {/* Layer 2: Brand Information Card (stacked cleanly on mobile, floating lower-right on sm+) */}
+                <ParallaxDepth
+                  offset={-20}
+                  horizontal={10}
+                  className="w-full sm:w-auto sm:absolute sm:right-2 sm:bottom-0 mt-3 sm:mt-0 sm:max-w-[270px] z-20"
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`detail-${activeStory.name}`}
+                      initial={{ opacity: 0, x: 14 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-2xl p-3.5 sm:p-4 shadow-2xl space-y-1"
+                    >
+                      <p
+                        className="font-mono-tabular text-[11px] font-bold uppercase tracking-wider"
+                        style={{ color: activeStory.accentColor }}
+                      >
+                        {activeStory.specialty} · {String(categoryBrandIdx).padStart(2, '0')}/
+                        {String(activeCategory.brands.length).padStart(2, '0')}
+                      </p>
+                      <p className="text-xs text-[var(--text-primary)] font-medium leading-relaxed line-clamp-2">
+                        {activeStory.highlight}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </ParallaxDepth>
               </div>
             </div>
           </div>

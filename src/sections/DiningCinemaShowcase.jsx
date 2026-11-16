@@ -16,9 +16,10 @@ export function DiningCinemaShowcase() {
         video={VIDEO_ASSETS.diningTerrace}
         scrim="bottom"
         edgeBlend="none"
+        minHeight="min-h-[45svh] lg:min-h-full"
         className="flex items-end justify-end"
       >
-        <div className="relative z-10 w-full p-6 md:p-10 pt-20 md:pt-28 bg-gradient-to-t from-[#120b20]/95 via-[#120b20]/65 to-transparent text-white space-y-4">
+        <div className="relative z-10 w-full p-5 sm:p-6 md:p-10 pt-10 sm:pt-16 md:pt-28 bg-gradient-to-t from-[#120b20]/95 via-[#120b20]/65 to-transparent text-white space-y-3 sm:space-y-4">
           <ScrollReveal variant="slideRight">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
@@ -44,7 +45,7 @@ export function DiningCinemaShowcase() {
             ))}
           </div>
           <ScrollReveal variant="rise" delay={0.2}>
-            <div className="pt-2">
+            <div className="pt-1 sm:pt-2">
               <button
                 type="button"
                 onClick={() => navigate('/dining')}
@@ -63,9 +64,10 @@ export function DiningCinemaShowcase() {
         video={VIDEO_ASSETS.cinemaAuditorium}
         scrim="bottom"
         edgeBlend="none"
+        minHeight="min-h-[45svh] lg:min-h-full"
         className="flex items-end justify-end border-t lg:border-t-0 lg:border-l border-[var(--glass-border)]"
       >
-        <div className="relative z-10 w-full p-6 md:p-10 pt-20 md:pt-28 bg-gradient-to-t from-[#120b20]/95 via-[#120b20]/65 to-transparent text-white space-y-4">
+        <div className="relative z-10 w-full p-5 sm:p-6 md:p-10 pt-10 sm:pt-16 md:pt-28 bg-gradient-to-t from-[#120b20]/95 via-[#120b20]/65 to-transparent text-white space-y-3 sm:space-y-4">
           <ScrollReveal variant="pop">
             <BrandMark name="PVR INOX Cinemas" size="md" />
           </ScrollReveal>

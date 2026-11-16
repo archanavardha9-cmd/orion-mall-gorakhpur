@@ -146,13 +146,13 @@ export function DiningPage() {
     <FullPageContainer pageId="dining" sectionLabels={sectionLabels}>
       {/* UNIQUE DINING HERO: Top-Anchored Sunlit Culinary Horizon */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.diningTerrace}
+        video={VIDEO_ASSETS.diningDeckHero}
         scrim="heroPrism"
         isHero
-        minHeight="min-h-[100vh]"
-        className="flex flex-col justify-between py-14 md:py-20"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="flex flex-col justify-between py-8 md:py-16"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -166,7 +166,7 @@ export function DiningPage() {
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
                 className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
-                style={{ fontSize: 'clamp(2.9rem, 6vw, 5.5rem)' }}
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
               >
                 Third Floor Flavours
               </h1>
@@ -177,7 +177,7 @@ export function DiningPage() {
           </motion.div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 pt-16">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-12">
           <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
@@ -208,10 +208,10 @@ export function DiningPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.diningCulinary}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-20 md:py-28 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-10 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
             <AnimatePresence mode="wait">
               <motion.div
@@ -220,9 +220,9 @@ export function DiningPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center"
               >
-                <div className="lg:col-span-7 relative">
+                <div className="lg:col-span-7 relative order-2 lg:order-1">
                   <ParallaxDepth offset={24}>
                     <Interactive3DTilt intensity={5}>
                       <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a150f]">
@@ -237,25 +237,25 @@ export function DiningPage() {
                   </ParallaxDepth>
                 </div>
 
-                <div className="lg:col-span-5 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
+                <div className="lg:col-span-5 order-1 lg:order-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-4 sm:space-y-5">
                   <ScrollReveal variant="pop">
                     <BrandMark name={selectedOutlet.name} size="lg" />
                   </ScrollReveal>
                   <ScrollReveal variant="slideLeft" delay={0.04}>
-                    <h2 className="font-display text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
                       {selectedOutlet.name}
                     </h2>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.08}>
                     <p
-                      className="text-base font-semibold"
+                      className="text-sm sm:text-base font-semibold"
                       style={{ color: selectedOutlet.accent }}
                     >
                       {selectedOutlet.specialty}
                     </p>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.12}>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
                       {selectedOutlet.signature}
                     </p>
                   </ScrollReveal>
@@ -277,12 +277,12 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningBurger}
         scrim="soft"
         edgeBlend="none"
-        minHeight="min-h-[100vh]"
+        minHeight="min-h-[calc(100svh-4rem)]"
         className="flex items-center"
       >
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-6 md:px-12 py-6 md:py-8 my-auto space-y-5 text-[#F5EBDC]">
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-12 py-6 md:py-8 my-auto space-y-5 text-[#F5EBDC]">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
               <div className="lg:col-span-5 space-y-4">
                 <div className="space-y-2.5">
                   <BurgerKingLockup />
@@ -405,15 +405,15 @@ export function DiningPage() {
         video={VIDEO_ASSETS.diningPizza}
         scrim="none"
         edgeBlend="none"
-        minHeight="min-h-[100vh]"
+        minHeight="min-h-[calc(100svh-4rem)]"
         className="flex items-center"
       >
-        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-10 py-4 md:py-6 my-auto space-y-4">
+        <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-10 py-6 md:py-8 my-auto">
           <DepthEmergeSection>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-              {/* Left Column: Enlarged Domino's Main Content Box */}
-              <div className="lg:col-span-5 bg-white/95 text-slate-900 rounded-3xl p-7 sm:p-8 md:p-9 shadow-2xl border border-white/80 space-y-5">
-                <div className="space-y-3.5">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              {/* Left Column: Slightly Taller Rectangular Domino's Information Box */}
+              <div className="lg:col-span-5 bg-white/95 text-slate-900 rounded-3xl px-7 sm:px-8 py-9 sm:py-11 lg:min-h-[500px] shadow-2xl border border-white/80 flex flex-col justify-between gap-6">
+                <div className="space-y-4">
                   <ScrollReveal variant="pop">
                     <DominosLockup />
                   </ScrollReveal>
@@ -435,13 +435,13 @@ export function DiningPage() {
 
                   <ScrollReveal variant="rise" delay={0.09}>
                     <p className="text-sm text-slate-700 leading-relaxed">
-                      Hand-stretched dough with bubbling mozzarella, stuffed garlic breadsticks, and warm choco lava cakes.
+                      Hand-stretched dough with bubbling mozzarella, stuffed garlic breadsticks, and warm choco lava cakes baked fresh to order.
                     </p>
                   </ScrollReveal>
                 </div>
 
                 <ScrollReveal variant="rise" delay={0.12}>
-                  <div className="space-y-3 pt-3.5 border-t border-slate-200">
+                  <div className="space-y-3.5 pt-4 border-t border-slate-200">
                     <div className="flex flex-wrap gap-2" role="tablist" aria-label="Domino's Pizza specialties">
                       {DOMINOS_HIGHLIGHTS.map((item) => {
                         const isActive = activeDominoHighlight.id === item.id;
@@ -471,7 +471,7 @@ export function DiningPage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -4 }}
                         transition={{ duration: 0.2 }}
-                        className="space-y-1 pt-1"
+                        className="space-y-1.5 pt-1"
                       >
                         <h3 className="font-display text-lg font-semibold text-[#006491]">
                           {activeDominoHighlight.title}
@@ -482,7 +482,7 @@ export function DiningPage() {
                       </motion.div>
                     </AnimatePresence>
 
-                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-600 pt-2 border-t border-slate-100">
+                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-slate-600 pt-3 border-t border-slate-100">
                       <Clock className="w-3.5 h-3.5 text-[#E31837]" />
                       <span>{MALL_INFO.hours.dining}</span>
                       <span aria-hidden="true">·</span>
@@ -492,13 +492,13 @@ export function DiningPage() {
                 </ScrollReveal>
               </div>
 
-              {/* Right Column: Dynamic Asymmetric Pizza Image Composition */}
-              <div className="lg:col-span-7 flex flex-col sm:flex-row gap-5 lg:gap-7 items-center justify-center pl-0 sm:pl-3">
-                {/* Larger Pizza Image: Slightly increased size, moved just a little away from the card edge */}
-                <div className="w-full sm:w-[61%] sm:ml-2 -translate-y-2 sm:-translate-y-4">
+              {/* Right Column: Prominent First Pizza Image + Lower Closer Overlapping Second Pizza Image */}
+              <div className="lg:col-span-7 flex flex-col sm:flex-row items-center justify-center sm:justify-end pl-0 sm:pl-4 lg:pl-8 pb-4 sm:pb-12">
+                {/* First (Larger) Pizza Image: Prominent & slightly lifted */}
+                <div className="w-full sm:w-[68%] lg:w-[70%] relative z-10 sm:-translate-y-4">
                   <ScrollReveal variant="scaleDepth" delay={0.06}>
                     <Interactive3DTilt intensity={5}>
-                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/70 aspect-[4/3] max-h-[355px]">
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/85 aspect-[4/3] max-h-[430px] bg-slate-900">
                         <img
                           src={DINING_BRAND_GALLERY.dominos.spread}
                           alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks"
@@ -512,11 +512,11 @@ export function DiningPage() {
                   </ScrollReveal>
                 </div>
 
-                {/* Smaller Pizza Image: Positioned slightly further DOWN, maintaining natural asymmetrical stagger */}
-                <div className="w-[85%] sm:w-[39%] translate-y-4 sm:translate-y-8 self-end sm:self-auto">
+                {/* Second (Smaller) Pizza Image: Lowered further down & tucked closer to touch/overlap the first */}
+                <div className="w-[78%] sm:w-[40%] lg:w-[38%] relative z-20 self-end sm:self-center -mt-6 sm:mt-0 sm:-ml-10 lg:-ml-12 translate-y-2 sm:translate-y-16 lg:translate-y-20">
                   <ScrollReveal variant="scaleDepth" delay={0.12}>
                     <Interactive3DTilt intensity={4}>
-                      <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-white/60 aspect-[4/3] max-h-[240px]">
+                      <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 aspect-[4/3] max-h-[235px] bg-slate-900">
                         <img
                           src={DINING_BRAND_GALLERY.dominos.sides}
                           alt="Domino's Pizza oven-baked savory sides, slices and sauces"

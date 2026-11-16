@@ -199,8 +199,8 @@ export function HorizontalAtriumRibbon() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-stretch">
             {/* LEFT: Interactive Floor Elevation Rail */}
             <ScrollReveal variant="slideRight" className="lg:col-span-4">
-              <div className="flex flex-col justify-between gap-1 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2.5 sm:p-3 shadow-xl h-full">
-                <div className="divide-y divide-[var(--border-hairline)]">
+              <div className="flex flex-col justify-between gap-1 bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 sm:p-3 shadow-xl h-full">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-1 lg:gap-0 lg:divide-y divide-[var(--border-hairline)]">
                   {FLOOR_LEVELS.map((floor, idx) => {
                     const isActive = idx === activeIndex;
                     return (
@@ -208,7 +208,7 @@ export function HorizontalAtriumRibbon() {
                         <button
                           type="button"
                           onClick={() => selectFloorIndex(idx)}
-                          className="relative w-full text-left py-2 px-2.5 flex items-center justify-between gap-3 rounded-xl transition-colors cursor-pointer group"
+                          className="relative w-full text-left py-2 px-2.5 flex items-center justify-between gap-2 lg:gap-3 rounded-xl transition-colors cursor-pointer group"
                         >
                           {isActive && (
                             <motion.div
@@ -218,7 +218,7 @@ export function HorizontalAtriumRibbon() {
                             />
                           )}
 
-                          <div className="relative z-10 flex items-center gap-2.5 min-w-0">
+                          <div className="relative z-10 flex items-center gap-2 lg:gap-2.5 min-w-0">
                             <span
                               className="font-mono-tabular text-[11px] font-bold px-2 py-0.5 rounded-md text-white shrink-0 shadow-sm"
                               style={{
@@ -237,7 +237,7 @@ export function HorizontalAtriumRibbon() {
                               >
                                 {floor.label}
                               </p>
-                              <p className="text-[10px] text-[var(--text-muted)] truncate">
+                              <p className="text-[10px] text-[var(--text-muted)] truncate hidden sm:block">
                                 {floor.brands.length > 0
                                   ? `${floor.brands.length} Destination${floor.brands.length > 1 ? 's' : ''}`
                                   : 'Architectural Skylight Level'}
@@ -246,7 +246,7 @@ export function HorizontalAtriumRibbon() {
                           </div>
 
                           <ArrowRight
-                            className={`relative z-10 w-3.5 h-3.5 shrink-0 transition-all duration-300 ${
+                            className={`relative z-10 w-3.5 h-3.5 shrink-0 hidden lg:block transition-all duration-300 ${
                               isActive
                                 ? 'opacity-100 translate-x-0 text-[var(--accent-coral)]'
                                 : 'opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0 text-[var(--text-muted)]'
@@ -262,7 +262,7 @@ export function HorizontalAtriumRibbon() {
 
             {/* RIGHT: Seamless Infinitely Looping Vertical Elevation Stage */}
             <ScrollReveal variant="scaleDepth" delay={0.06} className="lg:col-span-8">
-              <div className="relative min-h-[320px] sm:min-h-[380px] lg:min-h-[420px] rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] bg-[#140f1e] h-full">
+              <div className="relative min-h-[300px] sm:min-h-[360px] lg:min-h-[420px] rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] bg-[#140f1e] h-full">
                 <AnimatePresence initial={false} custom={stepState.direction} mode="sync">
                   <motion.div
                     key={stepState.step}

@@ -108,11 +108,11 @@ export function HomePage() {
                 </div>
               </ScrollReveal>
 
-              <div className="lg:col-span-5 relative hidden sm:flex items-center justify-center min-h-[240px] md:min-h-[300px]">
-                <ParallaxDepth className="w-[88%] ml-auto">
+              <div className="lg:col-span-5 relative flex items-center justify-center min-h-0 md:min-h-[280px]">
+                <ParallaxDepth className="w-full sm:w-[88%] sm:ml-auto">
                   <Interactive3DTilt intensity={5}>
                     <ScrollReveal variant="scaleDepth" delay={0.1}>
-                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[var(--bg-tint-peach)]">
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] sm:aspect-[4/3] bg-[var(--bg-tint-peach)] relative">
                         <img
                           src={IMAGE_ASSETS.brandSalon}
                           alt="Warm sunlit seating terrace at Orion Mall Mohaddipur"

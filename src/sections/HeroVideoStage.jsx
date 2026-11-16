@@ -135,7 +135,7 @@ export function HeroVideoStage() {
                     referrerPolicy="no-referrer"
                     loading="eager"
                     decoding="async"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/90 to-transparent text-white">
@@ -162,7 +162,7 @@ export function HeroVideoStage() {
                   referrerPolicy="no-referrer"
                   loading="eager"
                   decoding="async"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 px-2.5 py-1.5 bg-gradient-to-t from-[#160d26]/88 to-transparent text-white">

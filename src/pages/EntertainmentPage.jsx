@@ -126,25 +126,25 @@ export function EntertainmentPage() {
     <FullPageContainer pageId="entertainment" sectionLabels={sectionLabels}>
       {/* UNIQUE ENTERTAINMENT HERO: Anamorphic Widescreen Cinema Frame */}
       <VideoBackdropSection
-        video={VIDEO_ASSETS.cinemaAuditorium}
+        video={VIDEO_ASSETS.entMultiplexHero}
         scrim="bottom"
         isHero
-        minHeight="min-h-[100vh]"
-        className="flex flex-col justify-between py-12 md:py-16"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="flex flex-col justify-between py-8 md:py-14"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 flex items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 flex items-center justify-between gap-4">
           <BrandMark name="PVR INOX Cinemas" size="md" />
-          <span className="font-mono-tabular text-xs tracking-[0.22em] uppercase text-amber-200 backdrop-blur-md bg-[#120c22]/60 border border-white/20 px-3.5 py-1.5 rounded-xl">
+          <span className="font-mono-tabular text-[10px] sm:text-xs tracking-[0.22em] uppercase text-amber-200 backdrop-blur-md bg-[#120c22]/60 border border-white/20 px-3 sm:px-3.5 py-1.5 rounded-xl">
             Fourth Floor · Mohaddipur
           </span>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 text-white space-y-6">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-white space-y-5">
           <motion.div
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85 }}
-            className="max-w-4xl space-y-4"
+            className="max-w-4xl space-y-3 sm:space-y-4"
           >
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <Film className="w-4 h-4" />
@@ -152,7 +152,7 @@ export function EntertainmentPage() {
             </div>
             <h1
               className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
-              style={{ fontSize: "clamp(3rem, 6.2vw, 5.8rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 6.2vw, 5.8rem)" }}
             >
               PVR INOX Cinemas
             </h1>
@@ -189,17 +189,17 @@ export function EntertainmentPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.cinemaHall}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-6 md:py-8 flex items-center justify-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-5 md:py-8 flex items-center justify-center"
       >
         <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 my-auto">
           <DepthEmergeSection>
             {/* Top Control Bar: Category Toggle (Now Showing / Coming Soon) on the LEFT & Carousel Arrows on the RIGHT */}
-            <div className="flex items-center justify-between gap-6 pb-3.5">
+            <div className="flex items-center justify-between gap-3 sm:gap-6 pb-3">
               <div
                 role="tablist"
                 aria-label="Select movie category"
-                className="inline-flex items-center gap-1.5 p-1 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md -ml-0.5 sm:-ml-1"
+                className="inline-flex items-center gap-1 p-1 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md"
               >
                 {MOVIE_CATEGORIES.map((cat) => {
                   const isActive = activeCategory === cat.id;
@@ -210,7 +210,7 @@ export function EntertainmentPage() {
                       role="tab"
                       aria-selected={isActive}
                       onClick={() => handleCategorySwitch(cat.id)}
-                      className={`relative px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                      className={`relative px-3.5 sm:px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                         isActive
                           ? "text-white"
                           : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -235,7 +235,7 @@ export function EntertainmentPage() {
               </div>
 
               {/* Counter & Carousel Controls moved towards the RIGHT with increased horizontal spacing */}
-              <div className="flex items-center gap-3.5 sm:gap-4 -mr-0.5 sm:-mr-1">
+              <div className="flex items-center gap-3.5 sm:gap-4">
                 <span className="text-xs font-mono-tabular text-[var(--text-muted)] hidden sm:inline">
                   {safeIndex + 1} of {currentMovies.length}
                 </span>
@@ -261,7 +261,7 @@ export function EntertainmentPage() {
               </div>
             </div>
 
-            {/* Main Prominent Center Showcase with AnimatePresence Horizontal Slide (Increased Vertical Length) */}
+            {/* Main Prominent Center Showcase with AnimatePresence Horizontal Slide */}
             <div className="overflow-hidden">
               <AnimatePresence custom={slideDirection} mode="wait">
                 <motion.div
@@ -271,15 +271,15 @@ export function EntertainmentPage() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-7 shadow-2xl min-h-[350px] sm:min-h-[370px]"
+                  className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-center bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-4 sm:p-7 shadow-2xl min-h-0 sm:min-h-[370px]"
                 >
-                  {/* Left Center Stage: Portrait Poster (Increased Vertical Length) */}
+                  {/* Left Center Stage: Portrait Poster */}
                   <div className="sm:col-span-5 flex justify-center">
                     <Interactive3DTilt
                       intensity={6}
-                      className="w-full max-w-[210px] sm:max-w-[235px]"
+                      className="w-full max-w-[160px] sm:max-w-[235px]"
                     >
-                      <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[2/3] max-h-[335px] bg-stone-900 mx-auto">
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[2/3] max-h-[235px] sm:max-h-[335px] bg-stone-900 mx-auto">
                         <img
                           src={currentMovie.poster}
                           alt={`${currentMovie.title} official theatrical poster`}
@@ -397,12 +397,12 @@ export function EntertainmentPage() {
       <VideoBackdropSection
         video={VIDEO_ASSETS.entSeats}
         scrim="jewelMist"
-        minHeight="min-h-[100vh]"
-        className="py-16 md:py-24 flex items-center"
+        minHeight="min-h-[calc(100svh-4rem)]"
+        className="py-8 md:py-20 flex items-center"
       >
-        <div className="max-w-[1440px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           <ScrollReveal variant="slideRight" className="lg:col-span-6">
-            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-8 md:p-10 shadow-2xl space-y-5">
+            <div className="backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-5">
               <BrandMark name="PVR INOX Cinemas" size="md" />
               <ScrollReveal variant="drop">
                 <p className="text-xs font-semibold tracking-[0.18em] uppercase text-[var(--accent-turquoise)]">
