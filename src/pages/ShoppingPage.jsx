@@ -1,20 +1,23 @@
-import { useState } from 'react';
-import { ShoppingBag } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { VideoBackdropSection } from '../components/VideoBackdropSection';
-import { BrandMark } from '../components/BrandMark';
-import { FullPageContainer, useFullPageScroll } from '../components/FullPageContainer';
+import { useState } from "react";
+import { ShoppingBag } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { VideoBackdropSection } from "../components/VideoBackdropSection";
+import { BrandMark } from "../components/BrandMark";
+import {
+  FullPageContainer,
+  useFullPageScroll,
+} from "../components/FullPageContainer";
 import {
   DepthEmergeSection,
   Interactive3DTilt,
-  ParallaxDepth
-} from '../animations/MotionPrimitives';
-import { ScrollReveal } from '../animations/ScrollReveal';
-import { VIDEO_ASSETS, IMAGE_ASSETS } from '../assets/mediaRegistry';
-import { FLOOR_LEVELS } from '../utils/mallData';
+  ParallaxDepth,
+} from "../animations/MotionPrimitives";
+import { ScrollReveal } from "../animations/ScrollReveal";
+import { VIDEO_ASSETS, IMAGE_ASSETS } from "../assets/mediaRegistry";
+import { FLOOR_LEVELS } from "../utils/mallData";
 
 const RETAIL_FLOORS = FLOOR_LEVELS.filter((f) =>
-  ['ground', 'first', 'second'].includes(f.id)
+  ["ground", "first", "second"].includes(f.id),
 );
 
 function ShoppingHeroScene() {
@@ -39,24 +42,50 @@ function ShoppingHeroScene() {
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
               className="font-display font-semibold leading-[0.95] text-white drop-shadow-lg"
-              style={{ fontSize: 'clamp(2.5rem, 5.4vw, 5.2rem)' }}
+              style={{ fontSize: "clamp(2.5rem, 5.4vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
           <p className="text-sm md:text-base text-white/90 max-w-lg leading-relaxed">
-            Explore tailored menswear, iconic denim culture, festive ethnic couture, active footwear, and Galaxy flagship electronics across Ground, First &amp; Second Floors.
+            Explore tailored menswear, iconic denim culture, festive ethnic
+            couture, active footwear, and Galaxy flagship electronics across
+            Ground, First &amp; Second Floors.
           </p>
 
           {/* Floor Navigation Bar */}
           <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
             {[
-              { id: 'all', label: 'All Levels', targetIndex: 1, color: 'var(--accent-coral)' },
-              { id: 'ground', label: 'Ground (9)', targetIndex: 1, color: '#D64E34' },
-              { id: 'first', label: 'First (7)', targetIndex: 2, color: '#0C8A7B' },
-              { id: 'second', label: 'Second (6)', targetIndex: 3, color: '#6C3EB8' }
+              {
+                id: "all",
+                label: "All Levels",
+                targetIndex: 1,
+                color: "var(--accent-coral)",
+              },
+              {
+                id: "ground",
+                label: "Ground (9)",
+                targetIndex: 1,
+                color: "#D64E34",
+              },
+              {
+                id: "first",
+                label: "First (7)",
+                targetIndex: 2,
+                color: "#0C8A7B",
+              },
+              {
+                id: "second",
+                label: "Second (6)",
+                targetIndex: 3,
+                color: "#6C3EB8",
+              },
             ].map((tab, idx) => (
-              <ScrollReveal key={tab.id} variant="pop" delay={0.08 + idx * 0.04}>
+              <ScrollReveal
+                key={tab.id}
+                variant="pop"
+                delay={0.08 + idx * 0.04}
+              >
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
@@ -87,7 +116,10 @@ function ShoppingHeroScene() {
               </ScrollReveal>
             </Interactive3DTilt>
           </ParallaxDepth>
-          <ParallaxDepth offset={32} className="absolute left-0 bottom-0 w-[48%] z-20">
+          <ParallaxDepth
+            offset={32}
+            className="absolute left-0 bottom-0 w-[48%] z-20"
+          >
             <ScrollReveal variant="slideLeft" delay={0.14}>
               <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29]">
                 <img
@@ -108,15 +140,21 @@ function ShoppingHeroScene() {
 }
 
 export function ShoppingPage() {
-  const [activeGroundBrand, setActiveGroundBrand] = useState(RETAIL_FLOORS[0].brands[0]);
-  const [activeFirstBrand, setActiveFirstBrand] = useState(RETAIL_FLOORS[1].brands[0]);
-  const [activeSecondBrand, setActiveSecondBrand] = useState(RETAIL_FLOORS[2].brands[0]);
+  const [activeGroundBrand, setActiveGroundBrand] = useState(
+    RETAIL_FLOORS[0].brands[0],
+  );
+  const [activeFirstBrand, setActiveFirstBrand] = useState(
+    RETAIL_FLOORS[1].brands[0],
+  );
+  const [activeSecondBrand, setActiveSecondBrand] = useState(
+    RETAIL_FLOORS[2].brands[0],
+  );
 
   const sectionLabels = [
-    '01 · Curated Lookbook',
-    '02 · Level 00 Flagships',
-    '03 · Level 01 Denim & Active',
-    '04 · Level 02 Couture & Kids'
+    "01 · Curated Lookbook",
+    "02 · Level 00 Flagships",
+    "03 · Level 01 Denim & Active",
+    "04 · Level 02 Couture & Kids",
   ];
 
   return (
@@ -148,7 +186,8 @@ export function ShoppingPage() {
                       </h2>
                     </ScrollReveal>
                     <p className="text-xs text-[var(--text-secondary)] mt-1.5">
-                      9 flagship apparel, footwear &amp; Galaxy electronics boutiques along the main atrium.
+                      9 flagship apparel, footwear &amp; Galaxy electronics
+                      boutiques along the main atrium.
                     </p>
                   </div>
 
@@ -156,14 +195,18 @@ export function ShoppingPage() {
                     {RETAIL_FLOORS[0].brands.map((brand, idx) => {
                       const selected = activeGroundBrand.name === brand.name;
                       return (
-                        <ScrollReveal key={brand.name} variant="pop" delay={idx * 0.03}>
+                        <ScrollReveal
+                          key={brand.name}
+                          variant="pop"
+                          delay={idx * 0.03}
+                        >
                           <button
                             type="button"
                             onClick={() => setActiveGroundBrand(brand)}
                             className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
                               selected
-                                ? 'border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md'
-                                : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
+                                ? "border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
+                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
                             }`}
                           >
                             <BrandMark name={brand.name} size="sm" />
@@ -209,7 +252,8 @@ export function ShoppingPage() {
                               {activeGroundBrand.name}
                             </h3>
                             <p className="text-xs text-[var(--text-secondary)] mt-1">
-                              {activeGroundBrand.category} · {activeGroundBrand.highlight}
+                              {activeGroundBrand.category} ·{" "}
+                              {activeGroundBrand.highlight}
                             </p>
                           </div>
                         </div>
@@ -264,7 +308,8 @@ export function ShoppingPage() {
                               {activeFirstBrand.name}
                             </h3>
                             <p className="text-xs text-[var(--text-secondary)] mt-1">
-                              {activeFirstBrand.category} · {activeFirstBrand.highlight}
+                              {activeFirstBrand.category} ·{" "}
+                              {activeFirstBrand.highlight}
                             </p>
                           </div>
                         </div>
@@ -274,7 +319,10 @@ export function ShoppingPage() {
                 </Interactive3DTilt>
               </div>
 
-              <ScrollReveal variant="slideLeft" className="lg:col-span-5 order-1 lg:order-2">
+              <ScrollReveal
+                variant="slideLeft"
+                className="lg:col-span-5 order-1 lg:order-2"
+              >
                 <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
@@ -288,7 +336,8 @@ export function ShoppingPage() {
                       </h2>
                     </ScrollReveal>
                     <p className="text-xs text-[var(--text-secondary)] mt-1.5">
-                      7 streetwear, smart-formal &amp; athletic footwear destinations along the upper promenade.
+                      7 streetwear, smart-formal &amp; athletic footwear
+                      destinations along the upper promenade.
                     </p>
                   </div>
 
@@ -296,14 +345,18 @@ export function ShoppingPage() {
                     {RETAIL_FLOORS[1].brands.map((brand, idx) => {
                       const selected = activeFirstBrand.name === brand.name;
                       return (
-                        <ScrollReveal key={brand.name} variant="pop" delay={idx * 0.03}>
+                        <ScrollReveal
+                          key={brand.name}
+                          variant="pop"
+                          delay={idx * 0.03}
+                        >
                           <button
                             type="button"
                             onClick={() => setActiveFirstBrand(brand)}
                             className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
                               selected
-                                ? 'border-[var(--accent-turquoise)] bg-[var(--bg-tint-mint)] dark:bg-[var(--bg-tint-sky)] scale-[1.03] shadow-md'
-                                : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
+                                ? "border-[var(--accent-turquoise)] bg-[var(--bg-tint-mint)] dark:bg-[var(--bg-tint-sky)] scale-[1.03] shadow-md"
+                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
                             }`}
                           >
                             <BrandMark name={brand.name} size="sm" />
@@ -346,7 +399,8 @@ export function ShoppingPage() {
                       </h2>
                     </ScrollReveal>
                     <p className="text-xs text-[var(--text-secondary)] mt-1.5">
-                      6 festive Indian ethnic, executive womenswear, handbag &amp; kidswear boutiques.
+                      6 festive Indian ethnic, executive womenswear, handbag
+                      &amp; kidswear boutiques.
                     </p>
                   </div>
 
@@ -354,14 +408,18 @@ export function ShoppingPage() {
                     {RETAIL_FLOORS[2].brands.map((brand, idx) => {
                       const selected = activeSecondBrand.name === brand.name;
                       return (
-                        <ScrollReveal key={brand.name} variant="pop" delay={idx * 0.03}>
+                        <ScrollReveal
+                          key={brand.name}
+                          variant="pop"
+                          delay={idx * 0.03}
+                        >
                           <button
                             type="button"
                             onClick={() => setActiveSecondBrand(brand)}
                             className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
                               selected
-                                ? 'border-[var(--accent-plum)] bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md'
-                                : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
+                                ? "border-[var(--accent-plum)] bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
+                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
                             }`}
                           >
                             <BrandMark name={brand.name} size="sm" />
@@ -407,7 +465,8 @@ export function ShoppingPage() {
                               {activeSecondBrand.name}
                             </h3>
                             <p className="text-xs text-[var(--text-secondary)] mt-1">
-                              {activeSecondBrand.category} · {activeSecondBrand.highlight}
+                              {activeSecondBrand.category} ·{" "}
+                              {activeSecondBrand.highlight}
                             </p>
                           </div>
                         </div>
