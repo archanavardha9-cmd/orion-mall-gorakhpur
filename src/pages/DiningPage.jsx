@@ -41,6 +41,9 @@ const DINING_DESTINATIONS = [
   }
 ];
 
+// KFC is the permanent brand displayed in the section immediately below the hero.
+const HERO_KFC = DINING_DESTINATIONS[0];
+
 const BURGER_KING_SHOWCASE = [
   {
     id: 'whopper',
@@ -131,7 +134,6 @@ function DominosLockup() {
 }
 
 export function DiningPage() {
-  const [selectedOutlet, setSelectedOutlet] = useState(DINING_DESTINATIONS[0]);
   const [activeBkView, setActiveBkView] = useState(BURGER_KING_SHOWCASE[0]);
   const [activeDominoHighlight, setActiveDominoHighlight] = useState(DOMINOS_HIGHLIGHTS[0]);
 
@@ -181,23 +183,13 @@ export function DiningPage() {
           <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
-                <button
-                  type="button"
-                  onClick={() => setSelectedOutlet(item)}
-                  className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
-                    selectedOutlet.name === item.name
-                      ? 'text-white shadow-md'
-                      : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
-                  }`}
-                  style={
-                    selectedOutlet.name === item.name
-                      ? { backgroundColor: item.accent }
-                      : undefined
-                  }
+                <div
+                  className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold text-white shadow-md"
+                  style={{ backgroundColor: item.accent }}
                 >
                   <BrandMark name={item.name} size="sm" />
                   <span>{item.name}</span>
-                </button>
+                </div>
               </ScrollReveal>
             ))}
           </div>
@@ -213,61 +205,52 @@ export function DiningPage() {
       >
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <DepthEmergeSection>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedOutlet.name}
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center"
-              >
-                <div className="lg:col-span-7 relative order-2 lg:order-1">
-                  <ParallaxDepth offset={24}>
-                    <Interactive3DTilt intensity={5}>
-                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a150f]">
-                        <img
-                          src={BRAND_IMAGES[selectedOutlet.name] || selectedOutlet.insetImg}
-                          alt={`${selectedOutlet.name} signature culinary spread`}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </Interactive3DTilt>
-                  </ParallaxDepth>
-                </div>
-
-                <div className="lg:col-span-5 order-1 lg:order-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-4 sm:space-y-5">
-                  <ScrollReveal variant="pop">
-                    <BrandMark name={selectedOutlet.name} size="lg" />
-                  </ScrollReveal>
-                  <ScrollReveal variant="slideLeft" delay={0.04}>
-                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
-                      {selectedOutlet.name}
-                    </h2>
-                  </ScrollReveal>
-                  <ScrollReveal variant="rise" delay={0.08}>
-                    <p
-                      className="text-sm sm:text-base font-semibold"
-                      style={{ color: selectedOutlet.accent }}
-                    >
-                      {selectedOutlet.specialty}
-                    </p>
-                  </ScrollReveal>
-                  <ScrollReveal variant="rise" delay={0.12}>
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-                      {selectedOutlet.signature}
-                    </p>
-                  </ScrollReveal>
-                  <ScrollReveal variant="rise" delay={0.16}>
-                    <div className="flex items-center gap-2 text-xs font-mono-tabular text-[var(--text-muted)] pt-3 border-t border-[var(--border-hairline)]">
-                      <Clock className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
-                      <span>{MALL_INFO.hours.dining} · Third Floor</span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+              <div className="lg:col-span-7 relative order-2 lg:order-1">
+                <ParallaxDepth offset={24}>
+                  <Interactive3DTilt intensity={5}>
+                    <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a150f]">
+                      <img
+                        src={BRAND_IMAGES['KFC'] || HERO_KFC.insetImg}
+                        alt="KFC signature crispy chicken culinary spread"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                  </ScrollReveal>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                  </Interactive3DTilt>
+                </ParallaxDepth>
+              </div>
+
+              <div className="lg:col-span-5 order-1 lg:order-2 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-4 sm:space-y-5">
+                <ScrollReveal variant="pop">
+                  <BrandMark name="KFC" size="lg" />
+                </ScrollReveal>
+                <ScrollReveal variant="slideLeft" delay={0.04}>
+                  <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)]">
+                    KFC
+                  </h2>
+                </ScrollReveal>
+                <ScrollReveal variant="rise" delay={0.08}>
+                  <p
+                    className="text-sm sm:text-base font-semibold"
+                    style={{ color: HERO_KFC.accent }}
+                  >
+                    {HERO_KFC.specialty}
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal variant="rise" delay={0.12}>
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+                    {HERO_KFC.signature}
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal variant="rise" delay={0.16}>
+                  <div className="flex items-center gap-2 text-xs font-mono-tabular text-[var(--text-muted)] pt-3 border-t border-[var(--border-hairline)]">
+                    <Clock className="w-3.5 h-3.5 text-[var(--accent-turquoise)]" />
+                    <span>{MALL_INFO.hours.dining} · Third Floor</span>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </div>
           </DepthEmergeSection>
         </div>
       </VideoBackdropSection>

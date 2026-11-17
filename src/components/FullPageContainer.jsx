@@ -140,8 +140,10 @@ export function FullPageContainer({
       return;
     }
 
-    // Target is a section
-    if (isAtFooterRef.current || window.scrollY > 20) {
+    // Target is a section — only reset scroll position when actually at the footer.
+    // The previous `window.scrollY > 20` check caused every upward swipe to jump
+    // the page back to top 0, producing a refresh-like behaviour.
+    if (isAtFooterRef.current) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setIsAtFooter(false);
       isAtFooterRef.current = false;
@@ -185,8 +187,10 @@ export function FullPageContainer({
     if (isTransitioningRef.current) return;
     emitScrollImpulse('up', delta);
 
-    // If at footer, transition smoothly back into the final section
-    if (isAtFooterRef.current || window.scrollY > 20) {
+    // Only return to the last section when actually positioned at the footer.
+    // Previously this also triggered on window.scrollY > 20, which caused every
+    // upward swipe to jump the page back to top 0 — a refresh-like behaviour.
+    if (isAtFooterRef.current) {
       scrollToLastSectionFromFooter();
       return;
     }
@@ -296,6 +300,37 @@ export function FullPageContainer({
       }
     };
 
+    // Prevent native page scrolling so our section transitions own the gesture,
+    // BUT allow native scrolling inside vertically scrollable content containers.
+    // Without this, the browser scrolls the document while touchend also fires,
+    // causing window.scrollY to spike and producing a "refresh"-like jump.
+    const handleTouchMove = (e) => {
+      if (isTransitioningRef.current) return;
+      if (e.target && e.target.closest && e.target.closest('.interactive-scroll-allow')) {
+        return;
+      }
+
+      // If the touch is inside a scrollable container, let the browser scroll it natively
+      // so slow swipes move through content before triggering a section transition.
+      const scrollableChild = e.target && e.target.closest
+        ? e.target.closest('.oversized-content-scroll')
+        : null;
+      if (scrollableChild) {
+        const touchY = e.touches && e.touches[0] ? e.touches[0].clientY : null;
+        if (touchY !== null) {
+          const canScrollDown = scrollableChild.scrollTop + scrollableChild.clientHeight < scrollableChild.scrollHeight - 6;
+          const canScrollUp = scrollableChild.scrollTop > 6;
+          // Determine swipe direction from the accumulated movement
+          const diffY = touchStartYRef.current - touchY;
+          if ((diffY > 0 && canScrollDown) || (diffY < 0 && canScrollUp)) {
+            return; // Allow native internal scroll
+          }
+        }
+      }
+
+      e.preventDefault();
+    };
+
     const handleTouchEnd = (e) => {
       if (isTransitioningRef.current) return;
       if (!e.changedTouches || !e.changedTouches[0]) return;
@@ -321,10 +356,12 @@ export function FullPageContainer({
     };
 
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [handleDown, handleUp]);
@@ -405,7 +442,7 @@ export function FullPageContainer({
           height: containerHeight ? `${containerHeight}px` : 'calc(100svh - 4rem)',
           minHeight: '480px'
         }}
-        className="relative w-full overflow-hidden select-none bg-[var(--bg-canvas)]"
+        className="relative w-full overflow-hidden select-none bg-[var(--bg-canvas)] touch-none overscroll-none"
       >
         {/* Cinematic Scene Stage */}
         <AnimatePresence custom={direction} initial={false} mode="popLayout">
