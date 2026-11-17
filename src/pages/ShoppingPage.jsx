@@ -53,8 +53,8 @@ function ShoppingHeroScene() {
             Ground, First &amp; Second Floors.
           </p>
 
-          {/* Floor Navigation Bar */}
-          <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
+          {/* Floor Navigation Bar - hidden on mobile (shown after images), visible on desktop in original position */}
+          <div className="hidden lg:inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
             {[
               {
                 id: "all",
@@ -133,6 +133,52 @@ function ShoppingHeroScene() {
               </div>
             </ScrollReveal>
           </ParallaxDepth>
+        </div>
+
+        {/* Floor Navigation Bar - visible on mobile only, placed after images per requested order */}
+        <div className="lg:hidden col-span-1 w-full flex justify-center pt-2">
+          <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
+            {[
+              {
+                id: "all",
+                label: "All Levels",
+                targetIndex: 1,
+                color: "var(--accent-coral)",
+              },
+              {
+                id: "ground",
+                label: "Ground (9)",
+                targetIndex: 1,
+                color: "#D64E34",
+              },
+              {
+                id: "first",
+                label: "First (7)",
+                targetIndex: 2,
+                color: "#0C8A7B",
+              },
+              {
+                id: "second",
+                label: "Second (6)",
+                targetIndex: 3,
+                color: "#6C3EB8",
+              },
+            ].map((tab, idx) => (
+              <ScrollReveal
+                key={tab.id}
+                variant="pop"
+                delay={0.08 + idx * 0.04}
+              >
+                <button
+                  type="button"
+                  onClick={() => goToSection(tab.targetIndex)}
+                  className="px-3.5 sm:px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
+                >
+                  {tab.label}
+                </button>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </VideoBackdropSection>

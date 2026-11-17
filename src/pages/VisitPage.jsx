@@ -34,8 +34,8 @@ export function VisitPage() {
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-white">
-          <div className="border-t border-white/35 pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-            <div className="lg:col-span-8 space-y-3">
+          <div className="border-t border-white/35 pt-6 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4">
               <ScrollReveal variant="drop">
                 <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
                   <MapPin className="w-4 h-4" />
@@ -44,20 +44,20 @@ export function VisitPage() {
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.05}>
                 <h1
-                  className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
-                  style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
+                  className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
+                  style={{ fontSize: 'clamp(2.8rem, 6.5vw, 5.8rem)' }}
                 >
                   Visit Orion Mall
                 </h1>
               </ScrollReveal>
-            </div>
-
-            <div className="lg:col-span-4 lg:justify-self-end space-y-4">
-              <ScrollReveal variant="slideLeft" delay={0.08}>
-                <p className="text-sm text-white/95 leading-relaxed">
+              <ScrollReveal variant="rise" delay={0.1}>
+                <p className="text-sm md:text-base text-white/95 max-w-2xl leading-relaxed pt-1">
                   {MALL_INFO.locality}
                 </p>
               </ScrollReveal>
+            </div>
+
+            <div className="lg:col-span-4 lg:justify-self-end">
               <ScrollReveal variant="pop" delay={0.12}>
                 <a
                   href={googleMapsUrl}

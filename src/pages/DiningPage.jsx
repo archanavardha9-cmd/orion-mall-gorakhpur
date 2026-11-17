@@ -150,14 +150,14 @@ export function DiningPage() {
         scrim="heroPrism"
         isHero
         minHeight="min-h-[calc(100svh-4rem)]"
-        className="flex flex-col justify-between py-8 md:py-16"
+        className="flex flex-col justify-center py-12 md:py-20"
       >
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75 }}
-            className="max-w-3xl space-y-4 text-white"
+            className="max-w-4xl space-y-6 text-white"
           >
             <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
@@ -165,26 +165,26 @@ export function DiningPage() {
             </ScrollReveal>
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
-                className="font-display font-semibold leading-[0.94] text-white drop-shadow-lg"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
+                className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
+                style={{ fontSize: 'clamp(2.8rem, 6.5vw, 5.8rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
-            <p className="text-sm md:text-base text-white/90 max-w-xl leading-relaxed">
+            <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed pt-2">
               Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
             </p>
           </motion.div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-12">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-10 md:pt-16">
           <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
                 <button
                   type="button"
                   onClick={() => setSelectedOutlet(item)}
-                  className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
+                  className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all cursor-pointer ${
                     selectedOutlet.name === item.name
                       ? 'text-white shadow-md'
                       : 'text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'

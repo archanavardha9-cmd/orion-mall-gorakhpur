@@ -12,7 +12,6 @@ import { useRouter } from "../utils/router";
 const HERO_FEATURED_LOGOS = [
   "MAX Fashion",
   "Levi's",
-  "Allen Solly",
   "KFC",
   "PVR INOX Cinemas",
 ];
