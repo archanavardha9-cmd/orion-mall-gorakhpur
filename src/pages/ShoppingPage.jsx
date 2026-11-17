@@ -31,8 +31,8 @@ function ShoppingHeroScene() {
       minHeight="min-h-[calc(100svh-4rem)]"
       className="flex items-center py-8 md:py-16"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-12 items-center">
-        <div className="lg:col-span-6 space-y-5 text-white">
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-7 items-center">
+        <div className="lg:col-span-6 space-y-3 lg:space-y-5 text-white">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <ShoppingBag className="w-4 h-4" />
@@ -42,12 +42,12 @@ function ShoppingHeroScene() {
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
               className="font-display font-semibold leading-[0.95] text-white drop-shadow-lg"
-              style={{ fontSize: "clamp(2.5rem, 5.4vw, 5.2rem)" }}
+              style={{ fontSize: "clamp(2rem, 5vw, 3.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
-          <p className="text-sm md:text-base text-white/90 max-w-lg leading-relaxed">
+          <p className="text-sm text-white/90 max-w-lg leading-relaxed">
             Explore tailored menswear, iconic denim culture, festive ethnic
             couture, active footwear, and Galaxy flagship electronics across
             Ground, First &amp; Second Floors.
@@ -99,11 +99,11 @@ function ShoppingHeroScene() {
         </div>
 
         {/* Layered Overlapping Storefront Imagery */}
-        <div className="lg:col-span-6 relative min-h-[230px] sm:min-h-[380px] flex items-center pr-0 sm:pr-4">
-          <ParallaxDepth offset={-26} className="w-[82%] sm:w-[78%] ml-auto">
+<div className="lg:col-span-6 relative min-h-[180px] sm:min-h-[260px] flex items-center pr-0 sm:pr-4">
+          <ParallaxDepth offset={-26} className="w-[78%] sm:w-[78%] ml-auto">
             <Interactive3DTilt intensity={5}>
               <ScrollReveal variant="scaleDepth" delay={0.08}>
-                <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530]">
+                <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530] max-h-[220px] sm:max-h-[280px] lg:max-h-none">
                   <img
                     src={IMAGE_ASSETS.brandLavie}
                     alt="Second Floor luxury handbags showcase inside Orion Mall"
@@ -121,7 +121,7 @@ function ShoppingHeroScene() {
             className="absolute left-0 bottom-0 w-[48%] z-20"
           >
             <ScrollReveal variant="slideLeft" delay={0.14}>
-              <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29]">
+              <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29] max-h-[160px] sm:max-h-[200px] lg:max-h-none">
                 <img
                   src={IMAGE_ASSETS.brandSamsung}
                   alt="Ground Floor Samsung flagship electronics showroom"
@@ -136,7 +136,7 @@ function ShoppingHeroScene() {
         </div>
 
         {/* Floor Navigation Bar - visible on mobile only, placed after images per requested order */}
-        <div className="lg:hidden col-span-1 w-full flex justify-center pt-2">
+        <div className="lg:hidden col-span-1 w-full flex justify-center pt-1.5">
           <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
             {[
               {
