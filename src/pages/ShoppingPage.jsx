@@ -221,9 +221,9 @@ function ShoppingHeroScene() {
       className="flex items-center py-8 md:py-16"
     >
       {/* ── Tablet & Desktop layout ── */}
-      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 md:gap-8 lg:gap-12 items-center">
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5 md:gap-8 lg:gap-12 items-center">
         {/* Text column */}
-        <div className="md:col-span-1 lg:col-span-6 space-y-4 md:space-y-5 lg:space-y-5 text-white">
+        <div className="md:col-span-1 lg:col-span-6 space-y-2.5 sm:space-y-4 md:space-y-5 lg:space-y-5 text-white">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <ShoppingBag className="w-4 h-4" />
@@ -233,14 +233,14 @@ function ShoppingHeroScene() {
 
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.95] text-white drop-shadow-lg"
+              className="font-display font-semibold leading-[0.95] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
               style={{ fontSize: "clamp(2.2rem, 4.8vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
 
-          <p className="text-sm md:text-base text-white/90 max-w-lg leading-relaxed">
+          <p className="text-sm md:text-base text-[#f7f3ec] max-w-lg leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
             Explore tailored menswear, iconic denim culture, festive ethnic
             couture, active footwear, and Galaxy flagship electronics across
             Ground, First &amp; Second Floors.
@@ -267,7 +267,7 @@ function ShoppingHeroScene() {
         </div>
 
         {/* Image column – tablet gets larger proportions */}
-        <div className="md:col-span-1 lg:col-span-6 relative min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] flex items-center pr-0 sm:pr-4">
+        <div className="md:col-span-1 lg:col-span-6 relative min-h-[160px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] flex items-center pr-0 sm:pr-4">
           <ParallaxDepth offset={-26} className="w-[80%] sm:w-[78%] ml-auto">
             <Interactive3DTilt intensity={5}>
               <ScrollReveal variant="scaleDepth" delay={0.08}>

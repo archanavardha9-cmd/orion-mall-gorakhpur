@@ -167,13 +167,13 @@ export function DiningPage() {
             </ScrollReveal>
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
-                className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
+                className="font-display font-semibold leading-[0.92] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
                 style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
-            <p className="text-sm md:text-lg text-white/90 max-w-2xl leading-relaxed">
+            <p className="text-sm md:text-lg text-[#f7f3ec] max-w-2xl leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
               Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
             </p>
           </motion.div>
@@ -181,7 +181,7 @@ export function DiningPage() {
 
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-14">
           {/* Mobile View: Clean single row of 3 restaurant logos with no background containers or text */}
-          <div className="sm:hidden flex items-center justify-center gap-8 py-2">
+          <div className="sm:hidden flex items-center justify-center gap-6 py-2">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
                 <div className="flex items-center justify-center">
@@ -189,7 +189,7 @@ export function DiningPage() {
                     name={item.name}
                     size="md"
                     raw={true}
-                    className="max-h-9 sm:max-h-10 w-auto object-contain filter drop-shadow-md"
+                    className="h-8 max-h-9 w-auto object-contain filter drop-shadow-md shrink-0"
                   />
                 </div>
               </ScrollReveal>

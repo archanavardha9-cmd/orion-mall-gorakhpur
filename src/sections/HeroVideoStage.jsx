@@ -11,8 +11,8 @@ import { useRouter } from "../utils/router";
 
 const HERO_FEATURED_LOGOS = [
   "MAX Fashion",
-  "Levi's",
   "KFC",
+  "Levi's",
   "PVR INOX Cinemas",
 ];
 
@@ -87,18 +87,18 @@ export function HeroVideoStage() {
           <div className="lg:col-span-7 text-white space-y-4">
             <ScrollReveal variant="rise" delay={0.04}>
               <h1
-                className="font-display font-semibold leading-[0.94] tracking-tight text-white drop-shadow-lg"
+                className="font-display font-semibold leading-[0.94] tracking-tight text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
                 style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.6rem)" }}
               >
                 Orion Mall
-                <span className="block italic font-medium text-amber-200 mt-0.5">
+                <span className="block italic font-medium text-amber-300 drop-shadow-[0_2px_8px_rgba(10,6,22,0.85)] mt-0.5">
                   Gorakhpur
                 </span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal variant="rise" delay={0.08}>
-              <p className="text-xs sm:text-sm md:text-base text-white/95 max-w-xl leading-relaxed drop-shadow-sm">
+              <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-xl leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
                 Step inside Mohaddipur&apos;s sunlit five-level destination —
                 uniting flagship apparel, denim culture, festive couture, Third
                 Floor culinary favourites, and PVR INOX Cinemas.
@@ -161,25 +161,27 @@ export function HeroVideoStage() {
               </div>
             </div>
 
-            {/* Featured Brand Strip - Mobile: Clean 2x2 Grid, No Box Containers, No Written Names */}
+            {/* Featured Brand Strip - Mobile: Clean 2x2 Grid with Elegant Box Containers, No Written Names */}
             <div className="pt-3 border-t border-white/20 sm:hidden">
               <span className="block text-[11px] font-mono-tabular uppercase tracking-wider text-white/70 mb-2.5 text-center">
-                Anchor Outlets:
+                Anchor Outlets
               </span>
-              <div className="grid grid-cols-2 gap-3 items-center justify-items-center">
+              <div className="grid grid-cols-2 gap-2.5 items-center justify-items-center">
                 {HERO_FEATURED_LOGOS.map((name, i) => (
                   <ScrollReveal
                     key={name}
                     variant="pop"
                     delay={0.15 + i * 0.03}
-                    className="w-full flex items-center justify-center p-1"
+                    className="w-full"
                   >
-                    <BrandMark
-                      name={name}
-                      size="md"
-                      raw={true}
-                      className="max-h-7 max-w-[120px] w-auto object-contain brightness-105"
-                    />
+                    <div className="w-full h-12 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 shadow-sm flex items-center justify-center px-4 py-2">
+                      <BrandMark
+                        name={name}
+                        size="md"
+                        raw={true}
+                        className="max-h-7 max-w-[105px] w-auto object-contain filter drop-shadow-sm brightness-105"
+                      />
+                    </div>
                   </ScrollReveal>
                 ))}
               </div>

@@ -149,6 +149,18 @@ const BRAND_LOGOS = {
     backdrop: 'light',
     padding: 'p-1.5'
   },
+  "Domino's": {
+    src: '/images/logos/dominos.svg',
+    alt: "Domino's Pizza official logo",
+    backdrop: 'light',
+    padding: 'p-1.5'
+  },
+  Dominos: {
+    src: '/images/logos/dominos.svg',
+    alt: "Domino's Pizza official logo",
+    backdrop: 'light',
+    padding: 'p-1.5'
+  },
   'PVR INOX Cinemas': {
     src: '/images/logos/pvr_inox.webp',
     alt: 'PVR INOX Cinemas official logo',

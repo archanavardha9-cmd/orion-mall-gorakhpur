@@ -44,14 +44,14 @@ export function VisitPage() {
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.05}>
                 <h1
-                  className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
+                  className="font-display font-semibold leading-[0.92] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
                   style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
                 >
                   Visit Orion Mall
                 </h1>
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.1}>
-                <p className="text-sm md:text-base text-white/95 max-w-2xl leading-relaxed">
+                <p className="text-sm md:text-base text-[#f7f3ec] max-w-2xl leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
                   {MALL_INFO.locality}
                 </p>
               </ScrollReveal>
