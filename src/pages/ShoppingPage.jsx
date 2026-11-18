@@ -24,7 +24,14 @@ const RETAIL_FLOORS = FLOOR_LEVELS.filter((f) =>
 const MOBILE_BRAND_PREVIEW = 4;
 
 // ─── Brand Modal (mobile only) ────────────────────────────────────────────────
-function BrandModal({ brands, activeBrand, onSelect, onClose, accentColor, floorLabel }) {
+function BrandModal({
+  brands,
+  activeBrand,
+  onSelect,
+  onClose,
+  accentColor,
+  floorLabel,
+}) {
   return (
     <AnimatePresence>
       <motion.div
@@ -106,7 +113,10 @@ function BrandModal({ brands, activeBrand, onSelect, onClose, accentColor, floor
           </div>
 
           {/* Bottom safe area padding */}
-          <div className="pb-safe shrink-0" style={{ paddingBottom: "env(safe-area-inset-bottom, 12px)" }} />
+          <div
+            className="pb-safe shrink-0"
+            style={{ paddingBottom: "env(safe-area-inset-bottom, 12px)" }}
+          />
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -114,7 +124,14 @@ function BrandModal({ brands, activeBrand, onSelect, onClose, accentColor, floor
 }
 
 // ─── Floor Brand List with View More (mobile-aware) ───────────────────────────
-function FloorBrandList({ brands, activeBrand, onSelect, accentColor, floorLabel, selectedClass }) {
+function FloorBrandList({
+  brands,
+  activeBrand,
+  onSelect,
+  accentColor,
+  floorLabel,
+  selectedClass,
+}) {
   const [modalOpen, setModalOpen] = useState(false);
   const preview = brands.slice(0, MOBILE_BRAND_PREVIEW);
 
@@ -136,7 +153,9 @@ function FloorBrandList({ brands, activeBrand, onSelect, accentColor, floorLabel
                 type="button"
                 onClick={() => onSelect(brand)}
                 className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
-                  selected ? selectedClass : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
+                  selected
+                    ? selectedClass
+                    : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
                 }`}
               >
                 <BrandMark name={brand.name} size="sm" />
@@ -182,10 +201,15 @@ function ShoppingHeroScene() {
   const { goToSection } = useFullPageScroll();
 
   const floorTabs = [
-    { id: "all",    label: "All Levels",   targetIndex: 1, color: "var(--accent-coral)" },
-    { id: "ground", label: "Ground (9)",   targetIndex: 1, color: "#D64E34" },
-    { id: "first",  label: "First (7)",    targetIndex: 2, color: "#0C8A7B" },
-    { id: "second", label: "Second (6)",   targetIndex: 3, color: "#6C3EB8" },
+    {
+      id: "all",
+      label: "All Levels",
+      targetIndex: 1,
+      color: "var(--accent-coral)",
+    },
+    { id: "ground", label: "Ground (9)", targetIndex: 1, color: "#D64E34" },
+    { id: "first", label: "First (7)", targetIndex: 2, color: "#0C8A7B" },
+    { id: "second", label: "Second (6)", targetIndex: 3, color: "#6C3EB8" },
   ];
 
   return (
@@ -198,7 +222,6 @@ function ShoppingHeroScene() {
     >
       {/* ── Tablet & Desktop layout ── */}
       <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 md:gap-8 lg:gap-12 items-center">
-
         {/* Text column */}
         <div className="md:col-span-1 lg:col-span-6 space-y-4 md:space-y-5 lg:space-y-5 text-white">
           <ScrollReveal variant="drop">
@@ -226,7 +249,11 @@ function ShoppingHeroScene() {
           {/* Floor nav – visible on md+ in left column, hidden on mobile (shown below images) */}
           <div className="hidden md:inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
             {floorTabs.map((tab, idx) => (
-              <ScrollReveal key={tab.id} variant="pop" delay={0.08 + idx * 0.04}>
+              <ScrollReveal
+                key={tab.id}
+                variant="pop"
+                delay={0.08 + idx * 0.04}
+              >
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
@@ -259,7 +286,10 @@ function ShoppingHeroScene() {
             </Interactive3DTilt>
           </ParallaxDepth>
 
-          <ParallaxDepth offset={32} className="absolute left-0 bottom-0 w-[46%] z-20">
+          <ParallaxDepth
+            offset={32}
+            className="absolute left-0 bottom-0 w-[46%] z-20"
+          >
             <ScrollReveal variant="slideLeft" delay={0.14}>
               <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29]">
                 <img
@@ -279,7 +309,11 @@ function ShoppingHeroScene() {
         <div className="md:hidden col-span-1 w-full flex justify-center pt-1">
           <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
             {floorTabs.map((tab, idx) => (
-              <ScrollReveal key={tab.id} variant="pop" delay={0.08 + idx * 0.04}>
+              <ScrollReveal
+                key={tab.id}
+                variant="pop"
+                delay={0.08 + idx * 0.04}
+              >
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
@@ -298,9 +332,15 @@ function ShoppingHeroScene() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export function ShoppingPage() {
-  const [activeGroundBrand, setActiveGroundBrand] = useState(RETAIL_FLOORS[0].brands[0]);
-  const [activeFirstBrand,  setActiveFirstBrand]  = useState(RETAIL_FLOORS[1].brands[0]);
-  const [activeSecondBrand, setActiveSecondBrand] = useState(RETAIL_FLOORS[2].brands[0]);
+  const [activeGroundBrand, setActiveGroundBrand] = useState(
+    RETAIL_FLOORS[0].brands[0],
+  );
+  const [activeFirstBrand, setActiveFirstBrand] = useState(
+    RETAIL_FLOORS[1].brands[0],
+  );
+  const [activeSecondBrand, setActiveSecondBrand] = useState(
+    RETAIL_FLOORS[2].brands[0],
+  );
 
   const sectionLabels = [
     "01 · Curated Lookbook",
@@ -452,7 +492,10 @@ export function ShoppingPage() {
                 </Interactive3DTilt>
               </div>
 
-              <ScrollReveal variant="slideLeft" className="lg:col-span-5 order-1 lg:order-2">
+              <ScrollReveal
+                variant="slideLeft"
+                className="lg:col-span-5 order-1 lg:order-2"
+              >
                 <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
