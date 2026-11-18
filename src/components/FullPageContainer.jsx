@@ -1,5 +1,12 @@
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 const FullPageScrollContext = createContext({
   activeSection: 0,
@@ -9,7 +16,7 @@ const FullPageScrollContext = createContext({
   nextSection: () => {},
   prevSection: () => {},
   scrollToFooter: () => {},
-  scrollToLastSectionFromFooter: () => {}
+  scrollToLastSectionFromFooter: () => {},
 });
 
 export function useFullPageScroll() {
@@ -19,7 +26,7 @@ export function useFullPageScroll() {
 /**
  * FullPageContainer
  * A unified, controlled full-screen vertical scene manager.
- * 
+ *
  * Key behaviours:
  * - Displays one complete main section at a time with smooth vertical transitions.
  * - All visual scrollbars are hidden (cross-browser); scrolling remains 100% active.
@@ -31,10 +38,12 @@ export function useFullPageScroll() {
  */
 export function FullPageContainer({
   children,
-  pageId = 'page',
-  sectionLabels = []
+  pageId = "page",
+  sectionLabels = [],
 }) {
-  const sections = Array.isArray(children) ? children.filter(Boolean) : [children];
+  const sections = Array.isArray(children)
+    ? children.filter(Boolean)
+    : [children];
   const totalSections = sections.length;
 
   const [activeSection, setActiveSection] = useState(0);
@@ -59,11 +68,11 @@ export function FullPageContainer({
 
   // Emit scroll impulse for video forward/reverse control
   const emitScrollImpulse = useCallback((dir, delta = 40) => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.dispatchEvent(
-        new CustomEvent('scroll-impulse', {
-          detail: { direction: dir, delta: Math.abs(delta) }
-        })
+        new CustomEvent("scroll-impulse", {
+          detail: { direction: dir, delta: Math.abs(delta) },
+        }),
       );
     }
   }, []);
@@ -81,8 +90,8 @@ export function FullPageContainer({
     };
 
     measureAvailableHeight();
-    window.addEventListener('resize', measureAvailableHeight);
-    return () => window.removeEventListener('resize', measureAvailableHeight);
+    window.addEventListener("resize", measureAvailableHeight);
+    return () => window.removeEventListener("resize", measureAvailableHeight);
   }, [pageId]);
 
   // Reset to first section and top: 0 on page change
@@ -99,15 +108,15 @@ export function FullPageContainer({
   // Smooth scroll to the Footer
   const scrollToFooter = useCallback(() => {
     if (isTransitioningRef.current) return;
-    const footer = document.querySelector('footer');
+    const footer = document.querySelector("footer");
     if (!footer) return;
 
     isTransitioningRef.current = true;
     setIsAtFooter(true);
     isAtFooterRef.current = true;
-    emitScrollImpulse('down', 60);
+    emitScrollImpulse("down", 60);
 
-    footer.scrollIntoView({ behavior: 'smooth' });
+    footer.scrollIntoView({ behavior: "smooth" });
 
     const cooldown = window.innerWidth < 640 ? 800 : 650;
     setTimeout(() => {
@@ -122,9 +131,9 @@ export function FullPageContainer({
     isTransitioningRef.current = true;
     setIsAtFooter(false);
     isAtFooterRef.current = false;
-    emitScrollImpulse('up', 60);
+    emitScrollImpulse("up", 60);
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     const cooldown = window.innerWidth < 640 ? 800 : 650;
     setTimeout(() => {
@@ -133,32 +142,33 @@ export function FullPageContainer({
   }, [emitScrollImpulse]);
 
   // Jump directly to a given section index (or to footer if targetIndex === totalSections)
-  const goToSection = useCallback((targetIndex) => {
-    if (targetIndex < 0 || targetIndex > totalSections) return;
-    if (isTransitioningRef.current) return;
+  const goToSection = useCallback(
+    (targetIndex) => {
+      if (targetIndex < 0 || targetIndex > totalSections) return;
+      if (isTransitioningRef.current) return;
 
-    // Target is the footer
-    if (targetIndex === totalSections) {
-      scrollToFooter();
-      return;
-    }
+      // Target is the footer
+      if (targetIndex === totalSections) {
+        scrollToFooter();
+        return;
+      }
 
-    // Target is a section — only reset scroll position when actually at the footer.
-    // The previous `window.scrollY > 20` check caused every upward swipe to jump
-    // the page back to top 0, producing a refresh-like behaviour.
-    if (isAtFooterRef.current) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setIsAtFooter(false);
-      isAtFooterRef.current = false;
-    }
+      // Target is a section — only reset scroll position when actually at the footer.
+      // The previous `window.scrollY > 20` check caused every upward swipe to jump
+      // the page back to top 0, producing a refresh-like behaviour.
+      if (isAtFooterRef.current) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setIsAtFooter(false);
+        isAtFooterRef.current = false;
+      }
 
-    if (targetIndex === activeSection) return;
+      if (targetIndex === activeSection) return;
 
-    isTransitioningRef.current = true;
-    const newDir = targetIndex > activeSection ? 1 : -1;
-    setDirection(newDir);
-    setActiveSection(targetIndex);
-    emitScrollImpulse(newDir > 0 ? 'down' : 'up', 50);
+      isTransitioningRef.current = true;
+      const newDir = targetIndex > activeSection ? 1 : -1;
+      setDirection(newDir);
+      setActiveSection(targetIndex);
+      emitScrollImpulse(newDir > 0 ? "down" : "up", 50);
 
     // Use a longer cooldown on mobile to prevent rapid successive swipes
     // from accidentally skipping through multiple sections.
@@ -169,43 +179,60 @@ export function FullPageContainer({
   }, [activeSection, totalSections, scrollToFooter, emitScrollImpulse]);
 
   // Downward gesture handler (Wheel down, Swipe up, ArrowDown, PageDown, Space)
-  const handleDown = useCallback((delta = 50) => {
-    if (isTransitioningRef.current) return;
-    emitScrollImpulse('down', delta);
+  const handleDown = useCallback(
+    (delta = 50) => {
+      if (isTransitioningRef.current) return;
+      emitScrollImpulse("down", delta);
 
-    // If already at footer, do nothing
-    if (isAtFooterRef.current) {
-      return;
-    }
+      // If already at footer, do nothing
+      if (isAtFooterRef.current) {
+        return;
+      }
 
-    // On the final section, move smoothly to the footer
-    if (activeSection === totalSections - 1) {
-      scrollToFooter();
-      return;
-    }
+      // On the final section, move smoothly to the footer
+      if (activeSection === totalSections - 1) {
+        scrollToFooter();
+        return;
+      }
 
-    // Otherwise, transition to next section
-    goToSection(activeSection + 1);
-  }, [activeSection, totalSections, goToSection, scrollToFooter, emitScrollImpulse]);
+      // Otherwise, transition to next section
+      goToSection(activeSection + 1);
+    },
+    [
+      activeSection,
+      totalSections,
+      goToSection,
+      scrollToFooter,
+      emitScrollImpulse,
+    ],
+  );
 
   // Upward gesture handler (Wheel up, Swipe down, ArrowUp, PageUp, Shift+Space)
-  const handleUp = useCallback((delta = 50) => {
-    if (isTransitioningRef.current) return;
-    emitScrollImpulse('up', delta);
+  const handleUp = useCallback(
+    (delta = 50) => {
+      if (isTransitioningRef.current) return;
+      emitScrollImpulse("up", delta);
 
-    // Only return to the last section when actually positioned at the footer.
-    // Previously this also triggered on window.scrollY > 20, which caused every
-    // upward swipe to jump the page back to top 0 — a refresh-like behaviour.
-    if (isAtFooterRef.current) {
-      scrollToLastSectionFromFooter();
-      return;
-    }
+      // Only return to the last section when actually positioned at the footer.
+      // Previously this also triggered on window.scrollY > 20, which caused every
+      // upward swipe to jump the page back to top 0 — a refresh-like behaviour.
+      if (isAtFooterRef.current) {
+        scrollToLastSectionFromFooter();
+        return;
+      }
 
-    // Otherwise, transition to previous section
-    if (activeSection > 0) {
-      goToSection(activeSection - 1);
-    }
-  }, [activeSection, goToSection, scrollToLastSectionFromFooter, emitScrollImpulse]);
+      // Otherwise, transition to previous section
+      if (activeSection > 0) {
+        goToSection(activeSection - 1);
+      }
+    },
+    [
+      activeSection,
+      goToSection,
+      scrollToLastSectionFromFooter,
+      emitScrollImpulse,
+    ],
+  );
 
   const nextSection = useCallback(() => {
     handleDown();
@@ -232,25 +259,33 @@ export function FullPageContainer({
       }
     };
 
-    window.addEventListener('scroll', handleWindowScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleWindowScroll);
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleWindowScroll);
   }, [activeSection, totalSections]);
 
   // Wheel Event Listener: intercept deliberate scroll gestures with threshold accumulation
   useEffect(() => {
     const handleWheel = (e) => {
       // Don't intercept if inside an interactive 3D canvas
-      if (e.target && e.target.closest && e.target.closest('.interactive-scroll-allow')) {
+      if (
+        e.target &&
+        e.target.closest &&
+        e.target.closest(".interactive-scroll-allow")
+      ) {
         return;
       }
 
       // Emit continuous scroll impulse for subtle real-time video scrub
-      emitScrollImpulse(e.deltaY > 0 ? 'down' : 'up', Math.abs(e.deltaY));
+      emitScrollImpulse(e.deltaY > 0 ? "down" : "up", Math.abs(e.deltaY));
 
       // Check if user is scrolling inside an oversized section container
-      const scrollableChild = e.target.closest ? e.target.closest('.oversized-content-scroll') : null;
+      const scrollableChild = e.target.closest
+        ? e.target.closest(".oversized-content-scroll")
+        : null;
       if (scrollableChild && !isAtFooterRef.current) {
-        const canScrollDown = scrollableChild.scrollTop + scrollableChild.clientHeight < scrollableChild.scrollHeight - 6;
+        const canScrollDown =
+          scrollableChild.scrollTop + scrollableChild.clientHeight <
+          scrollableChild.scrollHeight - 6;
         const canScrollUp = scrollableChild.scrollTop > 6;
         if ((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) {
           return; // Allow native internal scroll
@@ -259,7 +294,9 @@ export function FullPageContainer({
 
       // If at footer, allow natural scroll within tall footer on small screens
       if (isAtFooterRef.current) {
-        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+        const atBottom =
+          window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 8;
         if (e.deltaY > 0 && !atBottom) {
           return;
         }
@@ -290,9 +327,9 @@ export function FullPageContainer({
       }
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
-      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener("wheel", handleWheel);
       if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
     };
   }, [handleDown, handleUp, emitScrollImpulse]);
@@ -313,19 +350,26 @@ export function FullPageContainer({
     // causing window.scrollY to spike and producing a "refresh"-like jump.
     const handleTouchMove = (e) => {
       if (isTransitioningRef.current) return;
-      if (e.target && e.target.closest && e.target.closest('.interactive-scroll-allow')) {
+      if (
+        e.target &&
+        e.target.closest &&
+        e.target.closest(".interactive-scroll-allow")
+      ) {
         return;
       }
 
       // If the touch is inside a scrollable container, let the browser scroll it natively
       // so slow swipes move through content before triggering a section transition.
-      const scrollableChild = e.target && e.target.closest
-        ? e.target.closest('.oversized-content-scroll')
-        : null;
+      const scrollableChild =
+        e.target && e.target.closest
+          ? e.target.closest(".oversized-content-scroll")
+          : null;
       if (scrollableChild) {
         const touchY = e.touches && e.touches[0] ? e.touches[0].clientY : null;
         if (touchY !== null) {
-          const canScrollDown = scrollableChild.scrollTop + scrollableChild.clientHeight < scrollableChild.scrollHeight - 6;
+          const canScrollDown =
+            scrollableChild.scrollTop + scrollableChild.clientHeight <
+            scrollableChild.scrollHeight - 6;
           const canScrollUp = scrollableChild.scrollTop > 6;
           // Determine swipe direction from the accumulated movement
           const diffY = touchStartYRef.current - touchY;
@@ -373,65 +417,76 @@ export function FullPageContainer({
       }
     };
 
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [handleDown, handleUp]);
 
   // Keyboard Navigation: ArrowDown, ArrowUp, PageDown, PageUp, Space, Home, End
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) {
+      if (
+        e.target &&
+        ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)
+      ) {
         return;
       }
 
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) {
+      if (
+        e.key === "ArrowDown" ||
+        e.key === "PageDown" ||
+        (e.key === " " && !e.shiftKey)
+      ) {
         e.preventDefault();
         handleDown(50);
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) {
+      } else if (
+        e.key === "ArrowUp" ||
+        e.key === "PageUp" ||
+        (e.key === " " && e.shiftKey)
+      ) {
         e.preventDefault();
         handleUp(50);
-      } else if (e.key === 'Home') {
+      } else if (e.key === "Home") {
         e.preventDefault();
         goToSection(0);
-      } else if (e.key === 'End') {
+      } else if (e.key === "End") {
         e.preventDefault();
         scrollToFooter();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleDown, handleUp, goToSection, scrollToFooter]);
 
   // Strictly vertical transition variants (pure Y position + opacity, zero blur, zero scale)
   const sceneVariants = {
     initial: (dir) => ({
-      y: dir > 0 ? '100%' : '-100%',
-      opacity: 0.95
+      y: dir > 0 ? "100%" : "-100%",
+      opacity: 0.95,
     }),
     animate: {
-      y: '0%',
+      y: "0%",
       opacity: 1,
       transition: {
         duration: 0.55,
-        ease: [0.22, 1, 0.36, 1]
-      }
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
     exit: (dir) => ({
-      y: dir > 0 ? '-100%' : '100%',
+      y: dir > 0 ? "-100%" : "100%",
       opacity: 0.95,
       transition: {
         duration: 0.52,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    })
+        ease: [0.22, 1, 0.36, 1],
+      },
+    }),
   };
 
   // Compile complete dot list including every main section PLUS the Footer
@@ -439,7 +494,7 @@ export function FullPageContainer({
   while (allDotLabels.length < totalSections) {
     allDotLabels.push(`Scene 0${allDotLabels.length + 1}`);
   }
-  allDotLabels.push('Footer · Orion Mall');
+  allDotLabels.push("Footer · Orion Mall");
 
   return (
     <FullPageScrollContext.Provider
@@ -451,14 +506,16 @@ export function FullPageContainer({
         nextSection,
         prevSection,
         scrollToFooter,
-        scrollToLastSectionFromFooter
+        scrollToLastSectionFromFooter,
       }}
     >
       <div
         ref={containerRef}
         style={{
-          height: containerHeight ? `${containerHeight}px` : 'calc(100svh - 4rem)',
-          minHeight: '480px'
+          height: containerHeight
+            ? `${containerHeight}px`
+            : "calc(100svh - 4rem)",
+          minHeight: "480px",
         }}
         className="relative w-full overflow-hidden select-none bg-[var(--bg-canvas)] touch-none overscroll-none"
       >
@@ -484,7 +541,9 @@ export function FullPageContainer({
         >
           {allDotLabels.map((label, idx) => {
             const isFooterDot = idx === totalSections;
-            const isActive = isFooterDot ? isAtFooter : (!isAtFooter && idx === activeSection);
+            const isActive = isFooterDot
+              ? isAtFooter
+              : !isAtFooter && idx === activeSection;
 
             return (
               <button
@@ -504,8 +563,8 @@ export function FullPageContainer({
                 <div
                   className={`transition-all duration-300 rounded-full ${
                     isActive
-                      ? 'w-3.5 h-3.5 bg-[var(--accent-coral)] ring-4 ring-[var(--accent-coral)]/30 scale-110 shadow-lg'
-                      : 'w-2 h-2 bg-[var(--text-primary)]/40 hover:bg-[var(--text-primary)]/80 hover:scale-125'
+                      ? "w-3.5 h-3.5 bg-[var(--accent-coral)] ring-4 ring-[var(--accent-coral)]/30 scale-110 shadow-lg"
+                      : "w-2 h-2 bg-[var(--text-primary)]/40 hover:bg-[var(--text-primary)]/80 hover:scale-125"
                   }`}
                 />
               </button>
