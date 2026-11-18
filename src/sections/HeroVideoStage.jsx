@@ -16,6 +16,29 @@ const HERO_FEATURED_LOGOS = [
   "PVR INOX Cinemas",
 ];
 
+const HERO_BRAND_CONFIG = {
+  "MAX Fashion": {
+    bg: "bg-[#f0f6ff]",
+    border: "border-[#2563eb]/25",
+    accent: "#2563eb",
+  },
+  "KFC": {
+    bg: "bg-[#fff4f4]",
+    border: "border-[#e4002b]/25",
+    accent: "#e4002b",
+  },
+  "Levi's": {
+    bg: "bg-[#fff6f2]",
+    border: "border-[#d6492e]/25",
+    accent: "#d6492e",
+  },
+  "PVR INOX Cinemas": {
+    bg: "bg-[#fffbe8]",
+    border: "border-[#c6821c]/25",
+    accent: "#c6821c",
+  },
+};
+
 const HERO_LEVEL_LINKS = [
   {
     num: "00",
@@ -121,7 +144,7 @@ export function HeroVideoStage() {
                 <button
                   type="button"
                   onClick={() => navigate("/shopping")}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-white/20 text-white border border-white/45 hover:bg-white/30 transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/75 text-amber-100 border border-amber-200/40 hover:bg-[#1e1233]/90 transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap shadow-lg backdrop-blur-md"
                 >
                   <span>Explore Brands</span>
                   <ArrowRight className="w-4 h-4" />
@@ -141,8 +164,8 @@ export function HeroVideoStage() {
             </div>
 
             {/* Featured Brand Strip - Desktop / Tablet */}
-            <div className="pt-2 border-t border-white/20 hidden sm:flex flex-wrap items-center gap-2">
-              <span className="text-[11px] font-mono-tabular uppercase tracking-wider text-white/70">
+            <div className="hidden sm:inline-flex flex-wrap items-center gap-3 p-2.5 px-4 rounded-2xl bg-[#160d26]/80 backdrop-blur-xl border border-white/20 shadow-xl">
+              <span className="text-[11px] font-mono-tabular uppercase tracking-wider text-amber-200/90 font-medium">
                 Anchor Outlets:
               </span>
               <div className="flex flex-wrap items-center gap-2">
@@ -161,29 +184,43 @@ export function HeroVideoStage() {
               </div>
             </div>
 
-            {/* Featured Brand Strip - Mobile: Clean 2x2 Grid with Elegant Box Containers, No Written Names */}
-            <div className="pt-3 border-t border-white/20 sm:hidden">
-              <span className="block text-[11px] font-mono-tabular uppercase tracking-wider text-white/70 mb-2.5 text-center">
+            {/* Featured Brand Strip - Mobile: Distinct Coloured Container Backgrounds for Each Logo */}
+            <div className="sm:hidden p-3.5 rounded-2xl bg-[#160d26]/80 backdrop-blur-xl border border-white/20 shadow-xl">
+              <span className="block text-[11px] font-mono-tabular uppercase tracking-wider text-amber-200/90 mb-2.5 text-center font-medium">
                 Anchor Outlets
               </span>
               <div className="grid grid-cols-2 gap-2.5 items-center justify-items-center">
-                {HERO_FEATURED_LOGOS.map((name, i) => (
-                  <ScrollReveal
-                    key={name}
-                    variant="pop"
-                    delay={0.15 + i * 0.03}
-                    className="w-full"
-                  >
-                    <div className="w-full h-12 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 shadow-sm flex items-center justify-center px-4 py-2">
-                      <BrandMark
-                        name={name}
-                        size="md"
-                        raw={true}
-                        className="max-h-7 max-w-[105px] w-auto object-contain filter drop-shadow-sm brightness-105"
-                      />
-                    </div>
-                  </ScrollReveal>
-                ))}
+                {HERO_FEATURED_LOGOS.map((name, i) => {
+                  const brandStyle = HERO_BRAND_CONFIG[name] || {
+                    bg: "bg-white",
+                    border: "border-white/40",
+                    accent: "#f5be42",
+                  };
+
+                  return (
+                    <ScrollReveal
+                      key={name}
+                      variant="pop"
+                      delay={0.15 + i * 0.03}
+                      className="w-full"
+                    >
+                      <div
+                        className={`w-full h-13 rounded-xl ${brandStyle.bg} ${brandStyle.border} border shadow-md flex items-center justify-center px-4 py-2 transition-transform`}
+                        style={{
+                          borderBottomColor: brandStyle.accent,
+                          borderBottomWidth: "2.5px",
+                        }}
+                      >
+                        <BrandMark
+                          name={name}
+                          size="md"
+                          raw={true}
+                          className="max-h-7.5 max-w-[105px] w-auto object-contain filter drop-shadow-sm"
+                        />
+                      </div>
+                    </ScrollReveal>
+                  );
+                })}
               </div>
             </div>
           </div>

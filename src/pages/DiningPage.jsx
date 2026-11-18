@@ -180,20 +180,42 @@ export function DiningPage() {
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-14">
-          {/* Mobile View: Clean single row of 3 restaurant logos with no background containers or text */}
-          <div className="sm:hidden flex items-center justify-center gap-6 py-2">
-            {DINING_DESTINATIONS.map((item, idx) => (
-              <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
-                <div className="flex items-center justify-center">
-                  <BrandMark
-                    name={item.name}
-                    size="md"
-                    raw={true}
-                    className="h-8 max-h-9 w-auto object-contain filter drop-shadow-md shrink-0"
-                  />
-                </div>
-              </ScrollReveal>
-            ))}
+          {/* Mobile View: Beautifully designed matching container boxes */}
+          <div className="sm:hidden pt-2 pb-1">
+            <div className="grid grid-cols-3 gap-2.5 max-w-sm mx-auto items-center">
+              {DINING_DESTINATIONS.map((item, idx) => {
+                const diningCardStyle =
+                  item.name === "KFC"
+                    ? { bg: "bg-[#fff5f5]", border: "border-[#e4002b]/30", accent: "#E4002B" }
+                    : item.name === "Burger King"
+                    ? { bg: "bg-[#fff9f0]", border: "border-[#d62300]/30", accent: "#D62300" }
+                    : { bg: "bg-[#f0f7ff]", border: "border-[#006491]/30", accent: "#006491" };
+
+                return (
+                  <ScrollReveal
+                    key={item.name}
+                    variant="pop"
+                    delay={idx * 0.05}
+                    className="w-full"
+                  >
+                    <div
+                      className={`w-full h-14 rounded-2xl ${diningCardStyle.bg} ${diningCardStyle.border} border shadow-md flex items-center justify-center p-2.5 transition-transform`}
+                      style={{
+                        borderBottomColor: diningCardStyle.accent,
+                        borderBottomWidth: "2.5px",
+                      }}
+                    >
+                      <BrandMark
+                        name={item.name}
+                        size="md"
+                        raw={true}
+                        className="max-h-8 max-w-[76px] w-auto object-contain filter drop-shadow-sm"
+                      />
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
+            </div>
           </div>
 
           {/* Tablet & Desktop View: Preserved styled badge pill bar */}
