@@ -112,8 +112,8 @@ export function HomePage() {
                     <ScrollReveal variant="scaleDepth" delay={0.1}>
                       <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] sm:aspect-[4/3] bg-[var(--bg-tint-peach)] relative">
                         <img
-                          src={IMAGE_ASSETS.brandSalon}
-                          alt="Warm sunlit seating terrace at Orion Mall Mohaddipur"
+                          src={IMAGE_ASSETS.mallExteriorNight}
+                          alt="Orion Mall Gorakhpur illuminated exterior at night with colorful LED signage"
                           referrerPolicy="no-referrer"
                           loading="lazy"
                           decoding="async"

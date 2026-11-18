@@ -164,12 +164,11 @@ export function VisitPage() {
                   <Interactive3DTilt intensity={5}>
                     <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10]">
                       <img
-                        src={IMAGE_ASSETS.mallAtriumEmpty}
-                        alt="Orion Mall sunlit central atrium"
-                        referrerPolicy="no-referrer"
+                        src={IMAGE_ASSETS.mallExteriorNight}
+                        alt="Orion Mall Gorakhpur illuminated exterior at night with colorful LED signage"
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-center"
                       />
                     </div>
                   </Interactive3DTilt>
