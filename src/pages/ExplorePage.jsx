@@ -96,8 +96,8 @@ function ExploreFinaleScene() {
                   <ScrollReveal variant="scaleDepth">
                     <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10]">
                       <img
-                        src={IMAGE_ASSETS.mallAtriumEmpty}
-                        alt="Sunlit five-level architectural atrium inside Orion Mall"
+                        src={IMAGE_ASSETS.mallLuxuryCorridor}
+                        alt="Luxury marble promenade and golden chandelier corridor inside Orion Mall"
                         referrerPolicy="no-referrer"
                         loading="lazy"
                         decoding="async"

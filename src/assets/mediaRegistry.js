@@ -7,6 +7,7 @@ import brandDiningImg from './images/brand_dining_spread_1794533373053.webp';
 import brandCinemaImg from './images/brand_cinema_velvet_1794533374523.webp';
 import brandSalonImg from './images/brand_salon_arch_1794533373435.webp';
 import mallExteriorNightImg from './images/mall_exterior_night_1794994662378.webp';
+import mallLuxuryCorridorImg from './images/mall_luxury_corridor_1794997803991.webp';
 
 // Unique Ground Floor brand images
 import brandMaxFashionImg from './images/brand_max_fashion_1794534768545.webp';
@@ -318,6 +319,7 @@ export const IMAGE_ASSETS = {
   brandSalon: brandSalonImg,
   brandSamsung: brandSamsungImg,
   mallExteriorNight: mallExteriorNightImg,
+  mallLuxuryCorridor: mallLuxuryCorridorImg,
   brandLavie: brandLavieImg,
   brandAllenSolly: brandAllenSollyImg,
   brandSkechers: brandSkechersImg,

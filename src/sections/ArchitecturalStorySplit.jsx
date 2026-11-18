@@ -121,8 +121,8 @@ export function ArchitecturalStorySplit() {
                   <ScrollReveal variant="scaleDepth" delay={0.08}>
                     <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[16/10] bg-[var(--bg-tint-peach)]">
                       <img
-                        src={IMAGE_ASSETS.mallAtriumEmpty}
-                        alt="Sunlit five-level central atrium inside Orion Mall"
+                        src={IMAGE_ASSETS.mallLuxuryCorridor}
+                        alt="Luxury marble promenade and golden chandelier corridor inside Orion Mall"
                         referrerPolicy="no-referrer"
                         loading="lazy"
                         decoding="async"
