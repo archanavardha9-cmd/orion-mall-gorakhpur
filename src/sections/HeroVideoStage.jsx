@@ -163,65 +163,55 @@ export function HeroVideoStage() {
               </ScrollReveal>
             </div>
 
-            {/* Featured Brand Strip - Desktop / Tablet */}
-            <div className="hidden sm:inline-flex flex-wrap items-center gap-3 p-2.5 px-4 rounded-2xl bg-[#160d26]/80 backdrop-blur-xl border border-white/20 shadow-xl">
-              <span className="text-[11px] font-mono-tabular uppercase tracking-wider text-amber-200/90 font-medium">
-                Anchor Outlets:
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                {HERO_FEATURED_LOGOS.map((name, i) => (
+            {/* Featured Brand Strip - Desktop / Tablet: individual pill containers, no outer wrapper */}
+            <div className="hidden sm:flex flex-wrap items-center gap-2">
+              {HERO_FEATURED_LOGOS.map((name, i) => (
+                <ScrollReveal
+                  key={name}
+                  variant="pop"
+                  delay={0.15 + i * 0.03}
+                >
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/15 border border-white/25 text-xs text-white">
+                    <BrandMark name={name} size="sm" />
+                    <span className="font-medium text-[11px]">{name}</span>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Featured Brand Strip - Mobile: Coloured individual containers, no outer black wrapper */}
+            <div className="sm:hidden grid grid-cols-2 gap-2.5">
+              {HERO_FEATURED_LOGOS.map((name, i) => {
+                const brandStyle = HERO_BRAND_CONFIG[name] || {
+                  bg: "bg-white",
+                  border: "border-white/40",
+                  accent: "#f5be42",
+                };
+
+                return (
                   <ScrollReveal
                     key={name}
                     variant="pop"
                     delay={0.15 + i * 0.03}
+                    className="w-full"
                   >
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/15 border border-white/25 text-xs text-white">
-                      <BrandMark name={name} size="sm" />
-                      <span className="font-medium text-[11px]">{name}</span>
+                    <div
+                      className={`w-full h-12 rounded-xl ${brandStyle.bg} ${brandStyle.border} border shadow-md flex items-center justify-center px-3 py-2 transition-transform`}
+                      style={{
+                        borderBottomColor: brandStyle.accent,
+                        borderBottomWidth: "2.5px",
+                      }}
+                    >
+                      <BrandMark
+                        name={name}
+                        size="md"
+                        raw={true}
+                        className="max-h-7 max-w-[100px] w-auto object-contain filter drop-shadow-sm"
+                      />
                     </div>
                   </ScrollReveal>
-                ))}
-              </div>
-            </div>
-
-            {/* Featured Brand Strip - Mobile: Distinct Coloured Container Backgrounds for Each Logo */}
-            <div className="sm:hidden p-3.5 rounded-2xl bg-[#160d26]/80 backdrop-blur-xl border border-white/20 shadow-xl">
-              <span className="block text-[11px] font-mono-tabular uppercase tracking-wider text-amber-200/90 mb-2.5 text-center font-medium">
-                Anchor Outlets
-              </span>
-              <div className="grid grid-cols-2 gap-2.5 items-center justify-items-center">
-                {HERO_FEATURED_LOGOS.map((name, i) => {
-                  const brandStyle = HERO_BRAND_CONFIG[name] || {
-                    bg: "bg-white",
-                    border: "border-white/40",
-                    accent: "#f5be42",
-                  };
-
-                  return (
-                    <ScrollReveal
-                      key={name}
-                      variant="pop"
-                      delay={0.15 + i * 0.03}
-                      className="w-full"
-                    >
-                      <div
-                        className={`w-full h-13 rounded-xl ${brandStyle.bg} ${brandStyle.border} border shadow-md flex items-center justify-center px-4 py-2 transition-transform`}
-                        style={{
-                          borderBottomColor: brandStyle.accent,
-                          borderBottomWidth: "2.5px",
-                        }}
-                      >
-                        <BrandMark
-                          name={name}
-                          size="md"
-                          raw={true}
-                          className="max-h-7.5 max-w-[105px] w-auto object-contain filter drop-shadow-sm"
-                        />
-                      </div>
-                    </ScrollReveal>
-                  );
-                })}
-              </div>
+                );
+              })}
             </div>
           </div>
 

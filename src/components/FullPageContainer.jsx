@@ -48,6 +48,7 @@ export function FullPageContainer({
 
   const touchStartYRef = useRef(0);
   const touchStartXRef = useRef(0);
+  const touchStartTimeRef = useRef(0);
   const wheelAccumulatorRef = useRef(0);
   const wheelTimeoutRef = useRef(null);
 
@@ -108,9 +109,10 @@ export function FullPageContainer({
 
     footer.scrollIntoView({ behavior: 'smooth' });
 
+    const cooldown = window.innerWidth < 640 ? 800 : 650;
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 650);
+    }, cooldown);
   }, [emitScrollImpulse]);
 
   // Smooth scroll away from the Footer back to the last section
@@ -124,9 +126,10 @@ export function FullPageContainer({
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    const cooldown = window.innerWidth < 640 ? 800 : 650;
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 650);
+    }, cooldown);
   }, [emitScrollImpulse]);
 
   // Jump directly to a given section index (or to footer if targetIndex === totalSections)
@@ -157,9 +160,12 @@ export function FullPageContainer({
     setActiveSection(targetIndex);
     emitScrollImpulse(newDir > 0 ? 'down' : 'up', 50);
 
+    // Use a longer cooldown on mobile to prevent rapid successive swipes
+    // from accidentally skipping through multiple sections.
+    const cooldown = window.innerWidth < 640 ? 800 : 650;
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 650);
+    }, cooldown);
   }, [activeSection, totalSections, scrollToFooter, emitScrollImpulse]);
 
   // Downward gesture handler (Wheel down, Swipe up, ArrowDown, PageDown, Space)
@@ -297,6 +303,7 @@ export function FullPageContainer({
       if (e.touches && e.touches[0]) {
         touchStartYRef.current = e.touches[0].clientY;
         touchStartXRef.current = e.touches[0].clientX;
+        touchStartTimeRef.current = Date.now();
       }
     };
 
@@ -339,18 +346,29 @@ export function FullPageContainer({
       const touchEndX = e.changedTouches[0].clientX;
       const diffY = touchStartYRef.current - touchEndY;
       const diffX = touchStartXRef.current - touchEndX;
+      const elapsed = Date.now() - touchStartTimeRef.current;
 
       // Ignore predominantly horizontal gestures
       if (Math.abs(diffX) > Math.abs(diffY)) return;
 
-      // Deliberate vertical swipe threshold of 45px
-      if (Math.abs(diffY) > 45) {
+      const absDiffY = Math.abs(diffY);
+
+      // On mobile (narrow viewport), require a larger deliberate swipe:
+      // - Minimum 70px travel distance, OR
+      // - 55px travel with enough velocity (> 0.4 px/ms = fast flick)
+      // This prevents accidental section jumps from small nudges.
+      const isMobile = window.innerWidth < 640;
+      const minDistance = isMobile ? 70 : 45;
+      const velocity = elapsed > 0 ? absDiffY / elapsed : 0;
+      const isDeliberateFlick = isMobile ? (absDiffY >= 55 && velocity >= 0.4) : false;
+
+      if (absDiffY >= minDistance || isDeliberateFlick) {
         if (diffY > 0) {
-          // Swipe up -> move down
-          handleDown(Math.abs(diffY));
+          // Swipe up → move down to next section
+          handleDown(absDiffY);
         } else {
-          // Swipe down -> move up
-          handleUp(Math.abs(diffY));
+          // Swipe down → move up to previous section
+          handleUp(absDiffY);
         }
       }
     };
@@ -459,10 +477,10 @@ export function FullPageContainer({
           </motion.div>
         </AnimatePresence>
 
-        {/* Fixed Vertical Navigation Dots on the Right: Sections + Footer */}
+        {/* Fixed Vertical Navigation Dots on the Right: Sections + Footer — hidden on mobile */}
         <aside
           aria-label="Scene navigation dots"
-          className="fixed right-3.5 sm:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-3 pointer-events-auto"
+          className="fixed right-3.5 sm:right-6 top-1/2 -translate-y-1/2 z-50 flex-col items-center gap-3 pointer-events-auto hidden sm:flex"
         >
           {allDotLabels.map((label, idx) => {
             const isFooterDot = idx === totalSections;
