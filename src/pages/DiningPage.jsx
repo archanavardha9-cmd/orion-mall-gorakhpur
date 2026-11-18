@@ -180,7 +180,24 @@ export function DiningPage() {
         </div>
 
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-14">
-          <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
+          {/* Mobile View: Clean single row of 3 restaurant logos with no background containers or text */}
+          <div className="sm:hidden flex items-center justify-center gap-8 py-2">
+            {DINING_DESTINATIONS.map((item, idx) => (
+              <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
+                <div className="flex items-center justify-center">
+                  <BrandMark
+                    name={item.name}
+                    size="md"
+                    raw={true}
+                    className="max-h-9 sm:max-h-10 w-auto object-contain filter drop-shadow-md"
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Tablet & Desktop View: Preserved styled badge pill bar */}
+          <div className="hidden sm:inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
                 <div

@@ -30,7 +30,7 @@ export function Header() {
           className="shrink-0 flex items-center focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
         >
           <img
-            src="/images/orion_mall_logo.png"
+            src="/images/orion_mall_logo.webp"
             alt="Orion Mall"
             /* natural aspect ratio preserved; height drives size */
             className="h-10 sm:h-11 md:h-14 w-auto object-contain"

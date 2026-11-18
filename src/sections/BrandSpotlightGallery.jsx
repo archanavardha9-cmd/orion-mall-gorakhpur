@@ -281,14 +281,14 @@ export function BrandSpotlightGallery() {
             </div>
 
             {/* 12-Column Brand Spotlight: Brand Image & Cards on Left + Category Nav & Brand List on Right */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start lg:items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-5 lg:gap-8 items-start lg:items-center">
               {/* RIGHT (Desktop) / FIRST (Mobile): Category Navigation slightly upward directly above Brand List Card */}
-              <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-3.5 sm:gap-4">
+              <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-2.5 sm:gap-4">
                 {/* 6-Category Navigation cleanly separated above the Brand List Card */}
                 <div
                   role="tablist"
                   aria-label="Browse brands by shopping and lifestyle category"
-                  className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md w-full"
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-2xl backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-md w-full"
                 >
                   {BRAND_CATEGORIES.map((cat) => {
                     const Icon = cat.icon;
@@ -300,7 +300,7 @@ export function BrandSpotlightGallery() {
                         role="tab"
                         aria-selected={isActive}
                         onClick={() => handleSelectCategory(cat)}
-                        className={`relative inline-flex items-center justify-between gap-1 px-2 sm:px-2.5 py-1.5 min-h-[34px] rounded-xl text-[10.5px] sm:text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap min-w-0 ${
+                        className={`relative inline-flex items-center justify-between gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 min-h-[30px] sm:min-h-[34px] rounded-xl text-[10px] sm:text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap min-w-0 ${
                           isActive
                             ? 'text-white'
                             : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
@@ -335,7 +335,7 @@ export function BrandSpotlightGallery() {
                 </div>
 
                 {/* Compact & Clean Brand List Card with clear visual gap below Categories */}
-                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-4 sm:p-5 shadow-2xl">
+                <div className="relative overflow-hidden backdrop-blur-xl bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-3 sm:p-5 shadow-2xl">
                   <div
                     aria-hidden="true"
                     className="absolute -top-16 -right-16 w-44 h-44 rounded-full blur-2xl opacity-20 pointer-events-none transition-colors duration-500"
@@ -349,30 +349,30 @@ export function BrandSpotlightGallery() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="relative z-10 space-y-3.5"
+                      className="relative z-10 space-y-2.5 sm:space-y-3.5"
                     >
                       {/* Category Header */}
-                      <div className="space-y-1 border-b border-[var(--border-hairline)] pb-2.5">
+                      <div className="space-y-0.5 sm:space-y-1 border-b border-[var(--border-hairline)] pb-2">
                         <div className="flex items-center justify-between gap-2">
                           <span
-                            className="inline-flex items-center gap-1.5 text-xs font-mono-tabular font-bold uppercase tracking-[0.14em]"
+                            className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-mono-tabular font-bold uppercase tracking-[0.14em]"
                             style={{ color: activeCategory.accentColor }}
                           >
-                            <activeCategory.icon className="w-3.5 h-3.5 shrink-0" />
+                            <activeCategory.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                             <span>{activeCategory.label}</span>
                           </span>
-                          <span className="font-mono-tabular text-[11px] font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
+                          <span className="font-mono-tabular text-[10px] sm:text-[11px] font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
                             {activeCategory.brands.length}{' '}
                             {activeCategory.brands.length === 1 ? 'Brand' : 'Brands'}
                           </span>
                         </div>
-                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                        <p className="text-[11px] sm:text-xs text-[var(--text-secondary)] leading-tight sm:leading-relaxed line-clamp-1 sm:line-clamp-none">
                           {activeCategory.tagline}
                         </p>
                       </div>
 
-                      {/* Brand List: Compact, readable, comfortable spacing */}
-                      <div className="flex flex-wrap gap-2 py-0.5">
+                      {/* Brand List: 2 per row on mobile, reduced height & compact brand logos */}
+                      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2 py-0.5">
                         {activeCategory.brands.map((brandName, idx) => {
                           const isSelected = activeStory.name === brandName;
                           return (
@@ -384,7 +384,7 @@ export function BrandSpotlightGallery() {
                               transition={{ duration: 0.2, delay: idx * 0.02 }}
                               onClick={() => handleSelectBrand(brandName)}
                               aria-pressed={isSelected}
-                              className={`group flex items-center gap-2 rounded-xl border transition-all duration-200 cursor-pointer pr-3 p-1.5 ${
+                              className={`group flex items-center gap-1.5 sm:gap-2 rounded-xl border transition-all duration-200 cursor-pointer pr-2 sm:pr-3 p-1 sm:p-1.5 ${
                                 isSelected
                                   ? `${activeCategory.activeSurface} scale-[1.02] shadow-md`
                                   : 'border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]'
@@ -393,8 +393,9 @@ export function BrandSpotlightGallery() {
                               <BrandMark
                                 name={brandName}
                                 size="sm"
+                                className="!h-7 !min-w-[2.5rem] !max-w-[4.5rem] sm:!h-9 sm:!min-w-[3.25rem] sm:!max-w-[6.25rem]"
                               />
-                              <span className="font-semibold text-xs sm:text-sm text-[var(--text-primary)] whitespace-nowrap">
+                              <span className="font-semibold text-[11px] sm:text-xs text-[var(--text-primary)] whitespace-nowrap truncate">
                                 {brandName}
                               </span>
                             </motion.button>
@@ -403,18 +404,18 @@ export function BrandSpotlightGallery() {
                       </div>
 
                       {/* Card Footer */}
-                      <div className="pt-2.5 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-[11px] text-[var(--text-muted)]">
-                          {activeStory.specialty} · {activeStory.categoryLabel}
+                      <div className="pt-2 sm:pt-2.5 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-1.5">
+                        <span className="text-[10px] sm:text-[11px] text-[var(--text-muted)] truncate max-w-[55%]">
+                          {activeStory.specialty}
                         </span>
                         <button
                           type="button"
                           onClick={() => navigate(activeCategory.route)}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold hover:underline cursor-pointer whitespace-nowrap"
+                          className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold hover:underline cursor-pointer whitespace-nowrap"
                           style={{ color: activeCategory.accentColor }}
                         >
                           <span>Explore {activeCategory.ctaLabel}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         </button>
                       </div>
                     </motion.div>
@@ -423,7 +424,7 @@ export function BrandSpotlightGallery() {
               </div>
 
               {/* LEFT (Desktop) / SECOND (Mobile): Main Brand Image + Floating Crest & Detail Info Cards */}
-              <div className="lg:col-span-6 order-2 lg:order-1 relative pt-8 sm:pt-9 pb-0 sm:pb-6 flex flex-col sm:flex-row items-center justify-center">
+              <div className="lg:col-span-6 order-2 lg:order-1 relative pt-5 sm:pt-9 pb-0 sm:pb-6 flex flex-col sm:flex-row items-center justify-center">
                 {/* Layer 3: Brand Name & Logo Crest overlapping upper edge cleanly below heading */}
                 <AnimatePresence mode="wait">
                   <motion.div

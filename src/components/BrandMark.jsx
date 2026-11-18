@@ -18,25 +18,25 @@ const BRAND_LOGOS = {
     padding: 'px-2 py-1'
   },
   'Van Heusen': {
-    src: '/images/logos/van_heusen.png',
+    src: '/images/logos/van_heusen.webp',
     alt: 'Van Heusen official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
   },
   'Louis Philippe': {
-    src: '/images/logos/louis_philippe.png',
+    src: '/images/logos/louis_philippe.webp',
     alt: 'Louis Philippe official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
   },
   ColorPlus: {
-    src: '/images/logos/colorplus.png',
+    src: '/images/logos/colorplus.webp',
     alt: 'ColorPlus official logo',
     backdrop: 'light',
     padding: 'px-2 py-1'
   },
   'Being Human': {
-    src: '/images/logos/being_human.png',
+    src: '/images/logos/being_human.webp',
     alt: 'Being Human Clothing official logo',
     backdrop: 'light',
     padding: 'px-2 py-1'
@@ -54,7 +54,7 @@ const BRAND_LOGOS = {
     padding: 'px-2.5 py-1.5'
   },
   'Allen Solly': {
-    src: '/images/logos/allen_solly.png',
+    src: '/images/logos/allen_solly.webp',
     alt: 'Allen Solly official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
@@ -72,13 +72,13 @@ const BRAND_LOGOS = {
     padding: 'px-2.5 py-1'
   },
   Spykar: {
-    src: '/images/logos/spykar.png',
+    src: '/images/logos/spykar.webp',
     alt: 'Spykar official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
   },
   Mufti: {
-    src: '/images/logos/mufti.png',
+    src: '/images/logos/mufti.webp',
     alt: 'Mufti official logo',
     backdrop: 'none',
     padding: 'p-0'
@@ -102,31 +102,31 @@ const BRAND_LOGOS = {
     padding: 'p-0'
   },
   W: {
-    src: '/images/logos/w_woman.png',
+    src: '/images/logos/w_woman.webp',
     alt: 'W for Woman official logo',
     backdrop: 'none',
     padding: 'p-0'
   },
   Aurelia: {
-    src: '/images/logos/aurelia.png',
+    src: '/images/logos/aurelia.webp',
     alt: 'Aurelia official logo',
     backdrop: 'none',
     padding: 'p-0'
   },
   'Van Heusen Woman': {
-    src: '/images/logos/van_heusen.png',
+    src: '/images/logos/van_heusen.webp',
     alt: 'Van Heusen Woman official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
   },
   'U.S. Polo Assn. Kids': {
-    src: '/images/logos/uspa.png',
+    src: '/images/logos/uspa.webp',
     alt: 'U.S. Polo Assn. official logo',
     backdrop: 'light',
     padding: 'px-2 py-1'
   },
   Lavie: {
-    src: '/images/logos/lavie.png',
+    src: '/images/logos/lavie.webp',
     alt: 'Lavie official logo',
     backdrop: 'light',
     padding: 'px-2.5 py-1.5'
@@ -150,14 +150,14 @@ const BRAND_LOGOS = {
     padding: 'p-1.5'
   },
   'PVR INOX Cinemas': {
-    src: '/images/logos/pvr_inox.png',
+    src: '/images/logos/pvr_inox.webp',
     alt: 'PVR INOX Cinemas official logo',
     backdrop: 'light',
     padding: 'px-3 py-1.5'
   }
 };
 
-export function BrandMark({ name, size = 'md', className = '' }) {
+export function BrandMark({ name, size = 'md', className = '', raw = false }) {
   const logo = BRAND_LOGOS[name];
 
   const sizeClasses =
@@ -173,6 +173,21 @@ export function BrandMark({ name, size = 'md', className = '' }) {
       : size === 'sm'
       ? 'max-h-6'
       : 'max-h-8';
+
+  if (raw) {
+    if (!logo) {
+      return <span className={`text-xs font-semibold ${className}`}>{name}</span>;
+    }
+    return (
+      <img
+        src={logo.src}
+        alt={logo.alt}
+        loading="lazy"
+        decoding="async"
+        className={`w-auto object-contain block ${imgHeightClasses} ${className}`}
+      />
+    );
+  }
 
   if (!logo) {
     return (

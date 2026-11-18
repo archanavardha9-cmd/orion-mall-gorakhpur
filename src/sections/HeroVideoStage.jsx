@@ -132,7 +132,7 @@ export function HeroVideoStage() {
                 <button
                   type="button"
                   onClick={() => navigate("/entertainment")}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/55 text-amber-200 border border-amber-200/35 hover:bg-[#1e1233]/75 transition-colors cursor-pointer whitespace-nowrap"
+                  className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/55 text-amber-200 border border-amber-200/35 hover:bg-[#1e1233]/75 transition-colors cursor-pointer whitespace-nowrap"
                 >
                   <Film className="w-4 h-4" />
                   <span>Movie Tickets</span>
@@ -140,8 +140,8 @@ export function HeroVideoStage() {
               </ScrollReveal>
             </div>
 
-            {/* Featured Brand Strip */}
-            <div className="pt-2 border-t border-white/20 flex flex-wrap items-center gap-2">
+            {/* Featured Brand Strip - Desktop / Tablet */}
+            <div className="pt-2 border-t border-white/20 hidden sm:flex flex-wrap items-center gap-2">
               <span className="text-[11px] font-mono-tabular uppercase tracking-wider text-white/70">
                 Anchor Outlets:
               </span>
@@ -156,6 +156,30 @@ export function HeroVideoStage() {
                       <BrandMark name={name} size="sm" />
                       <span className="font-medium text-[11px]">{name}</span>
                     </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
+
+            {/* Featured Brand Strip - Mobile: Clean 2x2 Grid, No Box Containers, No Written Names */}
+            <div className="pt-3 border-t border-white/20 sm:hidden">
+              <span className="block text-[11px] font-mono-tabular uppercase tracking-wider text-white/70 mb-2.5 text-center">
+                Anchor Outlets:
+              </span>
+              <div className="grid grid-cols-2 gap-3 items-center justify-items-center">
+                {HERO_FEATURED_LOGOS.map((name, i) => (
+                  <ScrollReveal
+                    key={name}
+                    variant="pop"
+                    delay={0.15 + i * 0.03}
+                    className="w-full flex items-center justify-center p-1"
+                  >
+                    <BrandMark
+                      name={name}
+                      size="md"
+                      raw={true}
+                      className="max-h-7 max-w-[120px] w-auto object-contain brightness-105"
+                    />
                   </ScrollReveal>
                 ))}
               </div>

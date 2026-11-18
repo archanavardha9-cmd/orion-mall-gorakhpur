@@ -249,7 +249,8 @@ function ShoppingHeroScene() {
                     src={IMAGE_ASSETS.brandLavie}
                     alt="Second Floor luxury handbags showcase inside Orion Mall"
                     referrerPolicy="no-referrer"
-                    loading="lazy"
+                    loading="eager"
+                    fetchPriority="high"
                     decoding="async"
                     className="w-full h-full object-cover"
                   />

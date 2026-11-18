@@ -24,7 +24,7 @@ export function Footer() {
                 className="inline-block focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
               >
                 <img
-                  src="/images/orion_mall_logo.png"
+                  src="/images/orion_mall_logo.webp"
                   alt="Orion Mall"
                   className="h-14 md:h-16 w-auto object-contain"
                   style={{ maxWidth: '220px' }}
