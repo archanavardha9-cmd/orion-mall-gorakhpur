@@ -26,24 +26,23 @@ import { FLOOR_LEVELS } from '../utils/mallData';
 import { useRouter } from '../utils/router';
 
 const BRAND_CATEGORIES = [
-  {
-    id: 'clothing',
-    label: 'Clothing & Fashion',
-    tagline: 'Tailored menswear, premium denim & contemporary wardrobe essentials',
-    accentColor: '#D6492E',
-    tint: 'from-rose-200/85 via-orange-100/75 to-amber-200/80 dark:from-rose-950/85 dark:via-stone-900/85 dark:to-amber-950/80',
-    activeSurface: 'bg-[#fce8e2] dark:bg-[#3a1f24] border-[#D6492E]',
-    icon: Shirt,
-    route: '/shopping',
-    ctaLabel: 'Clothing & Fashion',
-    brands: [
-      'Louis Philippe',
-      "Levi's",
-      'MAX Fashion',
-      'Van Heusen',
-      'Allen Solly'
-    ]
-  },
+{
+        id: 'clothing',
+        label: 'Clothing & Fashion',
+        tagline: 'Tailored menswear, premium denim & contemporary wardrobe essentials',
+        accentColor: '#D6492E',
+        tint: 'from-rose-200/85 via-orange-100/75 to-amber-200/80 dark:from-rose-950/85 dark:via-stone-900/85 dark:to-amber-950/80',
+        activeSurface: 'bg-[#fce8e2] dark:bg-[#3a1f24] border-[#D6492E]',
+        icon: Shirt,
+        route: '/shopping',
+        ctaLabel: 'Clothing & Fashion',
+        brands: [
+          'Louis Philippe',
+          "Levi's",
+          'MAX Fashion',
+          'Van Heusen'
+        ]
+      },
   {
     id: 'dining',
     label: 'Food & Dining',
@@ -149,7 +148,6 @@ export function BrandSpotlightGallery() {
       "Levi's",
       'MAX Fashion',
       'Van Heusen',
-      'Allen Solly',
       'KFC',
       'Burger King',
       "Domino's Pizza",
@@ -238,7 +236,7 @@ export function BrandSpotlightGallery() {
                   </p>
                 </ScrollReveal>
                 <ScrollReveal variant="rise" delay={0.03}>
-                  <h2 className="font-display text-xl sm:text-3xl font-semibold text-[var(--text-primary)] mt-0.5 leading-none sm:whitespace-nowrap">
+                  <h2 className="font-display text-xl sm:text-3xl font-semibold text-[var(--text-primary)] mt-0.5 leading-none whitespace-normal sm:whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
                     Flagship Retail Collection
                   </h2>
                 </ScrollReveal>

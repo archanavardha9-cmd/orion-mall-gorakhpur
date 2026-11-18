@@ -152,14 +152,14 @@ export function DiningPage() {
         scrim="heroPrism"
         isHero
         minHeight="min-h-[calc(100svh-4rem)]"
-        className="flex flex-col justify-center py-12 md:py-20"
+        className="flex flex-col justify-center py-8 md:py-20"
       >
         <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75 }}
-            className="max-w-4xl space-y-6 text-white"
+            className="max-w-4xl space-y-4 sm:space-y-6 text-white"
           >
             <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
@@ -168,18 +168,18 @@ export function DiningPage() {
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
                 className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
-                style={{ fontSize: 'clamp(2.8rem, 6.5vw, 5.8rem)' }}
+                style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
-            <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed pt-2">
+            <p className="text-sm md:text-lg text-white/90 max-w-2xl leading-relaxed">
               Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
             </p>
           </motion.div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-10 md:pt-16">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-6 md:pt-14">
           <div className="inline-flex flex-wrap gap-3 backdrop-blur-xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] rounded-2xl p-2 shadow-2xl">
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
@@ -476,12 +476,12 @@ export function DiningPage() {
               </div>
 
               {/* Right Column: Prominent First Pizza Image + Lower Closer Overlapping Second Pizza Image */}
-              <div className="lg:col-span-7 flex flex-col sm:flex-row items-center justify-center sm:justify-end pl-0 sm:pl-4 lg:pl-8 pb-4 sm:pb-12">
-                {/* First (Larger) Pizza Image: Prominent & slightly lifted */}
-                <div className="w-full sm:w-[68%] lg:w-[70%] relative z-10 sm:-translate-y-4">
+              <div className="lg:col-span-7 relative flex items-center justify-center min-h-[200px] sm:min-h-[280px] pb-0 sm:pb-10">
+                {/* First (Larger) Pizza Image: Prominent */}
+                <div className="w-full sm:w-[75%] lg:w-[80%] relative z-10 sm:ml-auto">
                   <ScrollReveal variant="scaleDepth" delay={0.06}>
                     <Interactive3DTilt intensity={5}>
-                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/85 aspect-[4/3] max-h-[430px] bg-slate-900">
+                      <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-white/85 aspect-[4/3] bg-slate-900">
                         <img
                           src={DINING_BRAND_GALLERY.dominos.spread}
                           alt="Fresh hand-tossed cheese pull pizza with stuffed garlic breadsticks"
@@ -495,11 +495,11 @@ export function DiningPage() {
                   </ScrollReveal>
                 </div>
 
-                {/* Second (Smaller) Pizza Image: Lowered further down & tucked closer to touch/overlap the first */}
-                <div className="w-[78%] sm:w-[40%] lg:w-[38%] relative z-20 self-end sm:self-center -mt-6 sm:mt-0 sm:-ml-10 lg:-ml-12 translate-y-2 sm:translate-y-16 lg:translate-y-20">
-                  <ScrollReveal variant="scaleDepth" delay={0.12}>
+                {/* Second (Smaller) Pizza Image: Anchored lower-left, hidden on smallest screens */}
+                <div className="hidden sm:block absolute left-0 bottom-0 w-[42%] z-20">
+                  <ScrollReveal variant="slideLeft" delay={0.12}>
                     <Interactive3DTilt intensity={4}>
-                      <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 aspect-[4/3] max-h-[235px] bg-slate-900">
+                      <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-white/90 aspect-[4/3] bg-slate-900">
                         <img
                           src={DINING_BRAND_GALLERY.dominos.sides}
                           alt="Domino's Pizza oven-baked savory sides, slices and sauces"

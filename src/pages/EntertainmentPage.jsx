@@ -162,12 +162,12 @@ export function EntertainmentPage() {
             </p>
           </motion.div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5 sm:gap-3">
             <a
               href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-white hover:opacity-95 transition-opacity shadow-xl"
+              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-white hover:opacity-95 transition-opacity shadow-xl"
             >
               <span>Book Tickets · BookMyShow</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -176,7 +176,7 @@ export function EntertainmentPage() {
               href={PVR_BOOKING_LINKS.pvrOfficial}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
+              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
             >
               <span>PVR INOX Official</span>
               <ArrowUpRight className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, ChevronDown, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { VideoBackdropSection } from "../components/VideoBackdropSection";
 import { BrandMark } from "../components/BrandMark";
@@ -20,8 +20,173 @@ const RETAIL_FLOORS = FLOOR_LEVELS.filter((f) =>
   ["ground", "first", "second"].includes(f.id),
 );
 
+// Number of brands shown before "View More" on mobile
+const MOBILE_BRAND_PREVIEW = 4;
+
+// ─── Brand Modal (mobile only) ────────────────────────────────────────────────
+function BrandModal({ brands, activeBrand, onSelect, onClose, accentColor, floorLabel }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        key="brand-modal-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+        aria-modal="true"
+        role="dialog"
+        aria-label={`All brands – ${floorLabel}`}
+      >
+        <motion.div
+          key="brand-modal-panel"
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
+          transition={{ type: "spring", stiffness: 340, damping: 32 }}
+          className="w-full max-h-[80svh] bg-[var(--bg-surface-elevated)] rounded-t-3xl border-t-2 border-[var(--glass-border)] shadow-2xl flex flex-col overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Handle bar */}
+          <div className="flex justify-center pt-3 pb-1 shrink-0">
+            <div className="w-10 h-1 rounded-full bg-[var(--border-strong)]" />
+          </div>
+
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-hairline)] shrink-0">
+            <div>
+              <p
+                className="text-[11px] font-mono-tabular font-bold uppercase tracking-widest"
+                style={{ color: accentColor }}
+              >
+                {floorLabel}
+              </p>
+              <p className="text-sm font-semibold text-[var(--text-primary)] mt-0.5">
+                All Brands · {brands.length} stores
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close brand list"
+              className="w-9 h-9 rounded-xl flex items-center justify-center bg-[var(--bg-surface)] border border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Scrollable brand grid */}
+          <div className="overflow-y-auto overscroll-contain flex-1 p-4">
+            <div className="flex flex-wrap gap-2.5">
+              {brands.map((brand) => {
+                const selected = activeBrand.name === brand.name;
+                return (
+                  <button
+                    key={brand.name}
+                    type="button"
+                    onClick={() => {
+                      onSelect(brand);
+                      onClose();
+                    }}
+                    className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer active:scale-95 ${
+                      selected
+                        ? "border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.02] shadow-md"
+                        : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
+                    }`}
+                  >
+                    <BrandMark name={brand.name} size="sm" />
+                    <span className="text-xs font-semibold text-[var(--text-primary)]">
+                      {brand.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom safe area padding */}
+          <div className="pb-safe shrink-0" style={{ paddingBottom: "env(safe-area-inset-bottom, 12px)" }} />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+// ─── Floor Brand List with View More (mobile-aware) ───────────────────────────
+function FloorBrandList({ brands, activeBrand, onSelect, accentColor, floorLabel, selectedClass }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const preview = brands.slice(0, MOBILE_BRAND_PREVIEW);
+
+  return (
+    <>
+      <div className="flex flex-wrap gap-2.5">
+        {/* On mobile: show only preview brands; on md+: show all */}
+        {brands.map((brand, idx) => {
+          const selected = activeBrand.name === brand.name;
+          const isHiddenOnMobile = idx >= MOBILE_BRAND_PREVIEW;
+          return (
+            <ScrollReveal
+              key={brand.name}
+              variant="pop"
+              delay={idx * 0.03}
+              className={isHiddenOnMobile ? "hidden md:block" : ""}
+            >
+              <button
+                type="button"
+                onClick={() => onSelect(brand)}
+                className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
+                  selected ? selectedClass : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
+                }`}
+              >
+                <BrandMark name={brand.name} size="sm" />
+                <span className="text-xs font-semibold text-[var(--text-primary)]">
+                  {brand.name}
+                </span>
+              </button>
+            </ScrollReveal>
+          );
+        })}
+
+        {/* View More button – visible only on mobile when brands exceed preview count */}
+        {brands.length > MOBILE_BRAND_PREVIEW && (
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-2xl border border-dashed border-[var(--border-strong)] bg-[var(--bg-surface)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent-coral)] transition-colors cursor-pointer active:scale-95"
+            style={{ borderColor: accentColor + "60" }}
+          >
+            <span>+{brands.length - MOBILE_BRAND_PREVIEW} more</span>
+            <ChevronDown className="w-3.5 h-3.5" />
+          </button>
+        )}
+      </div>
+
+      {/* Modal (rendered at mobile viewport) */}
+      {modalOpen && (
+        <BrandModal
+          brands={brands}
+          activeBrand={activeBrand}
+          onSelect={onSelect}
+          onClose={() => setModalOpen(false)}
+          accentColor={accentColor}
+          floorLabel={floorLabel}
+        />
+      )}
+    </>
+  );
+}
+
+// ─── Shopping Hero Scene ───────────────────────────────────────────────────────
 function ShoppingHeroScene() {
   const { goToSection } = useFullPageScroll();
+
+  const floorTabs = [
+    { id: "all",    label: "All Levels",   targetIndex: 1, color: "var(--accent-coral)" },
+    { id: "ground", label: "Ground (9)",   targetIndex: 1, color: "#D64E34" },
+    { id: "first",  label: "First (7)",    targetIndex: 2, color: "#0C8A7B" },
+    { id: "second", label: "Second (6)",   targetIndex: 3, color: "#6C3EB8" },
+  ];
 
   return (
     <VideoBackdropSection
@@ -31,65 +196,41 @@ function ShoppingHeroScene() {
       minHeight="min-h-[calc(100svh-4rem)]"
       className="flex items-center py-8 md:py-16"
     >
-      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-center">
-        <div className="lg:col-span-6 space-y-3 lg:space-y-5 text-white">
+      {/* ── Tablet & Desktop layout ── */}
+      <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 md:gap-8 lg:gap-12 items-center">
+
+        {/* Text column */}
+        <div className="md:col-span-1 lg:col-span-6 space-y-4 md:space-y-5 lg:space-y-5 text-white">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <ShoppingBag className="w-4 h-4" />
               <span>Retail Flagships · 22 Stores</span>
             </div>
           </ScrollReveal>
+
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
               className="font-display font-semibold leading-[0.95] text-white drop-shadow-lg"
-              style={{ fontSize: "clamp(2.5rem, 5.4vw, 5.2rem)" }}
+              style={{ fontSize: "clamp(2.2rem, 4.8vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
+
           <p className="text-sm md:text-base text-white/90 max-w-lg leading-relaxed">
             Explore tailored menswear, iconic denim culture, festive ethnic
             couture, active footwear, and Galaxy flagship electronics across
             Ground, First &amp; Second Floors.
           </p>
 
-          {/* Floor Navigation Bar - hidden on mobile (shown after images), visible on desktop in original position */}
-          <div className="hidden lg:inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
-            {[
-              {
-                id: "all",
-                label: "All Levels",
-                targetIndex: 1,
-                color: "var(--accent-coral)",
-              },
-              {
-                id: "ground",
-                label: "Ground (9)",
-                targetIndex: 1,
-                color: "#D64E34",
-              },
-              {
-                id: "first",
-                label: "First (7)",
-                targetIndex: 2,
-                color: "#0C8A7B",
-              },
-              {
-                id: "second",
-                label: "Second (6)",
-                targetIndex: 3,
-                color: "#6C3EB8",
-              },
-            ].map((tab, idx) => (
-              <ScrollReveal
-                key={tab.id}
-                variant="pop"
-                delay={0.08 + idx * 0.04}
-              >
+          {/* Floor nav – visible on md+ in left column, hidden on mobile (shown below images) */}
+          <div className="hidden md:inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
+            {floorTabs.map((tab, idx) => (
+              <ScrollReveal key={tab.id} variant="pop" delay={0.08 + idx * 0.04}>
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
-                  className="px-3.5 sm:px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
+                  className="px-3.5 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
                 >
                   {tab.label}
                 </button>
@@ -98,12 +239,12 @@ function ShoppingHeroScene() {
           </div>
         </div>
 
-        {/* Layered Overlapping Storefront Imagery */}
-<div className="lg:col-span-6 relative min-h-[180px] sm:min-h-[260px] lg:min-h-[380px] flex items-center pr-0 sm:pr-4">
-          <ParallaxDepth offset={-26} className="w-[78%] sm:w-[78%] lg:w-[78%] ml-auto">
+        {/* Image column – tablet gets larger proportions */}
+        <div className="md:col-span-1 lg:col-span-6 relative min-h-[200px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] flex items-center pr-0 sm:pr-4">
+          <ParallaxDepth offset={-26} className="w-[80%] sm:w-[78%] ml-auto">
             <Interactive3DTilt intensity={5}>
               <ScrollReveal variant="scaleDepth" delay={0.08}>
-                <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530] max-h-[220px] sm:max-h-[280px] lg:max-h-none">
+                <div className="rounded-3xl overflow-hidden shadow-2xl border-2 border-[var(--glass-border)] aspect-[4/3] bg-[#2a1530]">
                   <img
                     src={IMAGE_ASSETS.brandLavie}
                     alt="Second Floor luxury handbags showcase inside Orion Mall"
@@ -116,12 +257,10 @@ function ShoppingHeroScene() {
               </ScrollReveal>
             </Interactive3DTilt>
           </ParallaxDepth>
-          <ParallaxDepth
-            offset={32}
-            className="absolute left-0 bottom-0 w-[48%] z-20"
-          >
+
+          <ParallaxDepth offset={32} className="absolute left-0 bottom-0 w-[46%] z-20">
             <ScrollReveal variant="slideLeft" delay={0.14}>
-              <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29] max-h-[160px] sm:max-h-[200px] lg:max-h-none">
+              <div className="animate-float-reverse rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-200/75 aspect-[4/3] bg-[#161b29]">
                 <img
                   src={IMAGE_ASSETS.brandSamsung}
                   alt="Ground Floor Samsung flagship electronics showroom"
@@ -135,44 +274,15 @@ function ShoppingHeroScene() {
           </ParallaxDepth>
         </div>
 
-        {/* Floor Navigation Bar - visible on mobile only, placed after images per requested order */}
-        <div className="lg:hidden col-span-1 w-full flex justify-center pt-1.5">
+        {/* Floor nav – mobile only, shown below images */}
+        <div className="md:hidden col-span-1 w-full flex justify-center pt-1">
           <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[var(--bg-surface-elevated)] border border-[var(--glass-border)] shadow-2xl">
-            {[
-              {
-                id: "all",
-                label: "All Levels",
-                targetIndex: 1,
-                color: "var(--accent-coral)",
-              },
-              {
-                id: "ground",
-                label: "Ground (9)",
-                targetIndex: 1,
-                color: "#D64E34",
-              },
-              {
-                id: "first",
-                label: "First (7)",
-                targetIndex: 2,
-                color: "#0C8A7B",
-              },
-              {
-                id: "second",
-                label: "Second (6)",
-                targetIndex: 3,
-                color: "#6C3EB8",
-              },
-            ].map((tab, idx) => (
-              <ScrollReveal
-                key={tab.id}
-                variant="pop"
-                delay={0.08 + idx * 0.04}
-              >
+            {floorTabs.map((tab, idx) => (
+              <ScrollReveal key={tab.id} variant="pop" delay={0.08 + idx * 0.04}>
                 <button
                   type="button"
                   onClick={() => goToSection(tab.targetIndex)}
-                  className="px-3.5 sm:px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
+                  className="px-3.5 py-2 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer text-[var(--text-primary)] hover:bg-[var(--bg-tint-peach)]/50"
                 >
                   {tab.label}
                 </button>
@@ -185,16 +295,11 @@ function ShoppingHeroScene() {
   );
 }
 
+// ─── Main Page ────────────────────────────────────────────────────────────────
 export function ShoppingPage() {
-  const [activeGroundBrand, setActiveGroundBrand] = useState(
-    RETAIL_FLOORS[0].brands[0],
-  );
-  const [activeFirstBrand, setActiveFirstBrand] = useState(
-    RETAIL_FLOORS[1].brands[0],
-  );
-  const [activeSecondBrand, setActiveSecondBrand] = useState(
-    RETAIL_FLOORS[2].brands[0],
-  );
+  const [activeGroundBrand, setActiveGroundBrand] = useState(RETAIL_FLOORS[0].brands[0]);
+  const [activeFirstBrand,  setActiveFirstBrand]  = useState(RETAIL_FLOORS[1].brands[0]);
+  const [activeSecondBrand, setActiveSecondBrand] = useState(RETAIL_FLOORS[2].brands[0]);
 
   const sectionLabels = [
     "01 · Curated Lookbook",
@@ -237,33 +342,14 @@ export function ShoppingPage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2.5">
-                    {RETAIL_FLOORS[0].brands.map((brand, idx) => {
-                      const selected = activeGroundBrand.name === brand.name;
-                      return (
-                        <ScrollReveal
-                          key={brand.name}
-                          variant="pop"
-                          delay={idx * 0.03}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => setActiveGroundBrand(brand)}
-                            className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
-                              selected
-                                ? "border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
-                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
-                            }`}
-                          >
-                            <BrandMark name={brand.name} size="sm" />
-                            <span className="text-xs font-semibold text-[var(--text-primary)]">
-                              {brand.name}
-                            </span>
-                          </button>
-                        </ScrollReveal>
-                      );
-                    })}
-                  </div>
+                  <FloorBrandList
+                    brands={RETAIL_FLOORS[0].brands}
+                    activeBrand={activeGroundBrand}
+                    onSelect={setActiveGroundBrand}
+                    accentColor="#D64E34"
+                    floorLabel="Level 00 · Ground Floor"
+                    selectedClass="border-[var(--accent-coral)] bg-[var(--bg-tint-peach)] dark:bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
+                  />
                 </div>
               </ScrollReveal>
 
@@ -365,10 +451,7 @@ export function ShoppingPage() {
                 </Interactive3DTilt>
               </div>
 
-              <ScrollReveal
-                variant="slideLeft"
-                className="lg:col-span-5 order-1 lg:order-2"
-              >
+              <ScrollReveal variant="slideLeft" className="lg:col-span-5 order-1 lg:order-2">
                 <div className="space-y-5 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-5 sm:p-8 shadow-2xl">
                   <div>
                     <ScrollReveal variant="drop">
@@ -387,33 +470,14 @@ export function ShoppingPage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2.5">
-                    {RETAIL_FLOORS[1].brands.map((brand, idx) => {
-                      const selected = activeFirstBrand.name === brand.name;
-                      return (
-                        <ScrollReveal
-                          key={brand.name}
-                          variant="pop"
-                          delay={idx * 0.03}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => setActiveFirstBrand(brand)}
-                            className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
-                              selected
-                                ? "border-[var(--accent-turquoise)] bg-[var(--bg-tint-mint)] dark:bg-[var(--bg-tint-sky)] scale-[1.03] shadow-md"
-                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
-                            }`}
-                          >
-                            <BrandMark name={brand.name} size="sm" />
-                            <span className="text-xs font-semibold text-[var(--text-primary)]">
-                              {brand.name}
-                            </span>
-                          </button>
-                        </ScrollReveal>
-                      );
-                    })}
-                  </div>
+                  <FloorBrandList
+                    brands={RETAIL_FLOORS[1].brands}
+                    activeBrand={activeFirstBrand}
+                    onSelect={setActiveFirstBrand}
+                    accentColor="#0C8A7B"
+                    floorLabel="Level 01 · First Floor"
+                    selectedClass="border-[var(--accent-turquoise)] bg-[var(--bg-tint-mint)] dark:bg-[var(--bg-tint-sky)] scale-[1.03] shadow-md"
+                  />
                 </div>
               </ScrollReveal>
             </div>
@@ -450,33 +514,14 @@ export function ShoppingPage() {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2.5">
-                    {RETAIL_FLOORS[2].brands.map((brand, idx) => {
-                      const selected = activeSecondBrand.name === brand.name;
-                      return (
-                        <ScrollReveal
-                          key={brand.name}
-                          variant="pop"
-                          delay={idx * 0.03}
-                        >
-                          <button
-                            type="button"
-                            onClick={() => setActiveSecondBrand(brand)}
-                            className={`flex items-center gap-2.5 pr-3 p-1.5 rounded-2xl border transition-all cursor-pointer ${
-                              selected
-                                ? "border-[var(--accent-plum)] bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
-                                : "border-[var(--border-hairline)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
-                            }`}
-                          >
-                            <BrandMark name={brand.name} size="sm" />
-                            <span className="text-xs font-semibold text-[var(--text-primary)]">
-                              {brand.name}
-                            </span>
-                          </button>
-                        </ScrollReveal>
-                      );
-                    })}
-                  </div>
+                  <FloorBrandList
+                    brands={RETAIL_FLOORS[2].brands}
+                    activeBrand={activeSecondBrand}
+                    onSelect={setActiveSecondBrand}
+                    accentColor="#6C3EB8"
+                    floorLabel="Level 02 · Second Floor"
+                    selectedClass="border-[var(--accent-plum)] bg-[var(--bg-tint-lavender)] scale-[1.03] shadow-md"
+                  />
                 </div>
               </ScrollReveal>
 
