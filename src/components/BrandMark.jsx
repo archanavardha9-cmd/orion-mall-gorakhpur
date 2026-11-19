@@ -194,6 +194,8 @@ export function BrandMark({ name, size = 'md', className = '', raw = false }) {
       <img
         src={logo.src}
         alt={logo.alt}
+        width="120"
+        height="36"
         loading="lazy"
         decoding="async"
         className={`w-auto object-contain block ${imgHeightClasses} ${className}`}
@@ -224,6 +226,8 @@ export function BrandMark({ name, size = 'md', className = '', raw = false }) {
       <img
         src={logo.src}
         alt={logo.alt}
+        width="120"
+        height="36"
         loading="lazy"
         decoding="async"
         className={`w-auto h-full ${imgHeightClasses} max-w-full object-contain block`}

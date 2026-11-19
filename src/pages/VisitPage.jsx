@@ -226,18 +226,19 @@ export function VisitPage() {
                 </ScrollReveal>
                 <ul className="divide-y divide-[var(--border-hairline)]">
                   {MALL_INFO.facilities.map((facility, idx) => (
-                    <ScrollReveal
-                      key={facility}
-                      variant="rise"
-                      delay={idx * 0.04}
-                    >
-                      <li className="py-3 flex items-center gap-4 text-sm text-[var(--text-secondary)]">
-                        <span className="font-mono-tabular text-xs font-bold text-[var(--accent-coral)]">
-                          0{idx + 1}
-                        </span>
-                        <span>{facility}</span>
-                      </li>
-                    </ScrollReveal>
+                    <li key={facility}>
+                      <ScrollReveal
+                        variant="rise"
+                        delay={idx * 0.04}
+                      >
+                        <div className="py-3 flex items-center gap-4 text-sm text-[var(--text-secondary)]">
+                          <span className="font-mono-tabular text-xs font-bold text-[var(--accent-coral)]">
+                            0{idx + 1}
+                          </span>
+                          <span>{facility}</span>
+                        </div>
+                      </ScrollReveal>
+                    </li>
                   ))}
                 </ul>
               </div>

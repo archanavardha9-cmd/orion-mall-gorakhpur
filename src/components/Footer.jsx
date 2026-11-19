@@ -29,6 +29,8 @@ export function Footer() {
                 <img
                   src="/images/orion_mall_logo.png"
                   alt="Orion Mall"
+                  width="220"
+                  height="64"
                   className="h-14 md:h-16 w-auto object-contain"
                   style={{ maxWidth: "220px" }}
                   loading="lazy"
@@ -69,12 +71,11 @@ export function Footer() {
             </ScrollReveal>
             <ul className="space-y-2">
               {ROUTES.map((route, idx) => (
-                <ScrollReveal
-                  key={route.path}
-                  variant="rise"
-                  delay={0.04 + idx * 0.03}
-                >
-                  <li>
+                <li key={route.path}>
+                  <ScrollReveal
+                    variant="rise"
+                    delay={0.04 + idx * 0.03}
+                  >
                     <a
                       href={route.path}
                       onClick={(e) => {
@@ -85,8 +86,8 @@ export function Footer() {
                     >
                       {route.label}
                     </a>
-                  </li>
-                </ScrollReveal>
+                  </ScrollReveal>
+                </li>
               ))}
             </ul>
           </div>

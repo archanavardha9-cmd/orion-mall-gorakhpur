@@ -31,7 +31,8 @@ export function Header() {
           <img
             src="/images/orion_mall_logo.png"
             alt="Orion Mall"
-            /* natural aspect ratio preserved; height drives size */
+            width="180"
+            height="56"
             className="h-10 sm:h-11 md:h-14 w-auto object-contain"
             style={{ maxWidth: "180px" }}
             loading="eager"
