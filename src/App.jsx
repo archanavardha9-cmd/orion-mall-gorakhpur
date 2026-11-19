@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { ThemeProvider } from './utils/themeContext';
 import { RouterProvider, useRouter } from './utils/router';
-import { AutoScrollProvider } from './utils/autoScrollContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -51,15 +50,13 @@ export default function App() {
   return (
     <ThemeProvider>
       <RouterProvider>
-        <AutoScrollProvider>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-1">
-              <PageStage />
-            </main>
-            <Footer />
-          </div>
-        </AutoScrollProvider>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-1">
+            <PageStage />
+          </main>
+          <Footer />
+        </div>
       </RouterProvider>
     </ThemeProvider>
   );

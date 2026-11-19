@@ -179,8 +179,8 @@ export function HeroVideoStage() {
               ))}
             </div>
 
-            {/* Featured Brand Strip - Mobile: Coloured individual containers, no outer black wrapper */}
-            <div className="sm:hidden grid grid-cols-2 gap-2.5">
+            {/* Featured Brand Strip - Mobile: Compact coloured individual containers */}
+            <div className="sm:hidden grid grid-cols-2 gap-2 max-w-[320px] pt-0.5">
               {HERO_FEATURED_LOGOS.map((name, i) => {
                 const brandStyle = HERO_BRAND_CONFIG[name] || {
                   bg: "bg-white",
@@ -196,17 +196,17 @@ export function HeroVideoStage() {
                     className="w-full"
                   >
                     <div
-                      className={`w-full h-12 rounded-xl ${brandStyle.bg} ${brandStyle.border} border shadow-md flex items-center justify-center px-3 py-2 transition-transform`}
+                      className={`w-full h-9.5 rounded-lg ${brandStyle.bg} ${brandStyle.border} border shadow-xs flex items-center justify-center px-2.5 py-1 transition-transform`}
                       style={{
                         borderBottomColor: brandStyle.accent,
-                        borderBottomWidth: "2.5px",
+                        borderBottomWidth: "2px",
                       }}
                     >
                       <BrandMark
                         name={name}
                         size="md"
                         raw={true}
-                        className="max-h-7 max-w-[100px] w-auto object-contain filter drop-shadow-sm"
+                        className="max-h-5.5 max-w-[82px] w-auto object-contain filter drop-shadow-sm"
                       />
                     </div>
                   </ScrollReveal>

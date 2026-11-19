@@ -1,15 +1,18 @@
-import { Compass, ArrowDown, ArrowUp, ArrowRight } from 'lucide-react';
-import { VideoBackdropSection } from '../components/VideoBackdropSection';
-import { MallExplorer3D } from '../components/MallExplorer3D';
-import { FullPageContainer, useFullPageScroll } from '../components/FullPageContainer';
+import { Compass, ArrowDown, ArrowUp, ArrowRight } from "lucide-react";
+import { VideoBackdropSection } from "../components/VideoBackdropSection";
+import { MallExplorer3D } from "../components/MallExplorer3D";
+import {
+  FullPageContainer,
+  useFullPageScroll,
+} from "../components/FullPageContainer";
 import {
   DepthEmergeSection,
   Interactive3DTilt,
-  ParallaxDepth
-} from '../animations/MotionPrimitives';
-import { ScrollReveal } from '../animations/ScrollReveal';
-import { IMAGE_ASSETS, VIDEO_ASSETS } from '../assets/mediaRegistry';
-import { useRouter } from '../utils/router';
+  ParallaxDepth,
+} from "../animations/MotionPrimitives";
+import { ScrollReveal } from "../animations/ScrollReveal";
+import { IMAGE_ASSETS, VIDEO_ASSETS } from "../assets/mediaRegistry";
+import { useRouter } from "../utils/router";
 
 function ExploreHeroScene() {
   const { goToSection } = useFullPageScroll();
@@ -32,14 +35,15 @@ function ExploreHeroScene() {
           <ScrollReveal variant="rise" delay={0.05}>
             <h1
               className="font-display font-semibold leading-[0.94] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
-              style={{ fontSize: 'clamp(2.5rem, 5.2vw, 4.8rem)' }}
+              style={{ fontSize: "clamp(2.5rem, 5.2vw, 4.8rem)" }}
             >
               Walk Through Every Level
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.1}>
             <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-lg mx-auto leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
-              Move along sunlit corridors, inspect storefronts, and experience Orion Mall in full real-time 3D.
+              Move along sunlit corridors, inspect storefronts, and experience
+              Orion Mall in full real-time 3D.
             </p>
           </ScrollReveal>
         </div>
@@ -65,12 +69,15 @@ function Explore3DScene() {
   const { navigate } = useRouter();
 
   return (
-    <div id="mall-3d-walkthrough" className="w-full h-full min-h-[calc(100svh-4rem)] relative interactive-scroll-allow">
+    <div
+      id="mall-3d-walkthrough"
+      className="w-full h-full min-h-[calc(100svh-4rem)] relative interactive-scroll-allow"
+    >
       <MallExplorer3D
         onSelectFloorPage={(floorId) => {
-          if (floorId === 'third') navigate('/dining');
-          else if (floorId === 'fourth') navigate('/entertainment');
-          else navigate('/shopping');
+          if (floorId === "third") navigate("/dining");
+          else if (floorId === "fourth") navigate("/entertainment");
+          else navigate("/shopping");
         }}
       />
     </div>
@@ -124,7 +131,10 @@ function ExploreFinaleScene() {
               </ParallaxDepth>
             </div>
 
-            <ScrollReveal variant="slideRight" className="lg:col-span-5 order-1 lg:order-2">
+            <ScrollReveal
+              variant="slideRight"
+              className="lg:col-span-5 order-1 lg:order-2"
+            >
               <div className="space-y-4 bg-[var(--bg-surface-elevated)] border-2 border-[var(--glass-border)] rounded-3xl p-6 sm:p-8 shadow-2xl">
                 <div>
                   <ScrollReveal variant="drop">
@@ -135,14 +145,16 @@ function ExploreFinaleScene() {
                   <ScrollReveal variant="rise" delay={0.04}>
                     <h2
                       className="font-display font-semibold leading-[0.98] text-[var(--text-primary)] mt-1.5"
-                      style={{ fontSize: 'clamp(2rem, 3.8vw, 3.4rem)' }}
+                      style={{ fontSize: "clamp(2rem, 3.8vw, 3.4rem)" }}
                     >
                       Sunlit From Ground to Sky
                     </h2>
                   </ScrollReveal>
                   <ScrollReveal variant="rise" delay={0.08}>
                     <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mt-2.5 max-w-md">
-                      Five open gallery levels linked by panoramic glass elevators and continuous escalators in Mohaddipur, Gorakhpur.
+                      Five open gallery levels linked by panoramic glass
+                      elevators and continuous escalators in Mohaddipur,
+                      Gorakhpur.
                     </p>
                   </ScrollReveal>
                 </div>
@@ -161,7 +173,7 @@ function ExploreFinaleScene() {
                   <ScrollReveal variant="pop" delay={0.16}>
                     <button
                       type="button"
-                      onClick={() => navigate('/visit')}
+                      onClick={() => navigate("/visit")}
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-turquoise)] transition-colors cursor-pointer"
                     >
                       <span>Plan Your Visit</span>
@@ -180,9 +192,9 @@ function ExploreFinaleScene() {
 
 export function ExplorePage() {
   const sectionLabels = [
-    '01 · Spatial Portal',
-    '02 · Real 3D Mall Explorer',
-    '03 · Architectural Perspective'
+    "01 · Spatial Portal",
+    "02 · Real 3D Mall Explorer",
+    "03 · Architectural Perspective",
   ];
 
   return (
