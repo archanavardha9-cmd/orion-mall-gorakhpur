@@ -159,21 +159,21 @@ export function DiningPage() {
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75 }}
-            className="max-w-4xl space-y-4 sm:space-y-6 text-[#f7f3ec]"
+            className="max-w-4xl space-y-4 sm:space-y-6 text-[#381c10]"
           >
-            <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
+            <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[#9a3412] font-bold">
               <UtensilsCrossed className="w-4 h-4" />
               <span>Third Floor Pavilion</span>
             </ScrollReveal>
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
-                className="font-display font-semibold leading-[0.92] text-[#f3ede2]"
+                className="font-display font-semibold leading-[0.92] text-[#221008]"
                 style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
-            <p className="text-sm md:text-lg text-[#f7f3ec] max-w-2xl leading-relaxed">
+            <p className="text-sm md:text-lg text-[#381c10] font-medium max-w-2xl leading-relaxed">
               Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
             </p>
           </motion.div>

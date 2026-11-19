@@ -88,15 +88,15 @@ export function HeroVideoStage() {
       className="flex flex-col justify-between"
     >
       {/* Top Architectural Coordinate Line */}
-      <div className="relative z-10 w-full bg-gradient-to-b from-[#120b20]/64 via-[#120b20]/28 to-transparent">
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-amber-100 border-b border-white/20 pb-3">
+      <div className="relative z-10 w-full bg-gradient-to-b from-[#f5ede2]/95 via-[#f5ede2]/50 to-transparent">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-[#3e3056] border-b border-[#3e3056]/15 pb-3">
           <ScrollReveal variant="slideRight">
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase text-amber-100">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase text-[#3e3056] font-semibold">
               Mohaddipur · Gorakhpur · Uttar Pradesh
             </span>
           </ScrollReveal>
           <ScrollReveal variant="slideLeft" delay={0.05}>
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-amber-200">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-[#c2410c] font-semibold">
               Five Levels · Fashion · Dining · Cinema
             </span>
           </ScrollReveal>
@@ -107,21 +107,21 @@ export function HeroVideoStage() {
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-12 py-4 md:py-6 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* Left Focal Anchor */}
-          <div className="lg:col-span-7 text-[#f7f3ec] space-y-4">
+          <div className="lg:col-span-7 text-[#2b1f3d] space-y-4">
             <ScrollReveal variant="rise" delay={0.04}>
               <h1
-                className="font-display font-semibold leading-[0.94] tracking-tight text-[#f3ede2]"
-                style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.6rem)" }}
+                className="font-display font-semibold leading-[0.94] tracking-tight text-[#160d26]"
+                style={{ fontSize: "clamp(2.75rem, 5vw, 4.6rem)" }}
               >
                 Orion Mall
-                <span className="block italic font-medium text-amber-300 mt-0.5">
+                <span className="block italic font-medium text-[#c2410c] mt-0.5">
                   Gorakhpur
                 </span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal variant="rise" delay={0.08}>
-              <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-sm md:text-base text-[#2b1f3d] font-medium max-w-xl leading-relaxed">
                 Step inside Mohaddipur&apos;s sunlit five-level destination —
                 uniting flagship apparel, denim culture, festive couture, Third
                 Floor culinary favourites, and PVR INOX Cinemas.
@@ -144,7 +144,7 @@ export function HeroVideoStage() {
                 <button
                   type="button"
                   onClick={() => navigate("/shopping")}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/75 text-amber-100 border border-amber-200/40 hover:bg-[#1e1233]/90 transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap shadow-lg backdrop-blur-md"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233] text-amber-200 border border-amber-300/40 hover:bg-[#2b1a47] transition-all hover:-translate-y-0.5 cursor-pointer whitespace-nowrap shadow-lg backdrop-blur-md"
                 >
                   <span>Explore Brands</span>
                   <ArrowRight className="w-4 h-4" />
@@ -155,7 +155,7 @@ export function HeroVideoStage() {
                 <button
                   type="button"
                   onClick={() => navigate("/entertainment")}
-                  className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/55 text-amber-200 border border-amber-200/35 hover:bg-[#1e1233]/75 transition-colors cursor-pointer whitespace-nowrap"
+                  className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-[#1e1233]/90 text-amber-200 border border-amber-200/40 hover:bg-[#1e1233] transition-colors cursor-pointer whitespace-nowrap shadow-md"
                 >
                   <Film className="w-4 h-4" />
                   <span>Movie Tickets</span>
@@ -171,16 +171,16 @@ export function HeroVideoStage() {
                   variant="pop"
                   delay={0.15 + i * 0.03}
                 >
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#180f28]/75 border border-amber-200/35 text-xs text-amber-100 shadow-sm backdrop-blur-md">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/90 border border-[#3e3056]/20 text-xs text-[#1a102b] shadow-xs backdrop-blur-md">
                     <BrandMark name={name} size="sm" />
-                    <span className="font-medium text-[11px] text-amber-100">{name}</span>
+                    <span className="font-semibold text-[11px] text-[#1a102b]">{name}</span>
                   </div>
                 </ScrollReveal>
               ))}
             </div>
 
             {/* Featured Brand Strip - Mobile: Compact coloured individual containers */}
-            <div className="sm:hidden grid grid-cols-2 gap-2 max-w-[320px] pt-0.5">
+            <div className="sm:hidden grid grid-cols-2 gap-1.5 max-w-[240px] pt-1">
               {HERO_FEATURED_LOGOS.map((name, i) => {
                 const brandStyle = HERO_BRAND_CONFIG[name] || {
                   bg: "bg-white",
@@ -196,7 +196,7 @@ export function HeroVideoStage() {
                     className="w-full"
                   >
                     <div
-                      className={`w-full h-9.5 rounded-lg ${brandStyle.bg} ${brandStyle.border} border shadow-xs flex items-center justify-center px-2.5 py-1 transition-transform`}
+                      className={`w-full h-8 rounded-lg ${brandStyle.bg} ${brandStyle.border} border shadow-xs flex items-center justify-center px-2 py-0.5 transition-transform`}
                       style={{
                         borderBottomColor: brandStyle.accent,
                         borderBottomWidth: "2px",
@@ -206,7 +206,7 @@ export function HeroVideoStage() {
                         name={name}
                         size="md"
                         raw={true}
-                        className="max-h-5.5 max-w-[82px] w-auto object-contain filter drop-shadow-sm"
+                        className="max-h-4 max-w-[62px] w-auto object-contain filter"
                       />
                     </div>
                   </ScrollReveal>

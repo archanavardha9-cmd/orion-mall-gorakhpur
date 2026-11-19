@@ -223,9 +223,9 @@ function ShoppingHeroScene() {
       {/* ── Tablet & Desktop layout ── */}
       <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5 md:gap-8 lg:gap-12 items-center">
         {/* Text column */}
-        <div className="md:col-span-1 lg:col-span-6 space-y-2.5 sm:space-y-4 md:space-y-5 lg:space-y-5 text-[#f7f3ec]">
+        <div className="md:col-span-1 lg:col-span-6 space-y-2.5 sm:space-y-4 md:space-y-5 lg:space-y-5 text-[#2d1e3d]">
           <ScrollReveal variant="drop">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[#9a3412] font-bold">
               <ShoppingBag className="w-4 h-4" />
               <span>Retail Flagships · 22 Stores</span>
             </div>
@@ -233,14 +233,14 @@ function ShoppingHeroScene() {
 
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.95] text-[#f3ede2]"
+              className="font-display font-semibold leading-[0.95] text-[#160d24]"
               style={{ fontSize: "clamp(2.2rem, 4.8vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
 
-          <p className="text-sm md:text-base text-[#f7f3ec] max-w-lg leading-relaxed">
+          <p className="text-sm md:text-base text-[#2d1e3d] font-medium max-w-lg leading-relaxed">
             Explore tailored menswear, iconic denim culture, festive ethnic
             couture, active footwear, and Galaxy flagship electronics across
             Ground, First &amp; Second Floors.

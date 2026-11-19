@@ -29,40 +29,40 @@ export function VisitPage() {
         minHeight="min-h-[calc(100svh-4rem)]"
         className="flex flex-col justify-between py-8 md:py-16"
       >
-        <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-8 md:-mt-16 pt-8 md:pt-16 pb-5">
-          <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 flex items-center justify-between text-amber-100 font-mono-tabular text-xs tracking-[0.2em]">
+        <div className="w-full bg-gradient-to-b from-[#f5ede2]/95 via-[#f5ede2]/50 to-transparent -mt-8 md:-mt-16 pt-8 md:pt-16 pb-5">
+          <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 flex items-center justify-between text-[#3e3056] font-mono-tabular text-xs tracking-[0.2em] border-b border-[#3e3056]/15 pb-2">
             <ScrollReveal variant="slideRight">
-              <span className="text-amber-100">
+              <span className="text-[#3e3056] font-semibold">
                 26.7606° N · 83.3956° E
               </span>
             </ScrollReveal>
             <ScrollReveal variant="slideLeft">
-              <span className="hidden sm:inline text-amber-200">
+              <span className="hidden sm:inline text-[#c2410c] font-semibold">
                 MOHADDIPUR · GORAKHPUR
               </span>
             </ScrollReveal>
           </div>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-[#f7f3ec]">
-          <div className="border-t border-white/35 pt-5 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-[#291b3b]">
+          <div className="border-t border-[#3e3056]/15 pt-5 sm:pt-8 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
             <div className="lg:col-span-8 space-y-3 sm:space-y-4">
               <ScrollReveal variant="drop">
-                <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[#9a3412] font-bold">
                   <MapPin className="w-4 h-4" />
                   <span>Getting Here</span>
                 </div>
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.05}>
                 <h1
-                  className="font-display font-semibold leading-[0.92] text-[#f3ede2]"
+                  className="font-display font-semibold leading-[0.92] text-[#110920]"
                   style={{ fontSize: "clamp(2.2rem, 6.5vw, 5.8rem)" }}
                 >
                   Visit Orion Mall
                 </h1>
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.1}>
-                <p className="text-sm md:text-base text-[#f7f3ec] max-w-2xl leading-relaxed">
+                <p className="text-sm md:text-base text-[#291b3b] font-medium max-w-2xl leading-relaxed">
                   {MALL_INFO.locality}
                 </p>
               </ScrollReveal>

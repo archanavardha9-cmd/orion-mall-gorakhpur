@@ -163,7 +163,7 @@ export function VideoBackdropSection({
     side: 'bg-gradient-to-r from-[#120b20]/55 via-[#120b20]/15 to-transparent',
     sideRight: 'bg-gradient-to-l from-[#120b20]/55 via-[#120b20]/15 to-transparent',
     bottom: 'bg-gradient-to-t from-[#120b20]/75 via-[#120b20]/25 to-transparent',
-    heroPrism: 'bg-gradient-to-r from-[#140d21]/60 via-[#140d21]/20 to-transparent',
+    heroPrism: 'bg-gradient-to-r from-[#fbf7f0]/92 via-[#fbf7f0]/62 to-[#fbf7f0]/15',
     lightMist: 'bg-[#120b20]/10',
     jewelMist: 'bg-[#120b20]/12',
     none: 'bg-transparent'

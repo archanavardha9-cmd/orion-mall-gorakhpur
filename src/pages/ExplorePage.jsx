@@ -24,24 +24,24 @@ function ExploreHeroScene() {
       isHero
       className="flex items-center justify-center text-center py-8 md:py-12"
     >
-      <div className="max-w-3xl mx-auto px-5 text-[#f7f3ec] space-y-5 my-auto">
+      <div className="max-w-3xl mx-auto px-5 text-[#281b3b] space-y-5 my-auto">
         <div className="space-y-3">
           <ScrollReveal variant="drop">
-            <div className="inline-flex items-center gap-2 text-xs font-mono-tabular tracking-[0.22em] uppercase text-teal-200">
+            <div className="inline-flex items-center gap-2 text-xs font-mono-tabular tracking-[0.22em] uppercase text-[#0a6c60] font-bold">
               <Compass className="w-4 h-4" />
               <span>Spatial Mall Walkthrough</span>
             </div>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.94] text-[#f3ede2]"
+              className="font-display font-semibold leading-[0.94] text-[#120a22]"
               style={{ fontSize: "clamp(2.5rem, 5.2vw, 4.8rem)" }}
             >
               Walk Through Every Level
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.1}>
-            <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-lg mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base text-[#281b3b] font-medium max-w-lg mx-auto leading-relaxed">
               Move along sunlit corridors, inspect storefronts, and experience
               Orion Mall in full real-time 3D.
             </p>
