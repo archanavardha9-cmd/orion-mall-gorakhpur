@@ -20,10 +20,14 @@ export default defineConfig({
     target: 'es2020',
     // Suppress chunk size warning for large 3D vendor chunk
     chunkSizeWarningLimit: 600,
-    // Enable CSS code splitting for better caching
+    // Single CSS bundle — prevents FOUC from multiple CSS loads
     cssCodeSplit: false,
     // Minify with esbuild (default, fastest)
     minify: 'esbuild',
+    // Disable automatic modulepreload injection for lazy chunks
+    // Vite injects modulepreload for ALL chunks by default — this causes lazy chunks
+    // (MallExplorer3D/Three.js) to be fetched eagerly, defeating code splitting.
+    modulePreload: { polyfill: false },
     rollupOptions: {
       output: {
         // Manual chunks: split heavy vendors from app code
@@ -37,20 +41,18 @@ export default defineConfig({
             return 'vendor-motion';
           }
           // React core runtime
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/scheduler')) {
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/scheduler')
+          ) {
             return 'vendor-react';
           }
           // Lucide icons — tree-shaken but still a separate chunk helps caching
           if (id.includes('node_modules/lucide-react')) {
             return 'vendor-lucide';
           }
-          // Page-level chunks (lazy loaded)
-          if (id.includes('src/pages/ExplorePage')) return 'ExplorePage';
-          if (id.includes('src/pages/ShoppingPage')) return 'ShoppingPage';
-          if (id.includes('src/pages/DiningPage')) return 'DiningPage';
-          if (id.includes('src/pages/EntertainmentPage')) return 'EntertainmentPage';
-          if (id.includes('src/pages/VisitPage')) return 'VisitPage';
-          // MallExplorer3D — only needed on Explore page, should be lazy
+          // MallExplorer3D — only needed on Explore page, lazy loaded
           if (id.includes('src/components/MallExplorer3D')) return 'MallExplorer3D';
         },
       },
