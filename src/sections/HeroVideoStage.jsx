@@ -96,7 +96,7 @@ export function HeroVideoStage() {
             </span>
           </ScrollReveal>
           <ScrollReveal variant="slideLeft" delay={0.05}>
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-[#c2410c] font-semibold">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-black font-semibold">
               Five Levels · Fashion · Dining · Cinema
             </span>
           </ScrollReveal>
