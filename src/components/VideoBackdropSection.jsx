@@ -200,6 +200,8 @@ export function VideoBackdropSection({
             muted
             playsInline
             preload={isHero ? "auto" : "metadata"}
+            poster={video?.poster || undefined}
+            fetchPriority={isHero ? "high" : "auto"}
             onError={() => setHasVideoError(true)}
             aria-hidden="true"
             style={{ objectPosition: resolvedPosition }}

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orion Mall Gorakhpur — Fashion, Dining & PVR INOX Cinemas</title>
+    <title>Orion Mall Gorakhpur — Fashion, Dining &amp; PVR INOX Cinemas</title>
     <meta
       name="description"
       content="Explore Orion Mall in Mohaddipur, Gorakhpur, Uttar Pradesh. Discover signature fashion brands across four curated retail levels, Third Floor dining and salon, and PVR INOX Cinemas on the Fourth Floor."
     />
-    <meta property="og:title" content="Orion Mall Gorakhpur — Fashion, Dining & PVR INOX Cinemas" />
+    <meta property="og:title" content="Orion Mall Gorakhpur — Fashion, Dining &amp; PVR INOX Cinemas" />
     <meta
       property="og:description"
       content="Explore Orion Mall in Mohaddipur, Gorakhpur. Ground to Fourth Floor shopping, dining, and PVR INOX Cinemas."
@@ -16,9 +16,13 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://orion-mall-gorakhpur.vercel.app/" />
+    <!-- Favicon: small WebP preferred, PNG fallback -->
+    <link rel="icon" type="image/webp" href="/images/orion_mall_logo_sm.webp" />
     <link rel="icon" type="image/png" href="/images/orion_mall_logo.png" />
+    <!-- Font preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Non-blocking Google Fonts -->
     <link
       rel="preload"
       as="style"
@@ -36,6 +40,16 @@
         rel="stylesheet"
       />
     </noscript>
+    <!-- PERFORMANCE: Preload hero LCP video — makes it discoverable before React hydrates -->
+    <link rel="preload" as="video" href="/videos/video_atrium_light.mp4" type="video/mp4" />
+    <!-- PERFORMANCE: Preload hero poster for instant above-the-fold paint on slow connections -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/hero_atrium_poster.webp"
+      imagesrcset="/images/hero_atrium_poster_mobile.webp 768w, /images/hero_atrium_poster.webp 1280w"
+      imagesizes="100vw"
+    />
   </head>
   <body>
     <div id="root"></div>
