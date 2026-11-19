@@ -23,6 +23,7 @@ export function VideoBackdropSection({
 }) {
   const videoRef = useRef(null);
   const [hasVideoError, setHasVideoError] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const stopTimeoutRef = useRef(null);
   const isScrubbingRef = useRef(false);
   const targetTimeRef = useRef(0);
@@ -32,8 +33,64 @@ export function VideoBackdropSection({
     setHasVideoError(false);
   }, [video?.src]);
 
+  // Progressive activation: Hero loads on user interaction or idle; non-hero loads on intersection
+  useEffect(() => {
+    const activate = () => setShouldLoadVideo(true);
+
+    if (isHero) {
+      const onUserAction = () => {
+        activate();
+        window.removeEventListener('scroll', onUserAction);
+        window.removeEventListener('wheel', onUserAction);
+        window.removeEventListener('touchstart', onUserAction);
+      };
+
+      window.addEventListener('scroll', onUserAction, { passive: true, once: true });
+      window.addEventListener('wheel', onUserAction, { passive: true, once: true });
+      window.addEventListener('touchstart', onUserAction, { passive: true, once: true });
+
+      const idleId = typeof requestIdleCallback !== 'undefined'
+        ? requestIdleCallback(activate, { timeout: 2000 })
+        : setTimeout(activate, 1500);
+
+      return () => {
+        window.removeEventListener('scroll', onUserAction);
+        window.removeEventListener('wheel', onUserAction);
+        window.removeEventListener('touchstart', onUserAction);
+        if (typeof cancelIdleCallback !== 'undefined') cancelIdleCallback(idleId);
+        else clearTimeout(idleId);
+      };
+    } else {
+      if (!window.IntersectionObserver) {
+        setShouldLoadVideo(true);
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0]?.isIntersecting) {
+            activate();
+            observer.disconnect();
+          }
+        },
+        { rootMargin: '350px' }
+      );
+
+      const el = id ? document.getElementById(id) : null;
+      if (el) {
+        observer.observe(el);
+      } else {
+        const timeout = setTimeout(activate, 2000);
+        return () => clearTimeout(timeout);
+      }
+
+      return () => observer.disconnect();
+    }
+  }, [isHero, id]);
+
   // Initial video setup: mute, preload, and prime the first frame cleanly (prevent black frames)
   useEffect(() => {
+    if (!shouldLoadVideo) return;
     const vid = videoRef.current;
     if (!vid) return;
 
@@ -181,25 +238,32 @@ export function VideoBackdropSection({
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none bg-[var(--bg-canvas)] overflow-hidden"
       >
-        {hasVideoError && video?.poster ? (
-          <img
-            src={video.poster}
-            alt={video.alt || 'Orion Mall footage'}
-            referrerPolicy="no-referrer"
-            loading={isHero ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={isHero ? "high" : "auto"}
-            style={{ objectPosition: resolvedPosition }}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        ) : (
+        {video?.poster && (
+          <picture>
+            {video.posterMobile && (
+              <source media="(max-width: 768px)" srcSet={video.posterMobile} type="image/webp" />
+            )}
+            <img
+              src={video.poster}
+              alt={video.alt || 'Orion Mall footage'}
+              referrerPolicy="no-referrer"
+              loading={isHero ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={isHero ? "high" : "auto"}
+              style={{ objectPosition: resolvedPosition }}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </picture>
+        )}
+        {!hasVideoError && shouldLoadVideo && (
           <video
             ref={videoRef}
             key={video?.src}
             src={video?.src}
+            poster={video?.poster}
             muted
             playsInline
-            preload={isHero ? "auto" : "metadata"}
+            preload={isHero ? "metadata" : "none"}
             onError={() => setHasVideoError(true)}
             aria-hidden="true"
             style={{ objectPosition: resolvedPosition }}

@@ -28,17 +28,20 @@ export function Header() {
           aria-label="Orion Mall – go to home page"
           className="shrink-0 flex items-center focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
         >
-          <img
-            src="/images/orion_mall_logo.png"
-            alt="Orion Mall"
-            width="180"
-            height="56"
-            className="h-10 sm:h-11 md:h-14 w-auto object-contain"
-            style={{ maxWidth: "180px" }}
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-          />
+          <picture>
+            <source srcSet="/images/orion_mall_logo_sm.webp" type="image/webp" />
+            <img
+              src="/images/orion_mall_logo.webp"
+              alt="Orion Mall"
+              width="180"
+              height="56"
+              className="h-10 sm:h-11 md:h-14 w-auto object-contain"
+              style={{ maxWidth: "180px" }}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
         </a>
 
         {/* Zone 2: Desktop nav links */}

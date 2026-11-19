@@ -1,6 +1,6 @@
+import { lazy, Suspense } from "react";
 import { Compass, ArrowDown, ArrowUp, ArrowRight } from "lucide-react";
 import { VideoBackdropSection } from "../components/VideoBackdropSection";
-import { MallExplorer3D } from "../components/MallExplorer3D";
 import {
   FullPageContainer,
   useFullPageScroll,
@@ -13,6 +13,12 @@ import {
 import { ScrollReveal } from "../animations/ScrollReveal";
 import { IMAGE_ASSETS, VIDEO_ASSETS } from "../assets/mediaRegistry";
 import { useRouter } from "../utils/router";
+
+const MallExplorer3D = lazy(() =>
+  import("../components/MallExplorer3D").then((m) => ({
+    default: m.MallExplorer3D,
+  }))
+);
 
 function ExploreHeroScene() {
   const { goToSection } = useFullPageScroll();
@@ -73,13 +79,24 @@ function Explore3DScene() {
       id="mall-3d-walkthrough"
       className="w-full h-full min-h-[calc(100svh-4rem)] relative interactive-scroll-allow"
     >
-      <MallExplorer3D
-        onSelectFloorPage={(floorId) => {
-          if (floorId === "third") navigate("/dining");
-          else if (floorId === "fourth") navigate("/entertainment");
-          else navigate("/shopping");
-        }}
-      />
+      <Suspense
+        fallback={
+          <div className="w-full h-full min-h-[calc(100svh-4rem)] flex items-center justify-center bg-[var(--bg-canvas)]">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-10 h-10 border-2 border-[var(--accent-coral)] border-t-transparent rounded-full animate-spin" />
+              <p className="text-xs font-mono-tabular tracking-widest uppercase text-[var(--text-secondary)]">Loading 3D Walkthrough...</p>
+            </div>
+          </div>
+        }
+      >
+        <MallExplorer3D
+          onSelectFloorPage={(floorId) => {
+            if (floorId === "third") navigate("/dining");
+            else if (floorId === "fourth") navigate("/entertainment");
+            else navigate("/shopping");
+          }}
+        />
+      </Suspense>
     </div>
   );
 }

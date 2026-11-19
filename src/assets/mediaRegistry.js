@@ -62,7 +62,8 @@ import movieKingPoster from './images/movie_king_poster_1794537285864.webp';
 export const VIDEO_ASSETS = {
   heroAtrium: {
     src: '/videos/video_atrium_light.mp4',
-    poster: atriumEmptyImg,
+    poster: '/images/hero_atrium_poster.webp',
+    posterMobile: '/images/hero_atrium_poster_mobile.webp',
     objectPosition: 'center center',
     startTime: 0.05,
     endTime: 4.9,
@@ -70,7 +71,8 @@ export const VIDEO_ASSETS = {
   },
   atriumStory: {
     src: '/videos/video_atrium_light.mp4',
-    poster: atriumEmptyImg,
+    poster: '/images/hero_atrium_poster.webp',
+    posterMobile: '/images/hero_atrium_poster_mobile.webp',
     objectPosition: 'center center',
     startTime: 0.05,
     endTime: 4.9,

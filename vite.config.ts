@@ -16,9 +16,26 @@ export default defineConfig({
     allowedHosts: true,
   },
   build: {
-    // Suppress chunk size warning — the large bundle is expected given the
-    // number of imported images and Three.js. Consider lazy-loading pages
-    // in future iterations for better performance.
-    chunkSizeWarningLimit: 1200,
+    target: 'esnext',
+    cssMinify: true,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules/three')) {
+            return 'vendor-three';
+          }
+          if (id.includes('node_modules/motion')) {
+            return 'vendor-motion';
+          }
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-lucide';
+          }
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'vendor-react';
+          }
+        },
+      },
+    },
   },
 });
