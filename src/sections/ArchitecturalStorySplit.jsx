@@ -75,7 +75,7 @@ export function ArchitecturalStorySplit() {
                         >
                           <div className="flex items-baseline gap-3">
                             <span
-                              className="font-mono-tabular text-xs font-bold px-2 py-0.5 rounded-lg text-white shrink-0"
+                              className="font-mono-tabular text-xs font-bold px-2 py-0.5 rounded-lg text-[#faf4eb] shrink-0"
                               style={{ backgroundColor: ch.accent }}
                             >
                               {ch.num}
@@ -99,7 +99,7 @@ export function ArchitecturalStorySplit() {
                     <button
                       type="button"
                       onClick={() => navigate("/explore")}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-[#faf4eb] hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
                     >
                       <span>Walk the 3D Mall Atrium</span>
                       <ArrowUpRight className="w-4 h-4" />
@@ -169,7 +169,7 @@ export function ArchitecturalStorySplit() {
                       decoding="async"
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-x-0 bottom-0 px-3 py-1.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
+                    <div className="absolute inset-x-0 bottom-0 px-3 py-1.5 bg-gradient-to-t from-[#160d26]/85 to-transparent">
                       <p className="font-mono-tabular text-[10px] uppercase tracking-[0.14em] text-amber-200 truncate">
                         26 Signature Outlets · Floors 00–04
                       </p>

@@ -24,7 +24,7 @@ function ExploreHeroScene() {
       isHero
       className="flex items-center justify-center text-center py-8 md:py-12"
     >
-      <div className="max-w-3xl mx-auto px-5 text-white space-y-5 my-auto">
+      <div className="max-w-3xl mx-auto px-5 text-[#f7f3ec] space-y-5 my-auto">
         <div className="space-y-3">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-mono-tabular tracking-[0.22em] uppercase text-teal-200">
@@ -34,14 +34,14 @@ function ExploreHeroScene() {
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.94] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
+              className="font-display font-semibold leading-[0.94] text-[#f3ede2]"
               style={{ fontSize: "clamp(2.5rem, 5.2vw, 4.8rem)" }}
             >
               Walk Through Every Level
             </h1>
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.1}>
-            <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-lg mx-auto leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
+            <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-lg mx-auto leading-relaxed">
               Move along sunlit corridors, inspect storefronts, and experience
               Orion Mall in full real-time 3D.
             </p>
@@ -53,7 +53,7 @@ function ExploreHeroScene() {
             <button
               type="button"
               onClick={() => goToSection(1)}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-turquoise)] text-white hover:opacity-95 shadow-xl cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-turquoise)] text-[#faf4eb] hover:opacity-95 shadow-xl cursor-pointer"
             >
               <span>Launch 3D Walkthrough</span>
               <ArrowDown className="w-4 h-4" />
@@ -164,7 +164,7 @@ function ExploreFinaleScene() {
                     <button
                       type="button"
                       onClick={() => goToSection(1)}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-[#faf4eb] hover:opacity-95 transition-opacity shadow-lg cursor-pointer"
                     >
                       <ArrowUp className="w-4 h-4" />
                       <span>Return to 3D Explorer</span>

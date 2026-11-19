@@ -139,7 +139,7 @@ export function EntertainmentPage() {
           </span>
         </div>
 
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-white space-y-5">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 text-[#f7f3ec] space-y-5">
           <motion.div
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,12 +151,12 @@ export function EntertainmentPage() {
               <span>Multiplex Experience</span>
             </div>
             <h1
-              className="font-display font-semibold leading-[0.92] text-white drop-shadow-lg"
+              className="font-display font-semibold leading-[0.92] text-[#f3ede2]"
               style={{ fontSize: "clamp(2.5rem, 6.2vw, 5.8rem)" }}
             >
               PVR INOX Cinemas
             </h1>
-            <p className="text-sm md:text-base text-white/90 max-w-xl">
+            <p className="text-sm md:text-base text-[#f7f3ec] max-w-xl">
               Laser projection, spatial Dolby surround acoustics, and plush
               recliner seating high above Orion Mall&apos;s central atrium.
             </p>
@@ -167,7 +167,7 @@ export function EntertainmentPage() {
               href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-white hover:opacity-95 transition-opacity shadow-xl"
+              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] to-[#c73468] text-[#faf4eb] hover:opacity-95 transition-opacity shadow-xl"
             >
               <span>Book Tickets · BookMyShow</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -176,7 +176,7 @@ export function EntertainmentPage() {
               href={PVR_BOOKING_LINKS.pvrOfficial}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold backdrop-blur-md bg-white/18 text-white border border-white/40 hover:bg-white/28 transition-colors"
+              className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-semibold backdrop-blur-md bg-[#1a102b]/65 text-amber-100 border border-amber-200/40 hover:bg-[#1a102b]/85 transition-colors shadow-lg"
             >
               <span>PVR INOX Official</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -212,7 +212,7 @@ export function EntertainmentPage() {
                       onClick={() => handleCategorySwitch(cat.id)}
                       className={`relative px-3.5 sm:px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                         isActive
-                          ? "text-white"
+                          ? "text-[#faf4eb]"
                           : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                       }`}
                     >
@@ -336,7 +336,7 @@ export function EntertainmentPage() {
                           href={currentMovie.bookingUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-95 transition-all shadow-md hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
+                          className="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-[#faf4eb] hover:opacity-95 transition-all shadow-md hover:-translate-y-0.5 cursor-pointer whitespace-nowrap"
                         >
                           <Ticket className="w-3.5 h-3.5" />
                           <span>Book Tickets</span>
@@ -415,7 +415,7 @@ export function EntertainmentPage() {
                 </h2>
               </ScrollReveal>
               <ScrollReveal variant="rise" delay={0.08}>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-sm md:text-base text-[var(--text-secondary)] leading-relaxed">
                   Direct elevator access from basement parking to the Fourth
                   Floor PVR INOX lobby, featuring gourmet popcorn concessions
                   and Dolby acoustics.

@@ -76,7 +76,7 @@ export function HomePage() {
                         <button
                           type="button"
                           onClick={() => navigate("/visit")}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-gold)] text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-gold)] text-[#faf4eb] hover:opacity-95 transition-opacity cursor-pointer shadow-lg"
                         >
                           <span>Directions &amp; Hours</span>
                           <ArrowRight className="w-4 h-4" />
@@ -119,11 +119,11 @@ export function HomePage() {
                           decoding="async"
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/85 to-transparent text-white">
+                        <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/85 to-transparent">
                           <p className="font-mono-tabular text-[10px] uppercase tracking-[0.18em] text-amber-200">
                             Mohaddipur Highway Corridor
                           </p>
-                          <p className="font-display text-base font-semibold">
+                          <p className="font-display text-base font-semibold text-[#f3ede2]">
                             Multi-Level Parking &amp; Valet Entry
                           </p>
                         </div>

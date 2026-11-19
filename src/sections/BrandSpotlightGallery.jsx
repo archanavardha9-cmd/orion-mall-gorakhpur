@@ -302,7 +302,7 @@ export function BrandSpotlightGallery() {
                         onClick={() => handleSelectCategory(cat)}
                         className={`relative inline-flex items-center justify-between gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 min-h-[30px] sm:min-h-[34px] rounded-xl text-[10px] sm:text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap min-w-0 ${
                           isActive
-                            ? 'text-white'
+                            ? 'text-[#faf4eb]'
                             : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                         }`}
                       >
@@ -324,7 +324,7 @@ export function BrandSpotlightGallery() {
                         </span>
                         <span
                           className={`relative z-10 font-mono-tabular text-[10px] opacity-85 shrink-0 ${
-                            isActive ? 'text-white/90' : 'text-[var(--text-muted)]'
+                            isActive ? 'text-[#faf4eb]/90' : 'text-[var(--text-muted)]'
                           }`}
                         >
                           {cat.brands.length}

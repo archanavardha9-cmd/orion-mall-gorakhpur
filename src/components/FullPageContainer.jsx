@@ -555,7 +555,7 @@ export function FullPageContainer({
                 className="group relative flex items-center justify-center p-1.5 cursor-pointer focus-visible:outline-none"
               >
                 {/* Tooltip Label on Hover */}
-                <span className="pointer-events-none absolute right-full mr-3.5 px-2.5 py-1 rounded-lg text-xs font-medium font-mono-tabular uppercase tracking-wider text-white bg-[#1a102b]/95 border border-white/20 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl hidden md:inline-block">
+                <span className="pointer-events-none absolute right-full mr-3.5 px-2.5 py-1 rounded-lg text-xs font-medium font-mono-tabular uppercase tracking-wider text-amber-100 bg-[#1a102b]/95 border border-amber-200/30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-xl hidden md:inline-block">
                   {label}
                 </span>
 

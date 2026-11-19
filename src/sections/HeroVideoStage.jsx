@@ -89,14 +89,14 @@ export function HeroVideoStage() {
     >
       {/* Top Architectural Coordinate Line */}
       <div className="relative z-10 w-full bg-gradient-to-b from-[#120b20]/64 via-[#120b20]/28 to-transparent">
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-white border-b border-white/20 pb-3">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-amber-100 border-b border-white/20 pb-3">
           <ScrollReveal variant="slideRight">
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase text-amber-100">
               Mohaddipur · Gorakhpur · Uttar Pradesh
             </span>
           </ScrollReveal>
           <ScrollReveal variant="slideLeft" delay={0.05}>
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-amber-200">
               Five Levels · Fashion · Dining · Cinema
             </span>
           </ScrollReveal>
@@ -107,21 +107,21 @@ export function HeroVideoStage() {
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-12 py-4 md:py-6 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* Left Focal Anchor */}
-          <div className="lg:col-span-7 text-white space-y-4">
+          <div className="lg:col-span-7 text-[#f7f3ec] space-y-4">
             <ScrollReveal variant="rise" delay={0.04}>
               <h1
-                className="font-display font-semibold leading-[0.94] tracking-tight text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
+                className="font-display font-semibold leading-[0.94] tracking-tight text-[#f3ede2]"
                 style={{ fontSize: "clamp(2.4rem, 4.8vw, 4.6rem)" }}
               >
                 Orion Mall
-                <span className="block italic font-medium text-amber-300 drop-shadow-[0_2px_8px_rgba(10,6,22,0.85)] mt-0.5">
+                <span className="block italic font-medium text-amber-300 mt-0.5">
                   Gorakhpur
                 </span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal variant="rise" delay={0.08}>
-              <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-xl leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
+              <p className="text-xs sm:text-sm md:text-base text-[#f7f3ec] max-w-xl leading-relaxed">
                 Step inside Mohaddipur&apos;s sunlit five-level destination —
                 uniting flagship apparel, denim culture, festive couture, Third
                 Floor culinary favourites, and PVR INOX Cinemas.
@@ -133,7 +133,7 @@ export function HeroVideoStage() {
                 <button
                   type="button"
                   onClick={() => navigate("/explore")}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] via-[#e26336] to-[#d97706] text-white hover:opacity-95 transition-all hover:-translate-y-0.5 cursor-pointer shadow-xl whitespace-nowrap"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#d6492e] via-[#e26336] to-[#d97706] text-[#faf4eb] hover:opacity-95 transition-all hover:-translate-y-0.5 cursor-pointer shadow-xl whitespace-nowrap"
                 >
                   <Compass className="w-4 h-4" />
                   <span>Enter 3D Mall</span>
@@ -171,9 +171,9 @@ export function HeroVideoStage() {
                   variant="pop"
                   delay={0.15 + i * 0.03}
                 >
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/15 border border-white/25 text-xs text-white">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#180f28]/75 border border-amber-200/35 text-xs text-amber-100 shadow-sm backdrop-blur-md">
                     <BrandMark name={name} size="sm" />
-                    <span className="font-medium text-[11px]">{name}</span>
+                    <span className="font-medium text-[11px] text-amber-100">{name}</span>
                   </div>
                 </ScrollReveal>
               ))}
@@ -233,11 +233,11 @@ export function HeroVideoStage() {
                     fetchPriority="high"
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/90 to-transparent text-white">
+                  <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/90 to-transparent">
                     <p className="font-mono-tabular text-[10px] uppercase tracking-[0.18em] text-amber-200">
                       Ground &amp; First Floor Flagships
                     </p>
-                    <p className="font-display text-base font-semibold">
+                    <p className="font-display text-base font-semibold text-[#f3ede2]">
                       Curated Menswear, Denim &amp; Footwear
                     </p>
                   </div>
@@ -260,8 +260,8 @@ export function HeroVideoStage() {
                   fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-x-0 bottom-0 px-2.5 py-1.5 bg-gradient-to-t from-[#160d26]/88 to-transparent text-white">
-                  <p className="text-[10px] font-semibold">
+                <div className="absolute inset-x-0 bottom-0 px-2.5 py-1.5 bg-gradient-to-t from-[#160d26]/88 to-transparent">
+                  <p className="text-[10px] font-semibold text-amber-100">
                     26 Signature Brands
                   </p>
                 </div>

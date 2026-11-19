@@ -109,7 +109,7 @@ export function Footer() {
                   href={PVR_BOOKING_LINKS.bookMyShowGorakhpur}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-white hover:opacity-90 transition-opacity shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-[var(--accent-coral)] to-[var(--accent-plum)] text-[#faf4eb] hover:opacity-90 transition-opacity shadow-sm"
                 >
                   <span>Book via BookMyShow</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

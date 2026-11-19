@@ -220,7 +220,7 @@ export function HorizontalAtriumRibbon() {
 
                           <div className="relative z-10 flex items-center gap-2 lg:gap-2.5 min-w-0">
                             <span
-                              className="font-mono-tabular text-[11px] font-bold px-2 py-0.5 rounded-md text-white shrink-0 shadow-sm"
+                              className="font-mono-tabular text-[11px] font-bold px-2 py-0.5 rounded-md text-[#faf4eb] shrink-0 shadow-sm"
                               style={{
                                 backgroundColor: isActive ? floor.accentColor : 'rgba(108, 62, 184, 0.55)'
                               }}
@@ -294,16 +294,16 @@ export function HorizontalAtriumRibbon() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#130c22]/90 via-[#19102c]/36 to-[#130c22]/18 pointer-events-none" />
 
-                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 text-white">
+                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 text-[#f7f3ec]">
                       <div className="flex items-start justify-between gap-3">
                         <div className="space-y-0.5">
                           <span
-                            className="inline-block font-mono-tabular text-xs font-bold px-2.5 py-0.5 rounded-lg text-white shadow-md"
+                            className="inline-block font-mono-tabular text-xs font-bold px-2.5 py-0.5 rounded-lg text-[#faf4eb] shadow-md"
                             style={{ backgroundColor: activeFloor.accentColor }}
                           >
                             Level {activeFloor.number} · {activeFloor.label}
                           </span>
-                          <p className="text-[11px] text-white/85 font-medium pt-0.5">
+                          <p className="text-[11px] text-amber-100/90 font-medium pt-0.5">
                             {activeFloor.subtitle}
                           </p>
                         </div>
@@ -323,7 +323,7 @@ export function HorizontalAtriumRibbon() {
                                 className="w-full h-full object-cover"
                               />
                             </div>
-                            <p className="px-2 py-1 text-[10px] font-medium text-white/95 truncate bg-[#160d26]/90">
+                            <p className="px-2 py-1 text-[10px] font-medium text-amber-100 truncate bg-[#160d26]/90">
                               {activeVisual.insetLabel}
                             </p>
                           </motion.div>
@@ -332,7 +332,7 @@ export function HorizontalAtriumRibbon() {
 
                       <div className="space-y-3">
                         <div>
-                          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.04] text-white max-w-2xl drop-shadow">
+                          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-[1.04] text-[#f3ede2] max-w-2xl">
                             {activeFloor.themeTitle}
                           </h3>
                         </div>
@@ -345,14 +345,14 @@ export function HorizontalAtriumRibbon() {
                                 className="inline-flex items-center gap-1.5 pr-2.5 p-1 rounded-lg bg-[#150e24]/85 border border-white/20"
                               >
                                 <BrandMark name={brand.name} size="sm" />
-                                <span className="text-[11px] font-semibold text-white whitespace-nowrap">
+                                <span className="text-[11px] font-semibold text-amber-100 whitespace-nowrap">
                                   {brand.name}
                                 </span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <p className="text-xs text-white/85 max-w-xl">
+                          <p className="text-xs text-[#f7f3ec]/90 max-w-xl">
                             Skylight Truss Deck &amp; Building Services · No Retail Stores Listed
                           </p>
                         )}
@@ -361,7 +361,7 @@ export function HorizontalAtriumRibbon() {
                           <button
                             type="button"
                             onClick={() => navigate(routeForFloor(activeFloor.id))}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white hover:opacity-95 transition-opacity cursor-pointer shadow-lg whitespace-nowrap"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-[#faf4eb] hover:opacity-95 transition-opacity cursor-pointer shadow-lg whitespace-nowrap"
                             style={{ backgroundColor: activeFloor.accentColor }}
                           >
                             <span>
@@ -372,7 +372,7 @@ export function HorizontalAtriumRibbon() {
                             <ArrowRight className="w-4 h-4" />
                           </button>
 
-                          <span className="font-mono-tabular text-xs text-white/80">
+                          <span className="font-mono-tabular text-xs text-amber-100/85">
                             0{activeIndex + 1} / 0{totalFloors}
                           </span>
                         </div>

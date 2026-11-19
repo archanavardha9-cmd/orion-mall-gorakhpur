@@ -223,7 +223,7 @@ function ShoppingHeroScene() {
       {/* ── Tablet & Desktop layout ── */}
       <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-5 md:gap-8 lg:gap-12 items-center">
         {/* Text column */}
-        <div className="md:col-span-1 lg:col-span-6 space-y-2.5 sm:space-y-4 md:space-y-5 lg:space-y-5 text-white">
+        <div className="md:col-span-1 lg:col-span-6 space-y-2.5 sm:space-y-4 md:space-y-5 lg:space-y-5 text-[#f7f3ec]">
           <ScrollReveal variant="drop">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <ShoppingBag className="w-4 h-4" />
@@ -233,14 +233,14 @@ function ShoppingHeroScene() {
 
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.95] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
+              className="font-display font-semibold leading-[0.95] text-[#f3ede2]"
               style={{ fontSize: "clamp(2.2rem, 4.8vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
           </ScrollReveal>
 
-          <p className="text-sm md:text-base text-[#f7f3ec] max-w-lg leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
+          <p className="text-sm md:text-base text-[#f7f3ec] max-w-lg leading-relaxed">
             Explore tailored menswear, iconic denim culture, festive ethnic
             couture, active footwear, and Galaxy flagship electronics across
             Ground, First &amp; Second Floors.
@@ -377,7 +377,7 @@ export function ShoppingPage() {
                         Flagship Icons &amp; Tech
                       </h2>
                     </ScrollReveal>
-                    <p className="text-xs text-[var(--text-secondary)] mt-1.5">
+                    <p className="text-sm text-[var(--text-secondary)] mt-1.5">
                       9 flagship apparel, footwear &amp; Galaxy electronics
                       boutiques along the main atrium.
                     </p>
@@ -508,7 +508,7 @@ export function ShoppingPage() {
                         Denim &amp; Activewear
                       </h2>
                     </ScrollReveal>
-                    <p className="text-xs text-[var(--text-secondary)] mt-1.5">
+                    <p className="text-sm text-[var(--text-secondary)] mt-1.5">
                       7 streetwear, smart-formal &amp; athletic footwear
                       destinations along the upper promenade.
                     </p>
@@ -552,7 +552,7 @@ export function ShoppingPage() {
                         Couture, Bags &amp; Kids
                       </h2>
                     </ScrollReveal>
-                    <p className="text-xs text-[var(--text-secondary)] mt-1.5">
+                    <p className="text-sm text-[var(--text-secondary)] mt-1.5">
                       6 festive Indian ethnic, executive womenswear, handbag
                       &amp; kidswear boutiques.
                     </p>

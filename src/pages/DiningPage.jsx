@@ -159,7 +159,7 @@ export function DiningPage() {
             initial={{ opacity: 0, y: -24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75 }}
-            className="max-w-4xl space-y-4 sm:space-y-6 text-white"
+            className="max-w-4xl space-y-4 sm:space-y-6 text-[#f7f3ec]"
           >
             <ScrollReveal variant="drop" className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-amber-200">
               <UtensilsCrossed className="w-4 h-4" />
@@ -167,13 +167,13 @@ export function DiningPage() {
             </ScrollReveal>
             <ScrollReveal variant="slideRight" delay={0.06}>
               <h1
-                className="font-display font-semibold leading-[0.92] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
+                className="font-display font-semibold leading-[0.92] text-[#f3ede2]"
                 style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
               >
                 Third Floor Flavours
               </h1>
             </ScrollReveal>
-            <p className="text-sm md:text-lg text-[#f7f3ec] max-w-2xl leading-relaxed drop-shadow-[0_1px_6px_rgba(10,6,22,0.85)]">
+            <p className="text-sm md:text-lg text-[#f7f3ec] max-w-2xl leading-relaxed">
               Flame-grilled burgers, crispy golden buckets &amp; oven-baked pizzas served across Orion Mall&apos;s sunlit culinary deck.
             </p>
           </motion.div>
@@ -223,7 +223,7 @@ export function DiningPage() {
             {DINING_DESTINATIONS.map((item, idx) => (
               <ScrollReveal key={item.name} variant="pop" delay={idx * 0.05}>
                 <div
-                  className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold text-white shadow-md"
+                  className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold text-[#faf4eb] shadow-md"
                   style={{ backgroundColor: item.accent }}
                 >
                   <BrandMark name={item.name} size="sm" />
@@ -336,7 +336,7 @@ export function DiningPage() {
                           onClick={() => setActiveBkView(view)}
                           className={`w-full text-left px-4 py-2.5 rounded-xl transition-all cursor-pointer border ${
                             isActive
-                              ? 'bg-[#D62300] border-[#FFAA00]/75 text-white shadow-lg translate-x-1'
+                              ? 'bg-[#D62300] border-[#FFAA00]/75 text-[#faf4eb] shadow-lg translate-x-1'
                               : 'bg-[#502314]/65 border-[#F5EBDC]/15 text-[#F5EBDC]/85 hover:bg-[#502314]/90'
                           }`}
                         >
@@ -476,7 +476,7 @@ export function DiningPage() {
                             onClick={() => setActiveDominoHighlight(item)}
                             className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                               isActive
-                                ? 'bg-[#006491] text-white shadow-sm'
+                                ? 'bg-[#006491] text-[#faf4eb] shadow-sm'
                                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                             }`}
                           >

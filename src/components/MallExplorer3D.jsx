@@ -981,13 +981,13 @@ export function MallExplorer3D({ onSelectFloorPage }) {
 
       {/* Minimal Top-Left Floor Readout + Prominent Reset Button */}
       <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2.5">
-        <div className="pointer-events-none flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#181226]/90 border border-white/20 text-white shadow-lg">
+        <div className="pointer-events-none flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#181226]/90 border border-white/20 text-[#f7f3ec] shadow-lg">
           <Compass className="w-4 h-4 text-[#f27c54]" />
           <div className="text-xs">
             <p className="font-semibold tracking-wide">
               {currentFloor.label} · {currentFloor.themeTitle}
             </p>
-            <p className="text-white/75 font-mono-tabular">
+            <p className="text-amber-100/75 font-mono-tabular">
               Corridor Progress: {zProgress}% · Drag to Look · Click Any Storefront
             </p>
           </div>
@@ -997,7 +997,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
           type="button"
           onClick={resetWalkthrough}
           aria-label="Reset 3D view, zoom and camera position"
-          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#d64e34] hover:bg-[#e45c42] border border-white/25 text-xs font-semibold text-white shadow-lg cursor-pointer whitespace-nowrap transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#d64e34] hover:bg-[#e45c42] border border-white/25 text-xs font-semibold text-[#faf4eb] shadow-lg cursor-pointer whitespace-nowrap transition-colors"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset View</span>
@@ -1006,7 +1006,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
 
       {/* Selected Shop Inspector Sheet (Triggered only on click, never blocking idle view) */}
       {selectedShop && (
-        <div className="absolute top-4 right-4 z-20 max-w-xs w-full rounded-2xl bg-[#1a1329]/95 border border-white/25 p-5 text-white shadow-2xl space-y-3">
+        <div className="absolute top-4 right-4 z-20 max-w-xs w-full rounded-2xl bg-[#1a1329]/95 border border-white/25 p-5 text-[#f7f3ec] shadow-2xl space-y-3">
           <div className="flex items-start justify-between gap-2">
             <BrandMark name={selectedShop.brand.name} size="md" />
             <button
@@ -1022,7 +1022,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
             <p className="text-[11px] font-mono-tabular uppercase tracking-wider text-amber-300">
               {selectedShop.floorLabel} · {selectedShop.brand.category}
             </p>
-            <h3 className="font-display text-2xl font-semibold mt-0.5">
+            <h3 className="font-display text-2xl font-semibold mt-0.5 text-[#f3ede2]">
               {selectedShop.brand.name}
             </h3>
             <p className="text-xs text-stone-200 mt-1.5 leading-relaxed">
@@ -1033,7 +1033,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
             <button
               type="button"
               onClick={() => onSelectFloorPage(selectedShop.floorId)}
-              className="w-full py-2 rounded-lg text-xs font-semibold bg-[#f27c54] text-white hover:opacity-95 cursor-pointer"
+              className="w-full py-2 rounded-lg text-xs font-semibold bg-[#f27c54] text-[#faf4eb] hover:opacity-95 cursor-pointer"
             >
               Open Full Floor Page
             </button>
@@ -1046,7 +1046,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
         <button
           type="button"
           onClick={() => setHudCollapsed((c) => !c)}
-          className="mb-1.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-t-xl bg-[#181226]/92 border border-white/20 text-[11px] font-medium text-white cursor-pointer"
+          className="mb-1.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-t-xl bg-[#181226]/92 border border-white/20 text-[11px] font-medium text-[#faf4eb] cursor-pointer"
         >
           {hudCollapsed ? (
             <>
@@ -1062,7 +1062,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
         </button>
 
         {!hudCollapsed && (
-          <div className="w-full rounded-2xl bg-[#181226]/94 border border-white/20 px-4 py-3 text-white shadow-2xl flex flex-wrap items-center justify-between gap-3">
+          <div className="w-full rounded-2xl bg-[#181226]/94 border border-white/20 px-4 py-3 text-[#f7f3ec] shadow-2xl flex flex-wrap items-center justify-between gap-3">
             {/* Walk, Zoom & Reset Controls */}
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -1110,7 +1110,7 @@ export function MallExplorer3D({ onSelectFloorPage }) {
                   setAutoWalk((w) => !w);
                 }}
                 className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium cursor-pointer whitespace-nowrap ${
-                  autoWalk ? 'bg-[#0c8a7b] text-white' : 'bg-white/14 text-white/90'
+                  autoWalk ? 'bg-[#0c8a7b] text-[#faf4eb]' : 'bg-white/14 text-[#faf4eb]/90'
                 }`}
               >
                 {autoWalk ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -1156,8 +1156,8 @@ export function MallExplorer3D({ onSelectFloorPage }) {
                   onClick={() => jumpToFloor(idx)}
                   className={`px-2.5 py-1.5 rounded-lg text-[11px] font-mono-tabular font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                     activeFloorIdx === idx
-                      ? 'bg-white text-[#181226]'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'bg-amber-100 text-[#181226]'
+                      : 'text-[#f7f3ec]/80 hover:text-[#faf4eb] hover:bg-white/10'
                   }`}
                 >
                   {fl.shortLabel}
