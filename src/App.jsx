@@ -1,45 +1,31 @@
-import { lazy, Suspense } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { ThemeProvider } from "./utils/themeContext";
-import { RouterProvider, useRouter } from "./utils/router";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { HomePage } from "./pages/HomePage";
-
-const ExplorePage = lazy(() =>
-  import("./pages/ExplorePage").then((m) => ({ default: m.ExplorePage })),
-);
-const ShoppingPage = lazy(() =>
-  import("./pages/ShoppingPage").then((m) => ({ default: m.ShoppingPage })),
-);
-const DiningPage = lazy(() =>
-  import("./pages/DiningPage").then((m) => ({ default: m.DiningPage })),
-);
-const EntertainmentPage = lazy(() =>
-  import("./pages/EntertainmentPage").then((m) => ({
-    default: m.EntertainmentPage,
-  })),
-);
-const VisitPage = lazy(() =>
-  import("./pages/VisitPage").then((m) => ({ default: m.VisitPage })),
-);
+import { AnimatePresence, motion } from 'motion/react';
+import { ThemeProvider } from './utils/themeContext';
+import { RouterProvider, useRouter } from './utils/router';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { HomePage } from './pages/HomePage';
+import { ExplorePage } from './pages/ExplorePage';
+import { ShoppingPage } from './pages/ShoppingPage';
+import { DiningPage } from './pages/DiningPage';
+import { EntertainmentPage } from './pages/EntertainmentPage';
+import { VisitPage } from './pages/VisitPage';
 
 function PageStage() {
   const { currentPath } = useRouter();
 
   const renderPage = () => {
     switch (currentPath) {
-      case "/explore":
+      case '/explore':
         return <ExplorePage />;
-      case "/shopping":
+      case '/shopping':
         return <ShoppingPage />;
-      case "/dining":
+      case '/dining':
         return <DiningPage />;
-      case "/entertainment":
+      case '/entertainment':
         return <EntertainmentPage />;
-      case "/visit":
+      case '/visit':
         return <VisitPage />;
-      case "/":
+      case '/':
       default:
         return <HomePage />;
     }
@@ -54,13 +40,7 @@ function PageStage() {
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       >
-        <Suspense
-          fallback={
-            <div className="min-h-[calc(100svh-4.5rem)] bg-[var(--bg-canvas)]" />
-          }
-        >
-          {renderPage()}
-        </Suspense>
+        {renderPage()}
       </motion.div>
     </AnimatePresence>
   );

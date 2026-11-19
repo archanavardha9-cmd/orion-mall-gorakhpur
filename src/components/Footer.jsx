@@ -26,19 +26,16 @@ export function Footer() {
                 aria-label="Orion Mall – go to home page"
                 className="inline-block focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
               >
-                <picture>
-                  <source srcSet="/images/orion_mall_logo.webp" type="image/webp" />
-                  <img
-                    src="/images/orion_mall_logo.webp"
-                    alt="Orion Mall"
-                    width="220"
-                    height="64"
-                    className="h-14 md:h-16 w-auto object-contain"
-                    style={{ maxWidth: "220px" }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
+                <img
+                  src="/images/orion_mall_logo.png"
+                  alt="Orion Mall"
+                  width="220"
+                  height="64"
+                  className="h-14 md:h-16 w-auto object-contain"
+                  style={{ maxWidth: "220px" }}
+                  loading="lazy"
+                  decoding="async"
+                />
               </a>
             </ScrollReveal>
             <ScrollReveal variant="rise" delay={0.04}>

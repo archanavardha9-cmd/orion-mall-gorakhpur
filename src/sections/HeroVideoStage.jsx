@@ -227,11 +227,10 @@ export function HeroVideoStage() {
                   <img
                     src={IMAGE_ASSETS.brandMenswear}
                     alt="Premium menswear and fashion atelier at Orion Mall"
-                    width="480"
-                    height="360"
                     referrerPolicy="no-referrer"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
+                    fetchPriority="high"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-[#160d26]/90 to-transparent">
@@ -255,11 +254,10 @@ export function HeroVideoStage() {
                 <img
                   src={IMAGE_ASSETS.brandEthnic}
                   alt="Festive fashion & lifestyle boutiques inside Orion Mall"
-                  width="320"
-                  height="240"
                   referrerPolicy="no-referrer"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 px-2.5 py-1.5 bg-gradient-to-t from-[#160d26]/88 to-transparent">
