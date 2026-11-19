@@ -1,10 +1,6 @@
-import { Suspense, lazy } from "react";
 import { Compass, ArrowDown, ArrowUp, ArrowRight } from "lucide-react";
 import { VideoBackdropSection } from "../components/VideoBackdropSection";
-// Lazy-load the heavy Three.js 3D explorer — only needed when user reaches the walkthrough section
-const MallExplorer3D = lazy(() =>
-  import("../components/MallExplorer3D").then((m) => ({ default: m.MallExplorer3D }))
-);
+import { MallExplorer3D } from "../components/MallExplorer3D";
 import {
   FullPageContainer,
   useFullPageScroll,
@@ -77,15 +73,13 @@ function Explore3DScene() {
       id="mall-3d-walkthrough"
       className="w-full h-full min-h-[calc(100svh-4rem)] relative interactive-scroll-allow"
     >
-      <Suspense fallback={<div className="w-full h-full min-h-[calc(100svh-4rem)] bg-[var(--bg-canvas,#fbf7f0)]" />}>
-        <MallExplorer3D
-          onSelectFloorPage={(floorId) => {
-            if (floorId === "third") navigate("/dining");
-            else if (floorId === "fourth") navigate("/entertainment");
-            else navigate("/shopping");
-          }}
-        />
-      </Suspense>
+      <MallExplorer3D
+        onSelectFloorPage={(floorId) => {
+          if (floorId === "third") navigate("/dining");
+          else if (floorId === "fourth") navigate("/entertainment");
+          else navigate("/shopping");
+        }}
+      />
     </div>
   );
 }
