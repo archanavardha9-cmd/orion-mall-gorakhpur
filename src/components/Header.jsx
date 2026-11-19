@@ -18,7 +18,6 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-[var(--glass-panel)] border-b border-[var(--border-hairline)] transition-colors duration-300">
       {/* ── Main header bar ── */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 h-[4.5rem] md:h-20 flex items-center justify-between gap-4 md:gap-8">
-
         {/* Zone 1: Orion Mall logo → links to home */}
         <a
           href="/"
@@ -30,11 +29,11 @@ export function Header() {
           className="shrink-0 flex items-center focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
         >
           <img
-            src="/images/orion_mall_logo.webp"
+            src="/images/orion_mall_logo.png"
             alt="Orion Mall"
             /* natural aspect ratio preserved; height drives size */
             className="h-10 sm:h-11 md:h-14 w-auto object-contain"
-            style={{ maxWidth: '180px' }}
+            style={{ maxWidth: "180px" }}
             loading="eager"
             decoding="async"
             fetchPriority="high"

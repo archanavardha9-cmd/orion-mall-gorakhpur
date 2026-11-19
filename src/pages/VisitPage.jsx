@@ -1,19 +1,22 @@
-import { MapPin, Navigation, Clock, Car, ArrowUpRight } from 'lucide-react';
-import { VideoBackdropSection } from '../components/VideoBackdropSection';
-import { FullPageContainer } from '../components/FullPageContainer';
-import { DepthEmergeSection, Interactive3DTilt } from '../animations/MotionPrimitives';
-import { ScrollReveal } from '../animations/ScrollReveal';
-import { VIDEO_ASSETS, IMAGE_ASSETS } from '../assets/mediaRegistry';
-import { MALL_INFO } from '../utils/mallData';
+import { MapPin, Navigation, Clock, Car, ArrowUpRight } from "lucide-react";
+import { VideoBackdropSection } from "../components/VideoBackdropSection";
+import { FullPageContainer } from "../components/FullPageContainer";
+import {
+  DepthEmergeSection,
+  Interactive3DTilt,
+} from "../animations/MotionPrimitives";
+import { ScrollReveal } from "../animations/ScrollReveal";
+import { VIDEO_ASSETS, IMAGE_ASSETS } from "../assets/mediaRegistry";
+import { MALL_INFO } from "../utils/mallData";
 
 export function VisitPage() {
   const googleMapsUrl =
-    'https://www.google.com/maps/search/?api=1&query=Orion+Mall+Mohaddipur+Gorakhpur+Uttar+Pradesh';
+    "https://www.google.com/maps/search/?api=1&query=Orion+Mall+Mohaddipur+Gorakhpur+Uttar+Pradesh";
 
   const sectionLabels = [
-    '01 · Coordinates & Access',
-    '02 · Transit & Hours',
-    '03 · Visitor Facilities'
+    "01 · Coordinates & Access",
+    "02 · Transit & Hours",
+    "03 · Visitor Facilities",
   ];
 
   return (
@@ -28,8 +31,16 @@ export function VisitPage() {
       >
         <div className="w-full bg-gradient-to-b from-[#120b20]/62 via-[#120b20]/26 to-transparent -mt-8 md:-mt-16 pt-8 md:pt-16 pb-5">
           <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 flex items-center justify-between text-white font-mono-tabular text-xs tracking-[0.2em]">
-            <ScrollReveal variant="slideRight"><span className="drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">26.7606° N · 83.3956° E</span></ScrollReveal>
-            <ScrollReveal variant="slideLeft"><span className="hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">MOHADDIPUR · GORAKHPUR</span></ScrollReveal>
+            <ScrollReveal variant="slideRight">
+              <span className="drop-shadow-[0_1px_6px_rgba(10,6,20,0.8)]">
+                26.7606° N · 83.3956° E
+              </span>
+            </ScrollReveal>
+            <ScrollReveal variant="slideLeft">
+              <span className="hidden sm:inline text-amber-200 drop-shadow-[0_1px_6px_rgba(10,6,20,0.9)]">
+                MOHADDIPUR · GORAKHPUR
+              </span>
+            </ScrollReveal>
           </div>
         </div>
 
@@ -45,7 +56,7 @@ export function VisitPage() {
               <ScrollReveal variant="rise" delay={0.05}>
                 <h1
                   className="font-display font-semibold leading-[0.92] text-[#f3ede2] drop-shadow-[0_2px_12px_rgba(10,6,22,0.9)]"
-                  style={{ fontSize: 'clamp(2.2rem, 6.5vw, 5.8rem)' }}
+                  style={{ fontSize: "clamp(2.2rem, 6.5vw, 5.8rem)" }}
                 >
                   Visit Orion Mall
                 </h1>
@@ -102,7 +113,11 @@ export function VisitPage() {
 
                   <div className="divide-y divide-[var(--border-hairline)]">
                     {MALL_INFO.transit.map((t, idx) => (
-                      <ScrollReveal key={t.mode} variant="rise" delay={idx * 0.05}>
+                      <ScrollReveal
+                        key={t.mode}
+                        variant="rise"
+                        delay={idx * 0.05}
+                      >
                         <div className="py-5 first:pt-2 last:pb-2 space-y-1">
                           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                             <h3 className="text-base font-semibold text-[var(--text-primary)]">
@@ -112,7 +127,9 @@ export function VisitPage() {
                               {t.distance}
                             </span>
                           </div>
-                          <p className="text-sm text-[var(--text-secondary)]">{t.note}</p>
+                          <p className="text-sm text-[var(--text-secondary)]">
+                            {t.note}
+                          </p>
                         </div>
                       </ScrollReveal>
                     ))}
@@ -134,7 +151,9 @@ export function VisitPage() {
                     <div className="space-y-3 text-sm">
                       <ScrollReveal variant="rise" delay={0.04}>
                         <div className="flex items-center justify-between py-2 border-b border-[var(--border-hairline)]">
-                          <span className="text-[var(--text-secondary)]">Retail (00 – 02)</span>
+                          <span className="text-[var(--text-secondary)]">
+                            Retail (00 – 02)
+                          </span>
                           <span className="font-mono-tabular font-semibold text-[var(--text-primary)]">
                             {MALL_INFO.hours.retail}
                           </span>
@@ -142,7 +161,9 @@ export function VisitPage() {
                       </ScrollReveal>
                       <ScrollReveal variant="rise" delay={0.08}>
                         <div className="flex items-center justify-between py-2 border-b border-[var(--border-hairline)]">
-                          <span className="text-[var(--text-secondary)]">Dining (03)</span>
+                          <span className="text-[var(--text-secondary)]">
+                            Dining (03)
+                          </span>
                           <span className="font-mono-tabular font-semibold text-[var(--text-primary)]">
                             {MALL_INFO.hours.dining}
                           </span>
@@ -150,7 +171,9 @@ export function VisitPage() {
                       </ScrollReveal>
                       <ScrollReveal variant="rise" delay={0.12}>
                         <div className="flex items-center justify-between py-2">
-                          <span className="text-[var(--text-secondary)]">PVR INOX (04)</span>
+                          <span className="text-[var(--text-secondary)]">
+                            PVR INOX (04)
+                          </span>
                           <span className="font-mono-tabular font-semibold text-[var(--text-primary)]">
                             {MALL_INFO.hours.cinema}
                           </span>
@@ -203,7 +226,11 @@ export function VisitPage() {
                 </ScrollReveal>
                 <ul className="divide-y divide-[var(--border-hairline)]">
                   {MALL_INFO.facilities.map((facility, idx) => (
-                    <ScrollReveal key={facility} variant="rise" delay={idx * 0.04}>
+                    <ScrollReveal
+                      key={facility}
+                      variant="rise"
+                      delay={idx * 0.04}
+                    >
                       <li className="py-3 flex items-center gap-4 text-sm text-[var(--text-secondary)]">
                         <span className="font-mono-tabular text-xs font-bold text-[var(--accent-coral)]">
                           0{idx + 1}

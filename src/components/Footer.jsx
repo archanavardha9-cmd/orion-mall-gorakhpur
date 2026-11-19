@@ -19,15 +19,18 @@ export function Footer() {
               {/* Orion Mall logo – transparent PNG, no background */}
               <a
                 href="/"
-                onClick={(e) => { e.preventDefault(); navigate('/'); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/");
+                }}
                 aria-label="Orion Mall – go to home page"
                 className="inline-block focus-visible:outline-2 focus-visible:outline-[var(--accent-coral)] focus-visible:outline-offset-2 rounded-sm"
               >
                 <img
-                  src="/images/orion_mall_logo.webp"
+                  src="/images/orion_mall_logo.png"
                   alt="Orion Mall"
                   className="h-14 md:h-16 w-auto object-contain"
-                  style={{ maxWidth: '220px' }}
+                  style={{ maxWidth: "220px" }}
                   loading="lazy"
                   decoding="async"
                 />
