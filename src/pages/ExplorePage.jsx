@@ -34,8 +34,8 @@ function ExploreHeroScene() {
           </ScrollReveal>
           <ScrollReveal variant="rise" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.94] text-[#120a22]"
-              style={{ fontSize: "clamp(2.5rem, 5.2vw, 4.8rem)" }}
+              className="font-display font-semibold leading-[0.98] text-[#120a22] break-words"
+              style={{ fontSize: "clamp(1.95rem, 5.2vw, 4.8rem)" }}
             >
               Walk Through Every Level
             </h1>

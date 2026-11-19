@@ -233,8 +233,8 @@ function ShoppingHeroScene() {
 
           <ScrollReveal variant="slideRight" delay={0.05}>
             <h1
-              className="font-display font-semibold leading-[0.95] text-[#160d24]"
-              style={{ fontSize: "clamp(2.2rem, 4.8vw, 5.2rem)" }}
+              className="font-display font-semibold leading-[0.98] text-[#160d24] break-words"
+              style={{ fontSize: "clamp(1.9rem, 4.8vw, 5.2rem)" }}
             >
               Three Levels of Curated Style
             </h1>
