@@ -83,20 +83,20 @@ export function HeroVideoStage() {
   return (
     <VideoBackdropSection
       video={VIDEO_ASSETS.heroAtrium}
-      scrim="heroPrism"
+      scrim="none"
       isHero
       className="flex flex-col justify-between"
     >
       {/* Top Architectural Coordinate Line */}
-      <div className="relative z-10 w-full bg-gradient-to-b from-[#f5ede2]/95 via-[#f5ede2]/50 to-transparent">
-        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-[#3e3056] border-b border-[#3e3056]/15 pb-3">
+          <div className="relative z-10 w-full bg-transparent">
+        <div className="max-w-[1440px] mx-auto w-full px-5 md:px-12 pt-4 md:pt-6 flex items-center justify-between text-[#FFFFFF] border-b border-[#3e3056]/15 pb-3">
           <ScrollReveal variant="slideRight">
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase text-[#3e3056] font-semibold">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase text-[#FFFFFF] font-semibold">
               Mohaddipur · Gorakhpur · Uttar Pradesh
             </span>
           </ScrollReveal>
           <ScrollReveal variant="slideLeft" delay={0.05}>
-            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-black font-semibold">
+            <span className="text-xs font-mono-tabular tracking-[0.22em] uppercase hidden sm:inline text-[#FFFFFF] font-semibold">
               Five Levels · Fashion · Dining · Cinema
             </span>
           </ScrollReveal>
@@ -107,10 +107,10 @@ export function HeroVideoStage() {
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-5 md:px-12 py-4 md:py-6 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* Left Focal Anchor */}
-          <div className="lg:col-span-7 text-[#2b1f3d] space-y-4">
+          <div className="lg:col-span-7 text-[#FFFFFF] space-y-4">
             <ScrollReveal variant="rise" delay={0.04}>
               <h1
-                className="font-display font-semibold leading-[0.94] tracking-tight text-[#160d26]"
+                className="font-display font-semibold leading-[0.94] tracking-tight text-[#FFFFFF]"
                 style={{ fontSize: "clamp(2.75rem, 5vw, 4.6rem)" }}
               >
                 Orion Mall
@@ -121,7 +121,7 @@ export function HeroVideoStage() {
             </ScrollReveal>
 
             <ScrollReveal variant="rise" delay={0.08}>
-              <p className="text-sm sm:text-sm md:text-base text-[#2b1f3d] font-medium max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-sm md:text-base text-[#FFFFFF] font-medium max-w-xl leading-relaxed">
                 Step inside Mohaddipur&apos;s sunlit five-level destination —
                 uniting flagship apparel, denim culture, festive couture, Third
                 Floor culinary favourites, and PVR INOX Cinemas.
